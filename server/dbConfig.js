@@ -15,6 +15,7 @@ db.knex.schema.hasTable('Groups').then(function(exists) {
     db.knex.schema.createTable('Groups', function(group) {
       group.increments('id').primary();
       group.string('group_name');
+      group.timestamps();
     }).then(function(table) {
       console.log('Groups table is created!', table);
     });
@@ -31,7 +32,7 @@ db.knex.schema.hasTable('Users').then(function(exists) {
       user.string('url_hash');
       user.integer('public');
       user.integer('permission');
-
+      user.timestamps();
     }).then(function(table) {
       console.log('Users table is created!', table);
     });
@@ -44,6 +45,7 @@ db.knex.schema.hasTable('Networks').then(function(exists) {
       network.increments('id').primary();
       network.string('network_name');
       network.string('username');
+      network.timestamps();
     }).then(function(table) {
       console.log('Networks table is created!', table);
     });
@@ -58,6 +60,7 @@ db.knex.schema.hasTable('Bios').then(function(exists) {
       bio.string('ipsum');
       bio.string('dolor');
       bio.string('sit');
+      bio.timestamps();
     }).then(function(table) {
       console.log('Bios table is created!', table);
     });

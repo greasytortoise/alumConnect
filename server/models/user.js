@@ -17,4 +17,4 @@ var User = db.Model.extend({
   }
 });
 
-module.export = User;
+module.exports = User;

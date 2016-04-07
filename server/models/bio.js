@@ -9,4 +9,4 @@ var Bio = db.Model.extend({
   }
 });
 
-module.export = Bio;
+module.exports = Bio;
