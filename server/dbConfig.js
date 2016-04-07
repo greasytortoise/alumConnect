@@ -1,7 +1,4 @@
-var knex = require('knex');
-var bookshelf = require('bookshelf');
-
-knex({
+var knex = require('knex')({
   client: 'mysql',
   connection: {
     host: 'localhost',
@@ -11,8 +8,7 @@ knex({
     charset: 'utf8'
   }
 });
-
-var db = bookshelf(knex);
+var db = require('bookshelf')(knex);
 
 db.knex.schema.hasTable('users').then(function(exists) {
   if (!exists) {
