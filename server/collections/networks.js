@@ -1,4 +1,4 @@
-var db = require('../config');
+var db = require('../dbConfig');
 var Network = require('../models/network');
 
 var Networks = new db.Collection();
