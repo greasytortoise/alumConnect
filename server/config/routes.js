@@ -1,12 +1,12 @@
 var db = require('../dbConfig');
 var Groups = require('../collections/groups');
-var Group = require('../collections/group');
+var Group = require('../models/group');
 var Networks = require('../collections/networks');
-var Network = require('../model/network');
+var Network = require('../models/network');
 var Users = require('../collections/users');
-var User = require('../collections/user');
+var User = require('../models/user');
 var Bios = require('../collections/bios');
-var Bio = require('../collections/bio');
+var Bio = require('../models/bio');
 
 module.exports = function(app, express) {
   app.get('/test', function(req, res) {
@@ -20,6 +20,6 @@ module.exports = function(app, express) {
   });
 
   app.post('/testDatabase', function(req, res) {
-    
+
   });
 };
