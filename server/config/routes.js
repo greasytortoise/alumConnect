@@ -1,4 +1,9 @@
-var db = require('./../dbConfig');
+var db = require('../dbConfig');
+var Groups = require('../collections/groups');
+var Networks = require('../collections/networks');
+var Users = require('../collections/users');
+var Bios = require('../collections/bios');
+
 
 module.exports = function(app, express) {
   app.get('/test', function(req, res) {
