@@ -1,4 +1,4 @@
-var db = require('../config');
+var db = require('../dbConfig');
 var User = require('../models/user');
 
 var Users = new db.Collection();
