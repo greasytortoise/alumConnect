@@ -10,35 +10,45 @@ var Bio = require('../models/bio');
 
 module.exports = function(app, express) {
   app.get('/test', function(req, res) {
-    res.send(200);
+    Group.where({id: 1}).fetch({withRelated: ['user']})
+      .then(function(group) {
+        res.send(JSON.stringify(group));
+      });
   });
 
   app.get('/testDatabase', function(req, res) {
-    Groups.create({
+    return Groups.create({
       group_name: 'HR40'
     })
-    .then(function() {
-      Users.create({
+    .then(function(group) {
+      console.log('<<group: ', group);
+      return Users.create({
         username: 'yochess',
         password: 'lol',
         email: 'drake@aol.com',
         url_hash: 'a1b2c3',
         public: 1,
-        permission: 1
+        permission: 1,
+        group_id: group.get('id')
       });
     })
-    .then(function() {
+    .then(function(user) {
+      console.log('<<user: ', user);
       Networks.create({
         network_name: 'facebook',
-        username: 'snorky'
+        username: 'snorky',
+        user_id: user.get('id')
       });
+      return user;
     })
-    .then(function() {
-      Bios.create({
+    .then(function(user) {
+      console.log('<<user: ', user);
+      return Bios.create({
         lorem: 'a',
         ipsum: 'b',
         dolor: 'c',
-        sit: 'd'
+        sit: 'd',
+        user_id: user.get('id')
       });
     })
     .then(function() {
