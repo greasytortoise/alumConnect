@@ -1,0 +1,3 @@
+//AUTHENTICATION SCRIPTS, ADD TO ROUTER LATER
+
+//util.routeHelpers
