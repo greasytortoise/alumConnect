@@ -1,0 +1,36 @@
+{
+  "name": "alumconnect",
+  "version": "1.0.0",
+  "description": "DO AMAZING THINGS",
+  "main": "index.js",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^3.3.4",
+    "body-parser": "^1.15.0",
+    "bookshelf": "^0.9.4",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "jwt-simple": "^0.5.0",
+    "knex": "^0.10.0",
+    "mysql": "^2.10.2",
+    "nodemon": "^1.9.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-nodemon": "^2.0.6",
+    "gulp-shell": "^0.5.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mikejonas/alumConnect"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mikejonas/alumConnect/issues"
+  },
+  "homepage": "https://github.com/mikejonas/alumConnect"
+}
