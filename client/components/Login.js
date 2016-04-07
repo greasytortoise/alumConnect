@@ -13,7 +13,7 @@ class Login extends React.Component {
     super(props);
     mixins([Router.state, Router.Navigation, Reflux.connect(AuthStore), Reflux.ListenerMixin], this);
   }
-  
+
   componentDidMount() {
     this.listenTo(AuthStore, this._OnAuthChange)
   }
@@ -36,7 +36,7 @@ class Login extends React.Component {
   render() {
     var errorMessage;
     if(this.state.error) {
-      errorMessage = (        
+      errorMessage = (
         <div className='state-error' style={{ paddingBottom: 16 }}>
           { this.state.error }
         </div>
@@ -68,7 +68,7 @@ class Login extends React.Component {
 
     return (
       <div>Hello, React Router!</div>
-      
+
     );
   }
 }

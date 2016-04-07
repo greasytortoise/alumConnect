@@ -5,6 +5,7 @@ iisnode.yml
 npm-debug.log
 node_modules
 client/bower_components
+client/bundle.js
 
 # Floobits
 .floo

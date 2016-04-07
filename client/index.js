@@ -8,8 +8,9 @@ import Login from './components/Login'
 
 render((
   <Router history={hashHistory}>
-    <Route path="/" component={App}/>
-    <Route path="/user" component={User}/>
-    <Route path="/login" component={Login}/>
+    <Route path="/" component={App}>
+      <Route path="/user" component={User}/>
+      <Route path="/login" component={Login}/>
+    </Route>
   </Router>
 ), document.getElementById('app'))
