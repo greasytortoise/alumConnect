@@ -14,12 +14,37 @@ module.exports = function(app, express) {
   });
 
   app.get('/testDatabase', function(req, res) {
-    db.knex('users').then(function(res) {
-      console.log(res);
+    Groups.create({
+      group_name: 'HR40'
+    })
+    .then(function() {
+      Users.create({
+        username: 'yochess',
+        password: 'lol',
+        email: 'drake@aol.com',
+        url_hash: 'a1b2c3',
+        public: 1,
+        permission: 1
+      });
+    })
+    .then(function() {
+      Networks.create({
+        network_name: 'facebook',
+        username: 'snorky'
+      });
+    })
+    .then(function() {
+      Bios.create({
+        lorem: 'a',
+        ipsum: 'b',
+        dolor: 'c',
+        sit: 'd'
+      });
+    })
+    .then(function() {
+      res.send(201);
     });
-  });
-
-  app.post('/testDatabase', function(req, res) {
 
   });
+
 };

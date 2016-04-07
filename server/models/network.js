@@ -9,4 +9,4 @@ var Network = db.Model.extend({
   }
 });
 
-module.export = Network;
+module.exports = Network;
