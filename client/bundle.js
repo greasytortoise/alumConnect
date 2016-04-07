@@ -24809,6 +24809,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouter = __webpack_require__(159);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
@@ -24817,7 +24819,16 @@
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      'Users'
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        'test'
+	      ),
+	      _react2.default.createElement(
+	        _reactRouter.Link,
+	        { to: '/' },
+	        'Go back home ¯\\_(ツ)_/¯'
+	      )
 	    );
 	  }
 	});
