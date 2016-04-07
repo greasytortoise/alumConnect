@@ -9,9 +9,10 @@ DO AMAZING THINGS!!!!
   * mysql> exit
 
 
-### To start react server webpack run: ###
+### Make sure you use webpack to generate a client/bundle.js: ###
 
   * (make sure you npm install your dependencies)
   * (make sure you get rid of all client side bower stuff)
-  * npm start 
-  * visit http://localhost:8080/client
+  * Install webpack globally (npm install -g webpack)
+  * run: webpack --watch
+  * Start the server visit http://localhost:3000/
