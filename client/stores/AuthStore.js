@@ -1,5 +1,5 @@
 import Reflux from 'reflux';
-import Actions from 'actions/AuthActions';
+import Actions from '../actions/AuthActions';
 
 var AuthStore = Reflux.createStore({
   listenables: Actions,
@@ -10,7 +10,7 @@ var AuthStore = Reflux.createStore({
     this.claims = this.parseJwt();
     this.error = false;
     this.loading = false;
-  }
+  },
 
   getState() {
     return {
@@ -20,19 +20,19 @@ var AuthStore = Reflux.createStore({
       loggedIn: this.loggedIn()
 
     };
-  }
+  },
 
   userFromClaims(){
     return this.claims;
-  }
+  },
 
   loggedIn(){
     return this.claims !== null;
-  }
+  },
 
   changed(){
     this.trigger(this.getState());
-  }
+  },
 
   onLogin(email, password){
     this.loading = true;
@@ -44,7 +44,7 @@ var AuthStore = Reflux.createStore({
     MAKE API CALL HERE
     MAKE API CALL HERE*/
 
-  }
+  },
 
   onLoginCompleted(authResponse) {
     if(authResponse) {
@@ -59,15 +59,15 @@ var AuthStore = Reflux.createStore({
 
     this.loading = false;
     this.changed();
-  }
+  },
 
-  ongLogout(){
+  onLogout(){
     this.jwt = null;
     this.claims = null;
     this.error = false;
     this.loading = false;
     localStorage.removeItem('jwtAlum');
-  }
+  },
 
   parseJwt(){
     if(this.jwtAlum !== null) {
