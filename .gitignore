@@ -1,0 +1,13 @@
+.DS_Store
+.AppleDouble
+.LSOverride
+iisnode.yml
+npm-debug.log
+node_modules
+client/bower_components
+
+# Floobits
+.floo
+.floobit
+.floo
+.flooignore
