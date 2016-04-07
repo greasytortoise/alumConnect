@@ -37,6 +37,8 @@ var AuthStore = Reflux.createStore({
   onLogin(email, password){
     this.loading = true;
     this.changed();
+    
+    var hash = CryptoJS.SHA256(password);
 
 /*    MAKE API CALL HERE
     MAKE API CALL HERE

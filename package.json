@@ -8,6 +8,7 @@
     "bluebird": "^3.3.4",
     "body-parser": "^1.15.0",
     "bookshelf": "^0.9.4",
+    "crypto-js": "^3.1.6",
     "es6-mixins": "^1.0.2",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
