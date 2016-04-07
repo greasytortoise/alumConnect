@@ -3,12 +3,12 @@ import Reflux from 'reflux';
 import Router from 'react-router';
 import mixins from 'es6-mixins';
 
-import AuthStore from 'stores/AuthStore';
-import AuthActions from 'actions/AuthActions';
+import AuthStore from '../stores/AuthStore';
+import AuthActions from '../actions/AuthActions';
 
 
 
-Class Login extends React.Component {
+class Login extends React.Component {
   constructor(props) {
     super(props);
     mixins([Router.state, Router.Navigation, Reflux.connect(AuthStore), Reflux.ListenerMixin], this);
@@ -68,13 +68,11 @@ Class Login extends React.Component {
 
     return (
       <div>Hello, React Router!</div>
-      <form onSubmit={this._handleSubmit}>
-        {formContent}
-      </form>
-
+      
     );
   }
-};
+}
+}
 
 
 module.exports = Login;
