@@ -13,12 +13,20 @@
     "jwt-simple": "^0.5.0",
     "knex": "^0.10.0",
     "mysql": "^2.10.2",
-    "nodemon": "^1.9.1"
+    "nodemon": "^1.9.1",
+    "react": "^0.14.8",
+    "react-dom": "^0.14.8",
+    "react-router": "^2.0.1"
   },
   "devDependencies": {
+    "babel-core": "^6.7.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.5.0",
     "gulp": "^3.9.1",
     "gulp-nodemon": "^2.0.6",
-    "gulp-shell": "^0.5.2"
+    "gulp-shell": "^0.5.2",
+    "webpack": "^1.12.14"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
