@@ -31142,7 +31142,11 @@
 	    key: 'render',
 	    value: function render() {
 
-	      return _react2.default.createElement('div', null);
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        'link'
+	      );
 	    }
 	  }]);
 
