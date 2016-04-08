@@ -1,10 +1,10 @@
-import React from 'react';
-import Reflux from 'reflux';
-import Router from 'react-router';
-import mixins from 'es6-mixins';
+import React from 'react'
+import Reflux from 'reflux'
+import Router from 'react-router'
+import mixins from 'es6-mixins'
 
-import AuthStore from '../stores/AuthStore';
-import AuthActions from '../actions/AuthActions';
+import AuthStore from '../stores/AuthStore'
+import AuthActions from '../actions/AuthActions'
 
 
 
