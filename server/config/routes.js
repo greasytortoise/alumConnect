@@ -11,12 +11,23 @@ var Bio = require('../models/bio');
 var util = require('../lib/utility.js');
 
 module.exports = function(app, express) {
-
   app.get('/db/groups', function(req, res) {
     Groups.fetch()
       .then(function(groups) {
         res.json(groups);
       });
+  });
+
+  app.get('/db/groups/:id', function(req, res) {
+    var id = req.params.id;
+    Group.where({id: id}).fetch()
+      .then(function(group) {
+        res.json(group);
+      });
+  });
+
+  app.post('/db/groups', function(req, res) {
+    //todo
   });
 
   app.get('/db/users', function(req, res) {
@@ -25,10 +36,34 @@ module.exports = function(app, express) {
     });
   });
 
+  app.get('/db/users/:id', function(req, res) {
+    var id = req.params.id;
+    User.where({id: id}).fetch()
+      .then(function(user) {
+        res.json(user);
+      });
+  });
+
+  app.post('/db/users', function(req, res) {
+    //todo
+  });
+
   app.get('/db/networks', function(req, res) {
     Networks.fetch().then(function(networks) {
       res.json(networks);
     });
+  });
+
+  app.post('/db/networks', function(req, res) {
+    //todo
+  });
+
+  app.get('/db/networks/:id', function(req, res) {
+    var id = req.params.id;
+    Network.where({id: id}).fetch()
+      .then(function(network) {
+        res.json(network);
+      });
   });
 
   app.get('/db/bios', function(req, res) {
@@ -37,14 +72,30 @@ module.exports = function(app, express) {
     });
   });
 
-  app.get('/db/test', function(req, res) {
-    Group.where({id: 1}).fetch()
-      .then(function(user) {
-        res.json(user);
+  app.get('/db/bios/:id', function(req, res) {
+    var id = req.params.id;
+    Bio.where({id: id}).fetch()
+      .then(function(bio) {
+        res.json(bio);
       });
   });
 
+  app.post('/db/bios', function(req, res) {
+    Bio.create({
+      name: 'robot',
+      before_hr: 'sleep all day',
+      location: 'planet earth',
+      interest: 'sleep',
+      experience: 'sleep a lot',
+      fun_fact: 'I like to sleep',
+      user_id: 5
+    })
+    .then(function(bio) {
+      res.send(201);
+    });
+  });
 
+  // this is currently not working (for test purposes)
   app.get('/testDatabase', function(req, res) {
     return Groups.create({
       group_name: 'HR40'
@@ -98,6 +149,7 @@ module.exports = function(app, express) {
   });
 
   app.get('*', function (request, response){
+    console.log('directing to index');
     response.sendFile(path.resolve(__dirname,  '../../client/index.html'))
   });
 };
