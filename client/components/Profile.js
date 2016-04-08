@@ -5,15 +5,28 @@ class Profile extends React.Component {
 
   constructor (props) {
     super (props);
-    // this.state = {
-    //   profile = {}
-    // };
+    this.state = {
+      currentProfile = null
+    };
+  }
+
+  componentDidMount() {
+    this.getUserProfile();
+  }
+
+  getUserProfile() {
+    
+  }
+
+  handleEditProfileClick() {
+
   }
 
   render() {
     return (
       
       <div>
+        <Edit 
         <h3>Preferred name</h3>
         <p>The Donald</p>
         <img src="../mockups/assets/donaldtrump.png" className="photo" />
