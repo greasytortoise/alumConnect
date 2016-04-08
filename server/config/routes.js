@@ -9,6 +9,8 @@ var User = require('../models/user');
 var Bios = require('../collections/bios');
 var Bio = require('../models/bio');
 var util = require('../lib/utility.js');
+var bcrypt = require('bcrypt');
+
 
 module.exports = function(app, express) {
   app.get('/db/groups', function(req, res) {
@@ -144,8 +146,18 @@ module.exports = function(app, express) {
         res.send(401, 'Invalid Password');
       }
     })
+  });
 
+  app.post('/changepassword', function(req, res) {
+    var tokenUserData = req.token.split('.')[1].user;
+    Users.where({id: tokenUserData.id}).fetch().then(function(user){
+      bcrypt.hash(password, 10, function(err, hash) {
+        
+        //DO THING WITH HASH
+        //SAVE NEW PW TO DB!
 
+      });
+    });
   });
 
   app.get('*', function (request, response){

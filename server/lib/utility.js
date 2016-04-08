@@ -14,14 +14,6 @@ exports.generateToken = function(userid, user) {
 
 };
 
-exports.hashAndStore = function(password, callback) {
-  bcrypt.hash(password, 10, function(err, hash) {
-    
-    //DO THING WITH HASH
-    callback(hash);
-  });
-};
-
 
 exports.comparePass = function(password, callback) {
 
@@ -43,6 +35,7 @@ exports.comparePass = function(password, callback) {
 
 exports.isLoggedIn = function(req) {
   //PROBABLY NEEDS ADJUSTMENT
+  //CHECK TO ENSURE JWT SENT WITH REQUESTS
   return req.token ? !!req.token.user : false;
 };
 
