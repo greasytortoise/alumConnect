@@ -13,7 +13,7 @@ class Profile extends React.Component {
   }
 
   componentDidMount() {
-    this.getUserProfile();
+    this._getUserProfile();
   }
 
   _getUserProfile() {
