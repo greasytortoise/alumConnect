@@ -11,13 +11,17 @@ import AuthActions from '../actions/AuthActions'
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = AuthStore.getInitialState();
     mixins([/*Router.State, Router.Navigation,*/ Reflux.connect(AuthStore, 'user'), Reflux.ListenerMixin], this);
   }
 
   componentDidMount() {
     this.listenTo(AuthStore, this._OnAuthChange)
   }
+
+  // getInitialState() {
+  //   return {};
+  // }
 
   _OnAuthChange(auth) {
     this.setState(auth);
@@ -29,7 +33,7 @@ class Login extends React.Component {
 
   _handleSubmit(event) {
     event.preventDefault();
-    AuthActions.login(React.findDOMNode(this.refs.email).value, React.findDOMNode(this.refs.password).value)
+    AuthActions.login(React.findDOMNode(this.refs.email).value, React.findDOMNode(this.refs.password).value);
   }
 
 
@@ -58,9 +62,9 @@ class Login extends React.Component {
       formContent = (
         <div>
           { errorMessage }
-          Email: <input defaultValue="DonaldTrump@MakeAmericaGreatAgain.com" ref="email" style={{ maxWidth: "100%" }} type="email" />
+          Email: <input defaultValue="DonaldTrump@MakeAmericaGreatAgain.com" ref="email" style={{ maxWidth: "150%" }} type="email" />
           <br/>
-          Password: <input defaultValue="DonaldTrump" ref="password" style={{ maxWidth: "100%" }} type="password" />
+          Password: <input defaultValue="DonaldTrump" ref="password" style={{ maxWidth: "150%" }} type="password" />
           <br/>
           <button onClick={ this.handleLogout }>Log In</button>
         </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Router, Route, hashHistory } from 'react-router'
+import { Router, Route, hashHistory, State } from 'react-router'
 import App from './components/App'
 import User from './components/User'
 import Login from './components/Login'
