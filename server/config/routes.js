@@ -9,12 +9,31 @@ var Bios = require('../collections/bios');
 var Bio = require('../models/bio');
 
 module.exports = function(app, express) {
-  app.get('/test', function(req, res) {
-    Group.where({id: 1}).fetch({withRelated: ['user']})
-      .then(function(group) {
-        res.send(JSON.stringify(group));
+  app.get('/db/groups', function(req, res) {
+    Groups.fetch()
+      .then(function(groups) {
+        res.json(groups);
       });
   });
+
+  app.get('/db/users', function(req, res) {
+    Users.fetch().then(function(users) {
+      res.json(users);
+    });
+  });
+
+  app.get('/db/networks', function(req, res) {
+    Networks.fetch().then(function(networks) {
+      res.json(networks);
+    });
+  });
+
+  app.get('/db/bios', function(req, res) {
+    Bios.fetch().then(function(bios) {
+      res.json(bios);
+    });
+  });
+
 
   app.get('/testDatabase', function(req, res) {
     return Groups.create({
