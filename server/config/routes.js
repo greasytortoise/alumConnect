@@ -139,19 +139,32 @@ module.exports = function(app, express) {
   });
 
   app.post('/login', function(req, res) {
-    util.comparePass(req.body.password, function(match, user) {
-      if(match) {
-        res.send(200, util.generateToken(user.id, user));
-      } else {
-        res.send(401, 'Invalid Password');
-      }
-    })
+
+
+    res.send(200, 'HEY CUTIE');
+
+    // Users.where({email: req.body.email }).fetch().then(function(user){
+    //   if(user.length === 0) {
+    //     res.send(401, 'No user with that email');
+    //   } else {
+    //     bcrypt.compare(password, user[0].password, function(err, isMatch){
+    //       if(match) {
+    //         res.send(200, util.generateToken(user.id, user));
+    //       } else {
+    //         // res.send(401, 'Invalid Password');
+    //         res.send(200, util.generateToken(user.id, user));
+
+    //       }
+    //     });
+
+    //   }
+    // });
   });
 
   app.post('/changepassword', function(req, res) {
     var tokenUserData = req.token.split('.')[1].user;
     Users.where({id: tokenUserData.id}).fetch().then(function(user){
-      bcrypt.hash(password, 10, function(err, hash) {
+      bcrypt.hash(req.body.password, 10, function(err, hash) {
         
         //DO THING WITH HASH
         //SAVE NEW PW TO DB!
@@ -165,11 +178,6 @@ module.exports = function(app, express) {
     response.sendFile(path.resolve(__dirname,  '../../client/index.html'))
   });
 };
-
-
-
-
-
 
 
 
