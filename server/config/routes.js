@@ -8,6 +8,7 @@ var Users = require('../collections/users');
 var User = require('../models/user');
 var Bios = require('../collections/bios');
 var Bio = require('../models/bio');
+var util = require('../lib/utility.js');
 
 module.exports = function(app, express) {
 
@@ -84,7 +85,29 @@ module.exports = function(app, express) {
     });
   });
 
+  app.post('/login', function(req, res) {
+    util.comparePass(req.body.password, function(match, user) {
+      if(match) {
+        res.send(200, util.generateToken(user.id, user));
+      } else {
+        res.send(401, 'Invalid Password');
+      }
+    })
+
+
+  });
+
   app.get('*', function (request, response){
     response.sendFile(path.resolve(__dirname,  '../../client/index.html'))
   });
 };
+
+
+
+
+
+
+
+
+
+

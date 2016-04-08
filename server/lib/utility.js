@@ -1,5 +1,6 @@
 var bcrypt = require('bcrypt');
 var jwt = require('jwt-simple');
+var Users = require('../collections/users');
 
 
 exports.generateToken = function(userid, user) {
@@ -13,21 +14,29 @@ exports.generateToken = function(userid, user) {
 
 };
 
-exports.hashAndStore = function(password) {
+exports.hashAndStore = function(password, callback) {
   bcrypt.hash(password, 10, function(err, hash) {
-
+    
     //DO THING WITH HASH
-  };
+    callback(hash);
+  });
 };
 
 
 exports.comparePass = function(password, callback) {
 
   //GET HASHED PASSWORD FROM DB
-  var storedHash;
-  bcrypt.compare(password, storedHash, function(err, isMatch){
-    callback(isMatch);
-  });
+  Users.where({email: req.body.email }).fetch().then(function(user){
+    if(user.length === 0) {
+      res.send(401, 'No user with that email');
+    } else {
+      bcrypt.compare(password, user[0].password, function(err, isMatch){
+        callback(isMatch, user);
+      });
+
+    }
+  })
+
 
 };
 
