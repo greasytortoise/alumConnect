@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 class Edit extends React.Component {
   constructor(props) {
@@ -8,7 +8,7 @@ class Edit extends React.Component {
   render() {
 
     return (
-      <div></div>
+      <div>link</div>
     );
   }
 }
