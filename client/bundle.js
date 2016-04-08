@@ -54,35 +54,35 @@
 
 	var _reactRouter = __webpack_require__(159);
 
-	var _App = __webpack_require__(223);
+	var _App = __webpack_require__(216);
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _AppAuth = __webpack_require__(224);
+	var _AppAuth = __webpack_require__(217);
 
 	var _AppAuth2 = _interopRequireDefault(_AppAuth);
 
-	var _Edit = __webpack_require__(216);
+	var _Edit = __webpack_require__(222);
 
 	var _Edit2 = _interopRequireDefault(_Edit);
 
-	var _Users = __webpack_require__(217);
+	var _Users = __webpack_require__(223);
 
 	var _Users2 = _interopRequireDefault(_Users);
 
-	var _User = __webpack_require__(218);
+	var _User = __webpack_require__(224);
 
 	var _User2 = _interopRequireDefault(_User);
 
-	var _authHelpers = __webpack_require__(219);
+	var _authHelpers = __webpack_require__(218);
 
 	var _authHelpers2 = _interopRequireDefault(_authHelpers);
 
-	var _Login = __webpack_require__(221);
+	var _Login = __webpack_require__(220);
 
 	var _Login2 = _interopRequireDefault(_Login);
 
-	var _Profile = __webpack_require__(222);
+	var _Profile = __webpack_require__(221);
 
 	var _Profile2 = _interopRequireDefault(_Profile);
 
@@ -101,7 +101,7 @@
 	    _react2.default.createElement(_reactRouter.Route, { path: '/edit', component: _Edit2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _Login2.default }),
 	    '*/}',
-	    _react2.default.createElement(_reactRouter.Route, { path: '/logout', component: _AppAuth2.default.Logout }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/logout', component: _AppAuth2.default.Logout, onEnter: _authHelpers2.default.logout }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/dashboard', component: _AppAuth2.default.Dashboard, onEnter: requireAuth })
 	  )
 	), document.getElementById('app'));
@@ -24795,6 +24795,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouter = __webpack_require__(159);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24803,31 +24805,57 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Edit = function (_React$Component) {
-	  _inherits(Edit, _React$Component);
+	var App = function (_React$Component) {
+	  _inherits(App, _React$Component);
 
-	  function Edit(props) {
-	    _classCallCheck(this, Edit);
+	  function App() {
+	    _classCallCheck(this, App);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Edit).call(this, props));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(App).apply(this, arguments));
 	  }
 
-	  _createClass(Edit, [{
+	  _createClass(App, [{
 	    key: 'render',
 	    value: function render() {
-
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        'link'
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'Website title'
+	        ),
+	        _react2.default.createElement(
+	          'ul',
+	          { role: 'nav' },
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/' },
+	              'Home'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/users' },
+	              'Users'
+	            )
+	          )
+	        ),
+	        this.props.children
 	      );
 	    }
 	  }]);
 
-	  return Edit;
+	  return App;
 	}(_react2.default.Component);
 
-	module.exports = Edit;
+	module.exports = App;
 
 /***/ },
 /* 217 */
@@ -24835,29 +24863,48 @@
 
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactDom = __webpack_require__(158);
+
 	var _reactRouter = __webpack_require__(159);
+
+	var _authHelpers = __webpack_require__(218);
+
+	var _authHelpers2 = _interopRequireDefault(_authHelpers);
+
+	var _Login = __webpack_require__(220);
+
+	var _Login2 = _interopRequireDefault(_Login);
+
+	var _Profile = __webpack_require__(221);
+
+	var _Profile2 = _interopRequireDefault(_Profile);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = _react2.default.createClass({
-	  displayName: 'Users',
+	var AppAuth = _react2.default.createClass({
+	  displayName: 'AppAuth',
+	  getInitialState: function getInitialState() {
+	    return {
+	      loggedIn: _authHelpers2.default.loggedIn()
+	    };
+	  },
+	  updateAuth: function updateAuth(loggedIn) {
+	    this.setState({
+	      loggedIn: _authHelpers2.default.loggedIn()
+	    });
+	  },
+	  componentWillMount: function componentWillMount() {
+	    _authHelpers2.default.onChange = this.updateAuth(this.loggedIn);
+	    _authHelpers2.default.login();
+	  },
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      _react2.default.createElement(
-	        'h2',
-	        null,
-	        'users'
-	      ),
 	      _react2.default.createElement(
 	        'ul',
 	        null,
@@ -24866,59 +24913,38 @@
 	          null,
 	          _react2.default.createElement(
 	            _reactRouter.Link,
-	            { to: '/users/donaldtrump' },
-	            'Donald Trump'
+	            { to: '/dashboard' },
+	            'SPARKLY RAINBOW UNICORNS HERE!!!'
 	          )
 	        ),
 	        _react2.default.createElement(
 	          'li',
 	          null,
-	          _react2.default.createElement(
+	          this.state.loggedIn ? _react2.default.createElement(
 	            _reactRouter.Link,
-	            { to: '/users/mattBresnan' },
-	            'Matt Bresnan'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'li',
-	          null,
-	          _react2.default.createElement(
+	            { to: '/logout' },
+	            'Log out'
+	          ) : _react2.default.createElement(
 	            _reactRouter.Link,
-	            { to: '/users/donaldtrump' },
-	            'Donald Trump'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'li',
-	          null,
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/users/mattBresnan' },
-	            'Matt Bresnan'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'li',
-	          null,
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/users/donaldtrump' },
-	            'Donald Trump'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'li',
-	          null,
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/users/mattBresnan' },
-	            'Matt Bresnan'
+	            { to: '/login' },
+	            'Sign in'
 	          )
 	        )
+	      ),
+	      this.props.children || _react2.default.createElement(
+	        'p',
+	        null,
+	        'You are ',
+	        !this.state.loggedIn && 'not',
+	        ' logged in.'
 	      )
 	    );
 	  }
 	});
+
+	module.exports = {
+	  App: AppAuth
+	};
 
 /***/ },
 /* 218 */
@@ -24926,45 +24952,7 @@
 
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(159);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'User',
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        'test'
-	      ),
-	      _react2.default.createElement(
-	        _reactRouter.Link,
-	        { to: '/' },
-	        'Go back home ¯\\_(ツ)_/¯'
-	      )
-	    );
-	  }
-	});
-
-/***/ },
-/* 219 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _cryptoJs = __webpack_require__(220);
+	var _cryptoJs = __webpack_require__(219);
 
 	var _cryptoJs2 = _interopRequireDefault(_cryptoJs);
 
@@ -25002,7 +24990,7 @@
 	};
 
 /***/ },
-/* 220 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	;(function (root, factory) {
@@ -30956,7 +30944,7 @@
 	}));
 
 /***/ },
-/* 221 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30969,7 +30957,7 @@
 
 	var _reactRouter2 = _interopRequireDefault(_reactRouter);
 
-	var _authHelpers = __webpack_require__(219);
+	var _authHelpers = __webpack_require__(218);
 
 	var _authHelpers2 = _interopRequireDefault(_authHelpers);
 
@@ -31042,7 +31030,7 @@
 	module.exports = Login;
 
 /***/ },
-/* 222 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31053,7 +31041,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Edit = __webpack_require__(216);
+	var _Edit = __webpack_require__(222);
 
 	var _Edit2 = _interopRequireDefault(_Edit);
 
@@ -31177,7 +31165,7 @@
 	module.exports = Profile;
 
 /***/ },
-/* 223 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31188,8 +31176,6 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactRouter = __webpack_require__(159);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31198,106 +31184,61 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var App = function (_React$Component) {
-	  _inherits(App, _React$Component);
+	var Edit = function (_React$Component) {
+	  _inherits(Edit, _React$Component);
 
-	  function App() {
-	    _classCallCheck(this, App);
+	  function Edit(props) {
+	    _classCallCheck(this, Edit);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(App).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Edit).call(this, props));
 	  }
 
-	  _createClass(App, [{
+	  _createClass(Edit, [{
 	    key: 'render',
 	    value: function render() {
+
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(
-	          'h2',
-	          null,
-	          'Website title'
-	        ),
-	        _react2.default.createElement(
-	          'ul',
-	          { role: 'nav' },
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/' },
-	              'Home'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/users' },
-	              'Users'
-	            )
-	          )
-	        ),
-	        this.props.children
+	        'link'
 	      );
 	    }
 	  }]);
 
-	  return App;
+	  return Edit;
 	}(_react2.default.Component);
 
-	module.exports = App;
+	module.exports = Edit;
 
 /***/ },
-/* 224 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(158);
-
 	var _reactRouter = __webpack_require__(159);
-
-	var _authHelpers = __webpack_require__(219);
-
-	var _authHelpers2 = _interopRequireDefault(_authHelpers);
-
-	var _Login = __webpack_require__(221);
-
-	var _Login2 = _interopRequireDefault(_Login);
-
-	var _Profile = __webpack_require__(222);
-
-	var _Profile2 = _interopRequireDefault(_Profile);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var AppAuth = _react2.default.createClass({
-	  displayName: 'AppAuth',
-	  getInitialState: function getInitialState() {
-	    return {
-	      loggedIn: _authHelpers2.default.loggedIn()
-	    };
-	  },
-	  updateAuth: function updateAuth(loggedIn) {
-	    this.setState({
-	      loggedIn: _authHelpers2.default.loggedIn()
-	    });
-	  },
-	  componentWillMount: function componentWillMount() {
-	    _authHelpers2.default.onChange = this.updateAuth(this.loggedIn);
-	    _authHelpers2.default.login();
-	  },
+	exports.default = _react2.default.createClass({
+	  displayName: 'Users',
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
 	      null,
+	      _react2.default.createElement(
+	        'h2',
+	        null,
+	        'users'
+	      ),
 	      _react2.default.createElement(
 	        'ul',
 	        null,
@@ -31306,75 +31247,97 @@
 	          null,
 	          _react2.default.createElement(
 	            _reactRouter.Link,
-	            { to: '/dashboard' },
-	            'SPARKLY RAINBOW UNICORNS HERE!!!'
+	            { to: '/users/donaldtrump' },
+	            'Donald Trump'
 	          )
 	        ),
 	        _react2.default.createElement(
 	          'li',
 	          null,
-	          this.state.loggedIn ? _react2.default.createElement(
+	          _react2.default.createElement(
 	            _reactRouter.Link,
-	            { to: '/logout' },
-	            'Log out'
-	          ) : _react2.default.createElement(
+	            { to: '/users/mattBresnan' },
+	            'Matt Bresnan'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'li',
+	          null,
+	          _react2.default.createElement(
 	            _reactRouter.Link,
-	            { to: '/login' },
-	            'Sign in'
+	            { to: '/users/donaldtrump' },
+	            'Donald Trump'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'li',
+	          null,
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/users/mattBresnan' },
+	            'Matt Bresnan'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'li',
+	          null,
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/users/donaldtrump' },
+	            'Donald Trump'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'li',
+	          null,
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/users/mattBresnan' },
+	            'Matt Bresnan'
 	          )
 	        )
-	      ),
-	      this.props.children || _react2.default.createElement(
-	        'p',
-	        null,
-	        'You are ',
-	        !this.state.loggedIn && 'not',
-	        ' logged in.'
 	      )
 	    );
 	  }
 	});
 
-	var Dashboard = _react2.default.createClass({
-	  displayName: 'Dashboard',
-	  render: function render() {
-	    var token = _authHelpers2.default.getToken();
+/***/ },
+/* 224 */
+/***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(159);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'User',
+	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
 	      null,
 	      _react2.default.createElement(
-	        'h1',
+	        'div',
 	        null,
-	        'Dashboard'
+	        'test'
 	      ),
 	      _react2.default.createElement(
-	        'p',
-	        null,
-	        'COOL STUFF'
-	      ),
-	      _react2.default.createElement(
-	        'p',
-	        null,
-	        token
+	        _reactRouter.Link,
+	        { to: '/' },
+	        'Go back home ¯\\_(ツ)_/¯'
 	      )
 	    );
 	  }
 	});
-
-	var Logout = _react2.default.createClass({
-	  displayName: 'Logout',
-	  componentDidMount: function componentDidMount() {
-	    _authHelpers2.default.logout();
-	  },
-	  render: function render() {}
-	});
-
-	module.exports = {
-	  App: AppAuth,
-	  Dashboard: Dashboard,
-	  Logout: Logout
-	};
 
 /***/ }
 /******/ ]);
