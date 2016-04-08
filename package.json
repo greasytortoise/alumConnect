@@ -32,11 +32,14 @@
     "gulp-nodemon": "^2.0.6",
     "gulp-shell": "^0.5.2",
     "webpack": "^1.12.14",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "http-server": "^0.8.5"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack && nodemon server/app.js"
+    "start": "webpack && nodemon server/app.js",
+    "start:dev": "webpack-dev-server --inline --content-base public/ --history-api-fallback",
+    "start:prod": "webpack && node server/app.js"
   },
   "repository": {
     "type": "git",
