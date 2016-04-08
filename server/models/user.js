@@ -5,13 +5,13 @@ var Bio = require('./bio');
 
 var User = db.Model.extend({
   tableName: 'Users',
-  group: function() {
+  groups: function() {
     return this.belongsTo(Group);
   },
-  network: function() {
-    return this.belongsTo(Network);
+  networks: function() {
+    return this.hasMany(Network);
   },
-  bio: function() {
+  bios: function() {
     return this.hasOne(Bio);
   }
 });
