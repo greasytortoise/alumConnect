@@ -19,10 +19,9 @@ render((
       <Route path="/login" component={Login}/>
       <Route path="/profile" component={Profile}/>
       <Route path="/edit" component={Edit}/>
-      <Route path="/login" component={Login} />*/}
-      <Route path="/logout" component={AppAuth.Logout} />
-      <Route path="/dashboard" component={AppAuth.Dashboard} onEnter={requireAuth} />
-    </Route>
+      <Route path="/login" component={Login} />}
+      <Route path="/logout" component={Login}  onEnter={auth.logout}/>
+   </Route>
   </Router>
 ), document.getElementById('app'))
 

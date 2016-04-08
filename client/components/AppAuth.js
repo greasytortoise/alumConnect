@@ -20,7 +20,7 @@ const AppAuth = React.createClass({
 
   componentWillMount() {
     auth.onChange = this.updateAuth(this.loggedIn);
-    auth.login()
+    auth.login();
   },
 
   render() {
@@ -42,31 +42,8 @@ const AppAuth = React.createClass({
   }
 })
 
-const Dashboard = React.createClass({
-  render() {
-    const token = auth.getToken()
 
-    return (
-      <div>
-        <h1>Dashboard</h1>
-        <p>COOL STUFF</p>
-        <p>{token}</p>
-      </div>
-    )
-  }
-})
-
-const Logout = React.createClass({
-  componentDidMount() {
-    auth.logout()
-  },
-
-  render() {
-  }
-})
 
 module.exports = {
-  App: AppAuth,
-  Dashboard: Dashboard,
-  Logout: Logout
+  App: AppAuth
 };
