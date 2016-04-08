@@ -19,9 +19,7 @@ render((
       <Route path="/login" component={Login}/>
       <Route path="/profile" component={Profile}/>
       <Route path="/edit" component={Edit}/>
-
       <Route path="/login" component={Login} />
-
       <Route path="/logout" component={Login}  onEnter={auth.logout}/>
     </Route>
   </Router>
