@@ -5,7 +5,6 @@ var Bio = require('./bio');
 
 var User = db.Model.extend({
   tableName: 'Users',
-  hasTimestamps: true,
   group: function() {
     return this.belongsTo(Group);
   },
