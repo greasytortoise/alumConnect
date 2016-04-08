@@ -15,7 +15,7 @@ render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
       <Route path="/users" component={Users}/>
-      <Route path="/users/:user" component={User}/>
+      <Route path="/users/:user" component={Profile}/>
       <Route path="/login" component={Login}/>
       <Route path="/profile" component={Profile}/>
       <Route path="/edit" component={Edit}/>
