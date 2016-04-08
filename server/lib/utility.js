@@ -15,29 +15,21 @@ exports.generateToken = function(userid, user) {
 };
 
 
-exports.comparePass = function(password, callback) {
-
-  //GET HASHED PASSWORD FROM DB
-  Users.where({email: req.body.email }).fetch().then(function(user){
-    if(user.length === 0) {
-      res.send(401, 'No user with that email');
-    } else {
-      bcrypt.compare(password, user[0].password, function(err, isMatch){
-        callback(isMatch, user);
-      });
-
-    }
-  })
-
-
-};
-
-
 exports.isLoggedIn = function(req) {
   //PROBABLY NEEDS ADJUSTMENT
   //CHECK TO ENSURE JWT SENT WITH REQUESTS
   return req.token ? !!req.token.user : false;
 };
 
+exports.allowCrossDomain = function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
 
-
+  if ('OPTIONS' === req.method) {
+    res.send(200);
+  }
+  else {
+    next();
+  }
+};
