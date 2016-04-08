@@ -43,6 +43,7 @@ exports.comparePass = function(password, callback) {
 
 exports.isLoggedIn = function(req) {
   //PROBABLY NEEDS ADJUSTMENT
+  //CHECK TO ENSURE JWT SENT WITH REQUESTS
   return req.token ? !!req.token.user : false;
 };
 
