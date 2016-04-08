@@ -12,6 +12,10 @@ var AuthStore = Reflux.createStore({
     this.state.error = false;
     this.state.loading = false;
   },
+  
+  getInitialState(){
+    return this.state;
+  },
 
   getState() {
     return {
