@@ -9,6 +9,12 @@ var routes = require('./config/routes');
 middleware(app, express);
 routes(app, express);
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+}); 
+
 LEX.create({
   configDir: './config/letsencrypt.config'                 // ~/letsencrypt, /etc/letsencrypt, whatever you want
 
