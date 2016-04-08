@@ -26691,6 +26691,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouter = __webpack_require__(159);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26706,6 +26708,9 @@
 	    _classCallCheck(this, Profile);
 
 	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Profile).call(this, props));
+	    // this.state = {
+	    //   profile = {}
+	    // };
 	  }
 
 	  _createClass(Profile, [{
@@ -26714,7 +26719,67 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        ' user profile'
+	        _react2.default.createElement(
+	          'h3',
+	          null,
+	          'Preferred name'
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'The Donald'
+	        ),
+	        _react2.default.createElement('img', { src: '../mockups/assets/donaldtrump.png', className: 'photo' }),
+	        _react2.default.createElement(
+	          'h3',
+	          null,
+	          'What have you been up to before HackReactor?'
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'Two years ago I moved from Virginia to LA to start working at Accenture as a security technology consultant. I had planned to  take a leave of absence for a few months to study python until one of my coworkers told me about HR. This was about 6  months ago. Ever since then I\'ve been studying, and eventually took the leave so I could focus on getting admitted into the  program. I quickly noticed that "full time" studying actually just means a little bit of studying, and a lot of Netflix.'
+	        ),
+	        _react2.default.createElement(
+	          'h3',
+	          null,
+	          'What city are you coming from to be here at HR?'
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'I relocated back home to VA temporarily, but I\'ve been in LA for the past two years.'
+	        ),
+	        _react2.default.createElement(
+	          'h3',
+	          null,
+	          'Tech interests?'
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'I\'ve always wanted to get into programming, but never fully committed to learning. This past year I finally decided it was time to pick up a new skill set, because I was getting really bored of technology consulting. Some of my tech interest are cyber security, data mining, and machine learning. After my programming skills are better I also want to learn as much as I can about making hardware.'
+	        ),
+	        _react2.default.createElement(
+	          'h3',
+	          null,
+	          'Coding experience?'
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'I majored in IT in college, and took a few entry level classes for java and php. Since then I\'ve taken java, C++, JS, and python classes online, which were all way more informative than what I learned in college. I picked up basic level linux commands at work since we use oracle\'s security suite for installs/configs/administration.'
+	        ),
+	        _react2.default.createElement(
+	          'h3',
+	          null,
+	          'Fun random stuff?'
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'I love to travel and experience new cultures and food. Like a few other people in the cohort I also scuba dive! After I saw Men of Honor I was always inspired to get my scuba cert one day. When I\'m not studying I\'m either at the gym, eating, cooking, or doing something else fitness related. I\'m obsessed with fitness, and would like to eventually get into competing or fitness modeling.'
+	        )
 	      );
 	    }
 	  }]);
