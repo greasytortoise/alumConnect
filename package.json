@@ -36,7 +36,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --inline --content-base ."
+    "start": "webpack && nodemon server/app.js"
   },
   "repository": {
     "type": "git",
