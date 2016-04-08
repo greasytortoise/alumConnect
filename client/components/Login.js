@@ -11,7 +11,8 @@ import AuthActions from '../actions/AuthActions'
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    mixins([Router.state, Router.Navigation, Reflux.connect(AuthStore), Reflux.ListenerMixin], this);
+    this.state = {};
+    mixins([/*Router.State, Router.Navigation,*/ Reflux.connect(AuthStore, 'user'), Reflux.ListenerMixin], this);
   }
 
   componentDidMount() {
@@ -57,7 +58,7 @@ class Login extends React.Component {
       formContent = (
         <div>
           { errorMessage }
-          Email: <input defaultValue="DonaldTrump" ref="email" style={{ maxWidth: "100%" }} type="email" />
+          Email: <input defaultValue="DonaldTrump@MakeAmericaGreatAgain.com" ref="email" style={{ maxWidth: "100%" }} type="email" />
           <br/>
           Password: <input defaultValue="DonaldTrump" ref="password" style={{ maxWidth: "100%" }} type="password" />
           <br/>
@@ -67,8 +68,11 @@ class Login extends React.Component {
 
 
     return (
-      <div>Hello, React Router!</div>
-
+      <div>
+      <form onSubmit={this._handleSubmit}>
+         {formContent}
+      </form>
+      </div>
     );
   }
 }
