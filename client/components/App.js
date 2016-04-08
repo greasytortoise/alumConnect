@@ -1,3 +1,27 @@
+import React from 'react'
+import { Link } from 'react-router'
+
+class App extends React.Component {
+  render() {
+    return(
+      <div>
+        <h2>Website title</h2>
+        <ul role="nav">
+          <li><Link to="/u">Home</Link></li>
+          <li><Link to="/users">Users</Link></li>
+        </ul>
+        {this.props.children}
+
+      </div>
+    );
+  }
+}
+
+module.exports = App;
+
+
+
+
 // var React = require('react');
 // var Router = require('react-router');
 // var { Route, RouteHandler, Link } = Router;

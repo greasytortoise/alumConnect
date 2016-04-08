@@ -1,4 +1,6 @@
 import React from 'react'
+import Edit from './Edit.js';
+
 import { Link } from 'react-router'
 
 class Profile extends React.Component {
@@ -15,7 +17,7 @@ class Profile extends React.Component {
   }
 
   _getUserProfile() {
-    //request to server to get user profile 
+    //request to server to get user profile
     this.setState({
       // this.currentProfile: userProfile;
     })
@@ -26,7 +28,7 @@ class Profile extends React.Component {
   }
 
   render() {
-    return (      
+    return (
       <div>
         <Edit handleEditProfileClick={this._handleEditProfileClick} />
         <h3>Preferred name</h3>
@@ -47,8 +49,8 @@ class Profile extends React.Component {
 
         <h3>Fun random stuff?</h3>
         <p>I love to travel and experience new cultures and food. Like a few other people in the cohort I also scuba dive! After I saw Men of Honor I was always inspired to get my scuba cert one day. When I'm not studying I'm either at the gym, eating, cooking, or doing something else fitness related. I'm obsessed with fitness, and would like to eventually get into competing or fitness modeling.</p>
-      
-      </div>      
+
+      </div>
     );
   }
 }
