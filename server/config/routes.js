@@ -76,7 +76,7 @@ module.exports = function(app, express) {
 
   app.get('/db/bios/:id', function(req, res) {
     var id = req.params.id;
-    Bio.where({id: id}).fetch()
+    Bio.where({id: id}).fetch({withRelated: ['users']})
       .then(function(bio) {
         res.json(bio);
       });
