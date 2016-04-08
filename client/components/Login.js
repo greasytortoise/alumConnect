@@ -40,11 +40,11 @@ const Login = React.createClass({
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label><input ref="email" placeholder="email" defaultValue="DonaldTrump@MakeAmericaGreatAgain.com" /></label>
+        <label><input ref="email" placeholder="email" placeholder="DonaldTrump@MakeAmericaGreatAgain.com" /></label>
         <label><input ref="pass" placeholder="password" type='password' /></label>
         <button type="submit">login</button>
         {this.state.error && (
-          <p>HANDS TOO SMALL</p>
+          <p>HANDS TOO SMALL!</p>
         )}
       </form>
     );

@@ -8,18 +8,18 @@ import Profile from './components/Profile'
 const App = React.createClass({
   getInitialState() {
     return {
-      loggedIn: auth.loggedIn()
+      loggedIn: auth.loggedIn();
     }
   },
 
   updateAuth(loggedIn) {
     this.setState({
-      loggedIn: loggedIn
+      loggedIn: auth.loggedIn();
     })
   },
 
   componentWillMount() {
-    auth.onChange = this.updateAuth
+    auth.onChange = this.updateAuth(this.loggedIn);
     auth.login()
   },
 
@@ -56,8 +56,6 @@ const Dashboard = React.createClass({
     )
   }
 })
-
-
 
 
 
