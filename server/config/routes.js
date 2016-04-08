@@ -26,6 +26,10 @@ module.exports = function(app, express) {
       });
   });
 
+  app.post('/db/groups', function(req, res) {
+    //todo
+  });
+
   app.get('/db/users', function(req, res) {
     Users.fetch().then(function(users) {
       res.json(users);
@@ -40,10 +44,18 @@ module.exports = function(app, express) {
       });
   });
 
+  app.post('/db/users', function(req, res) {
+    //todo
+  });
+
   app.get('/db/networks', function(req, res) {
     Networks.fetch().then(function(networks) {
       res.json(networks);
     });
+  });
+
+  app.post('/db/networks', function(req, res) {
+    //todo
   });
 
   app.get('/db/networks/:id', function(req, res) {
@@ -68,11 +80,19 @@ module.exports = function(app, express) {
       });
   });
 
-  app.get('/db/test', function(req, res) {
-    Group.where({id: 1}).fetch()
-      .then(function(user) {
-        res.json(user);
-      });
+  app.post('/db/bios', function(req, res) {
+    Bio.create({
+      name: 'robot',
+      before_hr: 'sleep all day',
+      location: 'planet earth',
+      interest: 'sleep',
+      experience: 'sleep a lot',
+      fun_fact: 'I like to sleep',
+      user_id: 5
+    })
+    .then(function(bio) {
+      res.send(201);
+    });
   });
 
   // this is currently not working (for test purposes)
@@ -129,7 +149,7 @@ module.exports = function(app, express) {
   });
 
   app.get('*', function (request, response){
-    console.log(3);
+    console.log('directing to index');
     response.sendFile(path.resolve(__dirname,  '../../client/index.html'))
   });
 };
