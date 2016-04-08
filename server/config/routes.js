@@ -10,7 +10,6 @@ var Bios = require('../collections/bios');
 var Bio = require('../models/bio');
 
 module.exports = function(app, express) {
-
   app.get('/db/groups', function(req, res) {
     Groups.fetch()
       .then(function(groups) {
@@ -85,6 +84,7 @@ module.exports = function(app, express) {
   });
 
   app.get('*', function (request, response){
+    console.log(3);
     response.sendFile(path.resolve(__dirname,  '../../client/index.html'))
   });
 };
