@@ -4,6 +4,7 @@
   "description": "DO AMAZING THINGS",
   "main": "index.js",
   "dependencies": {
+    "bcrypt": "^0.8.5",
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.3.4",
     "body-parser": "^1.15.0",
