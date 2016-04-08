@@ -21,7 +21,7 @@ render((
       <Route path="/edit" component={Edit}/>
       <Route path="/login" component={Login} />}
       <Route path="/logout" component={Login}  onEnter={auth.logout}/>
-   </Route>
+    </Route>
   </Router>
 ), document.getElementById('app'))
 
