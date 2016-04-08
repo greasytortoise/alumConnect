@@ -14,14 +14,6 @@ exports.generateToken = function(userid, user) {
 
 };
 
-exports.hashAndStore = function(password, callback) {
-  bcrypt.hash(password, 10, function(err, hash) {
-    
-    //DO THING WITH HASH
-    callback(hash);
-  });
-};
-
 
 exports.comparePass = function(password, callback) {
 
