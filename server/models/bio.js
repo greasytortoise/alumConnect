@@ -3,7 +3,7 @@ var User = require('./user');
 
 var Bio = db.Model.extend({
   tableName: 'Bios',
-  bio: function() {
+  bios: function() {
     return this.hasOne(User);
   }
 });

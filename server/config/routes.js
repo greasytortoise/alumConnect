@@ -34,6 +34,13 @@ module.exports = function(app, express) {
     });
   });
 
+  app.get('/db/test', function(req, res) {
+    Group.where({id: 1}).fetch()
+      .then(function(user) {
+        res.json(user);
+      });
+  });
+
 
   app.get('/testDatabase', function(req, res) {
     return Groups.create({

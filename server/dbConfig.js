@@ -8,5 +8,7 @@ var knex = require('knex')({
     charset: 'utf8'
   }
 });
-var db = require('bookshelf')(knex);
+var bookshelf = require('bookshelf');
+
+var db = new bookshelf(knex);
 module.exports = db;
