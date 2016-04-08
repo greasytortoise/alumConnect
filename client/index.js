@@ -1,10 +1,12 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Router, Route, browserHistory } from 'react-router'
+import { browserHistory, Router, Route, Link } from 'react-router'
 import App from './components/App'
-import Users from './components/Users'
+import AppAuth from './components/AppAuth'
 import Edit from './components/Edit'
+import Users from './components/Users'
 import User from './components/User'
+import auth from './authHelpers.js'
 import Login from './components/Login'
 import Profile from './components/Profile'
 
@@ -17,6 +19,19 @@ render((
       <Route path="/login" component={Login}/>
       <Route path="/profile" component={Profile}/>
       <Route path="/edit" component={Edit}/>
+      <Route path="/login" component={Login} />*/}
+      <Route path="/logout" component={AppAuth.Logout} />
+      <Route path="/dashboard" component={AppAuth.Dashboard} onEnter={requireAuth} />
     </Route>
   </Router>
 ), document.getElementById('app'))
+
+
+function requireAuth(nextState, replace) {
+  if (!auth.loggedIn()) {
+    replace({
+      pathname: '/login',
+      state: { nextPathname: nextState.location.pathname }
+    })
+  }
+}
