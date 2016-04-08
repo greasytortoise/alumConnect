@@ -6,7 +6,7 @@ class Profile extends React.Component {
   constructor (props) {
     super (props);
     this.state = {
-      currentProfile = null
+      currentProfile: null
     };
   }
 
@@ -14,22 +14,24 @@ class Profile extends React.Component {
     this.getUserProfile();
   }
 
-  getUserProfile() {
-    
+  _getUserProfile() {
+    //request to server to get user profile 
+    this.setState({
+      // this.currentProfile: userProfile;
+    })
   }
 
-  handleEditProfileClick() {
-
+  _handleEditProfileClick(event) {
+    event.preventDefault();
   }
 
   render() {
-    return (
-      
+    return (      
       <div>
-        <Edit 
+        <Edit handleEditProfileClick={this._handleEditProfileClick} />
         <h3>Preferred name</h3>
         <p>The Donald</p>
-        <img src="../mockups/assets/donaldtrump.png" className="photo" />
+        <img src={"../mockups/assets/donaldtrump.png"} className="photo" />
 
         <h3>What have you been up to before HackReactor?</h3>
         <p>Two years ago I moved from Virginia to LA to start working at Accenture as a security technology consultant. I had planned to  take a leave of absence for a few months to study python until one of my coworkers told me about HR. This was about 6  months ago. Ever since then I've been studying, and eventually took the leave so I could focus on getting admitted into the  program. I quickly noticed that "full time" studying actually just means a little bit of studying, and a lot of Netflix.</p>
