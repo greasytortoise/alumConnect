@@ -17,7 +17,7 @@ create table Users (
   url_hash varchar(255),
   public int,
   permission int,
-  group_id int,
+  group_id int not null,
   primary key(id),
   foreign key(group_id) references Groups(id)
 );
@@ -26,7 +26,7 @@ create table Networks (
   id int not null auto_increment,
   network_name varchar(255),
   username varchar(255),
-  user_id int,
+  user_id int not null,
   primary key(id),
   foreign key(user_id) references Users(id)
 );
@@ -37,7 +37,7 @@ create table Bios (
   ipsum varchar(255),
   dolor varchar(255),
   sit varchar(255),
-  user_id int,
+  user_id int not null,
   primary key(id),
   foreign key(user_id) references Users(id)
 );

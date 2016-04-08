@@ -3,8 +3,8 @@ var User = require('./user');
 
 var Network = db.Model.extend({
   tableName: 'Networks',
-  user: function() {
-    return this.hasOne(User);
+  users: function() {
+    return this.belongsTo(User);
   }
 });
 
