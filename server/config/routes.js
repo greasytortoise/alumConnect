@@ -43,7 +43,7 @@ module.exports = function(app, express) {
       });
   });
 
-
+  // this is currently not working (for test purposes)
   app.get('/testDatabase', function(req, res) {
     return Groups.create({
       group_name: 'HR40'
