@@ -18,16 +18,40 @@ module.exports = function(app, express) {
       });
   });
 
+  app.get('/db/groups/:id', function(req, res) {
+    var id = req.params.id;
+    Group.where({id: id}).fetch()
+      .then(function(group) {
+        res.json(group);
+      });
+  });
+
   app.get('/db/users', function(req, res) {
     Users.fetch().then(function(users) {
       res.json(users);
     });
   });
 
+  app.get('/db/users/:id', function(req, res) {
+    var id = req.params.id;
+    User.where({id: id}).fetch()
+      .then(function(user) {
+        res.json(user);
+      });
+  });
+
   app.get('/db/networks', function(req, res) {
     Networks.fetch().then(function(networks) {
       res.json(networks);
     });
+  });
+
+  app.get('/db/networks/:id', function(req, res) {
+    var id = req.params.id;
+    Network.where({id: id}).fetch()
+      .then(function(network) {
+        res.json(network);
+      });
   });
 
   app.get('/db/bios', function(req, res) {
@@ -37,8 +61,11 @@ module.exports = function(app, express) {
   });
 
   app.get('/db/bios/:id', function(req, res) {
-    console.log(req.params.id);
-    res.send(200, 'hi');
+    var id = req.params.id;
+    Bio.where({id: id}).fetch()
+      .then(function(bio) {
+        res.json(bio);
+      });
   });
 
   app.get('/db/test', function(req, res) {
