@@ -1,86 +1,56 @@
 import React from 'react'
-import Reflux from 'reflux'
 import Router from 'react-router'
-import mixins from 'es6-mixins'
 
-import AuthStore from '../stores/AuthStore'
-import AuthActions from '../actions/AuthActions'
+import React from 'react';
+import Router from 'react-router';
+import auth from '../authHelpers.js';
 
+const Login = React.createClass({
 
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
 
-class Login extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = AuthStore.getInitialState();
-    mixins([/*Router.State, Router.Navigation,*/ Reflux.connect(AuthStore, 'user'), Reflux.ListenerMixin], this);
-  }
-
-  componentDidMount() {
-    this.listenTo(AuthStore, this._OnAuthChange)
-  }
-
-  // getInitialState() {
-  //   return {};
-  // }
-
-  _OnAuthChange(auth) {
-    this.setState(auth);
-    if(this.state.loggedIn) {
-      var redirectUrl = this.getQuery().redirect || '/';
-      this.replaceWith(redirectUrl);
+  getInitialState() {
+    return {
+      error: false
     }
-  }
+  },
 
-  _handleSubmit(event) {
-    event.preventDefault();
-    AuthActions.login(React.findDOMNode(this.refs.email).value, React.findDOMNode(this.refs.password).value);
-  }
+  handleSubmit(event) {
+    event.preventDefault()
 
+    const email = this.refs.email.value
+    const pass = this.refs.pass.value
 
+    auth.login(email, pass, (loggedIn) => {
+      if (!loggedIn)
+        return this.setState({ error: true })
+
+      const { location } = this.props
+
+      if (location.state && location.state.nextPathname) {
+        this.context.router.replace(location.state.nextPathname)
+      } else {
+        this.context.router.replace('/')
+      }
+    })
+  },
 
   render() {
-    var errorMessage;
-    if(this.state.error) {
-      errorMessage = (
-        <div className='state-error' style={{ paddingBottom: 16 }}>
-          { this.state.error }
-        </div>
-        );
-    }
-
-    var formContent;
-    if(this.state.user) {
-      formContent = (
-        <div>
-          <p>
-            You're logged in as <strong>{ this.state.user.name }</strong>.
-          </p>
-        </div>
-
-      );
-    } else {
-      formContent = (
-        <div>
-          { errorMessage }
-          Email: <input defaultValue="DonaldTrump@MakeAmericaGreatAgain.com" ref="email" style={{ maxWidth: "150%" }} type="email" />
-          <br/>
-          Password: <input defaultValue="DonaldTrump" ref="password" style={{ maxWidth: "150%" }} type="password" />
-          <br/>
-          <button onClick={ this.handleLogout }>Log In</button>
-        </div>
-      );
-
-
     return (
-      <div>
-      <form onSubmit={this._handleSubmit}>
-         {formContent}
+      <form onSubmit={this.handleSubmit}>
+        <label><input ref="email" placeholder="email" defaultValue="DonaldTrump@MakeAmericaGreatAgain.com" /></label>
+        <label><input ref="pass" placeholder="password" type='password' /></label>
+        <button type="submit">login</button>
+        {this.state.error && (
+          <p>HANDS TOO SMALL</p>
+        )}
       </form>
-      </div>
     );
   }
-}
-}
+})
+
 
 
 module.exports = Login;
