@@ -1,3 +1,4 @@
+var path = require('path')
 var db = require('../dbConfig');
 var Groups = require('../collections/groups');
 var Group = require('../models/group');
@@ -9,6 +10,7 @@ var Bios = require('../collections/bios');
 var Bio = require('../models/bio');
 
 module.exports = function(app, express) {
+
   app.get('/db/groups', function(req, res) {
     Groups.fetch()
       .then(function(groups) {
@@ -80,7 +82,9 @@ module.exports = function(app, express) {
     .then(function() {
       res.send(201);
     });
-
   });
 
+  app.get('*', function (request, response){
+    response.sendFile(path.resolve(__dirname,  '../../client/index.html'))
+  });
 };
