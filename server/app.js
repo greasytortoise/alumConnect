@@ -28,7 +28,7 @@ LEX.create({
     });
   }
 }).listen([3000], [1337, 5001], function () {
-  console.log("USING SSL");
+  console.log('SECURED');
 });
 
 module.exports = app;
