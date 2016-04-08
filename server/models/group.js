@@ -3,7 +3,8 @@ var User = require('./user');
 
 var Group = db.Model.extend({
   tableName: 'Groups',
-  user: function() {
+  users: function() {
+    console.log(this);
     return this.hasMany(User);
   }
 });
