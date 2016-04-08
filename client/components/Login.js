@@ -1,78 +1,56 @@
 import React from 'react'
-import Reflux from 'reflux'
 import Router from 'react-router'
-import mixins from 'es6-mixins'
 
-import AuthStore from '../stores/AuthStore'
-import AuthActions from '../actions/AuthActions'
+import React from 'react';
+import Router from 'react-router';
+import auth from '../authHelpers.js';
 
+const Login = React.createClass({
 
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
 
-class Login extends React.Component {
-  constructor(props) {
-    super(props);
-    mixins([Router.state, Router.Navigation, Reflux.connect(AuthStore), Reflux.ListenerMixin], this);
-  }
-
-  componentDidMount() {
-    this.listenTo(AuthStore, this._OnAuthChange)
-  }
-
-  _OnAuthChange(auth) {
-    this.setState(auth);
-    if(this.state.loggedIn) {
-      var redirectUrl = this.getQuery().redirect || '/';
-      this.replaceWith(redirectUrl);
+  getInitialState() {
+    return {
+      error: false
     }
-  }
+  },
 
-  _handleSubmit(event) {
-    event.preventDefault();
-    AuthActions.login(React.findDOMNode(this.refs.email).value, React.findDOMNode(this.refs.password).value)
-  }
+  handleSubmit(event) {
+    event.preventDefault()
 
+    const email = this.refs.email.value
+    const pass = this.refs.pass.value
 
+    auth.login(email, pass, (loggedIn) => {
+      if (!loggedIn)
+        return this.setState({ error: true })
+
+      const { location } = this.props
+
+      if (location.state && location.state.nextPathname) {
+        this.context.router.replace(location.state.nextPathname)
+      } else {
+        this.context.router.replace('/')
+      }
+    })
+  },
 
   render() {
-    var errorMessage;
-    if(this.state.error) {
-      errorMessage = (
-        <div className='state-error' style={{ paddingBottom: 16 }}>
-          { this.state.error }
-        </div>
-        );
-    }
-
-    var formContent;
-    if(this.state.user) {
-      formContent = (
-        <div>
-          <p>
-            You're logged in as <strong>{ this.state.user.name }</strong>.
-          </p>
-        </div>
-
-      );
-    } else {
-      formContent = (
-        <div>
-          { errorMessage }
-          Email: <input defaultValue="DonaldTrump" ref="email" style={{ maxWidth: "100%" }} type="email" />
-          <br/>
-          Password: <input defaultValue="DonaldTrump" ref="password" style={{ maxWidth: "100%" }} type="password" />
-          <br/>
-          <button onClick={ this.handleLogout }>Log In</button>
-        </div>
-      );
-
-
     return (
-      <div>Hello, React Router!</div>
-
+      <form onSubmit={this.handleSubmit}>
+        <label><input ref="email" placeholder="email" placeholder="DonaldTrump@MakeAmericaGreatAgain.com" /></label>
+        <label><input ref="pass" placeholder="password" type='password' /></label>
+        <button type="submit">login</button>
+        {this.state.error && (
+          <p>HANDS TOO SMALL!</p>
+        )}
+      </form>
     );
   }
-}
-}
+})
+
 
 
 module.exports = Login;

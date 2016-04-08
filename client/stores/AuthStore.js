@@ -5,29 +5,38 @@ var AuthStore = Reflux.createStore({
   listenables: Actions,
 
   init () {
-    this.jwtAlum = localStorage.getItem('jwtAlum');
+    this.state = {};
+    this.state.jwtAlum = localStorage.getItem('jwtAlum') || null;
 
-    this.claims = this.parseJwt();
-    this.error = false;
-    this.loading = false;
+    this.state.claims = this.parseJwt();
+    this.state.error = false;
+    this.state.loading = false;
+  },
+  
+  getInitialState(){
+    return this.state;
   },
 
   getState() {
     return {
-      loading: this.loading,
-      error: this.error,
+      loading: this.state.loading,
+      error: this.state.error,
       user: this.userFromClaims(),
       loggedIn: this.loggedIn()
 
     };
   },
 
+  getInitialState() {
+    return this.state;
+  },
+
   userFromClaims(){
-    return this.claims;
+    return this.state.claims;
   },
 
   loggedIn(){
-    return this.claims !== null;
+    return this.state.claims !== null;
   },
 
   changed(){
@@ -35,7 +44,7 @@ var AuthStore = Reflux.createStore({
   },
 
   onLogin(email, password){
-    this.loading = true;
+    this.state.loading = true;
     this.changed();
     
     var hash = CryptoJS.SHA256(password);
@@ -48,30 +57,30 @@ var AuthStore = Reflux.createStore({
 
   onLoginCompleted(authResponse) {
     if(authResponse) {
-      this.jwtAlum = AuthResponse.jwtAlum;
-      this.claims = this.parseJwt();
-      this.error = false;
+      this.state.jwtAlum = AuthResponse.jwtAlum;
+      this.state.claims = this.parseJwt();
+      this.state.error = false;
 
       localStorage.setItem('jwtAlum', this.jwtAlum);
     } else {
-      this.error = "CANT STUMP THE TRUMP. (Invalid email/pw)";
+      this.state.error = "CANT STUMP THE TRUMP. (Invalid email/pw)";
     }
 
-    this.loading = false;
+    this.state.loading = false;
     this.changed();
   },
 
   onLogout(){
-    this.jwt = null;
-    this.claims = null;
-    this.error = false;
-    this.loading = false;
+    this.state.jwt = null;
+    this.state.claims = null;
+    this.state.error = false;
+    this.state.loading = false;
     localStorage.removeItem('jwtAlum');
   },
 
   parseJwt(){
-    if(this.jwtAlum !== null) {
-      return JSON.parse(atob(this.jwtAlum.split('.')[1]));
+    if(this.state.jwtAlum !== null) {
+      return JSON.parse(atob(this.state.jwtAlum.split('.')[1]));
     } else {
       return null;
     }
