@@ -13,6 +13,7 @@ render((
       <Route path="/user" component={User}/>
       <Route path="/login" component={Login}/>
       <Route path="/profile" component={Profile}/>
+      <Route path="/edit" component={Edit}/>
     </Route>
   </Router>
 ), document.getElementById('app'))
