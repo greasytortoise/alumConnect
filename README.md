@@ -4,9 +4,7 @@ DO AMAZING THINGS!!!!
 
 ### To create database: ###
  **note from drake: database is still in test mode**
-  * $ mysql -u root
-  * mysql> create database alumconnecttest;
-  * mysql> exit
+  * $ mysql -u root < server/schema.sql
 
 
 ### Make sure you use webpack to generate a client/bundle.js: ###
