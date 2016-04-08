@@ -8,7 +8,7 @@ class Profile extends React.Component {
   constructor (props) {
     super (props);
     this.state = {
-      currentProfile: null,
+      currentProfile: this.props.user,
       editing: 0
     };
   }
@@ -18,11 +18,20 @@ class Profile extends React.Component {
   }
 
   _getUserProfile() {
-    //request to server to get user profile
-    if (this.editing === 0) {
+    //ajax request to get user profile here ??
+    this.setState({currentProfile})
+  }
+
+  _handleEditProfileClick(event) {
+    event.preventDefault();
+    this.setState({editing: 1});
+  }
+
+  render() {
+    if(this.state.editing === 0) {
       return (
         <div>
-          <Link to="/edit" onClick={this._handleEditProfileClick}>Edit Profile</Link>
+          <Link to="/edit" onClick={this._handleEditProfileClick.bind(this)}>Edit Profile</Link>
           <h3>Preferred name</h3>
           <p>The Donald</p>
           <img src={"../mockups/assets/donaldtrump.png"} className="photo" />
@@ -45,17 +54,10 @@ class Profile extends React.Component {
         </div>
       );
     } else {
-      // return ();
+      return(
+        <div></div>
+      );      
     }
-  }
-
-  _handleEditProfileClick(event) {
-    event.preventDefault();
-    this.setState({editing: 1});
-  }
-
-  render() {
-    this._getUserProfile();
   }
 }
 
