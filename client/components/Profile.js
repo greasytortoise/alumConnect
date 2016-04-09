@@ -9,7 +9,7 @@ class Profile extends React.Component {
     super (props);
     this.state = {
       value: 'Hello',
-      currentProfile: this.props.user,
+      currentProfile: null,
       editing: 0
     };
   }
@@ -46,7 +46,7 @@ class Profile extends React.Component {
           <h3>What have you been up to before HackReactor?</h3>
           <p>Two years ago I moved from Virginia to LA to start working at Accenture as a security technology consultant. I had planned to  take a leave of absence for a few months to study python until one of my coworkers told me about HR. This was about 6  months ago. Ever since then I've been studying, and eventually took the leave so I could focus on getting admitted into the  program. I quickly noticed that "full time" studying actually just means a little bit of studying, and a lot of Netflix.</p>
 
-          <h3>What city are you coming from to be here at HR?</h3>
+          <h3>What city are you coming from to be here at  ?  </h3>
           <p>I relocated back home to VA temporarily, but I've been in LA for the past two years.</p>
 
           <h3>Tech interests?</h3>
