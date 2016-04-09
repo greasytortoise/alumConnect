@@ -3,6 +3,7 @@ import { render } from 'react-dom'
 import { browserHistory, Router, Route, Link } from 'react-router'
 import App from './components/App'
 import AppAuth from './components/AppAuth'
+import Dashboard from './components/admin/Dashboard'
 import Edit from './components/Edit'
 import Users from './components/Users'
 import User from './components/User'
@@ -22,6 +23,7 @@ render((
       <Route path="/login" component={Login} />
       <Route path="/logout" component={Login}  onEnter={auth.logout}/>
     </Route>
+    <route path="/dashboard" component={Dashboard}/>
   </Router>
 ), document.getElementById('app'))
 
