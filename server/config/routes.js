@@ -11,8 +11,8 @@ var Bio = require('../models/bio');
 var util = require('../lib/utility.js');
 var bcrypt = require('bcrypt');
 
-
 module.exports = function(app, express) {
+
   app.get('/db/groups', function(req, res) {
     Groups.fetch()
       .then(function(groups) {
@@ -138,10 +138,10 @@ module.exports = function(app, express) {
     });
   });
 
-  app.post('/login', function(req, res) {
+  app.post('/login', util.allowCrossDomain, function(req, res) {
 
-
-    res.send(200, 'HEY CUTIE');
+    console.log('AAAASDASDASDASDADSADADAS');
+    res.send(200, 'ALL YOUR BASE ARE BELONG TO US');
 
     // Users.where({email: req.body.email }).fetch().then(function(user){
     //   if(user.length === 0) {
