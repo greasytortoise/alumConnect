@@ -4,7 +4,8 @@ var User = require('./user');
 var Bio = db.Model.extend({
   tableName: 'Bios',
   users: function() {
-    return this.belongsTo(User);
+    console.log('what is going on?!?!?');
+    return this.belongsTo(Bio);
   }
 });
 
