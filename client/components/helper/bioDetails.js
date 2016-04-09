@@ -1,44 +1,17 @@
 import React from 'react'
-import Edit from './Edit';
 
-import { Link } from 'react-router'
-
-class Profile extends React.Component {
-
-  constructor (props) {
-    super (props);
+class Bio extends React.Component {
+  constructor(props) {
+    super(props);
     this.state = {
-      value: 'Hello',
-      currentProfile: null,
-      editing: 0
-    };
-  }
-
-  componentDidMount() {
-    this._getUserProfile();
-  }
-
-  _getUserProfile() {
-    //ajax request to get user profile here ??
-    this.setState({currentProfile})
-  }
-
-  _handleEditProfileClick(event) {
-    event.preventDefault();
-    this.setState({editing: 1});
-  }
-
-  _handleProfileChange(event) {
-    event.preventDefault();
-    console.log(this.refs.val.value);
-    this.setState({value: this.refs.val.value});
+      this.bio = this.props.user.bio
+    }
   }
 
   render() {
-    if(this.state.editing === 0) {
-      return (
-        <div>
-          <Link to="/edit" onClick={this._handleEditProfileClick.bind(this)}>Edit Profile</Link>
+    return (
+      <div>
+        <Link to="/edit" onClick={this._handleEditProfileClick.bind(this)}>Edit Profile</Link>
           <h3>Preferred name</h3>
           <p>The Donald</p>
           <img src={"../mockups/assets/donaldtrump.png"} className="photo" />
@@ -57,15 +30,9 @@ class Profile extends React.Component {
 
           <h3>Fun random stuff?</h3>
           <p>I love to travel and experience new cultures and food. Like a few other people in the cohort I also scuba dive! After I saw Men of Honor I was always inspired to get my scuba cert one day. When I'm not studying I'm either at the gym, eating, cooking, or doing something else fitness related. I'm obsessed with fitness, and would like to eventually get into competing or fitness modeling.</p>
-
-        </div>
-      );
-    } else {
-      return(
-        <input ref="val" value={this.state.value} onChange={this._handleProfileChange.bind(this)}/>
-      );      
-    }
+      </div>
+    );
   }
-}
 
-module.exports = Profile;
+
+}
