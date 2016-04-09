@@ -16,8 +16,11 @@ module.exports = function(app, express) {
   app.get('/db/groups/:id', handler.fetchGroupId);
   app.post('/db/groups', handler.postGroup);
 
-  };
+};
   
+
+module.exports = function(app, express) {
+
   app.get('/db/groups', function(req, res) {
     Groups.fetch()
       .then(function(groups) {
