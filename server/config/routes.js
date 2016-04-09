@@ -11,21 +11,20 @@ var util = require('../lib/utility.js');
 var bcrypt = require('bcrypt');
 var handler = require('../lib/handler');
 
+
 module.exports = function(app, express) {
+
   app.get('/db/groups', handler.fetchGroups);
   app.get('/db/groups/:id', handler.fetchGroupId);
   app.post('/db/groups', handler.postGroup);
-
-};
-  
-
-module.exports = function(app, express) {
 
   app.get('/db/groups', function(req, res) {
     Groups.fetch()
       .then(function(groups) {
         res.json(groups);
+    });
   });
+
   app.get('/db/users', handler.fetchUsers);
   app.get('/db/users/:id', handler.fetchUserId);
   app.post('/db/users', handler.postUser);
