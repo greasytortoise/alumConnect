@@ -1,13 +1,20 @@
+/** I am avoiding the usage of 'withRelated' since 
+ *  bookshelf is not behaving the way I anticipate.
+ *  If you guys decide to try and take advantage of
+ *  this feature of bookshelf, GOOD LUCK!!!! 
+**/
+
+
 var path = require('path')
 var db = require('../dbConfig');
-var Groups = require('../collections/groups');
 var Group = require('../models/group');
-var Networks = require('../collections/networks');
+var Groups = require('../collections/groups');
 var Network = require('../models/network');
-var Users = require('../collections/users');
+var Networks = require('../collections/networks');
 var User = require('../models/user');
-var Bios = require('../collections/bios');
+var Users = require('../collections/users');
 var Bio = require('../models/bio');
+var Bios = require('../collections/bios');
 var util = require('../lib/utility.js');
 var bcrypt = require('bcrypt');
 
@@ -76,9 +83,16 @@ module.exports = function(app, express) {
 
   app.get('/db/bios/:id', function(req, res) {
     var id = req.params.id;
-    Bio.where({id: id}).fetch({withRelated: ['users']})
+    // withRelated does not work in fetch for some reason!!
+    Bio.where({id: id}).fetch()
       .then(function(bio) {
-        res.json(bio);
+        User.where({id: bio.id}).fetch()
+          .then(function(user) {
+            res.json({
+              user: user,
+              bio: bio
+            });
+          });
       });
   });
 

@@ -12,7 +12,7 @@ var User = db.Model.extend({
     return this.hasMany(Network);
   },
   bios: function() {
-    return this.belongsTo(Bio);
+    return this.hasOne(Bio);
   }
 });
 
