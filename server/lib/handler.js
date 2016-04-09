@@ -80,7 +80,19 @@ module.exports = {
       });
   },
 
-  postUser: function(req, res) {
+  postBio: function(req, res) {
     //todo
+    Bio.create({
+      name: 'robot',
+      before_hr: 'sleep all day',
+      location: 'planet earth',
+      interest: 'sleep',
+      experience: 'sleep a lot',
+      fun_fact: 'I like to sleep',
+      user_id: 5
+    })
+    .then(function(bio) {
+      res.send(201);
+    });
   }
 };

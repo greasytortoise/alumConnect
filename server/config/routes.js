@@ -23,28 +23,11 @@ module.exports = function(app, express) {
 
   app.get('/db/networks', handler.fetchNetworks);
   app.get('/db/networks/:id', handler.fetchNetworkId);
-  app.post('/db/networks', function(req, res) {
-    //todo
-  });
+  app.post('/db/networks', handler.postNetwork);
 
   app.get('/db/bios', handler.fetchBios);
-
   app.get('/db/bios/:id', handler.fetchBioId);
-
-  app.post('/db/bios', function(req, res) {
-    Bio.create({
-      name: 'robot',
-      before_hr: 'sleep all day',
-      location: 'planet earth',
-      interest: 'sleep',
-      experience: 'sleep a lot',
-      fun_fact: 'I like to sleep',
-      user_id: 5
-    })
-    .then(function(bio) {
-      res.send(201);
-    });
-  });
+  app.post('/db/bios', handler.postBio);
 
   // this is currently not working (for test purposes)
   app.get('/testDatabase', function(req, res) {
