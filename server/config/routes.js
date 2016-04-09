@@ -1,86 +1,35 @@
+/** I am avoiding the usage of 'withRelated' since 
+ *  bookshelf is not behaving the way I anticipate.
+ *  If you guys decide to try and take advantage of
+ *  this feature of bookshelf, GOOD LUCK!!!! 
+**/
+
+
 var path = require('path')
 var db = require('../dbConfig');
-var Groups = require('../collections/groups');
-var Group = require('../models/group');
-var Networks = require('../collections/networks');
-var Network = require('../models/network');
-var Users = require('../collections/users');
-var User = require('../models/user');
-var Bios = require('../collections/bios');
-var Bio = require('../models/bio');
 var util = require('../lib/utility.js');
 var bcrypt = require('bcrypt');
+var handler = require('../lib/handler');
 
 
 module.exports = function(app, express) {
-  app.get('/db/groups', function(req, res) {
-    Groups.fetch()
-      .then(function(groups) {
-        res.json(groups);
-      });
-  });
+  app.get('/db/groups', handler.fetchGroups);
+  app.get('/db/groups/:id', handler.fetchGroupId);
+  app.post('/db/groups', handler.postGroup);
 
-  app.get('/db/groups/:id', function(req, res) {
-    var id = req.params.id;
-    Group.where({id: id}).fetch()
-      .then(function(group) {
-        res.json(group);
-      });
-  });
+  app.get('/db/users', handler.fetchUsers);
+  app.get('/db/users/:id', handler.fetchUserId);
+  app.post('/db/users', handler.postUser);
 
-  app.post('/db/groups', function(req, res) {
-    //todo
-  });
-
-  app.get('/db/users', function(req, res) {
-    Users.fetch().then(function(users) {
-      res.json(users);
-    });
-  });
-
-  app.get('/db/users/:id', function(req, res) {
-    var id = req.params.id;
-    User.where({id: id}).fetch()
-      .then(function(user) {
-        res.json(user);
-      });
-  });
-
-  app.post('/db/users', function(req, res) {
-    //todo
-  });
-
-  app.get('/db/networks', function(req, res) {
-    Networks.fetch().then(function(networks) {
-      res.json(networks);
-    });
-  });
-
+  app.get('/db/networks', handler.fetchNetworks);
+  app.get('/db/networks/:id', handler.fetchNetworkId);
   app.post('/db/networks', function(req, res) {
     //todo
   });
 
-  app.get('/db/networks/:id', function(req, res) {
-    var id = req.params.id;
-    Network.where({id: id}).fetch()
-      .then(function(network) {
-        res.json(network);
-      });
-  });
+  app.get('/db/bios', handler.fetchBios);
 
-  app.get('/db/bios', function(req, res) {
-    Bios.fetch().then(function(bios) {
-      res.json(bios);
-    });
-  });
-
-  app.get('/db/bios/:id', function(req, res) {
-    var id = req.params.id;
-    Bio.where({id: id}).fetch()
-      .then(function(bio) {
-        res.json(bio);
-      });
-  });
+  app.get('/db/bios/:id', handler.fetchBioId);
 
   app.post('/db/bios', function(req, res) {
     Bio.create({
