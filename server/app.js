@@ -1,6 +1,8 @@
 var express = require('express');
 var Promise = require('bluebird');
 var app = express();
+
+
 var LEX = require('letsencrypt-express').testing();
 
 var middleware = require('./config/middleware');
@@ -9,32 +11,24 @@ var routes = require('./config/routes');
 middleware(app, express);
 routes(app, express);
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-}); 
 
-LEX.create({
-  configDir: './config/letsencrypt.config'                 // ~/letsencrypt, /etc/letsencrypt, whatever you want
 
-, onRequest: app                                    // your express app (or plain node http app)
-
-, letsencrypt: null                                 // you can provide you own instance of letsencrypt
-                                                    // if you need to configure it (with an agreeToTerms
-                                                    // callback, for example)
-
-, approveRegistration: function (hostname, cb) {    // PRODUCTION MODE needs this function, but only if you want
-                                                    // automatic registration (usually not necessary)
-                                                    // renewals for registered domains will still be automatic
+var lex = LEX.create({
+  configDir: /*require('os').homedir()*/ './config',
+  approveRegistration: function (hostname, cb) {
     cb(null, {
-      domains: [hostname]
-    , email: 'user@example.com'
-    , agreeTos: true              // you
+      domains: [hostname],
+      email: 'bresnan.mw@gmail.com',
+      agreeTos: true,
     });
   }
-}).listen([3000], [1337, 5001], function () {
-  console.log('SECURED');
+});
+
+lex.onRequest = app;
+
+lex.listen([3000], [1337, 5001], function () {
+  var protocol = ('requestCert' in this) ? 'https': 'http';
+  console.log("Listening at " + protocol + '://localhost:' + this.address().port);
 });
 
 module.exports = app;
