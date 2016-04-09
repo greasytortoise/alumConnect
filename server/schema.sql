@@ -1,3 +1,13 @@
+/** Make sure to create (or re-create) the database 
+ *  before running this code. To do this, run:
+ *
+ *  $ mysql -u root < server/schema
+ *
+ *  Note: Change password if necessary.
+ *  Also at the bottom are dummy variables to 
+ *  populate the table. 
+**/
+
 drop database if exists alumConnectTest;
 create database alumConnectTest;
 
@@ -104,8 +114,3 @@ values
   "I've played a lot of competitive chess growing up. The obsession finally ended when I achieved my goal of becoming a national master. I love puzzles and games in general, pretty much anything along the line of connect 4 and backgammon. I like to look at and analyze different strategies in all types of games.",
   4
 )
-
-
-/* Execute this file from the command line by typing:
- * mysql -u root < server/schema.sql
- * to create the database and the tables. */
