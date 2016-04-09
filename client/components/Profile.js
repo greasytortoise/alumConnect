@@ -8,6 +8,7 @@ class Profile extends React.Component {
   constructor (props) {
     super (props);
     this.state = {
+      value: 'Hello',
       currentProfile: this.props.user,
       editing: 0
     };
@@ -25,6 +26,12 @@ class Profile extends React.Component {
   _handleEditProfileClick(event) {
     event.preventDefault();
     this.setState({editing: 1});
+  }
+
+  _handleProfileChange(event) {
+    event.preventDefault();
+    console.log(this.refs.val.value);
+    this.setState({value: this.refs.val.value});
   }
 
   render() {
@@ -55,7 +62,7 @@ class Profile extends React.Component {
       );
     } else {
       return(
-        <div></div>
+        <input ref="val" value={this.state.value} onChange={this._handleProfileChange.bind(this)}/>
       );      
     }
   }
