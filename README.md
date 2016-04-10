@@ -1,5 +1,5 @@
 # alumConnect
-DO AMAZING THINGS!!!!
+Alumni networking platform
 
 
 ### To create database: ###
