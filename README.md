@@ -14,3 +14,21 @@ DO AMAZING THINGS!!!!
   * Install webpack globally (npm install -g webpack)
   * run: webpack --watch
   * Start the server visit http://localhost:3000/
+
+### API: 
+
+* get: <http://localhost:3000/db/groups>
+* get: <http://localhost:3000/db/groups/:id>
+* post: <http://localhost:3000/db/groups>
+* ---
+* get:  <http://localhost:3000/db/users>
+* get:  <http://localhost:3000/db/users/:id>
+* post: <http://localhost:3000/db/users>
+* ---
+* get:  <http://localhost:3000/db/networks>
+* get:  <http://localhost:3000/db/networks/:id>
+* post: <http://localhost:3000/db/networks>
+* ---
+* get:  <http://localhost:3000/db/bios>
+* get:  <http://localhost:3000/db/bios/:id>
+* post: <http://localhost:3000/db/bios>
