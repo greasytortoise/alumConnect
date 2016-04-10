@@ -63,7 +63,7 @@ class Profile extends React.Component {
     } else {
       return(
         <input ref="val" value={this.state.value} onChange={this._handleProfileChange.bind(this)}/>
-      );      
+      );
     }
   }
 }
