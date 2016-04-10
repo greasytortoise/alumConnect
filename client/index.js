@@ -1,20 +1,21 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { browserHistory, Router, Route, Link } from 'react-router'
+import { browserHistory, Router, Route, Link, IndexRoute } from 'react-router'
 import App from './components/App'
 import AppAuth from './components/AppAuth'
-import Dashboard from './components/admin/Dashboard'
 import Edit from './components/Edit'
 import Users from './components/Users'
 import User from './components/User'
 import auth from './authHelpers.js'
 import Login from './components/Login'
 import Profile from './components/Profile'
-
+import Dashboard from './components/admin/Dashboard'
+import DashboardUsers from './components/admin/DashboardUsers'
 
 render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
+      {/*<IndexRoute component={Users}/>*/}
       <Route path="/users" component={Users}/>
       <Route path="/users/:user" component={Profile}/>
       <Route path="/login" component={Login}/>
@@ -23,7 +24,11 @@ render((
       <Route path="/login" component={Login} />
       <Route path="/logout" component={Login}  onEnter={auth.logout}/>
     </Route>
-    <route path="/dashboard" component={Dashboard}/>
+    <route path="/dashboard" component={Dashboard}>
+      <IndexRoute component={Users}/>
+      <Route path="/dashboard/users" component={DashboardUsers}/>
+
+    </route>
   </Router>
 ), document.getElementById('app'))
 
