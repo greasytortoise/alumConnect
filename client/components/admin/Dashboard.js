@@ -1,16 +1,19 @@
-import React from 'react';
-import Router from 'react-router';
+import React from 'react'
+import NavLink from '../NavLink'
 
-const Dashboard = React.createClass({
-
+class Dashboard extends React.Component {
   render() {
-    return (
-      <div>dashboard</div>
+    return(
+      <div>
+        <ul role="nav">
+          <li><NavLink to="/dashboard" onlyActiveOnIndex>Dashboard</NavLink></li>
+          <li><NavLink to="/dashboard/users">users</NavLink></li>
+        </ul>
+        {this.props.children}
+
+      </div>
     );
   }
-})
-
-
-
+}
 
 module.exports = Dashboard;
