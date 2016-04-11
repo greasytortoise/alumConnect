@@ -25,7 +25,7 @@ render((
       <Route path="/logout" component={Login}  onEnter={auth.logout}/>
     </Route>
     <route path="/dashboard" component={Dashboard}>
-      <IndexRoute component={Users}/>
+      {/*<IndexRoute component={Users}/>*/}
       <Route path="/dashboard/users" component={DashboardUsers}/>
 
     </route>
