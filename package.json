@@ -11,7 +11,6 @@
     "bookshelf": "^0.9.4",
     "express": "^4.13.4",
     "griddle-react": "^0.4.1",
-    "jquery": "^2.2.3",
     "jwt-simple": "^0.5.0",
     "knex": "^0.10.0",
     "letsencrypt": "^1.4.3",
