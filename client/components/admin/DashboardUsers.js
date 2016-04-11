@@ -23,6 +23,7 @@ class Dashboard extends React.Component {
         <Griddle
           results={this.state.users}
           showFilter={true}
+          tableClassName='table'
           useGriddleStyles={false}
           columns={["id", "username", "email", "group_id", "public"]}/>
       </div>
