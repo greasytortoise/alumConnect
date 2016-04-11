@@ -33,24 +33,45 @@ module.exports = {
   fetchUsers: function(req, res) {
     Users.fetch()
       .then(function(users) {
-        res.json(users);
+        Groups.fetch()
+          .then(function(groups) {
+            var retArray = [];
+            users.forEach(function(user) {
+              retArray.push({
+                id: user.attributes.id,
+                username: user.attributes.username,
+                url: user.attributes.url_hash,
+                email: user.attributes.email,
+              });
+            });
+            res.json(retArray);
+          })
       });
   },
 
   fetchUserId: function(req, res) {
     var id = req.params.id;
-    User.where({id: id}).fetch()
+    User.where({id: id}).fetch({withRelated: ['groups']})
       .then(function(user) {
-        if (!user) {
-          return res.send(404);
-        }
-        Group.where({id: user.attributes.group_id}).fetch()
-          .then(function(group) {
-            res.json({
-              user: user,
-              group: group
-            });
-          })
+        if (!user) { return res.send(404); }
+        console.log('<><>', user.related('groups'));
+        res.json({
+          id: user.id,
+          username: user.attributes.username,
+          url: user.attributes.url_hash,
+          email: user.attributes.email,
+          group: user.related('groups').attributes.group_name
+        });
+        // Group.where({id: user.attributes.group_id}).fetch()
+        //   .then(function(group) {
+        //     res.json({
+        //       id: user.attributes.id,
+        //       username: user.attributes.username,
+        //       url: user.attributes.url_hash,
+        //       email: user.attributes.email,
+        //       group: group.attributes.group_name
+        //     });
+        //   })
       });
   },
 
