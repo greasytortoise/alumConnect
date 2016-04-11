@@ -34,23 +34,23 @@ class Profile extends React.Component {
       });
   }
 
-  // _handleEditProfileClick(event, bioDetails) {
-  //   event.preventDefault();
-  //   this.setState({
-  //     editing: 1,
-  //     bioDetails: {
-  //       
-  //     }
-  //   });
-  // }
+  _handleEditProfileClick(event, bioDetails) {
+    event.preventDefault();
+    this.setState({
+      editing: 1,
+      bioDetails: {
+        
+      }
+    });
+  }
 
-  // _handleChangeImage(event, image) {
-  //   event.preventDefault();
-  //   this.setState({
-  //     editing: 1,
-  //     image: image
-  //   });
-  // }
+  _handleChangeImage(event, image) {
+    event.preventDefault();
+    this.setState({
+      editing: 1,
+      image: image
+    });
+  }
 
   render() {
     console.log(this.props.params.user);
@@ -60,9 +60,10 @@ class Profile extends React.Component {
         <h3>Preferred name</h3>
         <p>The Donald Trump</p>
         
-        <Image image={this.state.image}/>
+        <Image image={this.state.image} handleChangeImage={this._handleChangeImage.bind(this)}/>
 
-        <Bio bioDetails={this.state.bioDetails} />
+        <Bio bioDetails={this.state.bioDetails} 
+          handleEditProfileClick={this._handleProfileChange.bind(this)}/>
 
       </div>
     );
