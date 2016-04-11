@@ -42,7 +42,6 @@ create table Networks (
 
 create table Networks_Values (
   id int not null auto_increment,
-  username varchar(255),
   rest_url varchar(255),
   user_id int not null,
   network_id int not null,
@@ -81,19 +80,19 @@ values
 insert into Networks
 (network_name, base_url, active)
 values
-('facebook', 'https://www.facebook.com', 1),
-('twitter', 'https://www.twitter.com', 1),
-('linkedin','https://www.linkedin.com', 1),
-('github', 'https://www.github.com', 1);
+('facebook', 'https://www.facebook.com/', 1),
+('twitter', 'https://www.twitter.com/', 1),
+('linkedin','https://www.linkedin.com/in/', 1),
+('github', 'https://www.github.com/', 1);
 
 insert into Networks_Values
-(username, rest_url, user_id, network_id)
+(rest_url, user_id, network_id)
 values
-('mikejonas', '/mikejonas', 1, 4),
-('mbresnan1701', '/mbresnan1701', 2, 4),
-('alamuv', '/alamuv', 3, 4),
-('yochess', '/yochess', 4, 4),
-('yochess', '/yochess', 1, 4);
+('mikejonas', 1, 4),
+('mbresnan1701', 2, 4),
+('alamuv', 3, 4),
+('yochess', 4, 4),
+('yochess', 1, 4);
 
 insert into Bios
 (name, before_hr, location, interest, experience, fun_fact, user_id)
