@@ -31,21 +31,19 @@ module.exports = {
   },
 
   fetchUsers: function(req, res) {
-    Users.fetch()
+    Users.fetch({withRelated: ['groups']})
       .then(function(users) {
-        Groups.fetch()
-          .then(function(groups) {
-            var retArray = [];
-            users.forEach(function(user) {
-              retArray.push({
-                id: user.attributes.id,
-                username: user.attributes.username,
-                url: user.attributes.url_hash,
-                email: user.attributes.email,
-              });
-            });
-            res.json(retArray);
-          })
+        var retArray = [];
+        users.forEach(function(user) {
+          retArray.push({
+            id: user.id,
+            username: user.attributes.username,
+            url: user.attributes.url_hash,
+            email: user.attributes.email,
+            group: user.related('groups').attributes.group_name
+          });
+        })
+        res.json(retArray);
       });
   },
 
@@ -54,7 +52,7 @@ module.exports = {
     User.where({id: id}).fetch({withRelated: ['groups']})
       .then(function(user) {
         if (!user) { return res.send(404); }
-        res.json({
+          res.json({
           id: user.id,
           username: user.attributes.username,
           url: user.attributes.url_hash,
