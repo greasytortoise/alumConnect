@@ -35,10 +35,20 @@ create table Users (
 create table Networks (
   id int not null auto_increment,
   network_name varchar(255),
+  base_url varchar(255),
+  active int,
+  primary key(id)
+);
+
+create table Networks_Values (
+  id int not null auto_increment,
   username varchar(255),
+  rest_url varchar(255),
   user_id int not null,
+  network_id int not null,
   primary key(id),
-  foreign key(user_id) references Users(id)
+  foreign key(user_id) references Users(id),
+  foreign key(network_id) references Networks(id)
 );
 
 create table Bios (
@@ -69,11 +79,21 @@ values
 ('Drake', 'aaaaaa', 'd@mail.com', 'a1b1c1', 0, 0, 1);
 
 insert into Networks
-(network_name, username, user_id)
+(network_name, base_url, active)
 values
-('facebook', 'dungeonMaster', 2),
-('twitter', 'notADungeonMaster', 2),
-('facebook', 'jonasBrothers', 1);
+('facebook', 'https://www.facebook.com', 1),
+('twitter', 'https://www.twitter.com', 1),
+('linkedin','https://www.linkedin.com', 1),
+('github', 'https://www.github.com', 1);
+
+insert into Networks_Values
+(username, rest_url, user_id, network_id)
+values
+('mikejonas', '/mikejonas', 1, 4),
+('mbresnan1701', '/mbresnan1701', 2, 4),
+('alamuv', '/alamuv', 3, 4),
+('yochess', '/yochess', 4, 4),
+('yochess', '/yochess', 1, 4);
 
 insert into Bios
 (name, before_hr, location, interest, experience, fun_fact, user_id)
