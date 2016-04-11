@@ -10,7 +10,6 @@ class Dashboard extends React.Component {
           <li><NavLink to="/dashboard/users">users</NavLink></li>
         </ul>
         {this.props.children}
-
       </div>
     );
   }

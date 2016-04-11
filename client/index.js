@@ -10,6 +10,7 @@ import auth from './authHelpers.js'
 import Login from './components/Login'
 import Profile from './components/Profile'
 import Dashboard from './components/admin/Dashboard'
+import DashboardHome from './components/admin/DashboardHome'
 import DashboardUsers from './components/admin/DashboardUsers'
 
 render((
@@ -25,7 +26,7 @@ render((
       <Route path="/logout" component={Login}  onEnter={auth.logout}/>
     </Route>
     <route path="/dashboard" component={Dashboard}>
-      {/*<IndexRoute component={Users}/>*/}
+      <IndexRoute component={DashboardHome}/>
       <Route path="/dashboard/users" component={DashboardUsers}/>
 
     </route>
