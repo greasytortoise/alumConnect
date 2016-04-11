@@ -54,7 +54,6 @@ module.exports = {
     User.where({id: id}).fetch({withRelated: ['groups']})
       .then(function(user) {
         if (!user) { return res.send(404); }
-        console.log('<><>', user.related('groups'));
         res.json({
           id: user.id,
           username: user.attributes.username,
@@ -62,16 +61,6 @@ module.exports = {
           email: user.attributes.email,
           group: user.related('groups').attributes.group_name
         });
-        // Group.where({id: user.attributes.group_id}).fetch()
-        //   .then(function(group) {
-        //     res.json({
-        //       id: user.attributes.id,
-        //       username: user.attributes.username,
-        //       url: user.attributes.url_hash,
-        //       email: user.attributes.email,
-        //       group: group.attributes.group_name
-        //     });
-        //   })
       });
   },
 
