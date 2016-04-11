@@ -70,6 +70,9 @@ module.exports = {
     // withRelated does not work in fetch for some reason!!
     Bio.where({id: id}).fetch()
       .then(function(bio) {
+        if (!bio) {
+          return res.send(404);
+        }
         User.where({id: bio.id}).fetch()
           .then(function(user) {
             res.json({
