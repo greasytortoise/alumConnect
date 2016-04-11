@@ -67,9 +67,17 @@ module.exports = {
   },
 
   fetchNetworks: function(req, res) {
-    Networks.fetch().then(function(network) {
-      res.json(network);
-    });
+    Networks.fetch()
+      .then(function(networks) {
+        var retArray = [];
+        networks.forEach(function(network) {
+          retArray.push({
+            id: network.id,
+            url: network.attributes.network_name
+          });
+        })
+        res.json(retArray);
+      });
   },
 
   fetchNetworkId: function(req, res) {
@@ -79,7 +87,10 @@ module.exports = {
         if (!network) {
           return res.send(404);
         }
-        res.json(network);
+        res.json({
+          id: network.id,
+          url: network.attributes.network_name
+        });
       });
   },
 
