@@ -27,11 +27,21 @@ class Users extends React.Component {
       );
     });
   }
+  cohortList() {
+
+  }
 
   render() {
     return (
       <div>
         <h2>users</h2>
+          <select>
+            <option value="4041">Cohort 40 / 41</option>
+            <option value="3839">Cohort 38 / 39</option>
+            <option value="3637">Cohort 36 / 37</option>
+          </select>
+          <input type="text" placeholder="Search users by name" />
+
           <ul>{this.usersList()}</ul>
       </div>
     )
