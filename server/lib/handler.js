@@ -9,19 +9,21 @@ var Bios = require('../collections/bios');
 
 module.exports = {
   fetchGroups: function(req, res) {
-    Groups.fetch().then(function(groups) {
-      res.json(groups);
-    });
+    Groups.fetch()
+      .then(function(groups) {
+        res.json(groups);
+      });
   },
 
   fetchGroupId: function(req, res) {
     var id = req.params.id;
-    Group.where({id: id}).fetch().then(function(group) {
-      if (!group) {
-        return res.send(404);
-      }
-      res.json(group);
-    });
+    Group.where({id: id}).fetch()
+      .then(function(group) {
+        if (!group) {
+          return res.send(404);
+        }
+        res.json(group);
+      });
   },
 
   postGroup: function(req, res) {
@@ -29,19 +31,27 @@ module.exports = {
   },
 
   fetchUsers: function(req, res) {
-    Users.fetch().then(function(users) {
-      res.json(users);
-    });
+    Users.fetch()
+      .then(function(users) {
+        res.json(users);
+      });
   },
 
   fetchUserId: function(req, res) {
     var id = req.params.id;
-    User.where({id: id}).fetch().then(function(user) {
-      if (!user) {
-        return res.send(404);
-      }
-      res.json(user);
-    });
+    User.where({id: id}).fetch()
+      .then(function(user) {
+        if (!user) {
+          return res.send(404);
+        }
+        Group.where({id: user.attributes.group_id}).fetch()
+          .then(function(group) {
+            res.json({
+              user: user,
+              group: group
+            });
+          })
+      });
   },
 
   postUser: function(req, res) {
@@ -56,12 +66,13 @@ module.exports = {
 
   fetchNetworkId: function(req, res) {
     var id = req.params.id;
-    Network.where({id: id}).fetch().then(function(network) {
-      if (!network) {
-        return res.send(404);
-      }
-      res.json(network);
-    });
+    Network.where({id: id}).fetch()
+      .then(function(network) {
+        if (!network) {
+          return res.send(404);
+        }
+        res.json(network);
+      });
   },
 
   postNetwork: function(req, res) {
@@ -82,12 +93,16 @@ module.exports = {
         if (!bio) {
           return res.send(404);
         }
-        User.where({id: bio.id}).fetch()
-          .then(function(user) {
-            res.json({
-              user: user,
-              bio: bio
-            });
+        User.where({id: bio.attributes.user_id}).fetch()
+          .then(function(user) {``
+            Group.where({id: user.attributes.group_id}).fetch()
+              .then(function(group) {
+                res.json({
+                  bio: bio,
+                  user: user,
+                  group: group
+                });
+              })
           });
       });
   },
