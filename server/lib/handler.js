@@ -17,6 +17,9 @@ module.exports = {
   fetchGroupId: function(req, res) {
     var id = req.params.id;
     Group.where({id: id}).fetch().then(function(group) {
+      if (!group) {
+        return res.send(404);
+      }
       res.json(group);
     });
   },
@@ -34,6 +37,9 @@ module.exports = {
   fetchUserId: function(req, res) {
     var id = req.params.id;
     User.where({id: id}).fetch().then(function(user) {
+      if (!user) {
+        return res.send(404);
+      }
       res.json(user);
     });
   },
@@ -51,6 +57,9 @@ module.exports = {
   fetchNetworkId: function(req, res) {
     var id = req.params.id;
     Network.where({id: id}).fetch().then(function(network) {
+      if (!network) {
+        return res.send(404);
+      }
       res.json(network);
     });
   },
