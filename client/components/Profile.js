@@ -34,7 +34,7 @@ class Profile extends React.Component {
       });
   }
 
-  _handleEditProfileClick(event, bioDetails) {
+  _handleProfileChange(event, bioDetails) {
     event.preventDefault();
     this.setState({
       editing: 1,
@@ -48,7 +48,7 @@ class Profile extends React.Component {
     event.preventDefault();
     this.setState({
       editing: 1,
-      image: image
+      image: "image"
     });
   }
 
