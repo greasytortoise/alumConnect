@@ -1,6 +1,6 @@
-var React = require('react');
-var Griddle = require('griddle-react');
-var request = require('superagent');
+import React from 'react'
+import Griddle from 'griddle-react'
+import RestHandler from '../../util/RestHandler';
 
 class Dashboard extends React.Component {
   constructor (props) {
@@ -11,15 +11,12 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    request
-      .get('/db/users')
-      .end((err, res) => {
-        this.setState({users: res.body})
-      });
+    RestHandler.Get('/db/users', (err, res) => {
+      this.setState({users: res.body})
+    });
   }
 
   render() {
-    console.log(this.state.users);
     return(
       <div>
         <h2>Users</h2>
