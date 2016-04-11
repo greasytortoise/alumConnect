@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
-
-var request = require('superagent');
+import RestHandler from '../util/RestHandler';
 
 class Users extends React.Component {
 
@@ -13,11 +12,9 @@ class Users extends React.Component {
   }
 
   componentDidMount() {
-    request
-      .get('/db/users')
-      .end((err, res) => {
-        this.setState({users: res.body})
-      });
+    RestHandler.Get('/db/users', (err, res) => {
+      this.setState({users: res.body})
+    });
   }
 
   usersList() {
