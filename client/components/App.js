@@ -9,11 +9,12 @@ class App extends React.Component {
   render() {
     return(
       <Grid>
-        <h2>Website title</h2>
         <NavigationBar />
+        <div id="main">
+          <h2>Website title</h2>
 
-        {this.props.children}
-
+          {this.props.children}
+        </div>
       </Grid>
     );
   }

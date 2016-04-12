@@ -1,3 +1,8 @@
+#main {
+    margin-top: 70px;
+}
+
+
 .search-for-users .form-group{
   max-width: 300px;
 }
@@ -12,7 +17,23 @@
 }
 
 
-@media (min-width: 768px)
+.navbar .dropdown-header {
+  display: inherit;
+  padding: 0;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  white-space: inherit;
+}
+.navbar-collapse.collapsing {
+  -webkit-transition: height 0.01s;
+  -moz-transition: height 0.01s;
+  -ms-transition: height 0.01s;
+  -o-transition: height 0.01s;
+  transition: height 0.01s;
+
+}
+
 .navbar-text {
     float: left;
     margin-right: 0;
