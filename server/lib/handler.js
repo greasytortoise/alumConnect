@@ -8,6 +8,8 @@ var Bio = require('../models/bio');
 var Bios = require('../collections/bios');
 
 module.exports = {
+  // sends id and group_name
+  // eg) { id: 1, group_name: "HR40" }
   fetchGroups: function(req, res) {
     Groups.fetch()
       .then(function(groups) {
@@ -15,14 +17,26 @@ module.exports = {
       });
   },
 
+  // sends id, group_name, and array of users
+  // eg) { id: 1, group_name: "HR40", users: [...] }
   fetchGroupId: function(req, res) {
     var id = req.params.id;
-    Group.where({id: id}).fetch()
-      .then(function(group) {
-        if (!group) {
-          return res.send(404);
-        }
-        res.json(group);
+    Users.query('where', {group_id: id})
+      .fetch({withRelated: ['groups']})
+      .then(function(users) {
+        var usersArray = [];
+        users.forEach(function(user) {
+          usersArray.push({
+            id: user.id,
+            username: user.attributes.username,
+            image: user.attributes.image
+          });
+        });
+        res.json({
+          id: users.at(0).related('groups').id,
+          group_name: users.at(0).related('groups').attributes.group_name,
+          users: usersArray
+        });
       });
   },
 
@@ -99,9 +113,11 @@ module.exports = {
   },
 
   fetchBios: function(req, res) {
-    Bios.fetch().then(function(bios) {
-      res.json(bios);
-    });
+    Bios.fetch({withRelated: ['users']})
+      .then(function(bios) {
+        console.log(bios);
+        res.json(bios);
+      });
   },
 
   fetchBioId: function(req, res) {

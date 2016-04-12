@@ -24,6 +24,7 @@ create table Users (
   username varchar(255),
   password varchar(255),
   email varchar(255),
+  image varchar(255),
   url_hash varchar(255),
   public int,
   permission int,
@@ -70,12 +71,13 @@ values
 ('HR41');
 
 insert into Users 
-(username, password, email, url_hash, public, permission, Group_id) 
+(username, password, email, image, url_hash, public, permission, Group_id) 
 values
-('Jonas', 'aaaaaa', 'j@mail.com', 'x2y2z2', 0, 0, 1),
-('Matt', 'bbbbbb', 'm@mail.com', 'i3j3k3', 0, 0, 1),
-('Alamu', 'cccccc', 'a@mail.com', 'n3m3o3', 0, 0, 1),
-('Drake', 'aaaaaa', 'd@mail.com', 'a1b1c1', 0, 0, 1);
+('Jonas', 'aaaaaa', 'j@mail.com', 'somelinkA', 'x2y2z2', 0, 0, 1),
+('Matt', 'bbbbbb', 'm@mail.com', 'somelinkB', 'i3j3k3', 0, 0, 1),
+('Alamu', 'cccccc', 'a@mail.com', 'somelinkC', 'n3m3o3', 0, 0, 1),
+('Drake', 'aaaaaa', 'd@mail.com', 'somelinkD', 'a1b1c1', 0, 0, 1),
+('someGuy', 'eeeeee', 'e@mail.com', 'somelinkE', 'fdasdf', 0, 0, 2);
 
 insert into Networks
 (network_name, base_url, active)
