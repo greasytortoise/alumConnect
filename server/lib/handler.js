@@ -33,10 +33,13 @@ module.exports = {
           });
         });
         res.json({
-          id: users.at(0).related('groups').id,
+          group_id: users.at(0).related('groups').id,
           group_name: users.at(0).related('groups').attributes.group_name,
           users: usersArray
         });
+      })
+      .catch(function(err) {
+        res.send(404, 'group has no users!');
       });
   },
 
@@ -44,6 +47,7 @@ module.exports = {
     //todo
   },
 
+  // ignore for now!
   fetchUsers: function(req, res) {
     Users.fetch({withRelated: ['groups']})
       .then(function(users) {
@@ -63,15 +67,30 @@ module.exports = {
 
   fetchUserId: function(req, res) {
     var id = req.params.id;
-    User.where({id: id}).fetch({withRelated: ['groups']})
+    User.where({id: id}).fetch({withRelated: ['groups', 'bios']})
       .then(function(user) {
-        if (!user) { return res.send(404); }
+        if (!user) { return res.send(404, 'user does not exist!'); }
           res.json({
-          id: user.id,
-          username: user.attributes.username,
-          url: user.attributes.url_hash,
-          email: user.attributes.email,
-          group: user.related('groups').attributes.group_name
+            user: {
+              id: user.id,
+              username: user.attributes.username,
+              url: user.attributes.url_hash,
+              email: user.attributes.email,
+            },
+            group: {
+              group: user.related('groups').attributes.group_name
+            },
+            bio: {
+              name: user.related('bios').attributes.name,
+              before_hr: user.related('bios').attributes.before_hr,
+              location: user.related('bios').attributes.location,
+              interest: user.related('bios').attributes.interest,
+              experience: user.related('bios').attributes.experience,
+              fun_fact: user.related('bios').attributes.fun_fact
+            },
+            networks: {
+              
+            }
         });
       });
   },
