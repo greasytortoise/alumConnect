@@ -10,6 +10,7 @@ var db = require('../dbConfig');
 var util = require('../lib/utility.js');
 var bcrypt = require('bcrypt');
 var handler = require('../lib/handler');
+var Users = require('../collections/users');
 
 
 module.exports = function(app, express) {
@@ -78,28 +79,7 @@ module.exports = function(app, express) {
     });
   });
 
-  app.post('/login', util.allowCrossDomain, function(req, res) {
-
-    console.log('AAAASDASDASDASDADSADADAS');
-    res.send(200, 'ALL YOUR BASE ARE BELONG TO US');
-
-    // Users.where({email: req.body.email }).fetch().then(function(user){
-    //   if(user.length === 0) {
-    //     res.send(401, 'No user with that email');
-    //   } else {
-    //     bcrypt.compare(password, user[0].password, function(err, isMatch){
-    //       if(match) {
-    //         res.send(200, util.generateToken(user.id, user));
-    //       } else {
-    //         // res.send(401, 'Invalid Password');
-    //         res.send(200, util.generateToken(user.id, user));
-
-    //       }
-    //     });
-
-    //   }
-    // });
-  });
+  app.post('/login', handler.checkLogin);
 
   app.post('/changepassword', function(req, res) {
     var tokenUserData = req.token.split('.')[1].user;
