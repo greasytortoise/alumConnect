@@ -24,21 +24,31 @@ create table Users (
   username varchar(255),
   password varchar(255),
   email varchar(255),
+  image varchar(255),
   url_hash varchar(255),
   public int,
   permission int,
-  group_id int not null,
+  Group_id int not null,
   primary key(id),
-  foreign key(group_id) references Groups(id)
+  foreign key(Group_id) references Groups(id)
 );
 
 create table Networks (
   id int not null auto_increment,
   network_name varchar(255),
-  username varchar(255),
-  user_id int not null,
+  base_url varchar(255),
+  active int,
+  primary key(id)
+);
+
+create table Networks_Values (
+  id int not null auto_increment,
+  rest_url varchar(255),
+  User_id int not null,
+  Network_id int not null,
   primary key(id),
-  foreign key(user_id) references Users(id)
+  foreign key(User_id) references Users(id),
+  foreign key(Network_id) references Networks(id)
 );
 
 create table Bios (
@@ -49,9 +59,9 @@ create table Bios (
   interest varchar(1023),
   experience varchar(1023),
   fun_fact varchar(1023),
-  user_id int not null,
+  User_id int not null,
   primary key(id),
-  foreign key(user_id) references Users(id)
+  foreign key(User_id) references Users(id)
 );
 
 insert into Groups
@@ -61,22 +71,33 @@ values
 ('HR41');
 
 insert into Users 
-(username, password, email, url_hash, public, permission, group_id) 
+(username, password, email, image, url_hash, public, permission, Group_id) 
 values
-('Jonas', 'aaaaaa', 'j@mail.com', 'x2y2z2', 0, 0, 1),
-('Matt', 'bbbbbb', 'm@mail.com', 'i3j3k3', 0, 0, 1),
-('Alamu', 'cccccc', 'a@mail.com', 'n3m3o3', 0, 0, 1),
-('Drake', 'aaaaaa', 'd@mail.com', 'a1b1c1', 0, 0, 1);
+('Jonas', 'aaaaaa', 'j@mail.com', 'somelinkA', 'x2y2z2', 0, 0, 1),
+('Matt', 'bbbbbb', 'm@mail.com', 'somelinkB', 'i3j3k3', 0, 0, 1),
+('Alamu', 'cccccc', 'a@mail.com', 'somelinkC', 'n3m3o3', 0, 0, 1),
+('Drake', 'aaaaaa', 'd@mail.com', 'somelinkD', 'a1b1c1', 0, 0, 1),
+('someGuy', 'eeeeee', 'e@mail.com', 'somelinkE', 'fdasdf', 0, 0, 2);
 
 insert into Networks
-(network_name, username, user_id)
+(network_name, base_url, active)
 values
-('facebook', 'dungeonMaster', 2),
-('twitter', 'notADungeonMaster', 2),
-('facebook', 'jonasBrothers', 1);
+('facebook', 'https://www.facebook.com/', 1),
+('twitter', 'https://www.twitter.com/', 1),
+('linkedin','https://www.linkedin.com/in/', 1),
+('github', 'https://www.github.com/', 1);
+
+insert into Networks_Values
+(rest_url, User_id, Network_id)
+values
+('mikejonas', 1, 4),
+('mbresnan1701', 2, 4),
+('alamuv', 3, 4),
+('yochess', 4, 4),
+('yochess', 1, 4);
 
 insert into Bios
-(name, before_hr, location, interest, experience, fun_fact, user_id)
+(name, before_hr, location, interest, experience, fun_fact, User_id)
 values
 (
   "matt Bresnan", 
