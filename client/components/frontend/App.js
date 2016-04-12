@@ -1,6 +1,5 @@
 import React from 'react'
-import auth from '../authHelpers.js'
-import NavLink from './NavLink'
+import auth from '../../authHelpers.js'
 import NavigationBar from './helpers/NavigationBar.js'
 import { Grid } from 'react-bootstrap';
 

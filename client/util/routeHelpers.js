@@ -7,7 +7,7 @@ Class LoginRequired extends React.Component {
   constructor(props) {
     super(props);
   }
-  
+
   this.statics = {
     willTransitionTo(transition, params, query, callback) {
       if(!AuthStore.loggedIn()) {

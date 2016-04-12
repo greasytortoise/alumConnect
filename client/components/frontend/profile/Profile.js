@@ -1,8 +1,8 @@
 import React from 'react'
-import Bio from './helperProfile/bioDetails.js'
-import Image from './helperProfile/Image.js'
-import Edit from './helperProfile/EditProfile.js'
-import RestHandler from '../util/RestHandler'
+import Bio from './bioDetails.js'
+import Image from './Image.js'
+import Edit from './EditProfile.js'
+import RestHandler from '../../../util/RestHandler'
 import { Button } from 'react-bootstrap';
 
 
