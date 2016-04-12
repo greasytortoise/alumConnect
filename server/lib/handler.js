@@ -27,6 +27,7 @@ module.exports = {
     Users.query('where', {group_id: id})
       .fetch({withRelated: ['groups']})
       .then(function(users) {
+        if (users.length === 0) { return res.send(200, 'group has no users!'); }
         var group = users.at(0).related('groups');
         var usersArray = [];
         users.forEach(function(user) {
@@ -41,9 +42,6 @@ module.exports = {
           group_name: group.attributes.group_name,
           users: usersArray
         });
-      })
-      .catch(function(err) {
-        res.send(404, 'group has no users!');
       });
   },
 
@@ -71,6 +69,16 @@ module.exports = {
   },
 
   // http://localhost:3000/db/users/1
+  // sends a join table on pretty much every table
+  /*
+    {
+      user: {id: 4, username: 'drake', url: ..., email: ...},
+      group: {group: "HR40"},
+      bio: {...},
+      networks: {base_url: ..., rest_url: ...}
+    }, 
+    ...
+  */
   fetchUserId: function(req, res) {
     var id = req.params.id;
     User.where({id: id}).fetch({withRelated: ['groups', 'bios', 'networkValues']})
@@ -79,28 +87,36 @@ module.exports = {
         var group = user.related('groups');
         var bio = user.related('bios');
         var networkValue = user.related('networkValues');
-        res.json({
-          user: {
-            id: user.id,
-            username: user.attributes.username,
-            url: user.attributes.url_hash,
-            email: user.attributes.email,
-          },
-          group: {
-            group: group.attributes.group_name
-          },
-          bio: {
-            name: bio.attributes.name,
-            before_hr: bio.attributes.before_hr,
-            location: bio.attributes.location,
-            interest: bio.attributes.interest,
-            experience: bio.attributes.experience,
-            fun_fact: bio.attributes.fun_fact
-          },
-          networks: {
-            rest_url: networkValue.attributes.rest_url
-          }
-        });
+        console.log('<><>', networkValue.attributes);
+        networkValue.where({Network_id: networkValue.attributes.Network_id})
+          .fetch({withRelated: ['networks']})
+          .then(function(networkVal) {
+            if (!networkVal) { return res.send(200, 'user belongs in no networks!'); }
+            var network = networkVal.related('networks');
+            res.json({
+              user: {
+                id: user.id,
+                username: user.attributes.username,
+                url: user.attributes.url_hash,
+                email: user.attributes.email,
+              },
+              group: {
+                group: group.attributes.group_name
+              },
+              bio: {
+                name: bio.attributes.name,
+                before_hr: bio.attributes.before_hr,
+                location: bio.attributes.location,
+                interest: bio.attributes.interest,
+                experience: bio.attributes.experience,
+                fun_fact: bio.attributes.fun_fact
+              },
+              networks: {
+                base_url: network.attributes.base_url,
+                rest_url: networkValue.attributes.rest_url
+              }
+            });
+          });
       });
   },
 
