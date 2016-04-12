@@ -5,11 +5,12 @@ var jwtTokenSecret = 'DONALD_TRUMP_HUGE_HANDS_NO_PROBLEM';
 var User = require('../models/user');
 
 
-exports.generateToken = function(userid, email) {
+exports.generateToken = function(userid, email, perm) {
   var expires = moment().add('days', 3).valueOf();
   var token = jwt.encode({
     iss: userid,
-    exp: expires
+    exp: expires,
+    perm: perm
   }, jwtTokenSecret);
 
   return {token: token, expires: expires, user: email};

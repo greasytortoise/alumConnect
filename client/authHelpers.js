@@ -14,7 +14,7 @@ module.exports = {
         } else {
           console.log(res);
           localStorage.setItem('jwtAlum', res.text);
-          console.log(JSON.parse(atob(localStorage.getItem('jwtAlum').split('.')[1])));
+          //DO REDIRECT HERE
         }
       });
 
@@ -28,6 +28,11 @@ module.exports = {
     localStorage.removeItem('jwtAlum');
 
     //redirect home
+  },
+
+  redirectSwitch() {
+    //ADMIN VS USER LOGIN REDIRECT
+    
   },
 
   loggedIn() {

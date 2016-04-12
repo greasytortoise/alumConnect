@@ -214,7 +214,7 @@ module.exports = {
         //   }
         // });
         if(req.body.password === user.attributes.password) {
-          res.send(200, util.generateToken(user.attributes.id, user.attributes.email));
+          res.send(200, util.generateToken(user.attributes.id, user.attributes.email, user.attributes.permission));
         } else {
           res.send(403, 'Invalid Password');
         }

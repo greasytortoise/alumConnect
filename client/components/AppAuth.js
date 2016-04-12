@@ -27,7 +27,6 @@ const AppAuth = React.createClass({
     return (
       <div>
         <ul>
-          <li><Link to="/dashboard">SPARKLY RAINBOW UNICORNS HERE!!!</Link></li>
           <li>
             {this.state.loggedIn ? (
               <Link to="/logout">Log out</Link>
