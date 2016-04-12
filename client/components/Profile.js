@@ -1,7 +1,8 @@
 import React from 'react'
 import Bio from './helperProfile/bioDetails.js'
 import Image from './helperProfile/Image.js'
-
+import Edit from './helperProfile/EditProfile.js'
+import RestHandler from '../util/RestHandler'
 import { Link } from 'react-router'
 
 var request = require('superagent');
@@ -19,50 +20,65 @@ class Profile extends React.Component {
   }
 
   componentDidMount() {
-    this._getUserProfile();
+    this.getUserProfile();
   }
 
-  _getUserProfile() {
+  getUserProfile() {
     var url = '/db/bios/' + this.props.params.user;
-    request
-      .get(url)
-      .end((err, res) => {
-        this.setState({
-          image: "../mockups/assets/donaldtrump.png",
-          bioDetails: res.body.bio
-        })
-      });
+    RestHandler.Get(url, (err, res) => {
+      this.setState({
+        image: "../mockups/assets/donaldtrump.png",
+        bioDetails: res.body.bio
+      })
+    });
   }
 
-  // _handleEditProfileClick(event, bioDetails) {
-  //   event.preventDefault();
-  //   this.setState({
-  //     editing: 1,
-  //     bioDetails: {
-  //       
-  //     }
-  //   });
-  // }
+  handleProfileChange(event, bioDetails) {
+    event.preventDefault();
+    this.setState({
+      editing: 1,
+      // bioDetails: bioDetails
+    });
+  }
 
-  // _handleChangeImage(event, image) {
-  //   event.preventDefault();
-  //   this.setState({
-  //     editing: 1,
-  //     image: image
-  //   });
-  // }
+  handleChangeImage(event, image) {
+    event.preventDefault();
+    this.setState({
+      editing: 1,
+      image: "image"
+    });
+  }
+
+  profile() {
+    if (this.state.editing === 0) {
+      return(
+        <div>
+          <Image image={this.state.image} handleChangeImage={this.handleChangeImage.bind(this)}/>
+
+          <Bio bioDetails={this.state.bioDetails} 
+              handleEditProfileClick={this.handleProfileChange.bind(this)}/>
+        </div>
+      );
+    } else {
+      return(
+        <div>
+          <Edit bioDetails={this.state.bioDetails} image={this.state.image} 
+            handleProfileChange={this.handleProfileChange.bind(this)}/>
+        </div>
+      );
+    }
+  }
 
   render() {
     console.log(this.props.params.user);
     console.log('resp', this.state.bioDetails);
     return (
       <div>
-        <h3>Preferred name</h3>
-        <p>The Donald Trump</p>
+        <Link to={'/edit'} onClick={this.handleProfileChange.bind(this)}>
+          Edit Profile</Link>
+        <h3>{this.state.bioDetails.name}</h3>
         
-        <Image image={this.state.image}/>
-
-        <Bio bioDetails={this.state.bioDetails} />
+        <div>{this.profile()}</div>
 
       </div>
     );
@@ -71,9 +87,6 @@ class Profile extends React.Component {
 
 module.exports = Profile;
 
-
-// handleChangeImage={this._handleChangeImage.bind(this)}
-//handleEditProfileClick={this._handleProfileChange.bind(this)}
 
 // _handleProfileChange(event) {
 //   event.preventDefault();

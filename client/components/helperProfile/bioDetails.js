@@ -12,10 +12,10 @@ class Bio extends React.Component {
       obj.title = title;
       obj.content = this.props.bioDetails[title];
       bio.push(
-        <div>
+        <div key={obj.title}>
             <h3>{obj.title}</h3>
             <p>{obj.content}</p>
-          </div>
+        </div>
       );
     }
 
