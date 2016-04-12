@@ -10,15 +10,16 @@ var Bio = require('../models/bio');
 var Bios = require('../collections/bios');
 
 module.exports = {
+  // http://localhost:3000/db/groups/
   // sends id and group_name
-  // eg) { id: 1, group_name: "HR40" }
+  // { id: 1, group_name: "HR40" }
   fetchGroups: function(req, res) {
     Groups.fetch()
       .then(function(groups) {
         res.json(groups);
       });
   },
-
+  // http://localhost:3000/db/groups/:id
   // sends id, group_name, and array of users
   // eg) { id: 1, group_name: "HR40", users: [...] }
   fetchGroupId: function(req, res) {
@@ -67,32 +68,36 @@ module.exports = {
       });
   },
 
+  // http://localhost:3000/db/users/1
   fetchUserId: function(req, res) {
     var id = req.params.id;
-    User.where({id: id}).fetch({withRelated: ['groups', 'bios']})
+    User.where({id: id}).fetch({withRelated: ['groups', 'bios', 'networkValues']})
       .then(function(user) {
         if (!user) { return res.send(404, 'user does not exist!'); }
-          res.json({
-            user: {
-              id: user.id,
-              username: user.attributes.username,
-              url: user.attributes.url_hash,
-              email: user.attributes.email,
-            },
-            group: {
-              group: user.related('groups').attributes.group_name
-            },
-            bio: {
-              name: user.related('bios').attributes.name,
-              before_hr: user.related('bios').attributes.before_hr,
-              location: user.related('bios').attributes.location,
-              interest: user.related('bios').attributes.interest,
-              experience: user.related('bios').attributes.experience,
-              fun_fact: user.related('bios').attributes.fun_fact
-            },
-            networks: {
-              
-            }
+        var group = user.related('groups');
+        var bio = user.related('bios');
+        var networkValue = user.related('networkValues');
+        res.json({
+          user: {
+            id: user.id,
+            username: user.attributes.username,
+            url: user.attributes.url_hash,
+            email: user.attributes.email,
+          },
+          group: {
+            group: group.attributes.group_name
+          },
+          bio: {
+            name: bio.attributes.name,
+            before_hr: bio.attributes.before_hr,
+            location: bio.attributes.location,
+            interest: bio.attributes.interest,
+            experience: bio.attributes.experience,
+            fun_fact: bio.attributes.fun_fact
+          },
+          networks: {
+            rest_url: networkValue.attributes.rest_url
+          }
         });
       });
   },
@@ -119,9 +124,7 @@ module.exports = {
     var id = req.params.id;
     Network.where({id: id}).fetch()
       .then(function(network) {
-        if (!network) {
-          return res.send(404);
-        }
+        if (!network) { return res.send(404); }
         res.json({
           id: network.id,
           url: network.attributes.network_name
@@ -146,9 +149,7 @@ module.exports = {
     // withRelated does not work in fetch for some reason!!
     Bio.where({id: id}).fetch()
       .then(function(bio) {
-        if (!bio) {
-          return res.send(404);
-        }
+        if (!bio) { return res.send(404); }
         User.where({id: bio.attributes.user_id}).fetch()
           .then(function(user) {``
             Group.where({id: user.attributes.group_id}).fetch()
