@@ -1,12 +1,14 @@
 import React from 'react'
+import EditBioEntry from './EditBioEntry.js'
 
 class Edit extends React.Component {
   constructor (props) {
     super(props);
+
   }
 
-  handleChange() {
-
+  saveAndContinue() {
+    
   }
 
   editBio() {
@@ -17,8 +19,7 @@ class Edit extends React.Component {
       obj.content = this.props.bioDetails[title];
       bio.push(
         <div key={obj.title}>
-          <h3>{obj.title}</h3>
-          <textarea type="text" onChange={this.handleChange} value={obj.content} />
+          <EditBioEntry bio={obj} />
         </div>
       );
     }
@@ -29,7 +30,11 @@ class Edit extends React.Component {
   render() {
 
     return (
-      <div>{this.editBio()}</div>
+      <div>
+        <img src={this.props.image} className="photo" />
+        <div>{this.editBio()}</div>
+        <button onClick={this.saveAndContinue}>Save and Continue</button>
+      </div>
     );
   }
 }

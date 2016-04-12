@@ -2,7 +2,7 @@ import React from 'react'
 import Bio from './helperProfile/bioDetails.js'
 import Image from './helperProfile/Image.js'
 import Edit from './helperProfile/EditProfile.js'
-
+import RestHandler from '../util/RestHandler'
 import { Link } from 'react-router'
 
 var request = require('superagent');
@@ -25,20 +25,19 @@ class Profile extends React.Component {
 
   getUserProfile() {
     var url = '/db/bios/' + this.props.params.user;
-    request
-      .get(url)
-      .end((err, res) => {
-        this.setState({
-          image: "../mockups/assets/donaldtrump.png",
-          bioDetails: res.body.bio
-        })
-      });
+    RestHandler.Get(url, (err, res) => {
+      this.setState({
+        image: "../mockups/assets/donaldtrump.png",
+        bioDetails: res.body.bio
+      })
+    });
   }
 
   handleProfileChange(event, bioDetails) {
     event.preventDefault();
     this.setState({
-      editing: 1
+      editing: 1,
+      // bioDetails: bioDetails
     });
   }
 
@@ -63,7 +62,8 @@ class Profile extends React.Component {
     } else {
       return(
         <div>
-          <Edit bioDetails={this.state.bioDetails} image={this.state.image} />
+          <Edit bioDetails={this.state.bioDetails} image={this.state.image} 
+            handleProfileChange={this.handleProfileChange.bind(this)}/>
         </div>
       );
     }
