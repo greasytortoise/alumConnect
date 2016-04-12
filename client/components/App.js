@@ -5,6 +5,7 @@ import NavigationBar from './helpers/NavigationBar.js'
 import { Grid } from 'react-bootstrap';
 
 class App extends React.Component {
+
   render() {
     return(
       <Grid>
