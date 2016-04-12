@@ -1,17 +1,20 @@
 var db = require('../dbConfig');
 var Group = require('./group');
-var Network = require('./network');
+var NetworkValue = require('./networkValue');
 var Bio = require('./bio');
 
 var User = db.Model.extend({
   tableName: 'Users',
   groups: function() {
+    // working
     return this.belongsTo(Group);
   },
-  networks: function() {
-    return this.hasMany(Network);
+  networkValues: function() {
+    // working
+    return this.hasOne(NetworkValue);
   },
   bios: function() {
+    // working
     return this.hasOne(Bio);
   }
 });
