@@ -41,7 +41,7 @@ create table Networks (
   primary key(id)
 );
 
-create table Networks_Values (
+create table Network_Values (
   id int not null auto_increment,
   rest_url varchar(255),
   User_id int not null,
@@ -87,7 +87,7 @@ values
 ('linkedin','https://www.linkedin.com/in/', 1),
 ('github', 'https://www.github.com/', 1);
 
-insert into Networks_Values
+insert into Network_Values
 (rest_url, User_id, Network_id)
 values
 ('mikejonas', 1, 4),

@@ -4,6 +4,8 @@ var User = require('../models/user');
 var Users = require('../collections/users');
 var Network = require('../models/network');
 var Networks = require('../collections/networks');
+var NetworkValue = require('../models/networkValue');
+var NetworkValues = require('../collections/networkValues');
 var Bio = require('../models/bio');
 var Bios = require('../collections/bios');
 
