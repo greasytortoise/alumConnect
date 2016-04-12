@@ -1,0 +1,12 @@
+.search-for-users .form-group{
+  max-width: 300px;
+}
+.input-with-dropdown  .input-group-addon {
+  padding: 0;
+}
+.input-with-dropdown .btn {
+  border: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  background: #f5f5f5;
+}
