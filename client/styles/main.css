@@ -2,6 +2,13 @@
     margin-top: 70px;
 }
 
+.navbar-toggle .in .dropdown-menu {
+  display: block;
+}
+.navbar-toggle .in a {
+  outline: 0;
+
+};
 
 .search-for-users .form-group{
   max-width: 300px;
