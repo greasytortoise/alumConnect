@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
+import { DropdownButton, MenuItem, Input } from 'react-bootstrap';
+
 import RestHandler from '../util/RestHandler';
 
 class Users extends React.Component {
@@ -32,14 +34,19 @@ class Users extends React.Component {
   }
 
   render() {
+    var title = 'Cohort38'
     return (
       <div>
         <h2>users</h2>
-          <select>
-            <option value="4041">Cohort 40 / 41</option>
-            <option value="3839">Cohort 38 / 39</option>
-            <option value="3637">Cohort 36 / 37</option>
-          </select>
+          <Input type="text" ref="input" onChange={this.handleChange} />
+
+          <DropdownButton bsStyle='default' title={title}>
+            <MenuItem eventKey="40">Cohort40</MenuItem>
+            <MenuItem eventKey="39">Cohort39</MenuItem>
+            <MenuItem eventKey="38" active>Cohort38</MenuItem>
+            <MenuItem divider />
+            <MenuItem eventKey="0">All Cohorts</MenuItem>
+          </DropdownButton>
           <input type="text" placeholder="Search users by name" />
 
           <ul>{this.usersList()}</ul>

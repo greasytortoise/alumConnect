@@ -1,11 +1,13 @@
 import React from 'react'
 import auth from '../authHelpers.js'
 import NavLink from './NavLink'
+import { Grid } from 'react-bootstrap';
+
 
 class App extends React.Component {
   render() {
     return(
-      <div>
+      <Grid>
         <h2>Website title</h2>
         <ul role="nav">
           <li><NavLink to="/" onlyActiveOnIndex>Home</NavLink></li>
@@ -18,7 +20,7 @@ class App extends React.Component {
         </ul>
         {this.props.children}
 
-      </div>
+      </Grid>
     );
   }
 }
