@@ -13,7 +13,7 @@ class NavigationBar extends React.Component {
           </Navbar.Brand>
         </Navbar.Header>
         <Nav>
-          <Navbar.Text><NavLink to="/users">Users</NavLink></Navbar.Text>
+          <Navbar.Text><NavLink to="/users">Students</NavLink></Navbar.Text>
         </Nav>
         <Nav pullRight>
           <NavDropdown title="Dropdown" id="basic-nav-dropdown">
