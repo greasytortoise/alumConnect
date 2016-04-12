@@ -94,7 +94,7 @@ values
 ('mbresnan1701', 2, 4),
 ('alamuv', 3, 4),
 ('yochess', 4, 4),
-('yochess', 1, 4);
+('yochess', 4, 1);
 
 insert into Bios
 (name, before_hr, location, interest, experience, fun_fact, User_id)
