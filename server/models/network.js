@@ -4,7 +4,8 @@ var NetworkValue = require('./networkValue');
 var Network = db.Model.extend({
   tableName: 'Networks',
   networkValues: function() {
-    return this.hasMany(networkValue);
+    // NOT WORKING
+    return this.hasMany(NetworkValue);
   }
 });
 

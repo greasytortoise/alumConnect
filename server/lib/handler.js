@@ -68,7 +68,7 @@ module.exports = {
       });
   },
 
-  // http://localhost:3000/db/users/1
+  // http://localhost:3000/db/users/:id
   // sends a join table on pretty much every table
   /*
     {
@@ -87,7 +87,6 @@ module.exports = {
         var group = user.related('groups');
         var bio = user.related('bios');
         var networkValue = user.related('networkValues');
-        console.log('<><>', networkValue.attributes);
         networkValue.where({Network_id: networkValue.attributes.Network_id})
           .fetch({withRelated: ['networks']})
           .then(function(networkVal) {
@@ -124,6 +123,8 @@ module.exports = {
     //todo
   },
 
+  // http://localhost:3000/db/networks/
+  // sends id and url
   fetchNetworks: function(req, res) {
     Networks.fetch()
       .then(function(networks) {
@@ -138,11 +139,14 @@ module.exports = {
       });
   },
 
+  // http://localhost:3000/db/networks/1
+  // sends id and url
+  // may expand upon in the future
   fetchNetworkId: function(req, res) {
     var id = req.params.id;
     Network.where({id: id}).fetch()
       .then(function(network) {
-        if (!network) { return res.send(404); }
+        if (!network) { return res.send(404, 'Network does not exist!'); }
         res.json({
           id: network.id,
           url: network.attributes.network_name
@@ -154,31 +158,22 @@ module.exports = {
     //todo
   },
 
+  // http://localhost:3000/db/bios
+  // sends bio of all users
   fetchBios: function(req, res) {
-    Bios.fetch({withRelated: ['users']})
+    Bios.fetch()
       .then(function(bios) {
-        console.log(bios);
         res.json(bios);
       });
   },
 
   fetchBioId: function(req, res) {
     var id = req.params.id;
-    // withRelated does not work in fetch for some reason!!
-    Bio.where({id: id}).fetch()
-      .then(function(bio) {
-        if (!bio) { return res.send(404); }
-        User.where({id: bio.attributes.user_id}).fetch()
-          .then(function(user) {``
-            Group.where({id: user.attributes.group_id}).fetch()
-              .then(function(group) {
-                res.json({
-                  bio: bio,
-                  user: user,
-                  group: group
-                });
-              })
-          });
+    NetworkValue.where({id: id}).fetch({withRelated: ['networks']})
+      .then(function(obj) {
+        console.log('obj is: ', obj);
+        if (!obj) { return res.send(404); }
+        res.send(obj);
       });
   },
 

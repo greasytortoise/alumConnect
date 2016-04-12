@@ -5,9 +5,11 @@ var Network = require('./network');
 var NetworkValue = db.Model.extend({
   tableName: 'Network_Values',
   users: function() {
+    // NOT WORKING
     return this.belongsTo(User);
   },
   networks: function() {
+    // working
     return this.belongsTo(Network);
   }
 });
