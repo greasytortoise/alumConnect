@@ -1,6 +1,7 @@
 import React from 'react'
 import Bio from './helperProfile/bioDetails.js'
 import Image from './helperProfile/Image.js'
+import Edit from './helperProfile/EditProfile.js'
 
 import { Link } from 'react-router'
 
@@ -19,10 +20,10 @@ class Profile extends React.Component {
   }
 
   componentDidMount() {
-    this._getUserProfile();
+    this.getUserProfile();
   }
 
-  _getUserProfile() {
+  getUserProfile() {
     var url = '/db/bios/' + this.props.params.user;
     request
       .get(url)
@@ -34,17 +35,14 @@ class Profile extends React.Component {
       });
   }
 
-  _handleProfileChange(event, bioDetails) {
+  handleProfileChange(event, bioDetails) {
     event.preventDefault();
     this.setState({
-      editing: 1,
-      bioDetails: {
-        
-      }
+      editing: 1
     });
   }
 
-  _handleChangeImage(event, image) {
+  handleChangeImage(event, image) {
     event.preventDefault();
     this.setState({
       editing: 1,
@@ -52,18 +50,35 @@ class Profile extends React.Component {
     });
   }
 
+  profile() {
+    if (this.state.editing === 0) {
+      return(
+        <div>
+          <Image image={this.state.image} handleChangeImage={this.handleChangeImage.bind(this)}/>
+
+          <Bio bioDetails={this.state.bioDetails} 
+              handleEditProfileClick={this.handleProfileChange.bind(this)}/>
+        </div>
+      );
+    } else {
+      return(
+        <div>
+          <Edit bioDetails={this.state.bioDetails} image={this.state.image} />
+        </div>
+      );
+    }
+  }
+
   render() {
     console.log(this.props.params.user);
     console.log('resp', this.state.bioDetails);
     return (
       <div>
-        <h3>Preferred name</h3>
-        <p>The Donald Trump</p>
+        <Link to={'/edit'} onClick={this.handleProfileChange.bind(this)}>
+          Edit Profile</Link>
+        <h3>{this.state.bioDetails.name}</h3>
         
-        <Image image={this.state.image} handleChangeImage={this._handleChangeImage.bind(this)}/>
-
-        <Bio bioDetails={this.state.bioDetails} 
-          handleEditProfileClick={this._handleProfileChange.bind(this)}/>
+        <div>{this.profile()}</div>
 
       </div>
     );
@@ -71,6 +86,7 @@ class Profile extends React.Component {
 }
 
 module.exports = Profile;
+
 
 // _handleProfileChange(event) {
 //   event.preventDefault();
