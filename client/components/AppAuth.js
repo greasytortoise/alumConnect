@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import { browserHistory, Router, Route, Link } from 'react-router'
 import auth from '../authHelpers.js'
 import Login from './Login'
-import Profile from './Profile'
+import Profile from './frontend/profile/Profile'
 
 const AppAuth = React.createClass({
   getInitialState() {

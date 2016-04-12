@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 import { Row, Col, DropdownButton, MenuItem, Input } from 'react-bootstrap';
 
-import RestHandler from '../util/RestHandler';
+import RestHandler from '../../util/RestHandler';
 
 class Users extends React.Component {
 
