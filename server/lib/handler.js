@@ -27,6 +27,7 @@ module.exports = {
     Users.query('where', {group_id: id})
       .fetch({withRelated: ['groups']})
       .then(function(users) {
+        var group = users.at(0).related('groups');
         var usersArray = [];
         users.forEach(function(user) {
           usersArray.push({
@@ -36,8 +37,8 @@ module.exports = {
           });
         });
         res.json({
-          group_id: users.at(0).related('groups').id,
-          group_name: users.at(0).related('groups').attributes.group_name,
+          group_id: group.id,
+          group_name: group.attributes.group_name,
           users: usersArray
         });
       })
@@ -56,6 +57,7 @@ module.exports = {
       .then(function(users) {
         var retArray = [];
         users.forEach(function(user) {
+          var group = user.related('groups');
           retArray.push({
             id: user.id,
             username: user.attributes.username,
