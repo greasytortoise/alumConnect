@@ -3,7 +3,8 @@ import Bio from './helperProfile/bioDetails.js'
 import Image from './helperProfile/Image.js'
 import Edit from './helperProfile/EditProfile.js'
 import RestHandler from '../util/RestHandler'
-import { Link } from 'react-router'
+import { Button } from 'react-bootstrap';
+
 
 var request = require('superagent');
 
@@ -55,14 +56,14 @@ class Profile extends React.Component {
         <div>
           <Image image={this.state.image} handleChangeImage={this.handleChangeImage.bind(this)}/>
 
-          <Bio bioDetails={this.state.bioDetails} 
+          <Bio bioDetails={this.state.bioDetails}
               handleEditProfileClick={this.handleProfileChange.bind(this)}/>
         </div>
       );
     } else {
       return(
         <div>
-          <Edit bioDetails={this.state.bioDetails} image={this.state.image} 
+          <Edit bioDetails={this.state.bioDetails} image={this.state.image}
             handleProfileChange={this.handleProfileChange.bind(this)}/>
         </div>
       );
@@ -74,10 +75,10 @@ class Profile extends React.Component {
     console.log('resp', this.state.bioDetails);
     return (
       <div>
-        <Link to={'/edit'} onClick={this.handleProfileChange.bind(this)}>
-          Edit Profile</Link>
+        <Button onClick={this.handleProfileChange.bind(this)}>
+          Edit Profile</Button>
         <h3>{this.state.bioDetails.name}</h3>
-        
+
         <div>{this.profile()}</div>
 
       </div>

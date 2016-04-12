@@ -20,10 +20,7 @@ render((
       <Route path="/users" component={Users}/>
       <Route path="/users/:user" component={Profile}/>
       <Route path="/login" component={Login}/>
-      <Route path="/profile" component={Profile}/>
-      <Route path="/edit" component={Edit}/>
-      <Route path="/login" component={Login} />
-      <Route path="/logout" component={Login}  onEnter={auth.logout}/>
+      <Route path="/logout" component={Login} onEnter={auth.logout}/>
     </Route>
     <route path="/dashboard" component={Dashboard}>
       <IndexRoute component={DashboardHome}/>
