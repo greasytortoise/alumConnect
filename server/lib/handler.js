@@ -200,12 +200,7 @@ module.exports = {
 
   checkLogin: function(req, res) {
 
-    console.log('AAAASDASDASDASDADSADADAS');
-    console.log(req.body);
     User.where({email: req.body.email}).fetch().then(function(user){
-      // console.log(user);
-      console.log(user.attributes);
-      // res.send(200, user);
       if(user.length === 0) {
         res.send(401, 'No user with that email');
       } else {
@@ -219,8 +214,7 @@ module.exports = {
         //   }
         // });
         if(req.body.password === user.attributes.password) {
-          console.log('GOOD PASSWORD');
-          res.send(200, util.generateToken(user.id, user));
+          res.send(200, util.generateToken(user.attributes.id, user.attributes.email));
         } else {
           res.send(403, 'Invalid Password');
         }

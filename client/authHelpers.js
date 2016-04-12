@@ -13,6 +13,8 @@ module.exports = {
           console.log(err);
         } else {
           console.log(res);
+          localStorage.setItem('jwtAlum', res.text);
+          console.log(JSON.parse(atob(localStorage.getItem('jwtAlum').split('.')[1])));
         }
       });
 
@@ -29,6 +31,12 @@ module.exports = {
   },
 
   loggedIn() {
+    if(localStorage.getItem('jwtAlum')) {
+      var timeout = JSON.parse(atob(localStorage.getItem('jwtAlum').split('.')[1])).exp;
+      if(Date.now() >= timeout) {
+        localStorage.removeItem('jwtAlum');
+      }
+    }
     return !!localStorage.getItem('jwtAlum');
   },
 
