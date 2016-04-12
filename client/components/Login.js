@@ -2,6 +2,9 @@ import React from 'react';
 import Router from 'react-router';
 import auth from '../authHelpers.js';
 
+var Promise = require('bluebird');
+
+
 const Login = React.createClass({
 
   contextTypes: {
@@ -12,6 +15,27 @@ const Login = React.createClass({
     return {
       error: false
     }
+  },
+
+  redirectSwitch() {
+    //ADMIN VS USER LOGIN REDIRECT
+    console.log('switch hit');
+    //if no token, failed login, set error true
+    if(!getToken()){
+      this.setState({ error: true });    
+      
+    } else {
+      var token = auth.parseJwt();
+
+      console.log(token);
+      //else redirect based on permissions
+      if(token.perm === 1) {
+        this.context.router.replace('/dashboard');
+      } else {
+        this.context.router.replace('/users');
+      }
+    }
+
   },
 
   handleSubmit(event) {

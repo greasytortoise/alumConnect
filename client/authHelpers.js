@@ -6,7 +6,7 @@ module.exports = {
     console.log(email);
     console.log(password);
 
-    request('POST', '/login')
+    return request('POST', '/login')
       .send({email:email, password:password})
       .end(function(err, res){
         if(err) {
@@ -15,6 +15,7 @@ module.exports = {
           console.log(res);
           localStorage.setItem('jwtAlum', res.text);
           //DO REDIRECT HERE
+          return;
         }
       });
 
@@ -30,10 +31,6 @@ module.exports = {
     //redirect home
   },
 
-  redirectSwitch() {
-    //ADMIN VS USER LOGIN REDIRECT
-    
-  },
 
   loggedIn() {
     if(localStorage.getItem('jwtAlum')) {
