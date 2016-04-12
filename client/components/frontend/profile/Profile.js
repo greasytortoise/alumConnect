@@ -25,7 +25,7 @@ class Profile extends React.Component {
   }
 
   getUserProfile() {
-    var url = '/db/bios/' + this.props.params.user;
+    var url = '/db/users/' + this.props.params.user;
     RestHandler.Get(url, (err, res) => {
       this.setState({
         image: "../mockups/assets/donaldtrump.png",
@@ -37,7 +37,7 @@ class Profile extends React.Component {
   handleProfileChange(event, bioDetails) {
     event.preventDefault();
     this.setState({
-      editing: 1,
+      editing: 1
       // bioDetails: bioDetails
     });
   }

@@ -1,5 +1,6 @@
 import React from 'react'
 import EditBioEntry from './EditBioEntry.js'
+import { Button } from 'react-bootstrap';
 
 class Edit extends React.Component {
   constructor (props) {
@@ -33,7 +34,7 @@ class Edit extends React.Component {
       <div>
         <img src={this.props.image} className="photo" />
         <div>{this.editBio()}</div>
-        <button onClick={this.saveAndContinue}>Save and Continue</button>
+        <Button onClick={this.saveAndContinue}>Save and Continue</Button>
       </div>
     );
   }

@@ -10,7 +10,11 @@ var Get = function(url, callback) {
     });
 }
 
+var Post = function () {
+
+}
 
 module.exports = {
-  Get: Get
+  Get: Get,
+  Post: Post
 };
