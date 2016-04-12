@@ -167,13 +167,16 @@ module.exports = {
       });
   },
 
+  // http://localhost:3000/db/bios/1
+  // sends bio of id of user sent in
   fetchBioId: function(req, res) {
     var id = req.params.id;
-    NetworkValue.where({id: id}).fetch({withRelated: ['networks']})
-      .then(function(obj) {
-        console.log('obj is: ', obj);
-        if (!obj) { return res.send(404); }
-        res.send(obj);
+    User.where({id: id}).fetch({withRelated: ['bios']})
+      .then(function(user) {
+        var bio = user.related('bios');
+        console.log('obj is: ', user);
+        if (!user) { return res.send(404); }
+        res.send(bio);
       });
   },
 
