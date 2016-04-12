@@ -72,10 +72,6 @@ class Profile extends React.Component {
 
 module.exports = Profile;
 
-
-// handleChangeImage={this._handleChangeImage.bind(this)}
-//handleEditProfileClick={this._handleProfileChange.bind(this)}
-
 // _handleProfileChange(event) {
 //   event.preventDefault();
 //   console.log(this.refs.val.value);
