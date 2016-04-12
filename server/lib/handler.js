@@ -8,6 +8,8 @@ var NetworkValue = require('../models/networkValue');
 var NetworkValues = require('../collections/networkValues');
 var Bio = require('../models/bio');
 var Bios = require('../collections/bios');
+var bodyParser = require('body-parser');
+var util = require('./utility.js');
 
 module.exports = {
   // http://localhost:3000/db/groups/
@@ -194,5 +196,39 @@ module.exports = {
     .then(function(bio) {
       res.send(201);
     });
+  },
+
+  checkLogin: function(req, res) {
+
+    console.log('AAAASDASDASDASDADSADADAS');
+    console.log(req.body);
+    User.where({email: req.body.email}).fetch().then(function(user){
+      // console.log(user);
+      console.log(user.attributes);
+      // res.send(200, user);
+      if(user.length === 0) {
+        res.send(401, 'No user with that email');
+      } else {
+        // bcrypt.compare(password, user[0].password, function(err, isMatch){
+        //   if(match) {
+        //     res.send(200, util.generateToken(user.id, user));
+        //   } else {
+        //     // res.send(401, 'Invalid Password');
+        //     res.send(200, util.generateToken(user.id, user));
+
+        //   }
+        // });
+        if(req.body.password === user.attributes.password) {
+          console.log('GOOD PASSWORD');
+          res.send(200, util.generateToken(user.id, user));
+        } else {
+          res.send(403, 'Invalid Password');
+        }
+      }
+    });
   }
 };
+
+
+
+

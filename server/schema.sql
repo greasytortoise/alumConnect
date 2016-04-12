@@ -77,6 +77,7 @@ values
 ('Matt', 'bbbbbb', 'm@mail.com', 'somelinkB', 'i3j3k3', 0, 0, 1),
 ('Alamu', 'cccccc', 'a@mail.com', 'somelinkC', 'n3m3o3', 0, 0, 1),
 ('Drake', 'aaaaaa', 'd@mail.com', 'somelinkD', 'a1b1c1', 0, 0, 1),
+('Admin', 'admin', 'admin@admin.com', 'thing', 'ndas2q', 0, 1, 1),
 ('someGuy', 'eeeeee', 'e@mail.com', 'somelinkE', 'fdasdf', 0, 0, 2);
 
 insert into Networks

@@ -19,19 +19,19 @@ const Login = React.createClass({
 
     const email = this.refs.email.value
     const pass = this.refs.pass.value
+    auth.login(email, pass);
+    // auth.login(email, pass, (loggedIn) => {
+    //   if (!loggedIn)
+    //     return this.setState({ error: true })
 
-    auth.login(email, pass, (loggedIn) => {
-      if (!loggedIn)
-        return this.setState({ error: true })
+    //   const { location } = this.props
 
-      const { location } = this.props
-
-      if (location.state && location.state.nextPathname) {
-        this.context.router.replace(location.state.nextPathname)
-      } else {
-        this.context.router.replace('/')
-      }
-    })
+    //   if (location.state && location.state.nextPathname) {
+    //     this.context.router.replace(location.state.nextPathname)
+    //   } else {
+    //     this.context.router.replace('/')
+    //   }
+    // })
   },
 
   render() {

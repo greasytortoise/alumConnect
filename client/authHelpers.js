@@ -1,10 +1,13 @@
 var request = require('superagent');
+var Promise = require('bluebird');
 
 module.exports = {
   login(email, password) {
+    console.log(email);
+    console.log(password);
 
     request('POST', '/login')
-      .send(JSON.stringify({email:email, password:password}))
+      .send({email:email, password:password})
       .end(function(err, res){
         if(err) {
           console.log(err);
@@ -12,6 +15,7 @@ module.exports = {
           console.log(res);
         }
       });
+
   },
 
   getToken() {
