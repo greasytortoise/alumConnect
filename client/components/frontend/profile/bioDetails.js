@@ -3,13 +3,30 @@ import { Input } from 'react-bootstrap';
 
 
 class Bio extends React.Component {
+
   constructor(props) {
     super(props);
+    this.state = {content: ''};
   }
 
+  componentDidMount() {
+    console.log('???');
+    this.setState({
+      content: this.props.bioDetails.content
+    })
+  }
+
+  handleFormChange () {
+    this.setState({content: this.refs.input.refs.input.value});
+  }
+
+
   renderBioDetails() {
-    var {title, content} = this.props.bioDetails
+
+    var {title} = this.props.bioDetails
     var editing = this.props.editing;
+    var content = this.state.content;
+
 
     if(!editing) {
       return (
@@ -24,11 +41,10 @@ class Bio extends React.Component {
       return (
         <div key={title}>
           <h3>{title}</h3>
-          <p>
-            {/*<textarea ref="val" onChange={this.handleChange.bind(this)} value={this.state.content} />            */}
-            <Input type="textarea" value={content} />
-
-          </p>
+          <Input type="textarea"
+            value={content}
+            ref='input'
+            onChange={this.handleFormChange.bind(this)} />
         </div>
       );
     }

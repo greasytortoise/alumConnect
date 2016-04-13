@@ -36,20 +36,11 @@ class Profile extends React.Component {
     });
   }
 
-  handleProfileChange(event, bioDetails) {
-    event.preventDefault();
-    this.setState({
-      editing: 1
-      // bioDetails: bioDetails
-    });
-  }
-
-  handleChangeImage(event, image) {
-    event.preventDefault();
-    this.setState({
-      editing: 1,
-      image: "image"
-    });
+  handleEditProfile(event, bioDetails) {
+    
+    this.state.editing
+    ? this.setState({ editing: 0})
+    : this.setState({ editing: 1});
   }
 
   profile() {
@@ -76,12 +67,11 @@ class Profile extends React.Component {
   }
 
   render() {
-    console.log(this.props.params.user);
-    console.log('resp', this.state.bioDetails);
     return (
       <div>
-        <Button onClick={this.handleProfileChange.bind(this)}>
-          Edit Profile</Button>
+        <Button onClick={this.handleEditProfile.bind(this)}>
+          Edit Profile
+        </Button>
         <h3>{this.state.username}</h3>
 
         <div>{this.profile()}</div>
