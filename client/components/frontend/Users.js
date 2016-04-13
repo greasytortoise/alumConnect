@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
-import { Row, Col, DropdownButton, MenuItem, Input } from 'react-bootstrap';
+import { Row, Col, DropdownButton, MenuItem, Input, Grid, Image, Thumbnail } from 'react-bootstrap';
 
 import RestHandler from '../../util/RestHandler';
 
@@ -20,12 +20,17 @@ class Users extends React.Component {
   }
 
   usersList() {
+    var userCount = this.state.users.length;
     return this.state.users.map(function(user, index) {
       var {username, id} = user
       return(
-        <li key={id}>
-          <Link to={{pathname: `users/${id}`}}>{username}</Link>
-        </li>
+        <Col xs={6} sm={4} md={4}>
+          <Image
+            src='https://pixabay.com/static/uploads/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+            responsive
+            />
+          <h4><Link to={{pathname: `users/${id}`}}>{username}</Link></h4>
+        </Col>
       );
     });
   }
@@ -47,7 +52,6 @@ class Users extends React.Component {
     var title = 'Cohort38'
     return (
       <div>
-        <h2>users</h2>
         <Row className="search-for-users">
           <Col xs={10} sm={10} md={10} lg={10}>
             <Input
@@ -61,7 +65,7 @@ class Users extends React.Component {
           </Col>
         </Row>
         <Row>
-          <ul>{this.usersList()}</ul>
+          {this.usersList()}
         </Row>
       </div>
     )

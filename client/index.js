@@ -14,8 +14,7 @@ import DashboardUsers from './components/admin/DashboardUsers'
 render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
-      {/*<IndexRoute component={Users}/>*/}
-      <Route path="/users" component={Users}/>
+      <IndexRoute component={Users}/>
       <Route path="/users/:user" component={Profile}/>
       <Route path="/login" component={Login}/>
       <Route path="/logout" component={Login} onEnter={auth.logout}/>
