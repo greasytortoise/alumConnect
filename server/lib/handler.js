@@ -14,6 +14,82 @@ var bodyParser = require('body-parser');
 var util = require('./utility.js');
 
 module.exports = {
+  fetchGroups: function(req, res) {
+
+  },
+  fetchGroupId: function(req, res) {
+
+  },
+  createGroup: function(req, res) {
+
+  },
+  modifyGroup: function(req, res) {
+
+  },
+  deleteGroup: function(req, res) {
+
+  },
+
+
+
+
+  fetchUsers: function(req, res) {
+
+  },
+  fetchUsersByGroup: function(req, res) {
+
+  },
+  fetchUserId: function(req, res) {
+
+  },
+  createUser: function(req, res) {
+
+  },
+  modifyUser: function(req, res) {
+
+  },
+  deleteUser: function(req, res) {
+
+  },
+
+
+
+
+  fetchSites: function(req, res) {
+
+  },
+  fetchSiteId: function(req, res) {
+
+  },
+  createSite: function(req, res) {
+
+  },
+  modifySite: function(req, res) {
+
+  },
+  deleteSite: function(req, res) {
+
+  },
+
+
+
+  fetchFields: function(req, res) {
+
+  },
+  fetchFieldId: function(req, res) {
+
+  },
+  createField: function(req, res) {
+
+  },
+  modifyField: function(req, res) {
+
+  },
+  deleteField: function(req, res) {
+
+  },
+
+
   // http://localhost:3000/db/groups/
   // sends id and group_name
   // { id: 1, group_name: "HR40" }
