@@ -38,14 +38,17 @@ const Login = React.createClass({
           loginComponent.setState({ error: true });
         } else {
           var parseRes = JSON.parse(res.text);
-          console.log(parseRes);
           localStorage.setItem('jwtAlum', JSON.stringify(parseRes.token));
           //else redirect based on permissions
-          if(parseRes.perm === 1) {
-            window.location.href = '/dashboard';
-          } else {
-            window.location.href = '/';
-          }
+          auth.checkToken(function(response) {
+            if(parseInt(response.text) === 1) {
+              window.location.href = '/dashboard';
+            } else {
+              window.location.href = '/';
+            }
+
+          });
+
         }
       });
   },

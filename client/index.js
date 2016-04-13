@@ -22,7 +22,7 @@ render((
       <Route path="/users/:user" component={Profile}/>
     </Route>
     <route path="/dashboard" component={Dashboard} onEnter={requireAdmin}>
-      <IndexRoute component={DashboardHome} onEnter={requireAdmin}/>
+      <IndexRoute component={DashboardHome} />
       <Route path="/dashboard/users" component={DashboardUsers} onEnter={requireAdmin}/>
     </route>
   </Router>
@@ -39,16 +39,18 @@ function requireAuth(nextState, replace) {
 }
 
 function requireAdmin(nextState, replace) {
-  console.log(auth.loggedIn());
-  console.log(auth.checkToken(function(res){
-    return parseInt(res.text) === 1
-  }));
-  if (!auth.loggedIn() && auth.checkToken(function(res){
-    return res.text === 1
-  })) {
-    replace({
-      pathname: '/',
-      state: { nextPathname: nextState.location.pathname }
-    });
-  }
+  console.log(!auth.loggedIn());
+  auth.checkToken(function(res) {
+    var perm = parseInt(res.text);
+    console.log(perm !== 1);
+    if(perm !== 1 || !auth.loggedIn() ) {
+      replace({
+        pathname: '/login',
+        state: { nextPathname: nextState.location.pathname }
+      });
+    }
+  });
 }
+
+
+

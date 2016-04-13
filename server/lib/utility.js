@@ -9,8 +9,7 @@ exports.generateToken = function(userid, email, perm) {
   var expires = moment().add('days', 3).valueOf();
   var token = jwt.encode({
     iss: userid,
-    exp: expires, 
-    perm: perm
+    exp: expires
   }, jwtTokenSecret);
 
   return {token: token, expires: expires, user: email};
@@ -45,11 +44,8 @@ exports.isLoggedIn = function(req, res, next) {
 };
 
 exports.getPermissions = function(req, res) {
-  console.log(req.body);
   var decoded = jwt.decode(req.body.token, jwtTokenSecret);
-  console.log(decoded);
   User.where({id: decoded.iss}).fetch().then(function(user){
-    console.log(user);
     res.send(200, user.attributes.permission);
   });
 
