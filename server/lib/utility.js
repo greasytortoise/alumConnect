@@ -9,7 +9,8 @@ exports.generateToken = function(userid, email, perm) {
   var expires = moment().add('days', 3).valueOf();
   var token = jwt.encode({
     iss: userid,
-    exp: expires
+    exp: expires,
+    perm: perm
   }, jwtTokenSecret);
 
   return {token: token, expires: expires, user: email};

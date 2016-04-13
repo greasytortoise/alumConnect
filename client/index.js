@@ -38,18 +38,15 @@ function requireAuth(nextState, replace) {
   }
 }
 
+
 function requireAdmin(nextState, replace) {
-  console.log(!auth.loggedIn());
-  auth.checkToken(function(res) {
-    var perm = parseInt(res.text);
-    console.log(perm !== 1);
-    if(perm !== 1 || !auth.loggedIn() ) {
-      replace({
-        pathname: '/login',
-        state: { nextPathname: nextState.location.pathname }
-      });
-    }
-  });
+  var token = auth.parseJwt();
+  if(!auth.loggedIn() || token.perm !== 1) {
+    replace({
+      pathname: '/login',
+      state: { nextPathname: nextState.location.pathname }
+    });
+  }
 }
 
 
