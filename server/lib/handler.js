@@ -88,34 +88,55 @@ module.exports = {
         if (!user) { return res.send(404, 'user does not exist!'); }
         var group = user.related('groups');
         var bio = user.related('bios');
-        var networkValue = user.related('networkValues');
-        networkValue.where({Network_id: networkValue.attributes.Network_id})
-          .fetch({withRelated: ['networks']})
-          .then(function(networkVal) {
-            if (!networkVal) { return res.send(200, 'user belongs in no networks!'); }
-            var network = networkVal.related('networks');
+        var networkValues = user.related('networkValues');
+        networkValues.fetch({withRelated: ['networks']})
+          .then(function(networkVals) {
+            var networkArray = [];
+            networkVals.forEach(function(networkVal) {
+              var network = networkVal.related('networks');
+              networkArray.push({
+                name: network.attributes.network_name,
+                url: network.attributes.base_url,
+                value: networkVal.attributes.rest_url
+              });
+            });
             res.json({
               user: {
                 id: user.id,
                 username: user.attributes.username,
+                password: user.attributes.password,
                 url: user.attributes.url_hash,
                 email: user.attributes.email,
+                group: group.attributes.group_name,
+                image: user.attributes.image
               },
-              group: {
-                group: group.attributes.group_name
-              },
-              bio: {
-                name: bio.attributes.name,
-                before_hr: bio.attributes.before_hr,
-                location: bio.attributes.location,
-                interest: bio.attributes.interest,
-                experience: bio.attributes.experience,
-                fun_fact: bio.attributes.fun_fact
-              },
-              networks: {
-                base_url: network.attributes.base_url,
-                rest_url: networkValue.attributes.rest_url
-              }
+              networks: networkArray,
+              userInfo: [
+                {
+                  title: 'preferred name',
+                  content: bio.attributes.name
+                },
+                {
+                  title: 'what were you doing before HR',
+                  content: bio.attributes.before_hr
+                },
+                {
+                  title: 'where did you come from',
+                  content: bio.attributes.location
+                },
+                {
+                  title: 'what are your interests',
+                  content: bio.attributes.interest
+                },
+                {
+                  title: 'prior experience?',
+                  content: bio.attributes.experience
+                },
+                {
+                  title: 'what are some fun facts?',
+                  content: bio.attributes.fun_fact
+                }
+              ]
             });
           });
       });
