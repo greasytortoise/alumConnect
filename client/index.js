@@ -13,16 +13,17 @@ import DashboardUsers from './components/admin/DashboardUsers'
 
 render((
   <Router history={browserHistory}>
+
+    <Route path="/login" component={Login}/>
+    <Route path="/logout" component={Login} onEnter={auth.logout}/>
+
     <Route path="/" component={App}>
       <IndexRoute component={Users}/>
       <Route path="/users/:user" component={Profile}/>
-      <Route path="/login" component={Login}/>
-      <Route path="/logout" component={Login} onEnter={auth.logout}/>
     </Route>
     <route path="/dashboard" component={Dashboard}>
       <IndexRoute component={DashboardHome}/>
       <Route path="/dashboard/users" component={DashboardUsers}/>
-
     </route>
   </Router>
 ), document.getElementById('app'))
