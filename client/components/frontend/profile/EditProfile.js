@@ -9,7 +9,7 @@ class Edit extends React.Component {
   }
 
   saveAndContinue() {
-    
+
   }
 
   editBio() {

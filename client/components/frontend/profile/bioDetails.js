@@ -1,33 +1,44 @@
 import React from 'react'
+import { Input } from 'react-bootstrap';
+
 
 class Bio extends React.Component {
   constructor(props) {
-    super(props); 
+    super(props);
   }
 
-  bio() {
-    var bio = [];
-    for (var i = 0; i < this.props.bioDetails.length; i++) {
-      var obj = this.props.bioDetails[i];
-      bio.push(
-        <div key={obj.title}>
-            <h3>{obj.title}</h3>
-            <p>{obj.content}</p>
+  renderBioDetails() {
+    var {title, content} = this.props.bioDetails
+    var editing = this.props.editing;
+
+    if(!editing) {
+      return (
+        <div key={title}>
+          <h3>{title}</h3>
+          <p>{content}</p>
         </div>
       );
     }
 
-    return bio;
+    else {
+      return (
+        <div key={title}>
+          <h3>{title}</h3>
+          <p>
+            {/*<textarea ref="val" onChange={this.handleChange.bind(this)} value={this.state.content} />            */}
+            <Input type="textarea" value={content} />
+
+          </p>
+        </div>
+      );
+    }
   }
 
   render() {
     return (
-      <div>{this.bio()}</div>
+      <div>{this.renderBioDetails()}</div>
     );
   }
 }
 
 module.exports = Bio;
-
-
-      

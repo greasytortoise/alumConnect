@@ -16,7 +16,7 @@ class Profile extends React.Component {
     this.state = {
       image: 'Hello',
       username: '',
-      bioDetails: {},
+      bioDetails: [],
       editing: 0
     };
   }
@@ -53,22 +53,26 @@ class Profile extends React.Component {
   }
 
   profile() {
-    if (this.state.editing === 0) {
-      return(
-        <div>
-          <Image image={this.state.image} />
 
-          <Bio bioDetails={this.state.bioDetails} />
-        </div>
-      );
-    } else {
-      return(
-        <div>
-          <Edit bioDetails={this.state.bioDetails} image={this.state.image}
-            handleProfileChange={this.handleProfileChange.bind(this)}/>
-        </div>
-      );
-    }
+    return this.state.bioDetails.map((detail, index) => {
+      return (<Bio
+        bioDetails={detail}
+        editing={this.state.editing} />)
+    });
+
+    // return(
+    //   <div>
+    //     <Image image={this.state.image} />
+    //     <Bio bioDetails={this.state.bioDetails} />
+    //   </div>
+    // );
+    //Normal
+
+    // <div>
+    //   <Edit bioDetails={this.state.bioDetails} image={this.state.image}
+    //     handleProfileChange={this.handleProfileChange.bind(this)}/>
+    // </div>
+
   }
 
   render() {
