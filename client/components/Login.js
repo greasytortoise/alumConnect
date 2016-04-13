@@ -37,14 +37,13 @@ const Login = React.createClass({
           console.log(err);
           loginComponent.setState({ error: true });
         } else {
-          console.log(res);
           localStorage.setItem('jwtAlum', res.text);
           var token = auth.parseJwt();
           //else redirect based on permissions
           if(token.perm === 1) {
-            window.location.href = '/dashboard'
+            window.location.href = '/dashboard';
           } else {
-            window.location.href = '/users'
+            window.location.href = '/';
           }
         }
       });

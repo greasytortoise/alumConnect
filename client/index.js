@@ -21,9 +21,9 @@ render((
       <IndexRoute component={Users}/>
       <Route path="/users/:user" component={Profile}/>
     </Route>
-    <route path="/dashboard" component={Dashboard}>
-      <IndexRoute component={DashboardHome}/>
-      <Route path="/dashboard/users" component={DashboardUsers}/>
+    <route path="/dashboard" component={Dashboard} onEnter={requireAdmin}>
+      <IndexRoute component={DashboardHome} onEnter={requireAdmin}/>
+      <Route path="/dashboard/users" component={DashboardUsers} onEnter={requireAdmin}/>
     </route>
   </Router>
 ), document.getElementById('app'))
@@ -33,6 +33,15 @@ function requireAuth(nextState, replace) {
   if (!auth.loggedIn()) {
     replace({
       pathname: '/login',
+      state: { nextPathname: nextState.location.pathname }
+    })
+  }
+}
+
+function requireAdmin(nextState, replace) {
+    if (!auth.isAdmin()) {
+    replace({
+      pathname: '/',
       state: { nextPathname: nextState.location.pathname }
     })
   }
