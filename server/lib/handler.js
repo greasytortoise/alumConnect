@@ -8,6 +8,8 @@ var NetworkValue = require('../models/networkValue');
 var NetworkValues = require('../collections/networkValues');
 var Bio = require('../models/bio');
 var Bios = require('../collections/bios');
+var BioField = require('../models/bioField');
+var BioFields = require('../collections/bioFields');
 var bodyParser = require('body-parser');
 var util = require('./utility.js');
 
