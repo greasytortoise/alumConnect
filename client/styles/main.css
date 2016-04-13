@@ -2,6 +2,54 @@
     margin-top: 70px;
 }
 
+.page-login {
+  background:#f5f5f5;
+}
+#loginFormWrapper {
+  margin: 100px auto 0 auto;
+  max-width:700px;
+}
+#loginFormWrapper h1 {
+  text-align: center;
+  font-weight: normal;
+  margin-bottom: 30px;
+}
+#loginForm {
+    max-width: 350px;
+    padding: 15px 35px 35px;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+#loginForm h1 {
+  margin-bottom: 15px;
+}
+#loginForm h2 {
+  margin-bottom: 20px
+}
+
+#loginForm .login-name {
+  margin-bottom: 10px;
+}
+
+#loginForm .login-password {
+  margin-bottom: 20px;
+}
+
+.form-signin-heading,
+.checkbox {
+  margin-bottom: 30px;
+}
+
+.checkbox {
+  font-weight: normal;
+}
+
+
+
+
+
+
 .navbar-toggle .in .dropdown-menu {
   display: block;
 }
