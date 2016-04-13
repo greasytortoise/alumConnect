@@ -38,6 +38,9 @@ module.exports = function(app, express) {
   app.get('/db/bios/:id', handler.fetchBioId);
   app.post('/db/bios', handler.postBio);
 
+  app.post('/checktoken', util.getPermissions);
+
+
   // this is currently not working (for test purposes)
   app.get('/testDatabase', function(req, res) {
     return Groups.create({

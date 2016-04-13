@@ -37,10 +37,11 @@ const Login = React.createClass({
           console.log(err);
           loginComponent.setState({ error: true });
         } else {
-          localStorage.setItem('jwtAlum', res.text);
-          var token = auth.parseJwt();
+          var parseRes = JSON.parse(res.text);
+          console.log(parseRes);
+          localStorage.setItem('jwtAlum', JSON.stringify(parseRes.token));
           //else redirect based on permissions
-          if(token.perm === 1) {
+          if(parseRes.perm === 1) {
             window.location.href = '/dashboard';
           } else {
             window.location.href = '/';

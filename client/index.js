@@ -39,10 +39,16 @@ function requireAuth(nextState, replace) {
 }
 
 function requireAdmin(nextState, replace) {
-    if (!auth.isAdmin()) {
+  console.log(auth.loggedIn());
+  console.log(auth.checkToken(function(res){
+    return parseInt(res.text) === 1
+  }));
+  if (!auth.loggedIn() && auth.checkToken(function(res){
+    return res.text === 1
+  })) {
     replace({
       pathname: '/',
       state: { nextPathname: nextState.location.pathname }
-    })
+    });
   }
 }
