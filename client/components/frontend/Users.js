@@ -25,11 +25,13 @@ class Users extends React.Component {
       var {username, id} = user
       return(
         <Col xs={6} sm={4} md={4}>
-          <Image
-            src='https://pixabay.com/static/uploads/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
-            responsive
-            />
-          <h4><Link to={{pathname: `users/${id}`}}>{username}</Link></h4>
+          <div className="user-card">
+            <Image
+              src='https://pixabay.com/static/uploads/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+              responsive
+              />
+            <h4><Link to={{pathname: `users/${id}`}}>{username}</Link></h4>
+          </div>
         </Col>
       );
     });
