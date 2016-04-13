@@ -9,7 +9,7 @@ var NetworkValue = db.Model.extend({
     return this.belongsTo(User);
   },
   networks: function() {
-    // working
+    // probably working
     return this.belongsTo(Network);
   }
 });

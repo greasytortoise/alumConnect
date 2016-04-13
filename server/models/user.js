@@ -11,7 +11,7 @@ var User = db.Model.extend({
   },
   networkValues: function() {
     // working
-    return this.hasOne(NetworkValue);
+    return this.hasMany(NetworkValue);
   },
   bios: function() {
     // working
