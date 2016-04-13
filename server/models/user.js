@@ -9,7 +9,7 @@ var User = db.Model.extend({
     return this.hasMany('NetworkValue');
   },
   bios: function() {
-    return this.hasOne('Bio');
+    return this.hasMany('Bio');
   }
 });
 
