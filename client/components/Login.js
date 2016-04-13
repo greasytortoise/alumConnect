@@ -28,18 +28,17 @@ const Login = React.createClass({
     //ADMIN VS USER LOGIN REDIRECT
     console.log('switch hit');
     //if no token, failed login, set error true
-    if(!getToken()){
+    if(!auth.getToken()){
       this.setState({ error: true });
 
     } else {
       var token = auth.parseJwt();
 
-      console.log(token);
       //else redirect based on permissions
       if(token.perm === 1) {
-        this.context.router.replace('/dashboard');
+        window.location.href = '/dashboard'
       } else {
-        this.context.router.replace('/users');
+        window.location.href = '/users'
       }
     }
 
@@ -51,6 +50,7 @@ const Login = React.createClass({
     const email = this.refs.email.value
     const pass = this.refs.pass.value
     auth.login(email, pass);
+    this.redirectSwitch();
   },
 
   render() {
