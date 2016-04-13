@@ -21,9 +21,9 @@ render((
       <IndexRoute component={Users}/>
       <Route path="/users/:user" component={Profile}/>
     </Route>
-    <route path="/dashboard" component={Dashboard}>
-      <IndexRoute component={DashboardHome}/>
-      <Route path="/dashboard/users" component={DashboardUsers}/>
+    <route path="/dashboard" component={Dashboard} onEnter={requireAdmin}>
+      <IndexRoute component={DashboardHome} />
+      <Route path="/dashboard/users" component={DashboardUsers} onEnter={requireAdmin}/>
     </route>
   </Router>
 ), document.getElementById('app'))
@@ -37,3 +37,17 @@ function requireAuth(nextState, replace) {
     })
   }
 }
+
+
+function requireAdmin(nextState, replace) {
+  var token = auth.parseJwt();
+  if(!auth.loggedIn() || token.perm !== 1) {
+    replace({
+      pathname: '/login',
+      state: { nextPathname: nextState.location.pathname }
+    });
+  }
+}
+
+
+

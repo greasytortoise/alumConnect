@@ -14,6 +14,7 @@ module.exports = {
     //redirect home
   },
 
+  
 
   loggedIn() {
     if(localStorage.getItem('jwtAlum')) {
@@ -25,16 +26,24 @@ module.exports = {
     return !!localStorage.getItem('jwtAlum');
   },
 
-  isAdmin() {
+  checkToken(callback) {
+    console.log(localStorage.getItem('jwtAlum'));
     if(localStorage.getItem('jwtAlum')) {
-      var perm = JSON.parse(atob(localStorage.getItem('jwtAlum').split('.')[1])).perm;
-      console.log(perm);
-      if(perm === 1) {
-        return true;
-      }
-    }
-    return false;
+
+    request('POST', '/checktoken')
+      .send({token: JSON.parse(localStorage.getItem('jwtAlum')).token})
+      .end(function(err, res){
+        if(err) {
+          console.log(err);
+        } else {
+          console.log(res);
+          callback(res);
+        }
+        
+      });
+    } 
   },
+
 
   onChange() {},
 

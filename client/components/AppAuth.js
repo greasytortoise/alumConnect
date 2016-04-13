@@ -29,7 +29,7 @@ const AppAuth = React.createClass({
         <ul>
           <li>
             {this.state.loggedIn ? (
-              <Link to="/logout">Log out</Link>
+              <Link to="/login">Log out</Link>
             ) : (
               <Link to="/login">Sign in</Link>
             )}

@@ -37,15 +37,18 @@ const Login = React.createClass({
           console.log(err);
           loginComponent.setState({ error: true });
         } else {
-          console.log(res);
-          localStorage.setItem('jwtAlum', res.text);
-          var token = auth.parseJwt();
+          var parseRes = JSON.parse(res.text);
+          localStorage.setItem('jwtAlum', JSON.stringify(parseRes.token));
           //else redirect based on permissions
-          if(token.perm === 1) {
-            window.location.href = '/dashboard'
-          } else {
-            window.location.href = '/users'
-          }
+          auth.checkToken(function(response) {
+            if(parseInt(response.text) === 1) {
+              window.location.href = '/dashboard';
+            } else {
+              window.location.href = '/';
+            }
+
+          });
+
         }
       });
   },

@@ -24,7 +24,7 @@ exports.getSecret = function() {
 exports.isLoggedIn = function(req, res, next) {
   //PROBABLY NEEDS ADJUSTMENT
   //CHECK TO ENSURE JWT SENT WITH REQUESTS
-  var token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'];
+  var token = (req.body && req.body.token) || (req.query && req.query.access_token) || req.headers['x-access-token'];
   if (token) {
     try {
       var decoded = jwt.decode(token, jwtTokenSecret);
@@ -44,10 +44,19 @@ exports.isLoggedIn = function(req, res, next) {
   }
 };
 
-exports.isAdmin = function(req, res, next) {
-  var decoded = jwt.decode(token, jwtTokenSecret);
+exports.getPermissions = function(req, res) {
+  var decoded = jwt.decode(req.body.token, jwtTokenSecret);
   User.where({id: decoded.iss}).fetch().then(function(user){
-    if(user.permission === 1) {
+    res.send(200, user.attributes.permission);
+  });
+
+};
+
+exports.isAdmin = function(req, res, next) {
+  var decoded = jwt.decode(req.body.token, jwtTokenSecret);
+  console.log(decoded);
+  User.where({id: decoded.iss}).fetch().then(function(user){
+    if(user.attributes.permission === 1) {
       next();
     } else {
       res.send(403, 'You have requested an admin-only resource without adequete permissions');
