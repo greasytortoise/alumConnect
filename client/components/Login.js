@@ -1,6 +1,7 @@
 import React from 'react';
 import {Router, Link} from 'react-router';
 import auth from '../authHelpers.js';
+import request from 'superagent';
 
 import { Grid, Input, ButtonInput } from 'react-bootstrap';
 
@@ -24,39 +25,35 @@ const Login = React.createClass({
     }
   },
 
-  redirectSwitch() {
-    //ADMIN VS USER LOGIN REDIRECT
-    console.log('switch hit');
-    //if no token, failed login, set error true
-    if(!getToken()){
-      this.setState({ error: true });
-
-    } else {
-      var token = auth.parseJwt();
-
-      console.log(token);
-      //else redirect based on permissions
-      if(token.perm === 1) {
-        this.context.router.replace('/dashboard');
-      } else {
-        this.context.router.replace('/users');
-      }
-    }
-
-  },
-
   handleSubmit(event) {
     event.preventDefault()
-
-    const email = this.refs.email.value
-    const pass = this.refs.pass.value
-    auth.login(email, pass);
+    const email = this.refs.email.refs.input.value;
+    const pass = this.refs.password.refs.input.value;
+    var loginComponent = this;
+    request('POST', '/login')
+      .send({email:email, password:pass})
+      .end(function(err, res){
+        if(err) {
+          console.log(err);
+          loginComponent.setState({ error: true });
+        } else {
+          console.log(res);
+          localStorage.setItem('jwtAlum', res.text);
+          var token = auth.parseJwt();
+          //else redirect based on permissions
+          if(token.perm === 1) {
+            window.location.href = '/dashboard'
+          } else {
+            window.location.href = '/users'
+          }
+        }
+      });
   },
 
   render() {
     return (
       <div id='loginFormWrapper'>
-        <form id='loginForm'>
+        <form id='loginForm' onSubmit={this.handleSubmit}>
           <h2>Please login</h2>
           <Input
             bsSize='large'
@@ -72,22 +69,13 @@ const Login = React.createClass({
             placeholder='password'
             groupClassName='login-password'
             onChange={this.handleChange} />
-          <ButtonInput bsStyle="primary" bsSize="large" block>Login</ButtonInput>
+          <ButtonInput bsStyle="primary" bsSize="large" type="submit" block>Login</ButtonInput>
 
         </form>
+        {this.state.error && (
+          <p>You have supplied invalid login information. Please Try Again.</p>
+        )}
 
-        <ul role="nav">
-          <li><Link to="/dashboard">Dashboard</Link></li>
-          <li><Link to="/dashboard/users">users</Link></li>
-        </ul>
-        <form onSubmit={this.handleSubmit}>
-          <label><input ref="email" placeholder="email" placeholder="DonaldTrump@MakeAmericaGreatAgain.com" /></label>
-          <label><input ref="pass" placeholder="password" type='password' /></label>
-          <button type="submit">login</button>
-          {this.state.error && (
-            <p>HANDS TOO SMALL!</p>
-          )}
-        </form>
       </div>
     );
   }

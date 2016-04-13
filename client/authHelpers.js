@@ -2,24 +2,7 @@ var request = require('superagent');
 var Promise = require('bluebird');
 
 module.exports = {
-  login(email, password) {
-    console.log(email);
-    console.log(password);
 
-    return request('POST', '/login')
-      .send({email:email, password:password})
-      .end(function(err, res){
-        if(err) {
-          console.log(err);
-        } else {
-          console.log(res);
-          localStorage.setItem('jwtAlum', res.text);
-          //DO REDIRECT HERE
-          return;
-        }
-      });
-
-  },
 
   getToken() {
     return localStorage.getItem('jwtAlum');
@@ -27,7 +10,7 @@ module.exports = {
 
   logout() {
     localStorage.removeItem('jwtAlum');
-
+    
     //redirect home
   },
 
@@ -40,6 +23,17 @@ module.exports = {
       }
     }
     return !!localStorage.getItem('jwtAlum');
+  },
+
+  isAdmin() {
+    if(localStorage.getItem('jwtAlum')) {
+      var perm = JSON.parse(atob(localStorage.getItem('jwtAlum').split('.')[1])).perm;
+      console.log(perm);
+      if(perm === 1) {
+        return true;
+      }
+    }
+    return false;
   },
 
   onChange() {},
