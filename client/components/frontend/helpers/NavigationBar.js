@@ -15,9 +15,9 @@ class NavigationBar extends React.Component {
         </Navbar.Header>
         <Navbar.Collapse>
 
-          <Nav>
+          {/*<Nav>
             <Navbar.Text><NavLink to="/users">Students</NavLink></Navbar.Text>
-          </Nav>
+          </Nav>*/}
 
           <Nav pullRight>
             <NavDropdown title="Drake Wang" id="nav-dropdown">
