@@ -216,7 +216,8 @@ module.exports = {
   checkLogin: function(req, res) {
 
     User.where({email: req.body.email}).fetch().then(function(user){
-      if(user.length === 0) {
+      console.log(user);
+      if(user === null) {
         res.send(401, 'No user with that email');
       } else {
         // bcrypt.compare(password, user[0].password, function(err, isMatch){

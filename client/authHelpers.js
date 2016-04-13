@@ -3,8 +3,6 @@ var Promise = require('bluebird');
 
 module.exports = {
   login(email, password) {
-    console.log(email);
-    console.log(password);
 
     return request('POST', '/login')
       .send({email:email, password:password})
@@ -14,7 +12,6 @@ module.exports = {
         } else {
           console.log(res);
           localStorage.setItem('jwtAlum', res.text);
-          //DO REDIRECT HERE
           return;
         }
       });
@@ -27,7 +24,7 @@ module.exports = {
 
   logout() {
     localStorage.removeItem('jwtAlum');
-
+    
     //redirect home
   },
 

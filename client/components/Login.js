@@ -33,22 +33,22 @@ const Login = React.createClass({
 
     } else {
       var token = auth.parseJwt();
-
+      console.log(token);
       //else redirect based on permissions
-      if(token.perm === 1) {
-        window.location.href = '/dashboard'
-      } else {
-        window.location.href = '/users'
-      }
+      // if(token.perm === 1) {
+      //   window.location.href = '/dashboard'
+      // } else {
+      //   window.location.href = '/users'
+      // }
     }
 
   },
 
   handleSubmit(event) {
     event.preventDefault()
-
-    const email = this.refs.email.value
-    const pass = this.refs.pass.value
+    console.log(this.refs);
+    const email = this.refs.email.refs.input.value;
+    const pass = this.refs.password.refs.input.value;
     auth.login(email, pass);
     this.redirectSwitch();
   },
@@ -56,7 +56,7 @@ const Login = React.createClass({
   render() {
     return (
       <div id='loginFormWrapper'>
-        <form id='loginForm'>
+        <form id='loginForm' onSubmit={this.handleSubmit}>
           <h2>Please login</h2>
           <Input
             bsSize='large'
@@ -72,22 +72,13 @@ const Login = React.createClass({
             placeholder='password'
             groupClassName='login-password'
             onChange={this.handleChange} />
-          <ButtonInput bsStyle="primary" bsSize="large" block>Login</ButtonInput>
-
-        </form>
-
-        <ul role="nav">
-          <li><Link to="/dashboard">Dashboard</Link></li>
-          <li><Link to="/dashboard/users">users</Link></li>
-        </ul>
-        <form onSubmit={this.handleSubmit}>
-          <label><input ref="email" placeholder="email" placeholder="DonaldTrump@MakeAmericaGreatAgain.com" /></label>
-          <label><input ref="pass" placeholder="password" type='password' /></label>
-          <button type="submit">login</button>
+          <ButtonInput bsStyle="primary" bsSize="large" type="submit" block>Login</ButtonInput>
           {this.state.error && (
             <p>HANDS TOO SMALL!</p>
           )}
         </form>
+
+
       </div>
     );
   }
