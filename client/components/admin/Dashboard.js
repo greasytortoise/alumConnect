@@ -1,16 +1,19 @@
 import React from 'react'
-import { Grid } from 'react-bootstrap';
+import { Grid } from 'react-bootstrap'
+import Sidebar from './helpers/Sidebar'
 
+
+class HelloMessage extends React.Component {
+  render() {
+    return <div>Hello</div>;
+  }
+}
 
 class Dashboard extends React.Component {
   render() {
     return(
       <div id="wrapper">
 
-        <ul role="nav">
-          {/*<li><NavLink to="/dashboard" onlyActiveOnIndex>Dashboard</NavLink></li>
-          <li><NavLink to="/dashboard/users">users</NavLink></li>*/}
-        </ul>
         <div id="sidebar-wrapper">
           <ul className="sidebar-nav">
             <li className="sidebar-brand">
@@ -19,7 +22,7 @@ class Dashboard extends React.Component {
               </a>
             </li>
             <li>
-              <a href="#">Dashboard</a>
+              <a href="#">{HelloMessage}</a>
             </li>
             <li>
               <a href="#">Shortcuts</a>
@@ -41,6 +44,7 @@ class Dashboard extends React.Component {
             </li>
           </ul>
         </div>
+
 
         <div id="page-content-wrapper">
           <div className="container-fluid">
