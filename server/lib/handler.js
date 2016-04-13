@@ -158,7 +158,7 @@ module.exports = {
   // http://localhost:3000/db/bios
   // sends bio of all users
   fetchBios: function(req, res) {
-    Bios.fetch().then(function(bios) {
+    Bios.fetch({withRelated: ['bioFields']}).then(function(bios) {
       res.json(bios);
     });
   },
@@ -167,11 +167,15 @@ module.exports = {
   // sends bio of id of user sent in
   fetchBioId: function(req, res) {
     var id = req.params.id;
-    User.where({id: id}).fetch({withRelated: ['bios']}).then(function(user) {
-      var bio = user.related('bios');
-      console.log('obj is: ', user);
-      if (!user) { return res.send(404); }
-      res.send(bio);
+    Bio.where({User_id: id}).fetchAll({withRelated: ['bioFields']}).then(function(bios) {
+      res.json(bios.map(function(bio) {
+        var bioField = bio.related('bioFields');
+        return {
+          title: bioField.attributes.field,
+          value: bio.attributes.bio
+        };
+      }));
+
     });
   },
 
