@@ -16,33 +16,31 @@ module.exports = {
   // sends id and group_name
   // { id: 1, group_name: "HR40" }
   fetchGroups: function(req, res) {
-    Groups.fetch()
-      .then(function(groups) {
-        res.json(groups);
-      });
+    Groups.fetch().then(function(groups) {
+      res.json(groups);
+    });
   },
   // http://localhost:3000/db/groups/:id
   // sends id, group_name, and array of users
   // eg) { id: 1, group_name: "HR40", users: [...] }
   fetchGroupId: function(req, res) {
     var id = req.params.id;
-    Users.query('where', {group_id: id})
-      .fetch({withRelated: ['groups']})
-      .then(function(users) {
-        if (users.length === 0) { return res.send(200, 'group has no users!'); }
-        var group = users.at(0).related('groups');
-        var usersArray = [];
-        users.forEach(function(user) {
-          usersArray.push({
+    Group.where({id: id}).fetch({withRelated: ['users']})
+      .then(function(group) {
+        if (!group) {
+          return res.send(200, 'group has no users!')
+        }
+        var users = group.related('users').map(function(user) {
+          return {
             id: user.id,
             username: user.attributes.username,
             image: user.attributes.image
-          });
+          };
         });
         res.json({
           group_id: group.id,
           group_name: group.attributes.group_name,
-          users: usersArray
+          users: users
         });
       });
   },
@@ -85,20 +83,20 @@ module.exports = {
     var id = req.params.id;
     User.where({id: id}).fetch({withRelated: ['groups', 'bios', 'networkValues']})
       .then(function(user) {
-        if (!user) { return res.send(404, 'user does not exist!'); }
+        if (!user) { 
+          return res.send(404, 'user does not exist!'); 
+        }
         var group = user.related('groups');
         var bio = user.related('bios');
-        var networkValues = user.related('networkValues');
-        networkValues.fetch({withRelated: ['networks']})
-          .then(function(networkVals) {
-            var networkArray = [];
-            networkVals.forEach(function(networkVal) {
-              var network = networkVal.related('networks');
-              networkArray.push({
+        user.related('networkValues').fetch({withRelated: ['networks']})
+          .then(function(networkValues) {
+            var networks = networkValues.map(function(networkValue) {
+              var network = networkValue.related('networks');
+              return {
                 name: network.attributes.network_name,
                 url: network.attributes.base_url,
-                value: networkVal.attributes.rest_url
-              });
+                value: networkValue.attributes.rest_url
+              };
             });
             res.json({
               user: {
@@ -110,7 +108,7 @@ module.exports = {
                 group: group.attributes.group_name,
                 image: user.attributes.image
               },
-              networks: networkArray,
+              networks: networks,
               userInfo: [
                 {
                   title: 'preferred name',
@@ -151,14 +149,7 @@ module.exports = {
   fetchNetworks: function(req, res) {
     Networks.fetch()
       .then(function(networks) {
-        var retArray = [];
-        networks.forEach(function(network) {
-          retArray.push({
-            id: network.id,
-            url: network.attributes.network_name
-          });
-        })
-        res.json(retArray);
+        res.json(networks);
       });
   },
 
@@ -169,10 +160,14 @@ module.exports = {
     var id = req.params.id;
     Network.where({id: id}).fetch()
       .then(function(network) {
-        if (!network) { return res.send(404, 'Network does not exist!'); }
+        if (!network) { 
+          return res.send(404, 'Network does not exist!'); 
+        }
         res.json({
           id: network.id,
-          url: network.attributes.network_name
+          url: network.attributes.base_url, 
+          name: network.attributes.network_name,
+          active: network.attributes.active
         });
       });
   },
@@ -184,10 +179,9 @@ module.exports = {
   // http://localhost:3000/db/bios
   // sends bio of all users
   fetchBios: function(req, res) {
-    Bios.fetch()
-      .then(function(bios) {
-        res.json(bios);
-      });
+    Bios.fetch().then(function(bios) {
+      res.json(bios);
+    });
   },
 
   // http://localhost:3000/db/bios/1
