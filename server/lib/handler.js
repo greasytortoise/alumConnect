@@ -70,15 +70,6 @@ module.exports = {
 
   // http://localhost:3000/db/users/:id
   // sends a join table on pretty much every table
-  /*
-    {
-      user: {id: 4, username: 'drake', url: ..., email: ...},
-      group: {group: "HR40"},
-      bio: {...},
-      networks: {base_url: ..., rest_url: ...}
-    }, 
-    ...
-  */
   fetchUserId: function(req, res) {
     var id = req.params.id;
     User.where({id: id}).fetch({withRelated: ['groups', 'bios', 'networkValues']}).then(function(user) {
@@ -90,6 +81,7 @@ module.exports = {
         var networks = networkValues.map(function(networkValue) {
           var network = networkValue.related('networks');
           return {
+            id: network.id,
             name: network.attributes.network_name,
             url: network.attributes.base_url,
             value: networkValue.attributes.rest_url
@@ -99,6 +91,7 @@ module.exports = {
           bios = bios.map(function(bio) {
           var bioField = bio.related('bioFields');
             return {
+              id: bioField.id,
               title: bioField.attributes.field,
               value: bio.attributes.bio
             };
