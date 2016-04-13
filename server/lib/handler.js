@@ -155,7 +155,9 @@ module.exports = {
         networks.forEach(function(network) {
           retArray.push({
             id: network.id,
-            url: network.attributes.network_name
+            url: network.attributes.base_url, 
+            name: network.attributes.network_name,
+            active: network.attributes.active
           });
         })
         res.json(retArray);
@@ -172,7 +174,9 @@ module.exports = {
         if (!network) { return res.send(404, 'Network does not exist!'); }
         res.json({
           id: network.id,
-          url: network.attributes.network_name
+          url: network.attributes.base_url, 
+          name: network.attributes.network_name,
+          active: network.attributes.active
         });
       });
   },
