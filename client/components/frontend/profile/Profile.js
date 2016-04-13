@@ -15,6 +15,7 @@ class Profile extends React.Component {
 
     this.state = {
       image: 'Hello',
+      username: '',
       bioDetails: {},
       editing: 0
     };
@@ -25,19 +26,20 @@ class Profile extends React.Component {
   }
 
   getUserProfile() {
-    var url = '/db/bios/' + this.props.params.user;
+    var url = '/db/users/' + this.props.params.user;
     RestHandler.Get(url, (err, res) => {
       this.setState({
+        username: res.body.user.username,
         image: "../mockups/assets/donaldtrump.png",
-        bioDetails: res.body.bio
-      })
+        bioDetails: res.body.userInfo
+      });
     });
   }
 
   handleProfileChange(event, bioDetails) {
     event.preventDefault();
     this.setState({
-      editing: 1,
+      editing: 1
       // bioDetails: bioDetails
     });
   }
@@ -54,10 +56,9 @@ class Profile extends React.Component {
     if (this.state.editing === 0) {
       return(
         <div>
-          <Image image={this.state.image} handleChangeImage={this.handleChangeImage.bind(this)}/>
+          <Image image={this.state.image} />
 
-          <Bio bioDetails={this.state.bioDetails}
-              handleEditProfileClick={this.handleProfileChange.bind(this)}/>
+          <Bio bioDetails={this.state.bioDetails} />
         </div>
       );
     } else {
@@ -77,7 +78,7 @@ class Profile extends React.Component {
       <div>
         <Button onClick={this.handleProfileChange.bind(this)}>
           Edit Profile</Button>
-        <h3>{this.state.bioDetails.name}</h3>
+        <h3>{this.state.username}</h3>
 
         <div>{this.profile()}</div>
 

@@ -7,10 +7,8 @@ class Bio extends React.Component {
 
   bio() {
     var bio = [];
-    for (var title in this.props.bioDetails) {
-      var obj = {};
-      obj.title = title;
-      obj.content = this.props.bioDetails[title];
+    for (var i = 0; i < this.props.bioDetails.length; i++) {
+      var obj = this.props.bioDetails[i];
       bio.push(
         <div key={obj.title}>
             <h3>{obj.title}</h3>
@@ -23,7 +21,6 @@ class Bio extends React.Component {
   }
 
   render() {
-
     return (
       <div>{this.bio()}</div>
     );
