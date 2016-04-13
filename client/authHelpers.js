@@ -42,6 +42,17 @@ module.exports = {
     return !!localStorage.getItem('jwtAlum');
   },
 
+  isAdmin() {
+    if(localStorage.getItem('jwtAlum')) {
+      var perm = JSON.parse(atob(localStorage.getItem('jwtAlum').split('.')[1])).perm;
+      console.log(perm);
+      if(perm === 1) {
+        return true;
+      }
+    }
+    return false;
+  },
+
   onChange() {},
 
   parseJwt(){
