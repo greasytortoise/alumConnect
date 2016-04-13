@@ -2,21 +2,7 @@ var request = require('superagent');
 var Promise = require('bluebird');
 
 module.exports = {
-  login(email, password) {
 
-    return request('POST', '/login')
-      .send({email:email, password:password})
-      .end(function(err, res){
-        if(err) {
-          console.log(err);
-        } else {
-          console.log(res);
-          localStorage.setItem('jwtAlum', res.text);
-          return;
-        }
-      });
-
-  },
 
   getToken() {
     return localStorage.getItem('jwtAlum');

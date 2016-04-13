@@ -216,7 +216,6 @@ module.exports = {
   checkLogin: function(req, res) {
 
     User.where({email: req.body.email}).fetch().then(function(user){
-      console.log(user);
       if(user === null) {
         res.send(401, 'No user with that email');
       } else {
