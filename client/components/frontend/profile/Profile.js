@@ -1,7 +1,6 @@
 import React from 'react'
-import Bio from './bioDetails.js'
+import ProfileField from './ProfileField.js'
 import Image from './Image.js'
-import Edit from './EditProfile.js'
 import RestHandler from '../../../util/RestHandler'
 import { Button } from 'react-bootstrap';
 
@@ -16,7 +15,7 @@ class Profile extends React.Component {
     this.state = {
       image: 'Hello',
       username: '',
-      bioDetails: {},
+      bioDetails: [],
       editing: 0
     };
   }
@@ -33,53 +32,34 @@ class Profile extends React.Component {
         image: "../mockups/assets/donaldtrump.png",
         bioDetails: res.body.userInfo
       });
+      console.log(res.body);
+
     });
   }
 
-  handleProfileChange(event, bioDetails) {
-    event.preventDefault();
-    this.setState({
-      editing: 1
-      // bioDetails: bioDetails
-    });
-  }
-
-  handleChangeImage(event, image) {
-    event.preventDefault();
-    this.setState({
-      editing: 1,
-      image: "image"
-    });
+  handleEditProfile(event, bioDetails) {
+    this.state.editing
+    ? this.setState({ editing: 0})
+    : this.setState({ editing: 1});
   }
 
   profile() {
-    if (this.state.editing === 0) {
-      return(
-        <div>
-          <Image image={this.state.image} />
 
-          <Bio bioDetails={this.state.bioDetails} />
-        </div>
-      );
-    } else {
-      return(
-        <div>
-          <Edit bioDetails={this.state.bioDetails} image={this.state.image}
-            handleProfileChange={this.handleProfileChange.bind(this)}/>
-        </div>
-      );
-    }
+    return this.state.bioDetails.map((detail, index) => {
+      return (<ProfileField
+        bioDetails={detail}
+        editing={this.state.editing} />)
+    });
   }
 
   render() {
-    console.log(this.props.params.user);
-    console.log('resp', this.state.bioDetails);
     return (
       <div>
-        <Button onClick={this.handleProfileChange.bind(this)}>
-          Edit Profile</Button>
+        <Image image={this.state.image} />
         <h3>{this.state.username}</h3>
-
+          <Button onClick={this.handleEditProfile.bind(this)}>
+            Edit Profile
+          </Button>
         <div>{this.profile()}</div>
 
       </div>
