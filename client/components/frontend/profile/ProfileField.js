@@ -6,26 +6,26 @@ class Bio extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {content: ''};
+    this.state = {value: ''};
   }
-  
+
   componentDidMount() {
-    this.setState({content: this.props.bioDetails.content})
+    this.setState({value: this.props.bioDetails.value})
   }
 
   handleFormChange () {
-    this.setState({content: this.refs.input.refs.input.value});
+    this.setState({value: this.refs.input.refs.input.value});
   }
   renderBioDetails() {
     var editing = this.props.editing;
     var {title} = this.props.bioDetails
-    var content = this.state.content;
+    var value = this.state.value;
 
     if(!editing) {
       return (
         <div key={title}>
           <h3>{title}</h3>
-          <p>{content}</p>
+          <p>{value}</p>
         </div>
       );
     } else {
@@ -33,7 +33,7 @@ class Bio extends React.Component {
         <div key={title}>
           <h3>{title}</h3>
           <Input type="textarea"
-            value={content}
+            value={value}
             ref='input'
             onChange={this.handleFormChange.bind(this)} />
         </div>
