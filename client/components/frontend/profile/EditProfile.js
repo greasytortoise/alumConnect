@@ -14,10 +14,8 @@ class Edit extends React.Component {
 
   editBio() {
     var bio = [];
-    for (var title in this.props.bioDetails) {
-      var obj = {};
-      obj.title = title;
-      obj.content = this.props.bioDetails[title];
+    for (var i = 0; i < this.props.bioDetails.length; i++) {
+      var obj = this.props.bioDetails[i];
       bio.push(
         <div key={obj.title}>
           <EditBioEntry bio={obj} />
@@ -29,7 +27,7 @@ class Edit extends React.Component {
   }
 
   render() {
-
+    console.log('edit bio', this.props);
     return (
       <div>
         <img src={this.props.image} className="photo" />
