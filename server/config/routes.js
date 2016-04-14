@@ -16,7 +16,7 @@ var Users = require('../collections/users');
 module.exports = function(app, express) {
   // db/groups
   app.get('/db/groups', handler.fetchGroups);
-  app.get('/db/groups/group/:id', handler.fetchGroupId);
+  app.get('/db/groups/group/:id', handler.fetchGroupInfo);
   app.post('/db/groups', handler.createGroup);
   app.post('/db/groups/group/:id', handler.modifyGroup);
   app.delete('/db/groups/group/:id', handler.deleteGroup);
@@ -24,7 +24,7 @@ module.exports = function(app, express) {
   // db/users
   app.get('/db/users', handler.fetchUsers);
   app.get('/db/users/group/:id', handler.fetchUsersByGroup);
-  app.get('/db/users/user/:id', handler.fetchUserId);
+  app.get('/db/users/user/:id', handler.fetchUserInfo);
   app.post('/db/users', handler.createUser);
   app.post('/db/users/user/:id', handler.modifyUser);
   app.delete('/db/users/user/:id', handler.deleteUser);
