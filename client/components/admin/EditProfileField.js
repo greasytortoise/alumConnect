@@ -6,14 +6,13 @@ class EditProfileField extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: this.props.value,
+      value: this.props.value.title,
       disabled: true,
       button: "Edit"
     }
   }
 
   handleChange () {
-    console.log(this.refs.input.getValue());  
     this.setState({
       value: this.refs.input.getValue(),
       disabled: false
@@ -28,12 +27,15 @@ class EditProfileField extends React.Component {
         disabled: false
       });
     } else if (this.state.button === 'Save') {
+
+      var url = '/db/fields/field/' + this.props.value.id;
       var data = {
         field: this.state.value
       };
 
-      RestHandler.Post('/db/fields', data, (err, res) => {
+      RestHandler.Post(url, data, (err, res) => {
         if (err) {return err;}
+        console.log('res', res.body);
       });
 
       this.setState({
