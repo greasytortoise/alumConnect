@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router'
 
 class Sidebar extends React.Component {
   render() {
@@ -11,7 +12,7 @@ class Sidebar extends React.Component {
             </a>
           </li>
           <li>
-            <a href="#">Dashboard</a>
+            <Link to="/dashboard/groups">Groups</Link>
           </li>
           <li>
             <a href="#">Shortcuts</a>

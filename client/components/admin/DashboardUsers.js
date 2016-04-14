@@ -2,7 +2,7 @@ import React from 'react'
 import Griddle from 'griddle-react'
 import RestHandler from '../../util/RestHandler';
 
-class Dashboard extends React.Component {
+class DashboardUsers extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -31,4 +31,4 @@ class Dashboard extends React.Component {
   }
 }
 
-module.exports = Dashboard;
+module.exports = DashboardUsers;
