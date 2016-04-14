@@ -43,13 +43,16 @@ class Users extends React.Component {
       var {username, id} = user
       return(
         <Col xs={6} sm={4} md={3} lg={3}>
-          <div className="user-card">
-            <Image
-              src='https://pixabay.com/static/uploads/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
-              responsive
-              />
-            <h4><Link to={{pathname: `users/${id}`}}>{username}</Link></h4>
-          </div>
+          <Link to={{pathname: `users/${id}`}}>
+            <div
+              className="user-card">
+              <Image
+                src='https://pixabay.com/static/uploads/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+                responsive
+                />
+              <h4>{username}</h4>
+            </div>
+          </Link>
         </Col>
       );
     });
@@ -64,7 +67,6 @@ class Users extends React.Component {
   handleFilterUsersInput() {
     var filterText = this.refs.searchusers.refs.input.value.toLowerCase();
     this.setState({searchUsersText: filterText});
-    console.log(filterText);
   }
 
   renderGroups(handleGroupSelect) {
@@ -88,14 +90,15 @@ class Users extends React.Component {
     return (
       <div>
         <Row className="search-for-users">
-          <Col xs={10} sm={10} md={10} lg={10}>
+          <Col xs={12}>
             <Input
-              wrapperClassName='input-with-dropdown'
               type='text'
               ref='searchusers'
               onChange={this.handleFilterUsersInput.bind(this)}
+              wrapperClassName='input-with-dropdown'
               placeholder="Search users"
-              addonBefore = {innerDropdown} />
+              addonBefore = {innerDropdown}
+              bsSize='large'/>
           </Col>
         </Row>
         <Row>
