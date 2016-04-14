@@ -10,7 +10,8 @@ class Users extends React.Component {
     super(props);
     this.state = {
       users: [],
-      groups: []
+      groups: [],
+      selectedGroup: {}
     }
   }
 
@@ -20,6 +21,8 @@ class Users extends React.Component {
     });
     RestHandler.Get('/db/groups', (err, res) => {
       this.setState({groups: res.body})
+      this.setState({selectedGroup: res.body[res.body.length - 1]})
+
     });
   }
 
@@ -42,24 +45,24 @@ class Users extends React.Component {
   cohortList() {
   }
 
-  groupSelect(evt, key) {
-    debugger;
-    console.log(key);
+  handleGroupSelect(evt, key) {
+    this.setState({'selectedGroup': key});
   }
 
-  renderGroups(groupSelect) {
+  renderGroups(handleGroupSelect) {
     return this.state.groups.map (function(group) {
       var {id, group_name} = group;
       return(
-        <MenuItem key={id} eventKey={id} onSelect={groupSelect}>{group_name}</MenuItem>
+        <MenuItem key={id} eventKey={group} onSelect={handleGroupSelect}>{group_name}</MenuItem>
       );
     });
   }
 
   render() {
+    var groupName = this.state.selectedGroup.group_name;
     const innerDropdown = (
-      <DropdownButton bsStyle='default' title='Cohort40'>
-        {this.renderGroups(this.groupSelect)}
+      <DropdownButton bsStyle='default' title={groupName}>
+        {this.renderGroups(this.handleGroupSelect.bind(this))}
       </DropdownButton>
     );
 
@@ -74,8 +77,7 @@ class Users extends React.Component {
               ref='input'
               onChange={this.handleChange}
               placeholder="Search users"
-              addonBefore = {innerDropdown}
-              />
+              addonBefore = {innerDropdown} />
           </Col>
         </Row>
         <Row>
