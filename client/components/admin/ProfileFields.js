@@ -36,7 +36,7 @@ class ProfileFields extends React.Component {
     var field = this.refs.field.getValue();
 
     var fieldInfo = {
-      field: field
+      title: field
     };
 
     RestHandler.Post('/db/fields', fieldInfo, (err, res) => {
