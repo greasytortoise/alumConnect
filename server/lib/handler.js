@@ -41,9 +41,36 @@ module.exports = {
       });
     });
   },
-  createGroup: function(req, res) {},
-  modifyGroup: function(req, res) {},
-  deleteGroup: function(req, res) {},
+  // http://localhost:3000/db/groups
+  // (still testing)
+  createGroup: function(req, res) {
+    var data = req.body;
+    new Group({group_name: data.group_name}).then(function(exist) {
+      if (exist) {
+        return res.send(400, 'Group already exists');
+      }
+      Groups.create({group_name: data.group_name}).then(function(newGroup) {
+        res.json(newGroup);
+      });
+    });
+  },
+  // http://localhost:3000/db/groups/group/:id
+  modifyGroup: function(req, res) {
+    var id = req.params.id;
+    var data = req.body;
+    Group.where({id: id}).fetch().then(function(group) {
+      group.save({
+        group_name: data.group_name || group.get('group_name')
+      });
+    });
+  },
+  // http://localhost:3000/db/groups/group/:id
+  deleteGroup: function(req, res) {
+    var id = req.params.id;
+    new Group({id: id}).destroy().then(function() {
+      res.send(201, 'deleted!');
+    });
+  },
 
 
 
