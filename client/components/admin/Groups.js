@@ -1,7 +1,6 @@
 import React from 'react'
 import {Input, ButtonInput, ListGroup, ListGroupItem} from 'react-bootstrap'
 import RestHandler from '../../util/RestHandler'
-import request from 'superagent';
 
 class Groups extends React.Component {
   constructor(props) {
@@ -28,7 +27,6 @@ class Groups extends React.Component {
   }
 
   handleSubmit(event) {
-    var self = this
     event.preventDefault();
     var group = this.refs.group.getValue();
     var groupInfo = {
