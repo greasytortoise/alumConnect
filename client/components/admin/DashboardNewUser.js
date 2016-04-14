@@ -7,13 +7,7 @@ class DashboardNewUser extends React.Component {
     super (props);
     this.state = {
       groups: [],
-      group: {},
-      user: {
-        name: '',
-        email: '',
-        password: '',
-        group: {}
-      }
+      group: {}
     };
   }
 
