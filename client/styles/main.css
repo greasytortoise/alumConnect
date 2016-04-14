@@ -1,6 +1,9 @@
 body {
   background: #eee;
 }
+.navbar-default {
+  background-color: #fff;
+}
 #main {
     margin-top: 70px;
 }
