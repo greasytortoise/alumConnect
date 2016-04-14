@@ -55,6 +55,14 @@ class Users extends React.Component {
     this.setState({'selectedGroup': key});
     this.getUsers(key.id);
   }
+  handleFilterUsersInput() {
+    var filterText = this.refs.searchusers.refs.input.value.toLowerCase();
+    var filteredUsers = this.state.users.filter(function(name) {
+      return name.username.toLowerCase().includes(filterText)
+    });
+    console.log(filteredUsers);
+    this.setState({users: filteredUsers})
+  }
 
   renderGroups(handleGroupSelect) {
     return this.state.groups.map (function(group) {
@@ -81,8 +89,8 @@ class Users extends React.Component {
             <Input
               wrapperClassName='input-with-dropdown'
               type='text'
-              ref='input'
-              onChange={this.handleChange}
+              ref='searchusers'
+              onChange={this.handleFilterUsersInput.bind(this)}
               placeholder="Search users"
               addonBefore = {innerDropdown} />
           </Col>
