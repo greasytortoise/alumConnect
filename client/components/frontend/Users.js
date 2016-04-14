@@ -24,7 +24,6 @@ class Users extends React.Component {
   }
 
   usersList() {
-    var userCount = this.state.users.length;
     return this.state.users.map(function(user, index) {
       var {username, id} = user
       return(

@@ -10,6 +10,7 @@ import Login from './components/Login'
 import Dashboard from './components/admin/Dashboard'
 import DashboardHome from './components/admin/DashboardHome'
 import DashboardUsers from './components/admin/DashboardUsers'
+import DashboardNewUser from './components/admin/DashboardNewUser'
 
 render((
   <Router history={browserHistory}>
@@ -21,9 +22,11 @@ render((
       <IndexRoute component={Users}/>
       <Route path="/users/:user" component={Profile}/>
     </Route>
-    <route path="/dashboard" component={Dashboard} onEnter={requireAdmin}>
-      <IndexRoute component={DashboardHome} />
-      <Route path="/dashboard/users" component={DashboardUsers} onEnter={requireAdmin}/>
+
+    <route path="/dashboard" component={Dashboard}>
+      <IndexRoute component={DashboardHome}/>
+      <Route path="/dashboard/users" component={DashboardUsers}/>
+      <Route path="/dashboard/newuser" component={DashboardNewUser}/>
     </route>
   </Router>
 ), document.getElementById('app'))
