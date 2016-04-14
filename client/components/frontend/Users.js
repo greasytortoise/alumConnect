@@ -10,16 +10,25 @@ class Users extends React.Component {
     super(props);
     this.state = {
       users: [],
-      groups: []
+      groups: [],
+      selectedGroup: {}
     }
   }
 
   componentDidMount() {
-    RestHandler.Get('/db/users', (err, res) => {
-      this.setState({users: res.body})
-    });
     RestHandler.Get('/db/groups', (err, res) => {
-      this.setState({groups: res.body})
+      var groups = res.body.reverse()
+      var initialGroup = res.body[0]
+      this.setState({groups: groups})
+      this.setState({selectedGroup: initialGroup})
+      this.getUsers(initialGroup.id);
+    });
+  }
+
+  getUsers(groupId) {
+    var getUrl = groupId ? '/db/users/group/' + groupId : '/db/users'
+    RestHandler.Get(getUrl, (err, res) => {
+      this.setState({users: res.body})
     });
   }
 
@@ -42,24 +51,33 @@ class Users extends React.Component {
   cohortList() {
   }
 
-  groupSelect(evt, key) {
-    debugger;
-    console.log(key);
+  handleGroupSelect(evt, key) {
+    this.setState({'selectedGroup': key});
+    this.getUsers(key.id);
+  }
+  handleFilterUsersInput() {
+    var filterText = this.refs.searchusers.refs.input.value.toLowerCase();
+    var filteredUsers = this.state.users.filter(function(name) {
+      return name.username.toLowerCase().includes(filterText)
+    });
+    console.log(filteredUsers);
+    this.setState({users: filteredUsers})
   }
 
-  renderGroups(groupSelect) {
+  renderGroups(handleGroupSelect) {
     return this.state.groups.map (function(group) {
       var {id, group_name} = group;
       return(
-        <MenuItem key={id} eventKey={id} onSelect={groupSelect}>{group_name}</MenuItem>
+        <MenuItem key={id} eventKey={group} onSelect={handleGroupSelect}>{group_name}</MenuItem>
       );
     });
   }
 
   render() {
+    var groupName = this.state.selectedGroup.group_name;
     const innerDropdown = (
-      <DropdownButton bsStyle='default' title='Cohort40'>
-        {this.renderGroups(this.groupSelect)}
+      <DropdownButton bsStyle='default' title={groupName}>
+        {this.renderGroups(this.handleGroupSelect.bind(this))}
       </DropdownButton>
     );
 
@@ -71,11 +89,10 @@ class Users extends React.Component {
             <Input
               wrapperClassName='input-with-dropdown'
               type='text'
-              ref='input'
-              onChange={this.handleChange}
+              ref='searchusers'
+              onChange={this.handleFilterUsersInput.bind(this)}
               placeholder="Search users"
-              addonBefore = {innerDropdown}
-              />
+              addonBefore = {innerDropdown} />
           </Col>
         </Row>
         <Row>
