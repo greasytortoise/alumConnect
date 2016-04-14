@@ -5,8 +5,8 @@ var User = db.Model.extend({
   groups: function() {
     return this.belongsTo('Group');
   },
-  networkValues: function() {
-    return this.hasMany('NetworkValue');
+  userSites: function() {
+    return this.hasMany('UserSite');
   },
   bios: function() {
     return this.hasMany('Bio');

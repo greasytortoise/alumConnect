@@ -33,22 +33,22 @@ create table Users (
   foreign key(Group_id) references Groups(id)
 );
 
-create table Networks (
+create table Sites (
   id int not null auto_increment,
-  network_name varchar(255),
+  site_name varchar(255),
   base_url varchar(255),
   active int,
   primary key(id)
 );
 
-create table Network_Values (
+create table User_Sites (
   id int not null auto_increment,
   rest_url varchar(255),
   User_id int not null,
-  Network_id int not null,
+  Site_id int not null,
   primary key(id),
   foreign key(User_id) references Users(id),
-  foreign key(Network_id) references Networks(id)
+  foreign key(Site_id) references Sites(id)
 );
 
 create table Bio_Fields (
@@ -84,16 +84,16 @@ values
   ('Admin', 'admin', 'admin@admin.com', 'thing', 'ndas2q', 0, 1, 1),
   ('someGuy', 'eeeeee', 'e@mail.com', 'somelinkE', 'fdasdf', 0, 0, 2);
 
-insert into Networks
-  (network_name, base_url, active)
+insert into Sites
+  (site_name, base_url, active)
 values
   ('facebook', 'https://www.facebook.com/', 1),
   ('twitter', 'https://www.twitter.com/', 1),
   ('linkedin','https://www.linkedin.com/in/', 1),
   ('github', 'https://www.github.com/', 1);
 
-insert into Network_Values
-  (rest_url, User_id, Network_id)
+insert into User_Sites
+  (rest_url, User_id, Site_id)
 values
   ('mikejonas', 1, 4),
   ('mbresnan1701', 2, 4),

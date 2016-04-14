@@ -2,10 +2,10 @@ var Group = require('../models/group');
 var Groups = require('../collections/groups');
 var User = require('../models/user');
 var Users = require('../collections/users');
-var Network = require('../models/network');
-var Networks = require('../collections/networks');
-var NetworkValue = require('../models/networkValue');
-var NetworkValues = require('../collections/networkValues');
+var Site = require('../models/site');
+var Sites = require('../collections/sites');
+var UserSite = require('../models/userSite');
+var UserSites = require('../collections/userSites');
 var Bio = require('../models/bio');
 var Bios = require('../collections/bios');
 var BioField = require('../models/bioField');
@@ -15,16 +15,12 @@ var util = require('./utility.js');
 
 module.exports = {
   // http://localhost:3000/db/groups/
-  // sends id and group_name
-  // { id: 1, group_name: "HR40" }
   fetchGroups: function(req, res) {
     Groups.fetch().then(function(groups) {
       res.json(groups);
     });
   },
-  // http://localhost:3000/db/groups/:id
-  // sends id, group_name, and array of users
-  // eg) { id: 1, group_name: "HR40", users: [...] }
+  // http://localhost:3000/db/groups/group/:id
   fetchGroupId: function(req, res) {
     var id = req.params.id;
     Group.where({id: id}).fetch({withRelated: ['users']}).then(function(group) {
@@ -45,60 +41,67 @@ module.exports = {
       });
     });
   },
+  createGroup: function(req, res) {},
+  modifyGroup: function(req, res) {},
+  deleteGroup: function(req, res) {},
 
-  postGroup: function(req, res) {
-    //todo
-  },
 
-  // ignore for now!
+
+
+  // http://localhost:3000/db/users
   fetchUsers: function(req, res) {
     Users.fetch({withRelated: ['groups']}).then(function(users) {
-      var retArray = [];
-      users.forEach(function(user) {
+      res.json(users.map(function(user) {
         var group = user.related('groups');
-        retArray.push({
+        return {
           id: user.id,
           username: user.attributes.username,
+          password: user.attributes.password,
           url: user.attributes.url_hash,
           email: user.attributes.email,
-          group: user.related('groups').attributes.group_name
-        });
-      });
-      res.json(retArray);
+          group: group.attributes.group_name
+        };
+      }));
     });
   },
-
-  // http://localhost:3000/db/users/:id
-  // sends a join table on pretty much every table
-  /*
-    {
-      user: {id: 4, username: 'drake', url: ..., email: ...},
-      group: {group: "HR40"},
-      bio: {...},
-      networks: {base_url: ..., rest_url: ...}
-    }, 
-    ...
-  */
+  // http://localhost:3000/db/users/group/:id
+  fetchUsersByGroup: function(req, res) {
+    var groupId = req.params.id;
+    Users.query('where', 'Group_id', '=', groupId).fetch().then(function(users) {
+      res.json(users.map(function(user) {
+        return {
+          id: user.id,
+          username: user.attributes.username,
+          password: user.attributes.password,
+          url: user.attributes.url_hash,
+          email: user.attributes.email
+        };
+      }));
+    });
+  },
+  // http://localhost:3000/db/users/user/:id
   fetchUserId: function(req, res) {
     var id = req.params.id;
-    User.where({id: id}).fetch({withRelated: ['groups', 'bios', 'networkValues']}).then(function(user) {
+    User.where({id: id}).fetch({withRelated: ['groups', 'bios', 'userSites']}).then(function(user) {
       if (!user) { 
         return res.send(404, 'user does not exist!'); 
       }
       var group = user.related('groups');
-      user.related('networkValues').fetch({withRelated: ['networks']}).then(function(networkValues) {
-        var networks = networkValues.map(function(networkValue) {
-          var network = networkValue.related('networks');
+      user.related('userSites').fetch({withRelated: ['sites']}).then(function(userSites) {
+        var sites = userSites.map(function(userSite) {
+          var site = userSite.related('sites');
           return {
-            name: network.attributes.network_name,
-            url: network.attributes.base_url,
-            value: networkValue.attributes.rest_url
+            id: site.id,
+            name: site.attributes.site_name,
+            url: site.attributes.base_url,
+            value: userSite.attributes.rest_url
           };
         });
         user.related('bios').fetch({withRelated: ['bioFields']}).then(function(bios) {
           bios = bios.map(function(bio) {
           var bioField = bio.related('bioFields');
             return {
+              id: bioField.id,
               title: bioField.attributes.field,
               value: bio.attributes.bio
             };
@@ -113,87 +116,45 @@ module.exports = {
               group: group.attributes.group_name,
               image: user.attributes.image
             },
-            networks: networks,
+            sites: sites,
             userInfo: bios
           });
         });
       });
     });
   },
+  createUser: function(req, res) {},
+  modifyUser: function(req, res) {},
+  deleteUser: function(req, res) {},
 
-  postUser: function(req, res) {
-    //todo
-  },
 
-  // http://localhost:3000/db/networks/
-  // sends id and url
-  fetchNetworks: function(req, res) {
-    Networks.fetch().then(function(networks) {
-      res.json(networks);
+
+
+  // http://localhost:3000/db/sites
+  fetchSites: function(req, res) {
+    Sites.fetch().then(function(sites) {
+      res.json(sites);
     });
   },
+  createSite: function(req, res) {},
+  modifySite: function(req, res) {},
+  deleteSite: function(req, res) {},
 
-  // http://localhost:3000/db/networks/1
-  // sends id and url
-  // may expand upon in the future
-  fetchNetworkId: function(req, res) {
-    var id = req.params.id;
-    Network.where({id: id}).fetch().then(function(network) {
-      if (!network) { 
-        return res.send(404, 'Network does not exist!'); 
-      }
-      res.json({
-        id: network.id,
-        url: network.attributes.base_url, 
-        name: network.attributes.network_name,
-        active: network.attributes.active
-      });
+
+
+
+  // http://localhost:3000/db/fields
+  fetchFields: function(req, res) {
+    UserSites.fetch().then(function(userSites) {
+      res.json(userSites);
     });
   },
+  createField: function(req, res) {},
+  modifyField: function(req, res) {},
+  deleteField: function(req, res) {},
 
-  postNetwork: function(req, res) {
-    //todo
-  },
 
-  // http://localhost:3000/db/bios
-  // sends bio of all users
-  fetchBios: function(req, res) {
-    Bios.fetch({withRelated: ['bioFields']}).then(function(bios) {
-      res.json(bios);
-    });
-  },
 
-  // http://localhost:3000/db/bios/1
-  // sends bio of id of user sent in
-  fetchBioId: function(req, res) {
-    var id = req.params.id;
-    Bio.where({User_id: id}).fetchAll({withRelated: ['bioFields']}).then(function(bios) {
-      res.json(bios.map(function(bio) {
-        var bioField = bio.related('bioFields');
-        return {
-          title: bioField.attributes.field,
-          value: bio.attributes.bio
-        };
-      }));
-
-    });
-  },
-
-  postBio: function(req, res) {
-    //todo
-    Bio.create({
-      name: 'robot',
-      before_hr: 'sleep all day',
-      location: 'planet earth',
-      interest: 'sleep',
-      experience: 'sleep a lot',
-      fun_fact: 'I like to sleep',
-      user_id: 5
-    })
-    .then(function(bio) {
-      res.send(201);
-    });
-  },
 
   checkLogin: function(req, res) {
 
