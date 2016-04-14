@@ -3,55 +3,55 @@ import {Input, ButtonInput, ListGroup, ListGroupItem} from 'react-bootstrap'
 import RestHandler from '../../util/RestHandler'
 import request from 'superagent';
 
-class Groups extends React.Component {
+class Sites extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      groups: [],
-      group_name: ''
+      sites: []
+      // group_name: ''
     }
   }
 
   componentDidMount() {
-    RestHandler.Get('/db/groups', (err, res) => {
-      this.setState({groups: res.body})
+    RestHandler.Get('/db/sites', (err, res) => {
+      this.setState({sites: res.body})
     });
   }
 
-  renderGroups() {
-    return this.state.groups.map(function(group) {
-      var {id, group_name} = group;
+  renderSites() {
+    return this.state.sites.map(function(site) {
+      var {id, site_name} = site;
       return (
-        <ListGroupItem key={id}>{group_name}</ListGroupItem>
+        <ListGroupItem key={id}>{site_name}</ListGroupItem>
       );
     });
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    var group = this.refs.group.refs.input.value;
-    request('POST', '/db/groups')
-      .send({group_name: group})
+    var site = this.refs.site.refs.input.value;
+    request('POST', '/db/sites')
+      .send({site_name: site})
       .end(function(err, res){
         if (err) {
           console.error(err);
         } //rerender all groups on success
-        this.setState({
-          groups: res.body
-        });
+        // this.setState({
+        //   groups: res.body
+        // });
       });
   }
 
   render() {
     return (
       <div>
-        <h4>Groups</h4>
+        <h4>Sites</h4>
         <ListGroup>
-          {this.renderGroups()}
+          {this.renderSites()}
         </ListGroup>
         <form onSubmit={this.handleSubmit.bind(this)}>
-          <Input type="text" label="Add Group" 
-            placeholder="Enter group name" ref="group" />
+          <Input type="text" label="Add Site" 
+            placeholder="Enter site name" ref="site" />
 
           <ButtonInput type="submit" value="Submit"/>
         </form>
@@ -60,4 +60,4 @@ class Groups extends React.Component {
   }
 }
 
-module.exports = Groups;
+module.exports = Sites;

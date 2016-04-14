@@ -12,6 +12,9 @@ import DashboardHome from './components/admin/DashboardHome'
 import DashboardUsers from './components/admin/DashboardUsers'
 import DashboardNewUser from './components/admin/DashboardNewUser'
 import Groups from './components/admin/Groups'
+import Sites from './components/admin/Sites'
+import ProfileFields from './components/admin/ProfileFields'
+
 
 render((
   <Router history={browserHistory}>
@@ -29,6 +32,8 @@ render((
       <Route path="/dashboard/users" component={DashboardUsers}/>
       <Route path="/dashboard/newuser" component={DashboardNewUser}/>
       <Route path="/dashboard/groups" component={Groups}/>
+      <Route path="/dashboard/sites" component={Sites}/>
+      <Route path="/dashboard/profile-fields" component={ProfileFields}/>
     </route>
   </Router>
 ), document.getElementById('app'))
