@@ -57,7 +57,7 @@ module.exports = {
       group.save({
         group_name: data.group_name || group.get('group_name')
       }).then(function() {
-        res.send('saved');
+        res.send('modified!');
       });
     });
   },
@@ -81,9 +81,9 @@ module.exports = {
           id: user.id,
           username: user.get('username'),
           password: user.get('password'),
-          url: user.attributes.url_hash,
-          email: user.attributes.email,
-          group: group.attributes.group_name
+          url: user.get('url_hash'),
+          email: user.get('email'),
+          group: group.get('group_name')
         };
       }));
     });
@@ -95,10 +95,10 @@ module.exports = {
       res.json(users.map(function(user) {
         return {
           id: user.id,
-          username: user.attributes.username,
-          password: user.attributes.password,
-          url: user.attributes.url_hash,
-          email: user.attributes.email
+          username: user.get('username'),
+          password: user.get('password'),
+          url: user.get('url_hash'),
+          email: user.get('email')
         };
       }));
     });
