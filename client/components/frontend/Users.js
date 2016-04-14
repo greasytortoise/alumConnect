@@ -16,13 +16,19 @@ class Users extends React.Component {
   }
 
   componentDidMount() {
-    RestHandler.Get('/db/users', (err, res) => {
-      this.setState({users: res.body})
-    });
     RestHandler.Get('/db/groups', (err, res) => {
-      this.setState({groups: res.body})
-      this.setState({selectedGroup: res.body[res.body.length - 1]})
+      var groups = res.body.reverse()
+      var initialGroup = res.body[0]
+      this.setState({groups: groups})
+      this.setState({selectedGroup: initialGroup})
+      this.getUsers(initialGroup.id);
+    });
+  }
 
+  getUsers(groupId) {
+    var getUrl = groupId ? '/db/users/group/' + groupId : '/db/users'
+    RestHandler.Get(getUrl, (err, res) => {
+      this.setState({users: res.body})
     });
   }
 
@@ -47,6 +53,7 @@ class Users extends React.Component {
 
   handleGroupSelect(evt, key) {
     this.setState({'selectedGroup': key});
+    this.getUsers(key.id);
   }
 
   renderGroups(handleGroupSelect) {
