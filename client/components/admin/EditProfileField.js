@@ -30,7 +30,7 @@ class EditProfileField extends React.Component {
 
       var url = '/db/fields/field/' + this.props.value.id;
       var data = {
-        field: this.state.value
+        title: this.state.value
       };
 
       RestHandler.Post(url, data, (err, res) => {
