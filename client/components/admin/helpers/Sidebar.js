@@ -15,16 +15,16 @@ class Sidebar extends React.Component {
             <Link to="/dashboard/groups">Groups</Link>
           </li>
           <li>
-            <a href="#">Shortcuts</a>
+            <Link to="/dashboard/users">Users</Link>
           </li>
           <li>
-            <a href="#">Overview</a>
+            <Link to="/dashboard/newuser">New User</Link>
           </li>
           <li>
-            <a href="#">Events</a>
+            <Link to="/dashboard/sites">Sites</Link>
           </li>
           <li>
-            <a href="#">About</a>
+            <Link to="/dashboard/profile-fields">ProfileFields</Link>
           </li>
           <li>
             <a href="#">Services</a>

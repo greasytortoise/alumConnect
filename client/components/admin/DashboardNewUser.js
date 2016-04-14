@@ -41,9 +41,9 @@ class DashboardNewUser extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    var name = this.refs.name.refs.input.value;
-    var email = this.refs.email.refs.input.value;
-    var password = this.refs.password.refs.input.value;
+    var name = this.refs.name.getValue();
+    var email = this.refs.email.getValue();
+    var password = this.refs.password.getValue();
     var group = this.state.group.group_name;
 
     var data = {
@@ -56,7 +56,14 @@ class DashboardNewUser extends React.Component {
     RestHandler.Post('db/users', data, (err, res) => {
 
     });
+    this.clearForm();
+  }
 
+  clearForm() {
+    const fields = ['name', 'email', 'password'];
+    fields.map(field => {
+      this.refs[field].refs['input'].value = '';
+    });
   }
 
   render() {

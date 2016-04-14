@@ -28,18 +28,26 @@ class Groups extends React.Component {
   }
 
   handleSubmit(event) {
+    var self = this
     event.preventDefault();
-    var group = this.refs.group.refs.input.value;
-    request('POST', '/db/groups')
-      .send({group_name: group})
-      .end(function(err, res){
-        if (err) {
-          console.error(err);
-        } //rerender all groups on success
-        // this.setState({
-        //   groups: res.body
-        // });
-      });
+    var group = this.refs.group.getValue();
+    var groupInfo = {
+      group_name: group
+    };
+
+    RestHandler.Post('/db/groups', groupInfo, (err, res) => {
+      if (err) {return err;}
+      this.setState({groups: this.state.groups.concat(res.body)})
+    });
+
+    this.clearForm();
+  }
+
+  clearForm() {
+    const fields = ['group'];
+    fields.map(field => {
+      this.refs[field].refs['input'].value = '';
+    });
   }
 
   render() {
