@@ -23,5 +23,6 @@ var Post = function (url, data, callback) {
 
 module.exports = {
   Get: Get,
-  Post: Post
+  Post: Post,
+  getGroups: getGroups
 };

@@ -7,7 +7,13 @@ class DashboardNewUser extends React.Component {
     super (props);
     this.state = {
       groups: [],
-      group: {}
+      group: {},
+      user: {
+        name: '',
+        email: '',
+        password: '',
+        group: {}
+      }
     };
   }
 
@@ -25,27 +31,50 @@ class DashboardNewUser extends React.Component {
     return this.state.groups.map (function(group) {
       var {id, group_name} = group;
       return (
-        <MenuItem key={id} eventKey={id} onSelect={groupSelect}>{group_name}</MenuItem>
+        <MenuItem key={id} eventKey={group} onSelect={groupSelect}>{group_name}</MenuItem>
       );
     });
   }
 
-  groupSelect(evt) {
-    console.log(evt);
+  groupSelect(evt, key) {
+    console.log(key); 
+    this.setState({
+      user: {
+        group: key
+      }
+    });  
+    console.log('group', this.state.group);
+  }
+
+  handleFormChange(evt, key) {
+    // console.log(this.refs.name.refs.input.value);
+    this.setState({
+      user: {
+        name: this.refs.name.refs.input.value,
+        email: this.refs.email.refs.input.value,
+        password: this.refs.password.refs.input.value,
+        group: this.state.group
+      }
+    });
+    console.log('user', this.state.user);
   }
 
   render() {
     return (
       <form>
-        <Input type="text" label="Name" placeholder="Enter name" />
-        <Input type="email" label="Email Address" placeholder="Enter email" />
-        <Input type="password" label="Password" placeholder="Enter new password"/> 
+        <Input type="text" label="Name" placeholder="Enter name"
+          ref="name"
+          onChange={this.handleFormChange.bind(this)} />
+        <Input type="email" label="Email Address" placeholder="Enter email" 
+          ref="email"
+          onChange={this.handleFormChange.bind(this)}/>
+        <Input type="password" label="Password" placeholder="Enter new password"
+          ref="password"
+          onChange={this.handleFormChange.bind(this)}/> 
 
         <label>Group  </label>
         <DropdownButton title="Select Group">
           {this.renderGroups(this.groupSelect)}
-          <MenuItem divider />
-          <MenuItem eventKey="new group" onSelect={this.groupSelect}>Add New Group</MenuItem>
         </DropdownButton>
    
         <ButtonInput type="submit" value="Submit" />

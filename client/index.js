@@ -11,6 +11,7 @@ import Dashboard from './components/admin/Dashboard'
 import DashboardHome from './components/admin/DashboardHome'
 import DashboardUsers from './components/admin/DashboardUsers'
 import DashboardNewUser from './components/admin/DashboardNewUser'
+import AddGroup from './components/admin/AddGroup'
 
 render((
   <Router history={browserHistory}>
@@ -27,6 +28,7 @@ render((
       <IndexRoute component={DashboardHome}/>
       <Route path="/dashboard/users" component={DashboardUsers}/>
       <Route path="/dashboard/newuser" component={DashboardNewUser}/>
+      <Route path="/dashboard/addgroup" component={AddGroup}/>
     </route>
   </Router>
 ), document.getElementById('app'))
