@@ -21,36 +21,31 @@ module.exports = {
     });
   },
   // http://localhost:3000/db/groups/group/:id
-  fetchGroupId: function(req, res) {
+  fetchGroupInfo: function(req, res) {
     var id = req.params.id;
     Group.where({id: id}).fetch({withRelated: ['users']}).then(function(group) {
-      if (!group) {
-        return res.send(200, 'group has no users!')
-      }
-      var users = group.related('users').map(function(user) {
-        return {
-          id: user.id,
-          username: user.attributes.username,
-          image: user.attributes.image
-        };
-      });
+      if (!group) { return res.send(200, 'group has no users!'); }
+      var users = group.related('users');
       res.json({
         group_id: group.id,
-        group_name: group.attributes.group_name,
-        users: users
+        group_name: group.get('group_name'),
+        users: users.map(function(user) {
+          return {
+            id: user.id,
+            username: user.get('username'),
+            image: user.get('image')
+          };
+        })
       });
     });
   },
   // http://localhost:3000/db/groups
-  // (still testing)
   createGroup: function(req, res) {
     var data = req.body;
-    new Group({group_name: data.group_name}).then(function(exist) {
-      if (exist) {
-        return res.send(400, 'Group already exists');
-      }
+    Group.where({group_name: data.group_name}).fetch().then(function(groupExist) {
+      if (groupExist) { return res.send(400, 'Group already exists!'); }
       Groups.create({group_name: data.group_name}).then(function(newGroup) {
-        res.json(newGroup);
+        res.json(201, newGroup);
       });
     });
   },
@@ -58,9 +53,12 @@ module.exports = {
   modifyGroup: function(req, res) {
     var id = req.params.id;
     var data = req.body;
-    Group.where({id: id}).fetch().then(function(group) {
-      group.save({
-        group_name: data.group_name || group.get('group_name')
+    Group.where({group_name: data.group_name}).fetch().then(function(groupExist) {
+      if (groupExist) { return res.send(400, 'Group already exists!'); }
+      Group.where({id: id}).fetch().then(function(group) {
+        group.save({group_name: data.group_name}).then(function() {
+          res.json(201, group);
+        });
       });
     });
   },
@@ -82,11 +80,11 @@ module.exports = {
         var group = user.related('groups');
         return {
           id: user.id,
-          username: user.attributes.username,
-          password: user.attributes.password,
-          url: user.attributes.url_hash,
-          email: user.attributes.email,
-          group: group.attributes.group_name
+          username: user.get('username'),
+          password: user.get('password'),
+          url: user.get('url_hash'),
+          email: user.get('email'),
+          group: group.get('group_name')
         };
       }));
     });
@@ -98,16 +96,16 @@ module.exports = {
       res.json(users.map(function(user) {
         return {
           id: user.id,
-          username: user.attributes.username,
-          password: user.attributes.password,
-          url: user.attributes.url_hash,
-          email: user.attributes.email
+          username: user.get('username'),
+          password: user.get('password'),
+          url: user.get('url_hash'),
+          email: user.get('email')
         };
       }));
     });
   },
   // http://localhost:3000/db/users/user/:id
-  fetchUserId: function(req, res) {
+  fetchUserInfo: function(req, res) {
     var id = req.params.id;
     User.where({id: id}).fetch({withRelated: ['groups', 'bios', 'userSites']}).then(function(user) {
       if (!user) { 
@@ -119,9 +117,9 @@ module.exports = {
           var site = userSite.related('sites');
           return {
             id: site.id,
-            name: site.attributes.site_name,
-            url: site.attributes.base_url,
-            value: userSite.attributes.rest_url
+            name: site.get('site_name'),
+            url: site.get('base_url'),
+            value: userSite.get('rest_url')
           };
         });
         user.related('bios').fetch({withRelated: ['bioFields']}).then(function(bios) {
@@ -129,19 +127,19 @@ module.exports = {
           var bioField = bio.related('bioFields');
             return {
               id: bioField.id,
-              title: bioField.attributes.field,
-              value: bio.attributes.bio
+              title: bioField.get('field'),
+              value: bio.get('bio')
             };
           });
           res.json({
             user: {
               id: user.id,
-              username: user.attributes.username,
-              password: user.attributes.password,
-              url: user.attributes.url_hash,
-              email: user.attributes.email,
-              group: group.attributes.group_name,
-              image: user.attributes.image
+              username: user.get('username'),
+              password: user.get('password'),
+              url: user.get('url_hash'),
+              email: user.get('email'),
+              group: group.get('group_name'),
+              image: user.get('image')
             },
             sites: sites,
             userInfo: bios
@@ -163,7 +161,15 @@ module.exports = {
       res.json(sites);
     });
   },
-  createSite: function(req, res) {},
+  // http://localhost:3000/db/sites
+  createSite: function(req, res) {
+    var data = req.body;
+    new Site({
+      site_name: data.site_name,
+      base_url: data.base_url,
+      active: 1
+    })
+  },
   modifySite: function(req, res) {},
   deleteSite: function(req, res) {},
 
