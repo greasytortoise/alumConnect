@@ -213,7 +213,12 @@ module.exports = {
   // http://localhost:3000/db/fields
   fetchFields: function(req, res) {
     BioFields.fetch().then(function(userSites) {
-      res.json(200, userSites);
+      res.json(200, userSites.map(function(userSite) {
+        return {
+          id: userSite.id,
+          title: userSite.get('field')
+        }
+      }));
     });
   },
   // http://localhost:3000/db/fields
