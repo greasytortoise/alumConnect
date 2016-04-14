@@ -12,7 +12,7 @@ class Sidebar extends React.Component {
             </a>
           </li>
           <li>
-            <Link to="/dashboard/addgroup">Add New Group</Link>
+            <Link to="/dashboard/groups">Groups</Link>
           </li>
           <li>
             <a href="#">Shortcuts</a>

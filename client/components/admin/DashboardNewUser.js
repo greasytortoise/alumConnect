@@ -39,46 +39,49 @@ class DashboardNewUser extends React.Component {
   groupSelect(evt, key) {
     console.log(key); 
     this.setState({
-      user: {
-        group: key
-      }
+      group: key
     });  
     console.log('group', this.state.group);
   }
 
-  handleFormChange(evt, key) {
-    // console.log(this.refs.name.refs.input.value);
-    this.setState({
-      user: {
-        name: this.refs.name.refs.input.value,
-        email: this.refs.email.refs.input.value,
-        password: this.refs.password.refs.input.value,
-        group: this.state.group
-      }
+  handleSubmit(event) {
+    event.preventDefault();
+
+    var name = this.refs.name.refs.input.value;
+    var email = this.refs.email.refs.input.value;
+    var password = this.refs.password.refs.input.value;
+    var group = this.state.group.group_name;
+
+    var data = {
+      username: name,
+      password: password,
+      email: email,
+      group: group
+    };
+
+    RestHandler.Post('db/users', data, (err, res) => {
+
     });
-    console.log('user', this.state.user);
+
   }
 
   render() {
+    var groupName = this.state.group.group_name || 'Select Group';
     return (
-      <form>
+      <form onSubmit={this.handleSubmit.bind(this)}>
         <Input type="text" label="Name" placeholder="Enter name"
-          ref="name"
-          onChange={this.handleFormChange.bind(this)} />
+          ref="name" />
         <Input type="email" label="Email Address" placeholder="Enter email" 
-          ref="email"
-          onChange={this.handleFormChange.bind(this)}/>
+          ref="email" />
         <Input type="password" label="Password" placeholder="Enter new password"
-          ref="password"
-          onChange={this.handleFormChange.bind(this)}/> 
+          ref="password" /> 
 
-        <label>Group  </label>
-        <DropdownButton title="Select Group">
-          {this.renderGroups(this.groupSelect)}
+        <label>Group</label>
+        <DropdownButton title={groupName}>
+          {this.renderGroups(this.groupSelect.bind(this))}
         </DropdownButton>
    
         <ButtonInput type="submit" value="Submit" />
-
       </form>
     );
   }
