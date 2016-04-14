@@ -42,13 +42,10 @@ module.exports = {
     });
   },
   // http://localhost:3000/db/groups
-  // (still testing)
   createGroup: function(req, res) {
     var data = req.body;
-    new Group({group_name: data.group_name}).then(function(exist) {
-      if (exist) {
-        return res.send(400, 'Group already exists');
-      }
+    new Group({group_name: data.group_name}).fetch().then(function(exist) {
+      if (exist) { return res.send(400, 'Group already exists'); }
       Groups.create({group_name: data.group_name}).then(function(newGroup) {
         res.json(newGroup);
       });
@@ -61,6 +58,8 @@ module.exports = {
     Group.where({id: id}).fetch().then(function(group) {
       group.save({
         group_name: data.group_name || group.get('group_name')
+      }).then(function() {
+        res.send('saved');
       });
     });
   },
@@ -82,8 +81,8 @@ module.exports = {
         var group = user.related('groups');
         return {
           id: user.id,
-          username: user.attributes.username,
-          password: user.attributes.password,
+          username: user.get('username'),
+          password: user.get('password'),
           url: user.attributes.url_hash,
           email: user.attributes.email,
           group: group.attributes.group_name
