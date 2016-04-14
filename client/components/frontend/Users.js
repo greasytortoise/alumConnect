@@ -47,7 +47,7 @@ class Users extends React.Component {
             <div
               className="user-card">
               <Image
-                src='https://pixabay.com/static/uploads/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+                src='../../assets/matt.jpg'
                 responsive
                 />
               <h4>{username}</h4>

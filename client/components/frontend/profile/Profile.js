@@ -29,7 +29,7 @@ class Profile extends React.Component {
     RestHandler.Get(url, (err, res) => {
       this.setState({
         username: res.body.user.username,
-        image: "../mockups/assets/donaldtrump.png",
+        image: "../../../assets/matt.jpg",
         bioDetails: res.body.userInfo
       });
       console.log(res.body);
