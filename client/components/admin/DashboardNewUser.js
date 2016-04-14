@@ -27,16 +27,16 @@ class DashboardNewUser extends React.Component {
     });
   }
 
-  renderGroups(groupSelect) {
+  renderGroups(handleGroupSelect) {
     return this.state.groups.map (function(group) {
       var {id, group_name} = group;
       return (
-        <MenuItem key={id} eventKey={group} onSelect={groupSelect}>{group_name}</MenuItem>
+        <MenuItem key={id} eventKey={group} onSelect={handleGroupSelect}>{group_name}</MenuItem>
       );
     });
   }
 
-  groupSelect(evt, key) {
+  handleGroupSelect(evt, key) {
     console.log(key); 
     this.setState({
       group: key
@@ -78,7 +78,7 @@ class DashboardNewUser extends React.Component {
 
         <label>Group</label>
         <DropdownButton title={groupName}>
-          {this.renderGroups(this.groupSelect.bind(this))}
+          {this.renderGroups(this.handleGroupSelect.bind(this))}
         </DropdownButton>
    
         <ButtonInput type="submit" value="Submit" />
