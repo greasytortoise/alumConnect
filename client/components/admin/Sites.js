@@ -1,14 +1,12 @@
 import React from 'react'
 import {Input, ButtonInput, ListGroup, ListGroupItem} from 'react-bootstrap'
 import RestHandler from '../../util/RestHandler'
-import request from 'superagent';
 
 class Sites extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       sites: []
-      // group_name: ''
     }
   }
 
@@ -22,7 +20,7 @@ class Sites extends React.Component {
     return this.state.sites.map(function(site) {
       var {id, site_name, base_url} = site;
       return (
-        <ListGroupItem key={id} header="site_name">
+        <ListGroupItem key={id} header={site_name}>
           {base_url}
         </ListGroupItem>
       );
