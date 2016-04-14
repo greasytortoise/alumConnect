@@ -53,7 +53,7 @@ create table User_Sites (
 
 create table Bio_Fields (
   id int not null auto_increment,
-  field varchar(255),
+  title varchar(255),
   primary key(id)
 );
 
@@ -102,7 +102,7 @@ values
   ('yochess', 4, 1);
 
 insert into Bio_Fields
-  (field)
+  (title)
 values
   ('What is your preferred name?'),
   ('What have you been doing before HR?'),

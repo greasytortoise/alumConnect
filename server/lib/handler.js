@@ -213,19 +213,14 @@ module.exports = {
   // http://localhost:3000/db/fields
   fetchFields: function(req, res) {
     BioFields.fetch().then(function(userSites) {
-      res.json(200, userSites.map(function(userSite) {
-        return {
-          id: userSite.id,
-          title: userSite.get('field')
-        }
-      }));
+      res.json(200, userSites);
     });
   },
   // http://localhost:3000/db/fields
   createField: function(req, res) {
     var data = req.body;
     BioFields.create({
-      field: data.field
+      title: data.title
     }).then(function(newBioField) {
       res.json(201, newBioField);
     });
@@ -236,7 +231,7 @@ module.exports = {
     var data = req.body;
     BioField.where({id: id}).fetch().then(function(bioField) {
       bioField.save({
-        field: data.field || bioField.get('field')
+        title: data.title || bioField.get('title')
       }).then(function() {
         res.json(201, bioField);
       });

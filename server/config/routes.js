@@ -1,10 +1,3 @@
-/** I am avoiding the usage of 'withRelated' since 
- *  bookshelf is not behaving the way I anticipate.
- *  If you guys decide to try and take advantage of
- *  this feature of bookshelf, GOOD LUCK!!!! 
-**/
-
-
 var path = require('path')
 var db = require('../dbConfig');
 var util = require('../lib/utility.js');
