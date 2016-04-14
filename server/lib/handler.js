@@ -54,9 +54,13 @@ module.exports = {
     var id = req.params.id;
     var data = req.body;
     Group.where({group_name: data.group_name}).fetch().then(function(groupExist) {
-      if (groupExist) { return res.send(400, 'Group already exists!'); }
+      if (groupExist && (groupExist.id !== parseInt(id))) { 
+        return res.send(400, 'Group already exists!'); 
+      }
       Group.where({id: id}).fetch().then(function(group) {
-        group.save({group_name: data.group_name}).then(function() {
+        group.save({
+          group_name: data.group_name || group.get('group_name')
+        }).then(function() {
           res.json(201, group);
         });
       });
@@ -65,7 +69,7 @@ module.exports = {
   // http://localhost:3000/db/groups/group/:id
   deleteGroup: function(req, res) {
     var id = req.params.id;
-    new Group({id: id}).destroy().then(function() {
+    Group.where({id: id}).destroy().then(function() {
       res.send(201, 'deleted!');
     });
   },
@@ -164,14 +168,43 @@ module.exports = {
   // http://localhost:3000/db/sites
   createSite: function(req, res) {
     var data = req.body;
-    new Site({
-      site_name: data.site_name,
-      base_url: data.base_url,
-      active: 1
-    })
+    Site.where({site_name: data.site_name}).fetch().then(function(siteExist) {
+      if (siteExist) { return res.send(400, 'Site already exists'); }
+      Sites.create({
+        site_name: data.site_name,
+        base_url: data.base_url,
+        active: 1
+      }).then(function(newSite) {
+        res.json(201, newSite);
+      });
+
+    });
   },
-  modifySite: function(req, res) {},
-  deleteSite: function(req, res) {},
+  // http://localhost:3000/db/sites/site/:id
+  modifySite: function(req, res) {
+    var id = req.params.id;
+    var data = req.body;
+    Site.where({site_name: data.site_name}).fetch().then(function(siteExist) {
+      if (siteExist && (siteExist.id !== parseInt(id))) {
+        return res.send(400, 'Site already exists!'); 
+      }
+      Site.where({id: id}).fetch().then(function(site) {
+        site.save({
+          site_name: data.site_name || site.get('site_name'),
+          base_url: data.base_url || site.get('base_url'),
+          active: data.active || site.get('active')
+        }).then(function() {
+          res.json(201, site);
+        });
+      });
+    });    
+  },
+  deleteSite: function(req, res) {
+    var id = req.params.id;
+    Site.where({id: id}).destroy().then(function() {
+      res.send(201, 'deleted!');
+    });
+  },
 
 
 
