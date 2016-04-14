@@ -26,7 +26,7 @@ module.exports = {
     Group.where({id: id}).fetch({withRelated: ['users']}).then(function(group) {
       if (!group) { return res.send(200, 'group has no users!'); }
       var users = group.related('users');
-      res.json({
+      res.json(200, {
         group_id: group.id,
         group_name: group.get('group_name'),
         users: users.map(function(user) {
@@ -80,7 +80,7 @@ module.exports = {
   // http://localhost:3000/db/users
   fetchUsers: function(req, res) {
     Users.fetch({withRelated: ['groups']}).then(function(users) {
-      res.json(users.map(function(user) {
+      res.json(200, users.map(function(user) {
         var group = user.related('groups');
         return {
           id: user.id,
@@ -162,7 +162,7 @@ module.exports = {
   // http://localhost:3000/db/sites
   fetchSites: function(req, res) {
     Sites.fetch().then(function(sites) {
-      res.json(sites);
+      res.json(200, sites);
     });
   },
   // http://localhost:3000/db/sites
@@ -199,6 +199,7 @@ module.exports = {
       });
     });    
   },
+  // http://localhost:3000/db/sites/site/:id
   deleteSite: function(req, res) {
     var id = req.params.id;
     Site.where({id: id}).destroy().then(function() {
@@ -211,13 +212,38 @@ module.exports = {
 
   // http://localhost:3000/db/fields
   fetchFields: function(req, res) {
-    UserSites.fetch().then(function(userSites) {
-      res.json(userSites);
+    BioFields.fetch().then(function(userSites) {
+      res.json(200, userSites);
     });
   },
-  createField: function(req, res) {},
-  modifyField: function(req, res) {},
-  deleteField: function(req, res) {},
+  // http://localhost:3000/db/fields
+  createField: function(req, res) {
+    var data = req.body;
+    BioFields.create({
+      field: data.field
+    }).then(function(newBioField) {
+      res.json(201, newBioField);
+    });
+  },
+  // http://localhost:3000/db/fields/field/:id  
+  modifyField: function(req, res) {
+    var id = req.params.id;
+    var data = req.body;
+    BioField.where({id: id}).fetch().then(function(bioField) {
+      bioField.save({
+        field: data.field || bioField.get('field')
+      }).then(function() {
+        res.json(201, bioField);
+      });
+    });
+  },
+  // http://localhost:3000/db/fields/field/:id 
+  deleteField: function(req, res) {
+    var id = req.params.id;
+    BioField.where({id: id}).destroy().then(function() {
+      res.send(201, 'deleted!');
+    });  
+  },
 
 
 
