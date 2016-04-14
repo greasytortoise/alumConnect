@@ -2,10 +2,10 @@ var Group = require('../models/group');
 var Groups = require('../collections/groups');
 var User = require('../models/user');
 var Users = require('../collections/users');
-var Network = require('../models/network');
-var Networks = require('../collections/networks');
-var NetworkValue = require('../models/networkValue');
-var NetworkValues = require('../collections/networkValues');
+var Site = require('../models/site');
+var Sites = require('../collections/sites');
+var UserSite = require('../models/userSite');
+var UserSites = require('../collections/userSites');
 var Bio = require('../models/bio');
 var Bios = require('../collections/bios');
 var BioField = require('../models/bioField');
@@ -82,19 +82,19 @@ module.exports = {
   // http://localhost:3000/db/users/user/:id
   fetchUserId: function(req, res) {
     var id = req.params.id;
-    User.where({id: id}).fetch({withRelated: ['groups', 'bios', 'networkValues']}).then(function(user) {
+    User.where({id: id}).fetch({withRelated: ['groups', 'bios', 'userSites']}).then(function(user) {
       if (!user) { 
         return res.send(404, 'user does not exist!'); 
       }
       var group = user.related('groups');
-      user.related('networkValues').fetch({withRelated: ['networks']}).then(function(networkValues) {
-        var networks = networkValues.map(function(networkValue) {
-          var network = networkValue.related('networks');
+      user.related('userSites').fetch({withRelated: ['sites']}).then(function(userSites) {
+        var sites = userSites.map(function(userSite) {
+          var site = userSite.related('sites');
           return {
-            id: network.id,
-            name: network.attributes.network_name,
-            url: network.attributes.base_url,
-            value: networkValue.attributes.rest_url
+            id: site.id,
+            name: site.attributes.site_name,
+            url: site.attributes.base_url,
+            value: userSite.attributes.rest_url
           };
         });
         user.related('bios').fetch({withRelated: ['bioFields']}).then(function(bios) {
@@ -116,7 +116,7 @@ module.exports = {
               group: group.attributes.group_name,
               image: user.attributes.image
             },
-            networks: networks,
+            sites: sites,
             userInfo: bios
           });
         });
@@ -132,8 +132,8 @@ module.exports = {
 
   // http://localhost:3000/db/sites
   fetchSites: function(req, res) {
-    Networks.fetch().then(function(networks) {
-      res.json(networks);
+    Sites.fetch().then(function(sites) {
+      res.json(sites);
     });
   },
   createSite: function(req, res) {},
@@ -145,8 +145,8 @@ module.exports = {
 
   // http://localhost:3000/db/fields
   fetchFields: function(req, res) {
-    NetworkValues.fetch().then(function(networkValues) {
-      res.json(networkValues);
+    UserSites.fetch().then(function(userSites) {
+      res.json(userSites);
     });
   },
   createField: function(req, res) {},
