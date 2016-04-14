@@ -11,7 +11,8 @@ class Users extends React.Component {
     this.state = {
       users: [],
       groups: [],
-      selectedGroup: {}
+      selectedGroup: {},
+      searchUsersText: ''
     }
   }
 
@@ -33,7 +34,12 @@ class Users extends React.Component {
   }
 
   usersList() {
-    return this.state.users.map(function(user, index) {
+    var searchUsersText = this.state.searchUsersText
+    var users = this.state.users.filter(function(name) {
+      return name.username.toLowerCase().includes(searchUsersText)
+    });
+
+    return users.map(function(user, index) {
       var {username, id} = user
       return(
         <Col xs={6} sm={4} md={3} lg={3}>
@@ -57,11 +63,8 @@ class Users extends React.Component {
   }
   handleFilterUsersInput() {
     var filterText = this.refs.searchusers.refs.input.value.toLowerCase();
-    var filteredUsers = this.state.users.filter(function(name) {
-      return name.username.toLowerCase().includes(filterText)
-    });
-    console.log(filteredUsers);
-    this.setState({users: filteredUsers})
+    this.setState({searchUsersText: filterText});
+    console.log(filterText);
   }
 
   renderGroups(handleGroupSelect) {
