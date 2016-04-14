@@ -20,11 +20,15 @@ class ProfileFields extends React.Component {
   renderFields() {
     var self = this;
     return this.state.fields.map(function(field) {
-      var {id, field} = field;
+      var {id, title} = field;
       return (
         <EditProfileField value={field} />
       );
     });
+  }
+
+  handleProfileFieldChange(field) {
+    this.setState({fields: this.state.fields.concat(field)})
   }
 
   handleSubmit(event) {
