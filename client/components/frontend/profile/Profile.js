@@ -25,7 +25,7 @@ class Profile extends React.Component {
   }
 
   getUserProfile() {
-    var url = '/db/users/' + this.props.params.user;
+    var url = '/db/users/user/' + this.props.params.user;
     RestHandler.Get(url, (err, res) => {
       this.setState({
         username: res.body.user.username,
