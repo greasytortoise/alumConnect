@@ -42,10 +42,10 @@ module.exports = {
   // http://localhost:3000/db/groups
   createGroup: function(req, res) {
     var data = req.body;
-    new Group({group_name: data.group_name}).fetch().then(function(exist) {
-      if (exist) { return res.send(400, 'Group already exists'); }
+    Group.where({group_name: data.group_name}).fetch().then(function(groupExist) {
+      if (groupExist) { return res.send(400, 'Group already exists!'); }
       Groups.create({group_name: data.group_name}).then(function(newGroup) {
-        res.json(newGroup);
+        res.json(201, newGroup);
       });
     });
   },
@@ -53,11 +53,12 @@ module.exports = {
   modifyGroup: function(req, res) {
     var id = req.params.id;
     var data = req.body;
-    Group.where({id: id}).fetch().then(function(group) {
-      group.save({
-        group_name: data.group_name || group.get('group_name')
-      }).then(function() {
-        res.send('modified!');
+    Group.where({group_name: data.group_name}).fetch().then(function(groupExist) {
+      if (groupExist) { return res.send(400, 'Group already exists!'); }
+      Group.where({id: id}).fetch().then(function(group) {
+        group.save({group_name: data.group_name}).then(function() {
+          res.json(201, group);
+        });
       });
     });
   },
@@ -160,7 +161,15 @@ module.exports = {
       res.json(sites);
     });
   },
-  createSite: function(req, res) {},
+  // http://localhost:3000/db/sites
+  createSite: function(req, res) {
+    var data = req.body;
+    new Site({
+      site_name: data.site_name,
+      base_url: data.base_url,
+      active: 1
+    })
+  },
   modifySite: function(req, res) {},
   deleteSite: function(req, res) {},
 
