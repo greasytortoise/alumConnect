@@ -1,7 +1,7 @@
 var db = require('../dbConfig');
 
 var Network = db.Model.extend({
-  tableName: 'Networks',
+  tableName: 'Sites',
   networkValues: function() {
     return this.hasMany('NetworkValue');
   }

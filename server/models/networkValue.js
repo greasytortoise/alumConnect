@@ -1,7 +1,7 @@
 var db = require('../dbConfig');
 
 var NetworkValue = db.Model.extend({
-  tableName: 'Network_Values',
+  tableName: 'User_Sites',
   users: function() {
     return this.belongsTo('User');
   },

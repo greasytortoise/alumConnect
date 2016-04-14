@@ -79,7 +79,7 @@ module.exports = {
       }));
     });
   },
-  // http://localhost:3000/db/users/:id
+  // http://localhost:3000/db/users/user/:id
   fetchUserId: function(req, res) {
     var id = req.params.id;
     User.where({id: id}).fetch({withRelated: ['groups', 'bios', 'networkValues']}).then(function(user) {
@@ -130,7 +130,7 @@ module.exports = {
 
 
 
-  // http://localhost:3000/db/networks/
+  // http://localhost:3000/db/sites
   fetchSites: function(req, res) {
     Networks.fetch().then(function(networks) {
       res.json(networks);
@@ -143,7 +143,7 @@ module.exports = {
 
 
 
-  // http://localhost:3000/db/sites
+  // http://localhost:3000/db/fields
   fetchFields: function(req, res) {
     NetworkValues.fetch().then(function(networkValues) {
       res.json(networkValues);
