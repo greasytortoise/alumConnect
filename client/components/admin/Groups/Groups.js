@@ -1,14 +1,13 @@
 import React from 'react'
 import {Input, ButtonInput, ListGroup, ListGroupItem} from 'react-bootstrap'
-import RestHandler from '../../util/RestHandler'
-import request from 'superagent';
+import RestHandler from '../../../util/RestHandler'
+import EditGroup from './EditGroup.js'
 
 class Groups extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      groups: [],
-      group_name: ''
+      groups: []
     }
   }
 
@@ -22,13 +21,12 @@ class Groups extends React.Component {
     return this.state.groups.map(function(group) {
       var {id, group_name} = group;
       return (
-        <ListGroupItem key={id}>{group_name}</ListGroupItem>
+        <EditGroup value={group} />
       );
     });
   }
 
   handleSubmit(event) {
-    var self = this
     event.preventDefault();
     var group = this.refs.group.getValue();
     var groupInfo = {
