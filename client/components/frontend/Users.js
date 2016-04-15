@@ -57,8 +57,6 @@ class Users extends React.Component {
       );
     });
   }
-  cohortList() {
-  }
 
   handleGroupSelect(evt, key) {
     this.setState({'selectedGroup': key});
