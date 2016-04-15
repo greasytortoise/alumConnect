@@ -40,14 +40,14 @@ class Users extends React.Component {
     });
 
     return users.map(function(user, index) {
-      var {username, id} = user
+      var {username, id, image} = user
       return(
         <Col xs={6} sm={4} md={3} lg={3} key={id}>
           <Link to={{pathname: `users/${id}`}}>
             <div
               className="user-card">
               <Image
-                src='../../assets/matt.jpg'
+                src={image}
                 responsive
                 />
               <h4>{username}</h4>
@@ -56,8 +56,6 @@ class Users extends React.Component {
         </Col>
       );
     });
-  }
-  cohortList() {
   }
 
   handleGroupSelect(evt, key) {

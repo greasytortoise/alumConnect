@@ -1,11 +1,11 @@
-/** Make sure to create (or re-create) the database 
+/** Make sure to create (or re-create) the database
  *  before running this code. To do this, run:
  *
  *  $ mysql -u root < server/schema
  *
  *  Note: Change password if necessary.
- *  Also at the bottom are dummy variables to 
- *  populate the table. 
+ *  Also at the bottom are dummy variables to
+ *  populate the table.
 **/
 
 drop database if exists alumConnectTest;
@@ -69,20 +69,20 @@ create table Bios (
 
 
 insert into Groups
-  (group_name) 
-values 
+  (group_name)
+values
   ('HR40'),
   ('HR41');
 
-insert into Users 
-  (username, password, email, image, url_hash, public, permission, Group_id) 
+insert into Users
+  (username, password, email, image, url_hash, public, permission, Group_id)
 values
-  ('Jonas', 'aaaaaa', 'j@mail.com', 'somelinkA', 'x2y2z2', 0, 0, 1),
-  ('Matt', 'bbbbbb', 'm@mail.com', 'somelinkB', 'i3j3k3', 0, 0, 1),
-  ('Alamu', 'cccccc', 'a@mail.com', 'somelinkC', 'n3m3o3', 0, 0, 1),
-  ('Drake', 'aaaaaa', 'd@mail.com', 'somelinkD', 'a1b1c1', 0, 0, 1),
-  ('Admin', 'admin', 'admin@admin.com', 'thing', 'ndas2q', 0, 1, 1),
-  ('someGuy', 'eeeeee', 'e@mail.com', 'somelinkE', 'fdasdf', 0, 0, 2);
+  ('Jonas', 'aaaaaa', 'j@mail.com', '/assets/jonas.jpg', 'x2y2z2', 0, 0, 1),
+  ('Matt', 'bbbbbb', 'm@mail.com', '/assets/matt.jpg', 'i3j3k3', 0, 0, 1),
+  ('Alamu', 'cccccc', 'a@mail.com', '/assets/alamu.jpg', 'n3m3o3', 0, 0, 1),
+  ('Drake', 'aaaaaa', 'd@mail.com', '/assets/drake.jpg', 'a1b1c1', 0, 0, 1),
+  ('Admin', 'admin', 'admin@admin.com', '/assets/trump.jpg', 'ndas2q', 0, 1, 1),
+  ('someGuy', 'eeeeee', 'e@mail.com', '/assets/someguy.jpg', 'fdasdf', 0, 0, 2);
 
 insert into Sites
   (site_name, base_url, active)
@@ -143,7 +143,7 @@ values
 -- (name, before_hr, location, interest, experience, fun_fact, User_id)
 -- values
 -- (
---   "matt Bresnan", 
+--   "matt Bresnan",
 --   "Two years ago I moved from Virginia to LA to start working at Accenture as a security technology consultant. I had planned to take a leave of absence for a few months to study python until one of my coworkers told me about HR. This was about 6 months ago. Ever since then I've been studying, and eventually took the leave so I could focus on getting admitted into the program. I quickly noticed that 'full time' studying actually just means a little bit of studying, and a lot of Netflix.",
 --   "I relocated back home to VA temporarily, but I've been in LA for the past two years.",
 --   "I've always wanted to get into programming, but never fully committed to learning. This past year I finally decided it was time to pick up a new skill set, because I was getting really bored of technology consulting. Some of my tech interest are cyber security, data mining, and machine learning. After my programming skills are better I also want to learn as much as I can about making hardware.",
