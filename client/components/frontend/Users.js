@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
-import { Row, Col, DropdownButton, MenuItem, Input, Grid, Image, Thumbnail } from 'react-bootstrap';
+import { Row, Col, DropdownButton, MenuItem, Input, Image } from 'react-bootstrap';
 
 import RestHandler from '../../util/RestHandler';
 
@@ -42,7 +42,7 @@ class Users extends React.Component {
     return users.map(function(user, index) {
       var {username, id} = user
       return(
-        <Col xs={6} sm={4} md={3} lg={3}>
+        <Col xs={6} sm={4} md={3} lg={3} key={id}>
           <Link to={{pathname: `users/${id}`}}>
             <div
               className="user-card">
@@ -79,9 +79,9 @@ class Users extends React.Component {
   }
 
   render() {
-    var groupName = this.state.selectedGroup.group_name;
+    var groupName = this.state.selectedGroup.group_name || '';
     const innerDropdown = (
-      <DropdownButton bsStyle='default' title={groupName}>
+      <DropdownButton bsStyle='default' title={groupName} id='dropdown-groups'>
         {this.renderGroups(this.handleGroupSelect.bind(this))}
       </DropdownButton>
     );

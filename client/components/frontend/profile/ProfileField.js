@@ -18,19 +18,18 @@ class Bio extends React.Component {
   }
   renderBioDetails() {
     var editing = this.props.editing;
-    var {title} = this.props.fieldDetails
+    var {title, id} = this.props.fieldDetails
     var value = this.state.value;
-
     if(!editing) {
       return (
-        <div key={title}>
+        <div key={id}>
           <h3>{title}</h3>
           <p>{value}</p>
         </div>
       );
     } else {
       return (
-        <div key={title}>
+        <div key={id}>
           <h3>{title}</h3>
           <Input type="textarea"
             value={value}
@@ -43,7 +42,7 @@ class Bio extends React.Component {
 
   render() {
     return (
-      <div>{this.renderBioDetails()}</div>
+      this.renderBioDetails()
     );
   }
 }

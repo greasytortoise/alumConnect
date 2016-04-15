@@ -1,8 +1,8 @@
 import React from 'react'
 import ProfileField from './ProfileField.js'
-import Image from './Image.js'
+// import Image from './Image.js'
 import RestHandler from '../../../util/RestHandler'
-import { Button } from 'react-bootstrap';
+import { Button, Grid, Row, Col, Image} from 'react-bootstrap';
 
 
 var request = require('superagent');
@@ -32,7 +32,6 @@ class Profile extends React.Component {
       this.setState({
         availableProfileFields: res.body
       });
-      console.log(res.body);
     });
   }
 
@@ -44,7 +43,6 @@ class Profile extends React.Component {
         image: "../../../assets/matt.jpg",
         filledOutProfileFields: res.body.userInfo
       });
-      console.log(res.body);
     });
   }
 
@@ -68,25 +66,40 @@ class Profile extends React.Component {
     //   fieldDetails={field}
     //   editing={this.state.editing} />);
     // });
-
-    return this.state.filledOutProfileFields.map((detail, index) => {
-      return (<ProfileField
-        fieldDetails={detail}
-        editing={this.state.editing} />);
-    });
+    if(this.state.filledOutProfileFields) {
+      return this.state.filledOutProfileFields.map((detail, index) => {
+        return (<ProfileField
+          fieldDetails={detail}
+          editing={this.state.editing}
+          key={index} />);
+      });
+    }
   }
 
   render() {
     return (
       <div>
-        <Image image={this.state.image} />
-        <h3>{this.state.username}</h3>
-          <Button onClick={this.handleEditProfile.bind(this)}>
-            Edit Profile
-          </Button>
-        <div>{this.profile()}</div>
-
+        <div className = 'section'>
+          <Grid>
+            <Row>
+              <Col xs={4}>
+                <Image src={this.state.image}
+                   responsive />
+              </Col>
+              <Col xs={8}>
+                <h2>{this.state.username}</h2>
+                <Button onClick={this.handleEditProfile.bind(this)}>
+                  Edit Profile
+                </Button>
+              </Col>
+            </Row>
+          </Grid>
+        </div>
+        <div className = 'section'>
+          {this.profile()}
+        </div>
       </div>
+
     );
   }
 }
