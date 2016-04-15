@@ -10,7 +10,7 @@ class Bio extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({value: this.props.bioDetails.value})
+    this.setState({value: this.props.fieldDetails.value})
   }
 
   handleFormChange () {
@@ -18,7 +18,7 @@ class Bio extends React.Component {
   }
   renderBioDetails() {
     var editing = this.props.editing;
-    var {title} = this.props.bioDetails
+    var {title} = this.props.fieldDetails
     var value = this.state.value;
 
     if(!editing) {

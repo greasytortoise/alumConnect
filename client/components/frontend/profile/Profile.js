@@ -15,13 +15,25 @@ class Profile extends React.Component {
     this.state = {
       image: 'Hello',
       username: '',
-      bioDetails: [],
+      filledOutProfileFields: [],
+      availableProfileFields: [],
       editing: 0
     };
   }
 
   componentDidMount() {
     this.getUserProfile();
+    this.getAvailableFields();
+  }
+
+  getAvailableFields() {
+    var url = '/db/fields';
+    RestHandler.Get(url, (err, res) => {
+      this.setState({
+        availableProfileFields: res.body
+      });
+      console.log(res.body);
+    });
   }
 
   getUserProfile() {
@@ -30,14 +42,13 @@ class Profile extends React.Component {
       this.setState({
         username: res.body.user.username,
         image: "../../../assets/matt.jpg",
-        bioDetails: res.body.userInfo
+        filledOutProfileFields: res.body.userInfo
       });
       console.log(res.body);
-
     });
   }
 
-  handleEditProfile(event, bioDetails) {
+  handleEditProfile(event, filledOutProfileFields) {
     this.state.editing
     ? this.setState({ editing: 0})
     : this.setState({ editing: 1});
@@ -45,10 +56,25 @@ class Profile extends React.Component {
 
   profile() {
 
-    return this.state.bioDetails.map((detail, index) => {
+    return this.state.availableProfileFields.map((field, index) => {
+
+    // if filledOutProfileFields contains the field.id
+    // set the value to the value
+    // else set value to ''
+    // if the balue is blank don't render it on the front end.
+
+
+      detail.value = ''
       return (<ProfileField
-        bioDetails={detail}
-        editing={this.state.editing} />)
+        fieldDetails={field}
+        editing={this.state.editing} />);
+    });
+
+    return this.state.filledOutProfileFields.map((detail, index) => {
+      debugger;
+      return (<ProfileField
+        fieldDetails={detail}
+        editing={this.state.editing} />);
     });
   }
 
