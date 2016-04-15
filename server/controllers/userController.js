@@ -22,7 +22,7 @@ module.exports = {
           password: user.get('password'),
           url: user.get('url_hash'),
           image: user.get('image'),
-          emfffail: user.get('email'),
+          email: user.get('email'),
           group: group.get('group_name')
         };
       }));
