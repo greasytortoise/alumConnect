@@ -131,7 +131,7 @@ module.exports = {
           var bioField = bio.related('bioFields');
             return {
               id: bioField.id,
-              title: bioField.get('field'),
+              title: bioField.get('title'),
               value: bio.get('bio')
             };
           });
@@ -152,9 +152,44 @@ module.exports = {
       });
     });
   },
-  createUser: function(req, res) {},
-  modifyUser: function(req, res) {},
-  deleteUser: function(req, res) {},
+  // http://localhost:3000/db/users
+  createUser: function(req, res) {
+    var data = req.body;
+    Group.where({group_name: data.user.group}).fetch().then(function(group) {
+      Users.create({
+        // permission and public are not dealt with yet...
+        username: data.user.username,
+        password: data.user.password,
+        email: data.user.email,
+        image: data.user.image,
+        url_hash: data.user.url,
+        Group_id: group.id,
+        public: 0,
+        permission: 0
+      }).then(function() {
+        data.sites.forEach(function(site) {
+          UserSites.create({
+            rest_url: site.value,
+            User_id: data.user.id,
+            Site_id: site.id
+          });
+        });
+      }).then(function() {
+        res.send('ok');
+      });
+    });
+  },
+  // http://localhost:3000/db/users/user/:id
+  modifyUser: function(req, res) {
+
+  },
+  // http://localhost:3000/db/users/user/:id
+  deleteUser: function(req, res) {
+    var id = req.params.id;
+    User.where({id: id}).destroy().then(function() {
+      res.send(201, 'deleted!');
+    });    
+  },
 
 
 
