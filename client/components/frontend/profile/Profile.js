@@ -56,22 +56,20 @@ class Profile extends React.Component {
 
   profile() {
 
-    return this.state.availableProfileFields.map((field, index) => {
-
-    // if filledOutProfileFields contains the field.id
-    // set the value to the value
-    // else set value to ''
-    // if the balue is blank don't render it on the front end.
-
-
-      detail.value = ''
-      return (<ProfileField
-        fieldDetails={field}
-        editing={this.state.editing} />);
-    });
+    // return this.state.availableProfileFields.map((field, index) => {
+    //
+    // // if filledOutProfileFields contains the field.id
+    // // set the value to the value
+    // // else set value to ''
+    // // if the balue is blank don't render it on the front end.
+    //
+    // field.value = ''
+    // return (<ProfileField
+    //   fieldDetails={field}
+    //   editing={this.state.editing} />);
+    // });
 
     return this.state.filledOutProfileFields.map((detail, index) => {
-      debugger;
       return (<ProfileField
         fieldDetails={detail}
         editing={this.state.editing} />);
