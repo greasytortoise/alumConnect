@@ -85,13 +85,12 @@ class Profile extends React.Component {
         <div className = 'section'>
           <Grid>
             <Row>
-              <Col xs={4}>
+              <Col xs={5} md={4}>
                 <Image src={image}
                    responsive />
               </Col>
-              <Col xs={8}>
+              <Col xs={7} md={8}>
                 <h2>{username}</h2>
-
                 <Button onClick={this.handleEditProfile.bind(this)}>
                   Edit Profile
                 </Button>
