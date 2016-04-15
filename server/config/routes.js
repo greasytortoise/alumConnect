@@ -8,6 +8,8 @@ var groupRouter = require('../routers/groupRouter');
 var userRouter = require('../routers/userRouter');
 var siteRouter = require('../routers/siteRouter');
 var fieldRouter = require('../routers/fieldRouter');
+var userSiteRouter = require('../routers/userSiteRouter');
+var bioRouter = require('../routers/bioRouter');
 
 module.exports = function(app, express) {
   app.use('/db/groups', groupRouter);
@@ -35,8 +37,3 @@ module.exports = function(app, express) {
     response.sendFile(path.resolve(__dirname,  '../../client/index.html'))
   });
 };
-
-
-
-
-
