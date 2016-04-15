@@ -1,19 +1,20 @@
 import React from 'react'
-import { Input, Button } from 'react-bootstrap'
+import { Input, Button, ListGroupItem } from 'react-bootstrap'
 import RestHandler from '../../../util/RestHandler'
 
 class EditSite extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: this.props.value,
+      site_name: this.props.value.site_name,
+      url: this.props.value.base_url,
       disabled: true
     }
   }
 
   handleInputChange () {
     this.setState({
-      value: this.refs.input.getValue(),
+      url: this.refs.input.getValue(),
       disabled: false
     });
   }
@@ -24,9 +25,10 @@ class EditSite extends React.Component {
         disabled: false
       });
     } else {
-      var url = '/db/fields/field/' + this.props.value.id;
+      var url = '/db/sites/site/' + this.props.value.id;
       var data = {
-        title: this.state.value
+        site_name: this.state.site_name,
+        base_url: this.state.url
       };
 
       RestHandler.Post(url, data, (err, res) => {
@@ -46,11 +48,12 @@ class EditSite extends React.Component {
     const innerButton = <Button onClick={this.handleClick.bind(this)}>{button}</Button>;
     return (
       <div>
-        <Input type="text" disabled={this.state.disabled} buttonAfter={innerButton} value={this.state.value} 
+        <Input type="text" disabled={this.state.disabled} label={this.state.site_name}
+          buttonAfter={innerButton} value={this.state.url} 
           ref="input" onChange={this.handleInputChange.bind(this)} />
       </div>
     );
   }
 }
 
-module.exports = EditProfileField;
+module.exports = EditSite;
