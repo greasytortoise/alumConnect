@@ -1,9 +1,3 @@
-// models and collections not in use so far:
-// var UserSite = require('../models/userSite');
-// var UserSites = require('../collections/userSites');
-// var Bio = require('../models/bio');
-// var Bios = require('../collections/bios');
-
 var bodyParser = require('body-parser');
 var util = require('./utility.js');
 
@@ -32,7 +26,3 @@ module.exports = {
     });
   }
 };
-
-
-
-
