@@ -55,7 +55,7 @@ module.exports = {
       .fetch()
       .then(function(group) {
         if (group && (group.id !== parseInt(id))) { 
-          return res.send(400, 'Group already exists!'); 
+          return res.status(400).send('Group name is taken!'); 
         }
         Group
           .where({id: id})
@@ -66,7 +66,7 @@ module.exports = {
                 group_name: data.group_name || group.get('group_name')
               })
               .then(function() {
-                res.json(201, group);
+                res.status(201).send(group);
               });
         });
     });
