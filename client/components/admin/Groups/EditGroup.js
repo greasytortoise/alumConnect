@@ -1,18 +1,17 @@
 import React from 'react'
 import { Input, Button } from 'react-bootstrap'
-import RestHandler from '../../util/RestHandler'
+import RestHandler from '../../../util/RestHandler'
 
-class EditProfileField extends React.Component {
+class EditGroup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: this.props.value.title,
-      disabled: true,
-      button: "Edit"
+      value: this.props.value.group_name,
+      disabled: true
     }
   }
 
-  handleChange () {
+  handleInputChange () {
     this.setState({
       value: this.refs.input.getValue(),
       disabled: false
@@ -20,17 +19,14 @@ class EditProfileField extends React.Component {
   }
 
   handleClick() {
-
-    if (this.state.button === 'Edit') {
+    if (this.state.disabled) {
       this.setState({
-        button: "Save",
         disabled: false
       });
-    } else if (this.state.button === 'Save') {
-
-      var url = '/db/fields/field/' + this.props.value.id;
+    } else {
+      var url = '/db/groups/group/' + this.props.value.id;
       var data = {
-        title: this.state.value
+        group_name: this.state.value
       };
 
       RestHandler.Post(url, data, (err, res) => {
@@ -39,22 +35,22 @@ class EditProfileField extends React.Component {
       });
 
       this.setState({
-        disabled: true,
-        button: "Edit"
+        disabled: true
       });
     }
-
   }
 
   render() {
-    const innerButton = <Button onClick={this.handleClick.bind(this)}>{this.state.button}</Button>;
+    var button = '';
+    this.state.disabled ? button = 'edit' : button = 'save';
+    const innerButton = <Button onClick={this.handleClick.bind(this)}>{button}</Button>;
     return (
       <div>
         <Input type="text" disabled={this.state.disabled} buttonAfter={innerButton} value={this.state.value} 
-          ref="input" onChange={this.handleChange.bind(this)} />
+          ref="input" onChange={this.handleInputChange.bind(this)} />
       </div>
     );
   }
 }
 
-module.exports = EditProfileField;
+module.exports = EditGroup;

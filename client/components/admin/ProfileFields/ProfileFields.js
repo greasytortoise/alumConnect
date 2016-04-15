@@ -1,6 +1,6 @@
 import React from 'react'
 import {Input, ButtonInput, ListGroup, ListGroupItem} from 'react-bootstrap'
-import RestHandler from '../../util/RestHandler'
+import RestHandler from '../../../util/RestHandler'
 import EditProfileField from './EditProfileField.js'
 
 class ProfileFields extends React.Component {
@@ -18,17 +18,12 @@ class ProfileFields extends React.Component {
   }
 
   renderFields() {
-    var self = this;
     return this.state.fields.map(function(field) {
       var {id, title} = field;
       return (
         <EditProfileField value={field} />
       );
     });
-  }
-
-  handleProfileFieldChange(field) {
-    this.setState({fields: this.state.fields.concat(field)})
   }
 
   handleSubmit(event) {

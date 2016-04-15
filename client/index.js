@@ -11,9 +11,9 @@ import Dashboard from './components/admin/Dashboard'
 import DashboardHome from './components/admin/DashboardHome'
 import DashboardUsers from './components/admin/DashboardUsers'
 import DashboardNewUser from './components/admin/DashboardNewUser'
-import Groups from './components/admin/Groups'
+import Groups from './components/admin/Groups/Groups'
 import Sites from './components/admin/Sites'
-import ProfileFields from './components/admin/ProfileFields'
+import ProfileFields from './components/admin/ProfileFields/ProfileFields'
 
 
 render((
