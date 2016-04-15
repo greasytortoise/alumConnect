@@ -79,14 +79,16 @@ class Profile extends React.Component {
   render() {
     return (
       <div>
-        <Row className="search-for-users">
+        <div className = 'section'>
           <Image image={this.state.image} />
           <h3>{this.state.username}</h3>
           <Button onClick={this.handleEditProfile.bind(this)}>
             Edit Profile
           </Button>
-        </Row>
-        <Row>{this.profile()}</Row>
+        </div>
+        <div className = 'section'>
+          {this.profile()}
+        </div>
       </div>
 
     );
