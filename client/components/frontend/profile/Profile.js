@@ -13,10 +13,7 @@ class Profile extends React.Component {
     super (props);
 
     this.state = {
-      image: 'Hello',
-      username: '',
-      filledOutProfileFields: [],
-      availableProfileFields: [],
+      profileData: {},
       editing: 0
     };
   }
@@ -38,10 +35,11 @@ class Profile extends React.Component {
   getUserProfile() {
     var url = '/db/users/user/' + this.props.params.user;
     RestHandler.Get(url, (err, res) => {
+      console.log(res.body)
       this.setState({
+        profileData: res.body,
         username: res.body.user.username,
-        image: "../../../assets/matt.jpg",
-        filledOutProfileFields: res.body.userInfo
+        image: "http://localhost:3000/assets/matt.jpg",
       });
     });
   }
@@ -66,8 +64,8 @@ class Profile extends React.Component {
     //   fieldDetails={field}
     //   editing={this.state.editing} />);
     // });
-    if(this.state.filledOutProfileFields) {
-      return this.state.filledOutProfileFields.map((detail, index) => {
+    if(this.state.profileData.userInfo) {
+      return this.state.profileData.userInfo.map((detail, index) => {
         return (<ProfileField
           fieldDetails={detail}
           editing={this.state.editing}
@@ -77,6 +75,10 @@ class Profile extends React.Component {
   }
 
   render() {
+    var username = this.state.profileData.user
+    ? this.state.profileData.user.username
+    : '';
+    
     return (
       <div>
         <div className = 'section'>
@@ -87,7 +89,8 @@ class Profile extends React.Component {
                    responsive />
               </Col>
               <Col xs={8}>
-                <h2>{this.state.username}</h2>
+                <h2>{username}</h2>
+
                 <Button onClick={this.handleEditProfile.bind(this)}>
                   Edit Profile
                 </Button>
