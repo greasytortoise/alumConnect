@@ -153,10 +153,11 @@ module.exports = {
     });
   },
   // http://localhost:3000/db/users
+  // no error handling on this one just yet
   createUser: function(req, res) {
     var data = req.body;
     Group.where({group_name: data.user.group}).fetch().then(function(group) {
-      Users.create({
+      return new User({
         // permission and public are not dealt with yet...
         username: data.user.username,
         password: data.user.password,
@@ -166,21 +167,67 @@ module.exports = {
         Group_id: group.id,
         public: 0,
         permission: 0
-      }).then(function() {
+      }).save().then(function(user) {
+        // may run into async issues
         data.sites.forEach(function(site) {
           UserSites.create({
             rest_url: site.value,
-            User_id: data.user.id,
+            User_id: user.id,
             Site_id: site.id
           });
         });
+        return user;
+      }).then(function(user) {
+        // may run into async issues
+        data.userInfo.forEach(function(info) {
+          Bios.create({
+            bio: info.value,
+            User_id: user.id,
+            Bio_Field_id: info.id
+          });
+        });
       }).then(function() {
-        res.send('ok');
+        res.send(201);
       });
     });
   },
   // http://localhost:3000/db/users/user/:id
+  // no error handling yet
   modifyUser: function(req, res) {
+    var id = req.params.id;
+    var data = req.body;
+    Group.where({group_name: data.user.group}).fetch().then(function(group) {
+      User.where({id: id}).fetch().then(function(user) {
+        return user.save({
+          username: data.user.username || user.get('username'),
+          password: data.user.password || user.get('password'),
+          email: data.user.email || user.get('email'),
+          image: data.user.image || user.get('image'),
+          url_hash: data.user.url || user.get('url_hash'),
+          Group_id: group.id
+        }).then(function(user) {
+          // site is not changeable (only its value is)
+          data.sites.forEach(function(site) {
+            UserSite.where({User_id: id, Site_id: site.id}).fetch().then(function(userSite) {
+              userSite.save({
+                rest_url: site.value || userSite.get('rest_url')
+              });
+            });
+          });
+          return user;
+        }).then(function(user) {
+          data.userInfo.forEach(function(info) {
+            Bio.where({User_id: id, Bio_Field_id: info.id}).fetch().then(function(bio) {
+              bio.save({
+                bio: info.value || bio.get('bio')
+              });
+            });
+          });
+        }).then(function() {
+          res.send(201);
+        });
+      });
+    });
 
   },
   // http://localhost:3000/db/users/user/:id
