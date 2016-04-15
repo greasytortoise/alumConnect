@@ -4,9 +4,11 @@ var Groups = require('../collections/groups');
 module.exports = {
  // http://localhost:3000/db/groups/
   fetchGroups: function(req, res) {
-    Groups.fetch().then(function(groups) {
-      res.json(groups);
-    });
+    Groups
+      .fetch()
+      .then(function(groups) {
+        res.json(groups);
+      });
   },
   // http://localhost:3000/db/groups/group/:id
   fetchGroupInfo: function(req, res) {
@@ -30,28 +32,43 @@ module.exports = {
   // http://localhost:3000/db/groups
   createGroup: function(req, res) {
     var data = req.body;
-    Group.where({group_name: data.group_name}).fetch().then(function(groupExist) {
-      if (groupExist) { return res.send(400, 'Group already exists!'); }
-      Groups.create({group_name: data.group_name}).then(function(newGroup) {
-        res.json(201, newGroup);
+    Group
+      .where({group_name: data.group_name})
+      .fetch()
+      .then(function(groupExist) {
+        if (groupExist) { 
+          return res.status(400).send('Group already exists!'); 
+        }
+        Groups
+          .create({group_name: data.group_name})
+          .then(function(newGroup) {
+            res.status(201).json(newGroup);
+          });
       });
-    });
   },
   // http://localhost:3000/db/groups/group/:id
   modifyGroup: function(req, res) {
     var id = req.params.id;
     var data = req.body;
-    Group.where({group_name: data.group_name}).fetch().then(function(groupExist) {
-      if (groupExist && (groupExist.id !== parseInt(id))) { 
-        return res.send(400, 'Group already exists!'); 
-      }
-      Group.where({id: id}).fetch().then(function(group) {
-        group.save({
-          group_name: data.group_name || group.get('group_name')
-        }).then(function() {
-          res.json(201, group);
+    Group
+      .where({group_name: data.group_name})
+      .fetch()
+      .then(function(group) {
+        if (group && (group.id !== parseInt(id))) { 
+          return res.status(400).send('Group name is taken!'); 
+        }
+        Group
+          .where({id: id})
+          .fetch()
+          .then(function(group) {
+            group
+              .save({
+                group_name: data.group_name || group.get('group_name')
+              })
+              .then(function() {
+                res.status(201).send(group);
+              });
         });
-      });
     });
   },
   // http://localhost:3000/db/groups/group/:id
