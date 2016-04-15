@@ -1,6 +1,15 @@
 var User = require('../models/user');
 var Users = require('../collections/users');
 
+var Group = require('../models/group');
+var Groups = require('../collections/groups');
+
+var UserSite = require('../models/userSite');
+var UserSites = require('../collections/userSites');
+
+var Bio = require('../models/bio');
+var Bios = require('../collections/bios');
+
 module.exports = {
   // http://localhost:3000/db/users
   fetchUsers: function(req, res) {

@@ -4,8 +4,8 @@ var BioFields = require('../collections/bioFields');
 module.exports = {
   // http://localhost:3000/db/fields
   fetchFields: function(req, res) {
-    BioFields.fetch().then(function(userSites) {
-      res.json(200, userSites);
+    BioFields.fetch().then(function(fields) {
+      res.json(200, fields);
     });
   },
   // http://localhost:3000/db/fields
