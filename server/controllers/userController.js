@@ -21,7 +21,8 @@ module.exports = {
           username: user.get('username'),
           password: user.get('password'),
           url: user.get('url_hash'),
-          email: user.get('email'),
+          image: user.get('image'),
+          emfffail: user.get('email'),
           group: group.get('group_name')
         };
       }));
@@ -37,6 +38,7 @@ module.exports = {
           username: user.get('username'),
           password: user.get('password'),
           url: user.get('url_hash'),
+          image: user.get('image'),
           email: user.get('email')
         };
       }));
@@ -46,8 +48,8 @@ module.exports = {
   fetchUserInfo: function(req, res) {
     var id = req.params.id;
     User.where({id: id}).fetch({withRelated: ['groups', 'bios', 'userSites']}).then(function(user) {
-      if (!user) { 
-        return res.send(404, 'user does not exist!'); 
+      if (!user) {
+        return res.send(404, 'user does not exist!');
       }
       var group = user.related('groups');
       user.related('userSites').fetch({withRelated: ['sites']}).then(function(userSites) {
@@ -169,6 +171,6 @@ module.exports = {
     var id = req.params.id;
     User.where({id: id}).destroy().then(function() {
       res.send(201, 'deleted!');
-    });    
+    });
   },
 }

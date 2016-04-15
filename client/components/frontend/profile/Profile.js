@@ -35,11 +35,9 @@ class Profile extends React.Component {
   getUserProfile() {
     var url = '/db/users/user/' + this.props.params.user;
     RestHandler.Get(url, (err, res) => {
-      console.log(res.body)
+      // console.log(res.body)
       this.setState({
         profileData: res.body,
-        username: res.body.user.username,
-        image: "http://localhost:3000/assets/matt.jpg",
       });
     });
   }
@@ -75,17 +73,20 @@ class Profile extends React.Component {
   }
 
   render() {
-    var username = this.state.profileData.user
-    ? this.state.profileData.user.username
-    : '';
-    
+    var username = ''
+    var image = ''
+    if (this.state.profileData.user) {
+      username = this.state.profileData.user.username
+      image = this.state.profileData.user.image
+    }
+
     return (
       <div>
         <div className = 'section'>
           <Grid>
             <Row>
               <Col xs={4}>
-                <Image src={this.state.image}
+                <Image src={image}
                    responsive />
               </Col>
               <Col xs={8}>
