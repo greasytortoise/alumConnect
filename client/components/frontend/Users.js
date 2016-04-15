@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
-import { Row, Col, DropdownButton, MenuItem, Input, Grid, Image, Thumbnail } from 'react-bootstrap';
+import { Row, Col, DropdownButton, MenuItem, Input, Image, Thumbnail } from 'react-bootstrap';
 
 import RestHandler from '../../util/RestHandler';
 
