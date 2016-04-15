@@ -32,6 +32,7 @@ class Profile extends React.Component {
       this.setState({
         availableProfileFields: res.body
       });
+      console.log(res.body);
     });
   }
 
