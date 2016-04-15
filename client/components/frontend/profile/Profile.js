@@ -1,8 +1,8 @@
 import React from 'react'
 import ProfileField from './ProfileField.js'
-import Image from './Image.js'
+// import Image from './Image.js'
 import RestHandler from '../../../util/RestHandler'
-import { Button, Row, Col} from 'react-bootstrap';
+import { Button, Grid, Row, Col, Image} from 'react-bootstrap';
 
 
 var request = require('superagent');
@@ -80,11 +80,20 @@ class Profile extends React.Component {
     return (
       <div>
         <div className = 'section'>
-          <Image image={this.state.image} />
-          <h3>{this.state.username}</h3>
-          <Button onClick={this.handleEditProfile.bind(this)}>
-            Edit Profile
-          </Button>
+          <Grid>
+            <Row>
+              <Col xs={4}>
+                <Image src={this.state.image}
+                   responsive />
+              </Col>
+              <Col xs={8}>
+                <h2>{this.state.username}</h2>
+                <Button onClick={this.handleEditProfile.bind(this)}>
+                  Edit Profile
+                </Button>
+              </Col>
+            </Row>
+          </Grid>
         </div>
         <div className = 'section'>
           {this.profile()}
