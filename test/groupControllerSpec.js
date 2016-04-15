@@ -99,7 +99,7 @@ describe('Group Endpoint: ', function() {
   });
 
   describe('fetchGroups', function() {
-    it('displays all Groups', function(done) {
+    it('displays all Groups on a get request (200)', function(done) {
       request(app)
         .get('/db/groups')
         .end(function(err, res) {
