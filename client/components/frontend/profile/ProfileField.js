@@ -43,7 +43,7 @@ class Bio extends React.Component {
 
   render() {
     return (
-      <div>{this.renderBioDetails()}</div>
+      <div key={this.props.fieldDetails.id}>{this.renderBioDetails()}</div>
     );
   }
 }
