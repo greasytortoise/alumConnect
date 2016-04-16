@@ -1,8 +1,8 @@
 var bcrypt = require('bcrypt');
 var jwt = require('jwt-simple');
 var moment = require('moment');
-var jwtTokenSecret = 'DONALD_TRUMP_HUGE_HANDS_NO_PROBLEM';
 var User = require('../models/user');
+var jwtTokenSecret = 'DONALD_TRUMP_HUGE_HANDS_NO_PROBLEM';
 
 
 exports.generateToken = function(userid, email, perm, name) {
@@ -53,16 +53,42 @@ exports.getPermissions = function(req, res) {
 
 };
 
+
 exports.isAdmin = function(req, res, next) {
-  var token = JSON.parse(req.body.token).token;
-  var decoded = jwt.decode(token, jwtTokenSecret);
-  User.where({id: decoded.iss}).fetch().then(function(user){
-    if(user.attributes.permission === 1) {
-      next();
-    } else {
-      res.send(403, 'You have requested an admin-only resource without adequete permissions');
+  // if(req.body.token === undefined) {
+  //   res.send(403, 'You have requested an admin-only resource without adequete permissions');
+  // }
+  // console.log(req.body.token);
+  // var token = JSON.parse(req.body.token).token;
+  // var decoded = jwt.decode(token, jwtTokenSecret);
+  // User.where({id: decoded.iss}).fetch().then(function(user){
+  //   if(user.attributes.permission === 1) {
+  //     next();
+  //   } else {
+  //     res.send(403, 'You have requested an admin-only resource without adequete permissions');
+  //   }
+  // });
+
+  var token = (req.body && req.body.token) || (req.query && req.query.access_token) || req.headers['x-access-token'];
+  if (token) {
+    try {
+      var decoded = jwt.decode(token, jwtTokenSecret);
+      User.where({id: decoded.iss}).fetch().then(function(user){
+        if(user.attributes.permission === 1) {
+          next();
+        } else {
+          res.send(403, 'You have requested an admin-only resource without adequete permissions');
+        }
+      });
+
+
+    } catch (err) {
+      res.send(500, 'Error has occured');
     }
-  });
+  } else {
+    res.send(403, 'Not logged in');
+  }
+
 };
 
 

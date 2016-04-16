@@ -4,6 +4,7 @@
   "description": "DO AMAZING THINGS",
   "main": "index.js",
   "dependencies": {
+    "base64-min": "^1.1.0",
     "bcrypt": "^0.8.5",
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.3.4",
@@ -38,6 +39,7 @@
     "gulp-shell": "^0.5.2",
     "http-server": "^0.8.5",
     "mocha": "^2.4.5",
+    "mock-local-storage": "^1.0.2",
     "supertest": "^1.2.0",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"

@@ -27,7 +27,6 @@ module.exports = {
   },
 
   checkToken(callback) {
-    console.log(localStorage.getItem('jwtAlum'));
     if(localStorage.getItem('jwtAlum')) {
 
     request('POST', '/checktoken')

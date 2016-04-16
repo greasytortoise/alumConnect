@@ -26,13 +26,13 @@ render((
       <Route path="/users/:user" component={Profile}/>
     </Route>
 
-    <route path="/dashboard" component={Dashboard}>
+    <route path="/dashboard" component={Dashboard} onEnter={requireAdmin}>
       <IndexRoute component={DashboardHome}/>
-      <Route path="/dashboard/users" component={DashboardUsers}/>
-      <Route path="/dashboard/newuser" component={DashboardNewUser}/>
-      <Route path="/dashboard/groups" component={Groups}/>
-      <Route path="/dashboard/sites" component={Sites}/>
-      <Route path="/dashboard/profile-fields" component={ProfileFields}/>
+      <Route path="/dashboard/users" component={DashboardUsers} onEnter={requireAdmin}/>
+      <Route path="/dashboard/newuser" component={DashboardNewUser} onEnter={requireAdmin}/>
+      <Route path="/dashboard/groups" component={Groups} onEnter={requireAdmin}/>
+      <Route path="/dashboard/sites" component={Sites} onEnter={requireAdmin}/>
+      <Route path="/dashboard/profile-fields" component={ProfileFields} onEnter={requireAdmin}/>
     </route>
   </Router>
 ), document.getElementById('app'))
