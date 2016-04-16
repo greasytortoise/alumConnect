@@ -29,7 +29,6 @@ describe('Server utility: ', function() {
         }
       });
   });
-    ('Admin', 'admin', 'admin@admin.com', '/assets/trump.jpg', 'ndas2q', 0, 1, 1),
 
   it('verifies user is admin before accessing protected resources', function(done) {
     var token = util.generateToken(5, 'admin@admin.com', 1, 'Admin');
