@@ -11,7 +11,7 @@ userRouter.route('/group/:id')
 
 userRouter.route('/user/:id')
   .get(userController.fetchUserInfo)
-  .post(util.isAdmin, userController.modifyUser)
+  .post(util.isLoggedIn, userController.modifyUser)
   .delete(util.isAdmin, userController.deleteUser);
 
 module.exports = userRouter;

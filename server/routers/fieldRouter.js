@@ -7,7 +7,7 @@ fieldRouter.route('/')
   .post(util.isAdmin, fieldController.createField);
 
 fieldRouter.route('/field/:id')
-  .post(fieldController.modifyField)
-  .delete(fieldController.deleteField);
+  .post(util.isLoggedIn, fieldController.modifyField)
+  .delete(util.isAdmin, fieldController.deleteField);
 
 module.exports = fieldRouter;
