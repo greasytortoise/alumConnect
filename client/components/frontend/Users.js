@@ -19,7 +19,10 @@ class Users extends React.Component {
   componentDidMount() {
     RestHandler.Get('/db/groups', (err, res) => {
       var groups = res.body.reverse()
-      var initialGroup = JSON.parse(localStorage.selectedGroup) || res.body[0]
+      var initialGroup = res.body[0];
+      if(localStorage.selectedGroup) {
+        initialGroup = JSON.parse(localStorage.selectedGroup);
+      }
       this.setState({groups: groups})
       this.setState({selectedGroup: initialGroup})
       this.getUsers(initialGroup.id);
