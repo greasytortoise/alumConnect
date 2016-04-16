@@ -14,7 +14,16 @@ class Bio extends React.Component {
   }
 
   handleFormChange () {
-    this.setState({value: this.refs.input.refs.input.value});
+    var {title, id} = this.props.fieldDetails
+    var formValue = this.refs.input.refs.input.value;
+
+    this.setState({value: formValue});
+    this.props.stageProfileEdits((editedObject) => {
+      editedObject[id] = {
+        title: title,
+        value: formValue
+      }
+    });
   }
   renderBioDetails() {
     var editing = this.props.editing;

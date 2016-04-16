@@ -11,11 +11,11 @@ class Profile extends React.Component {
 
   constructor (props) {
     super (props);
-
     this.state = {
       profileData: {},
       editing: 0
     };
+    this.profileEdits = {}
   }
 
   componentDidMount() {
@@ -35,10 +35,14 @@ class Profile extends React.Component {
   getUserProfile() {
     var url = '/db/users/user/' + this.props.params.user;
     RestHandler.Get(url, (err, res) => {
-      // console.log(res.body)
       this.setState({
         profileData: res.body,
       });
+      this.profileEdits = {
+        user: res.body.user,
+        sites: {},
+        userInfo:{}
+      }
     });
   }
 
@@ -67,9 +71,15 @@ class Profile extends React.Component {
         return (<ProfileField
           fieldDetails={detail}
           editing={this.state.editing}
-          key={index} />);
+          key={index}
+          stageProfileEdits = {this.stageProfileEdits.bind(this)} />);
       });
     }
+  }
+
+  stageProfileEdits(callback) {
+    callback(this.profileEdits.userInfo);
+    console.log(this.profileEdits);
   }
 
   render() {
@@ -86,8 +96,7 @@ class Profile extends React.Component {
           <Grid>
             <Row>
               <Col xs={5} md={4}>
-                <Image src={image}
-                   responsive />
+                <Image src={image} responsive />
               </Col>
               <Col xs={7} md={8}>
                 <h2>{username}</h2>
