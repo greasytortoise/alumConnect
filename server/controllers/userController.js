@@ -13,79 +13,91 @@ var Bios = require('../collections/bios');
 module.exports = {
   // http://localhost:3000/db/users
   fetchUsers: function(req, res) {
-    Users.fetch({withRelated: ['groups']}).then(function(users) {
-      res.json(200, users.map(function(user) {
-        var group = user.related('groups');
-        return {
-          id: user.id,
-          username: user.get('username'),
-          password: user.get('password'),
-          url: user.get('url_hash'),
-          image: user.get('image'),
-          email: user.get('email'),
-          group: group.get('group_name')
-        };
-      }));
+    Users.fetch({withRelated: ['groups']})
+      .then(function(users) {
+        var retObj = users.map(function(user) {
+          var group = user.related('groups');
+          return {
+            id: user.id,
+            username: user.get('username'),
+            password: user.get('password'),
+            url: user.get('url_hash'),
+            image: user.get('image'),
+            email: user.get('email'),
+            group: group.get('group_name')
+          };
+        });
+        res.status(200).send(retObj);
     });
   },
   // http://localhost:3000/db/users/group/:id
   fetchUsersByGroup: function(req, res) {
     var groupId = req.params.id;
-    Users.query('where', 'Group_id', '=', groupId).fetch().then(function(users) {
-      res.json(users.map(function(user) {
-        return {
-          id: user.id,
-          username: user.get('username'),
-          password: user.get('password'),
-          url: user.get('url_hash'),
-          image: user.get('image'),
-          email: user.get('email')
-        };
-      }));
+    Users
+      .query('where', 'Group_id', '=', groupId)
+      .fetch()
+      .then(function(users) {
+        var retObj = users.map(function(user) {
+          return {
+            id: user.id,
+            username: user.get('username'),
+            password: user.get('password'),
+            url: user.get('url_hash'),
+            image: user.get('image'),
+            email: user.get('email')
+          };
+        });
+        res.json(retObj);
     });
   },
   // http://localhost:3000/db/users/user/:id
   fetchUserInfo: function(req, res) {
     var id = req.params.id;
-    User.where({id: id}).fetch({withRelated: ['groups', 'bios', 'userSites']}).then(function(user) {
-      if (!user) {
-        return res.send(404, 'user does not exist!');
-      }
-      var group = user.related('groups');
-      user.related('userSites').fetch({withRelated: ['sites']}).then(function(userSites) {
-        var sites = userSites.map(function(userSite) {
-          var site = userSite.related('sites');
-          return {
-            id: site.id,
-            name: site.get('site_name'),
-            url: site.get('base_url'),
-            value: userSite.get('rest_url')
-          };
+    User
+      .where({id: id})
+      .fetch({withRelated: ['groups', 'bios', 'userSites']})
+      .then(function(user) {
+        if (!user) {
+          return res.status(404).send('user does not exist!');
+        }
+        var group = user.related('groups');
+        user
+          .related('userSites')
+          .fetch({withRelated: ['sites']})
+          .then(function(userSites) {
+            var sites = userSites.map(function(userSite) {
+              var site = userSite.related('sites');
+              return {
+                id: site.id,
+                name: site.get('site_name'),
+                url: site.get('base_url'),
+                value: userSite.get('rest_url')
+              };
+            });
+            user.related('bios').fetch({withRelated: ['bioFields']}).then(function(bios) {
+              bios = bios.map(function(bio) {
+              var bioField = bio.related('bioFields');
+                return {
+                  id: bioField.id,
+                  title: bioField.get('title'),
+                  value: bio.get('bio')
+                };
+              });
+              res.json({
+                user: {
+                  id: user.id,
+                  username: user.get('username'),
+                  password: user.get('password'),
+                  url: user.get('url_hash'),
+                  email: user.get('email'),
+                  group: group.get('group_name'),
+                  image: user.get('image')
+                },
+                sites: sites,
+                userInfo: bios
+              });
+            });
         });
-        user.related('bios').fetch({withRelated: ['bioFields']}).then(function(bios) {
-          bios = bios.map(function(bio) {
-          var bioField = bio.related('bioFields');
-            return {
-              id: bioField.id,
-              title: bioField.get('title'),
-              value: bio.get('bio')
-            };
-          });
-          res.json({
-            user: {
-              id: user.id,
-              username: user.get('username'),
-              password: user.get('password'),
-              url: user.get('url_hash'),
-              email: user.get('email'),
-              group: group.get('group_name'),
-              image: user.get('image')
-            },
-            sites: sites,
-            userInfo: bios
-          });
-        });
-      });
     });
   },
   // http://localhost:3000/db/users
@@ -169,8 +181,11 @@ module.exports = {
   // http://localhost:3000/db/users/user/:id
   deleteUser: function(req, res) {
     var id = req.params.id;
-    User.where({id: id}).destroy().then(function() {
-      res.send(201, 'deleted!');
-    });
-  },
+    User
+      .where({id: id})
+      .destroy()
+      .then(function() {
+        res.status(201).send('deleted!');
+      });
+  }
 }

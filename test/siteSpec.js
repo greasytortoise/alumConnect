@@ -116,12 +116,12 @@ describe('Site Endpoint: ', function() {
         .post('/db/sites/site/' + mockSiteIds[1])
         .send({
           site_name: '',
-          base_url: 'http://www.UHOH.com'
+          base_url: ''
         })
         .expect(201)
         .end(function(err, res) {
           expect(res.body.site_name).to.equal(mockSiteAttrs[1].site_name);
-          expect(res.body.base_url).to.equal('http://www.UHOH.com');
+          expect(res.body.base_url).to.equal(mockSiteAttrs[1].base_url);
           expect(res.body.active).to.equal(1);
           done();
         })
