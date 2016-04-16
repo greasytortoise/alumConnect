@@ -1,8 +1,8 @@
 var bcrypt = require('bcrypt');
 var jwt = require('jwt-simple');
 var moment = require('moment');
-var jwtTokenSecret = 'DONALD_TRUMP_HUGE_HANDS_NO_PROBLEM';
 var User = require('../models/user');
+var jwtTokenSecret = 'DONALD_TRUMP_HUGE_HANDS_NO_PROBLEM';
 
 
 exports.generateToken = function(userid, email, perm, name) {
@@ -53,7 +53,12 @@ exports.getPermissions = function(req, res) {
 
 };
 
+
 exports.isAdmin = function(req, res, next) {
+  if(req.body.token === undefined) {
+    res.send(403, 'You have requested an admin-only resource without adequete permissions');
+  }
+  
   var token = JSON.parse(req.body.token).token;
   var decoded = jwt.decode(token, jwtTokenSecret);
   User.where({id: decoded.iss}).fetch().then(function(user){
