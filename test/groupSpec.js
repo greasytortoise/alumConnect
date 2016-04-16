@@ -36,8 +36,8 @@ describe('Group Endpoint: ', function() {
 
   after('Deletes all test groups', function(done) {
     handler.getAll(mockGroupAttrs, Group)
-      .then(function(groups) { return handler.deleteAll(groups) })
-      .then(function() { done(); })
+      .then(function(groups) { return handler.deleteAll(groups) });
+      .then(function() { done(); });
   });
 
   describe('fetchGroups', function() {

@@ -29,3 +29,50 @@ var mockSiteAttrs = [
     base_url: 'http://www.testsite3.com'
   }
 ];
+
+describe('Site Endpoint: ', function() {
+  before('Set active for each site to 1', function(done) {
+    mockSiteAttrs.forEach(function(attr) {
+      attr.active = 1;
+    });
+    done();
+  });
+
+  beforeEach('Re-populates database with test sites', function(done) {
+    handler.getAll(mockSiteAttrs, Site)
+      .then(function(sites) { return handler.deleteAll(sites); })
+      .then(function() { return handler.createAll(mockSiteAttrs.slice(0, 3), Site); })
+      .then(function(sites) { mockSiteIds = handler.saveIds(sites); })
+      .then(function() { done(); });
+  });
+
+  after('Deletes all test sites', function(done) {
+    handler.getAll(mockSiteAttrs, Site)
+      .then(function(site) { return handler.deleteAll(site); })
+      .then(function() { done(); });
+  });
+
+  describe('fetchSites', function() {
+    it('', function(done) {
+      done();
+    });
+  });
+
+  describe('createSite', function() {
+    it('', function(done) {
+      done();
+    });
+  });
+
+  describe('modifySite', function() {
+    it('', function(done) {
+      done();
+    });
+  });
+
+  describe('deleteSite', function() {
+    it('', function(done) {
+      done();
+    });
+  });
+});
