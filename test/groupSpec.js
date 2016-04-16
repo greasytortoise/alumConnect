@@ -8,60 +8,57 @@ var app = require('../server/app.js');
 
 var Group = require('../server/models/group');
 var Groups = require('../server/collections/groups');
+var User = require('../server/models/user');
+var Users = require('../server/collections/users');
 
 var mockIds;
 var mockGroupAttrs = [
-  {group_name: 'testGroup1'},
-  {group_name: 'testGroup2'},
-  {group_name: 'testGroup3'},
-  {group_name: 'testGroup4'}
+  {group_name: 'DO_NOT_USE_TEST_GROUP_0'},
+  {group_name: 'DO_NOT_USE_TEST_GROUP_1'},
+  {group_name: 'DO_NOT_USE_TEST_GROUP_2'},
+  {group_name: 'DO_NOT_USE_TEST_GROUP_3'}
 ];
+
+var getAll = function(attrs, Model) {
+  return Promise.map(attrs, function(attr) {
+    return Model.forge(attr).fetch();
+  })
+  .filter(function(models) {
+    return models;
+  });
+};
+
+var deleteAll = function(models) {
+  return Promise.map(models, function(model) {
+    return model.destroy();
+  });
+};
+
+var createAll = function(attrs, Model) {
+  return Promise.map(attrs, function(attr) {
+    return Model.forge(attr).save();
+  });
+};
+
+var saveIds = function(models) {
+  return models.map(function(model) {
+    return model.id;
+  });
+}
 
 describe('Group Endpoint: ', function() {
   beforeEach('Re-populates database with test groups', function(done) {
-    Promise.map(mockGroupAttrs, function(attr) {
-      return Group.forge(attr).fetch();
-    })
-    .filter(function(groups) {
-      return groups;
-    })
-    .then(function(groups) {
-      return Promise.map(groups, function(group) {
-        return group.destroy();
-      });
-    })
-    .then(function() {
-      return Promise.map(mockGroupAttrs, function(attr) {
-        if (attr.group_name !== 'testGroup4') {
-          return Group.forge(attr).save();
-        }
-      });
-    })
-    .filter(function(groups) {
-      return groups
-    })
-    .then(function(groups) {
-      mockIds = groups.map(function(group) {
-        return group.id;
-      });
-      done();
-    });
+    getAll(mockGroupAttrs, Group)
+      .then(function(groups) { return deleteAll(groups); })
+      .then(function() { return createAll(mockGroupAttrs.slice(0, 3), Group); })
+      .then(function(groups) { mockIds = saveIds(groups); })
+      .then(function() { done(); });
   });
 
   after('Deletes all test groups', function(done) {
-    Promise.map(mockGroupAttrs, function(attr) {
-      return Group.forge(attr).fetch();
-    })
-    .filter(function(groups) {
-      return groups;
-    })
-    .then(function(groups) {
-      return Promise.map(groups, function(group) {
-        return group.destroy();
-      });
-    }).then(function() {
-      done();
-    })
+    getAll(mockGroupAttrs, Group)
+    .then(function(groups) { return deleteAll(groups) })
+    .then(function() { done(); })
   });
 
   describe('fetchGroups', function() {
@@ -74,10 +71,11 @@ describe('Group Endpoint: ', function() {
             .fetch()
             .then(function(groups) {
               expect(groups).to.have.length.above(2);
-              expect(groups.findWhere({group_name: 'testGroup1'})).to.exist;
-              expect(groups.findWhere({group_name: 'testGroup2'})).to.exist;
-              expect(groups.findWhere({group_name: 'testGroup3'})).to.exist;
-              expect(groups.findWhere({group_name: 'testGroup4'})).to.not.exist;
+              expect(groups.findWhere(mockGroupAttrs[0]).get('group_name'))
+                .to.equal(mockGroupAttrs[0].group_name);
+              expect(groups.findWhere(mockGroupAttrs[2]).get('group_name'))
+                .to.equal(mockGroupAttrs[2].group_name);
+              expect(groups.findWhere(mockGroupAttrs[3])).to.not.exist;
               done();
             });
         });
@@ -85,6 +83,16 @@ describe('Group Endpoint: ', function() {
   });
 
   xdescribe('fetchGroupInfo', function() {
+    // some other day
+    before('Populates database with test users', function(done) {
+      done();
+    });
+
+    after('Deletes test users from database', function(done) {
+      done();
+    });
+
+
     it('displays all info on a specific group on a successful get request (200)', function(done) {
       done();
     });
@@ -94,7 +102,7 @@ describe('Group Endpoint: ', function() {
     it('creates a new group on a successful post request (201)', function(done) {
       request(app)
         .post('/db/groups')
-        .send(mockGroupAttrs[3]) // group4
+        .send(mockGroupAttrs[3]) // group3
         .expect(201)
         .end(function(err, res) {
           expect(res.body.group_name).to.equal(mockGroupAttrs[3].group_name);
@@ -105,7 +113,7 @@ describe('Group Endpoint: ', function() {
     it('does not create an existing group on a bad post request (400)', function(done) {
       request(app)
         .post('/db/groups')
-        .send(mockGroupAttrs[2]) // group3
+        .send(mockGroupAttrs[2]) // group2
         .expect(400)
         .end(function(err, res) {
           expect(res.body.group_name).to.not.exist;
@@ -116,10 +124,10 @@ describe('Group Endpoint: ', function() {
   });
 
   describe('modifyGroup', function() {
-    it('does not modify a group\'s name to an existing group\'s name on a bad post request (400)', function(done) {
+    it("does not modify a group's name to an existing group's name on a bad post request (400)", function(done) {
       request(app)
-        .post('/db/groups/group/' + mockIds[1]) // group2
-        .send(mockGroupAttrs[0]) // group1
+        .post('/db/groups/group/' + mockIds[1]) // group1
+        .send(mockGroupAttrs[0]) // group0
         .expect(400)
         .end(function(err, res) {
           expect(res.body.group_name).to.not.exist;
@@ -128,13 +136,25 @@ describe('Group Endpoint: ', function() {
         });
     });
 
-    it('modifies a group\'s name on a successful post request (201)', function(done) {
+    it("modifies a group's name on a successful post request (201)", function(done) {
       request(app)
-        .post('/db/groups/group/' + mockIds[1]) // group2
-        .send(mockGroupAttrs[3]) // group4
+        .post('/db/groups/group/' + mockIds[1]) // group1
+        .send(mockGroupAttrs[3]) // group3
         .expect(201)
         .end(function(err, res) {
           expect(res.body.group_name).to.equal(mockGroupAttrs[3].group_name);
+          done();
+        });
+    });
+  });
+
+  describe('deleteGroup', function() {
+    it('deletes a group on a succesful deletion (201)', function(done) {
+      request(app)
+        .delete('/db/groups/group/' + mockIds[2]) //group2
+        .expect(201)
+        .end(function(err, res) {
+          expect(res.text).to.equal('deleted!');
           done();
         });
     });

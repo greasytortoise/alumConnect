@@ -13,20 +13,26 @@ module.exports = {
   // http://localhost:3000/db/groups/group/:id
   fetchGroupInfo: function(req, res) {
     var id = req.params.id;
-    Group.where({id: id}).fetch({withRelated: ['users']}).then(function(group) {
-      if (!group) { return res.send(200, 'group has no users!'); }
-      var users = group.related('users');
-      res.json(200, {
-        group_id: group.id,
-        group_name: group.get('group_name'),
-        users: users.map(function(user) {
-          return {
-            id: user.id,
-            username: user.get('username'),
-            image: user.get('image')
-          };
-        })
-      });
+    Group
+      .where({id: id})
+      .fetch({withRelated: ['users']})
+      .then(function(group) {
+        if (!group) { 
+          return res.send(200, 'group has no users!'); 
+        }
+        var users = group.related('users');
+        var retObj = {
+          group_id: group.id,
+          group_name: group.get('group_name'),
+          users: users.map(function(user) {
+            return {
+              id: user.id,
+              username: user.get('username'),
+              image: user.get('image')
+            };
+          })
+        }
+        res.json(retObj);
     });
   },
   // http://localhost:3000/db/groups
@@ -74,8 +80,11 @@ module.exports = {
   // http://localhost:3000/db/groups/group/:id
   deleteGroup: function(req, res) {
     var id = req.params.id;
-    Group.where({id: id}).destroy().then(function() {
-      res.send(201, 'deleted!');
-    });
+    Group
+      .where({id: id})
+      .destroy()
+      .then(function() {
+        res.status(201).send('deleted!');
+      });
   },
 };
