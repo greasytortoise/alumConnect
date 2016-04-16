@@ -11,10 +11,18 @@ var Groups = require('../server/collections/groups');
 
 var mockGroupIds;
 var mockGroupAttrs = [
-  {group_name: 'DO_NOT_USE_TEST_GROUP_0'},
-  {group_name: 'DO_NOT_USE_TEST_GROUP_1'},
-  {group_name: 'DO_NOT_USE_TEST_GROUP_2'},
-  {group_name: 'DO_NOT_USE_TEST_GROUP_3'}
+  {
+    group_name: 'TEST_GROUP_0'
+  },
+  {
+    group_name: 'TEST_GROUP_1'
+  },
+  {
+    group_name: 'TEST_GROUP_2'
+  },
+  {
+    group_name: 'TEST_GROUP_3'
+  }
 ];
 
 describe('Group Endpoint: ', function() {
