@@ -1,7 +1,10 @@
 import React from 'react'
-import ProfileField from './ProfileField.js'
+import ProfileField from './ProfileField'
+import ProfileEditButton from './ProfileEditButton'
+
 // import Image from './Image.js'
 import RestHandler from '../../../util/RestHandler'
+
 import { Button, Grid, Row, Col, Image} from 'react-bootstrap';
 
 var _map = require('lodash/map');
@@ -115,9 +118,9 @@ class Profile extends React.Component {
               </Col>
               <Col xs={7} md={8}>
                 <h2>{username}</h2>
-                <Button onClick={this.handleEditProfile.bind(this)}>
-                  Edit Profile
-                </Button>
+                <ProfileEditButton
+                  editing = {this.state.editing}
+                  handleEditProfile = {this.handleEditProfile.bind(this)} />
               </Col>
             </Row>
           </Grid>

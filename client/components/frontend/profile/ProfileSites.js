@@ -20,11 +20,19 @@ class Bio extends React.Component {
     var editing = this.props.editing;
     var {title, id} = this.props.fieldDetails
     var value = this.state.value;
+    var formatted = this.props.section.text.split(“\n”).map(function(item) {
+      return (
+        <span>
+          {item}
+          <br/>
+        </span>
+      )
+    })};
     if(!editing) {
       return (
         <div key={id}>
           <h3>{title}</h3>
-          <p>{value}</p>
+          <p>{fofrmatted}</p>
         </div>
       );
     } else {
