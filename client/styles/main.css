@@ -176,12 +176,29 @@ textarea.form-control {
   margin:0;
 }
 
-.profile-main h2 {
-  margin-top: 0;
+.profile-main h2,
+.profile-main h3 {
+  margin: 0
 }
 
 .profile-main .btn-toolbar {
   float: right;
+}
+.profile-main h2 {
+  color: #222;
+}
+.profile-main h3 {
+  font-weight:normal;
+  font-size: 22px;
+
+}
+.profile-main {
+  color: #555;
+}
+.profile-main ul {
+  margin: 15px 0;
+  padding: 0;
+  list-style-type: none;
 }
 
 .profile-bio .btn-toolbar .btn {

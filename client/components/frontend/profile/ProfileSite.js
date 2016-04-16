@@ -35,9 +35,7 @@ class ProfileSite extends React.Component {
 
     if(!editing) {
       return (
-        <div key={id}>
-          <p>{name}: {userUrl}</p>
-        </div>
+        <div>{name}: {userUrl}</div>
       );
     }
     else {

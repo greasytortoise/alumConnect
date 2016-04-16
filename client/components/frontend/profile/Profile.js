@@ -88,11 +88,14 @@ class Profile extends React.Component {
   renderProfileSites() {
     if(this.state.profileData.sites) {
       return this.state.profileData.sites.map((site, index) => {
-        return (<ProfileSite
-          siteDetails={site}
-          editing={this.state.editing}
-          key={index}
-          stageProfileEdits = {this.stageProfileEdits.bind(this)} />);
+        return (
+          <li key={index}>
+            <ProfileSite
+            siteDetails={site}
+            editing={this.state.editing}
+            stageProfileEdits = {this.stageProfileEdits.bind(this)} />
+          </li>
+        );
       });
     }
   }
@@ -104,9 +107,9 @@ class Profile extends React.Component {
   render() {
     var username = ''
     var image = ''
+    var group = ''
     if (this.state.profileData.user) {
-      username = this.state.profileData.user.username
-      image = this.state.profileData.user.image
+      var {username, image, group} = this.state.profileData.user
     }
 
     return (
@@ -122,8 +125,10 @@ class Profile extends React.Component {
                   profileEditButtonTapped = {this.profileEditButtonTapped.bind(this)}
                   profileSaveButtonTapped = {this.profileSaveButtonTapped.bind(this)} />
                 <h2>{username}</h2>
-
-                {this.renderProfileSites()}
+                <h3>Groups: <a href="#">{group}</a></h3>
+                <ul>
+                  {this.renderProfileSites()}
+                </ul>
               </Col>
             </Row>
         </div>
