@@ -1,5 +1,3 @@
-var $ = require("jquery");
-var _ = require("underscore");
 import React from 'react'
 import { render } from 'react-dom'
 import { browserHistory, Router, Route, Link, IndexRoute } from 'react-router'

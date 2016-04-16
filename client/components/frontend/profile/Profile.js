@@ -46,10 +46,23 @@ class Profile extends React.Component {
     });
   }
 
+  saveUserProfile(callback) {
+    var url = '/db/users/user/' + this.props.params.user;
+    var data = this.profileEdits;
+    RestHandler.Post(url, data, (err, res) => {
+      if (err) {return err;}
+      callback(res);
+    });
+  }
+
   handleEditProfile(event, filledOutProfileFields) {
-    this.state.editing
-    ? this.setState({ editing: 0})
-    : this.setState({ editing: 1});
+    if(this.state.editing) {
+      this.saveUserProfile( () => {
+        this.setState({ editing: 0})
+      });
+    } else {
+      this.setState({ editing: 1})
+    }
   }
 
   profile() {
