@@ -5,7 +5,7 @@ fieldRouter.route('/')
   .get(fieldController.fetchFields)
   .post(fieldController.createField);
 
-fieldRouter.route('/site/:id')
+fieldRouter.route('/field/:id')
   .post(fieldController.modifyField)
   .delete(fieldController.deleteField);
 
