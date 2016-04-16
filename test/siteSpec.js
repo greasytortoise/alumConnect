@@ -110,18 +110,6 @@ describe('Site Endpoint: ', function() {
           done();
         });
     });
-  });
-
-  describe('deleteSite', function() {
-    it('deletes a site on a successful deletion (201)', function(done) {
-      request(app)
-        .delete('/db/sites/site/' + mockSiteIds[2]) //site2
-        .expect(201)
-        .end(function(err, res) {
-          expect(res.text).to.equal('deleted!');
-          done();
-        });
-    });
 
     it('leaves the field as the original text if an empty string is passed in (201)', function(done) {
       request(app)
@@ -137,6 +125,18 @@ describe('Site Endpoint: ', function() {
           expect(res.body.active).to.equal(1);
           done();
         })
+    });
+  });
+
+  describe('deleteSite', function() {
+    it('deletes a site on a successful deletion (201)', function(done) {
+      request(app)
+        .delete('/db/sites/site/' + mockSiteIds[2]) //site2
+        .expect(201)
+        .end(function(err, res) {
+          expect(res.text).to.equal('deleted!');
+          done();
+        });
     });
   });
 });
