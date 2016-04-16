@@ -3,10 +3,18 @@ var expect = chai.expect;
 var assert = chai.assert;
 var request = require('supertest');
 var Promise = require('bluebird');
-
+var auth = require('../client/util/authHelpers.js');
 var handler = require('../server/lib/handler');
 var util = require('../server/lib/utility');
 var app = require('../server/app.js');
+var base64 = require('base64-min');
+
+app.post('/test', util.isLoggedIn, function(req, res) {
+  res.send(200);
+});
+app.post('/admintest', util.isAdmin, function(req, res) {
+  res.send(200);
+});
 
 describe('Server utility: ', function() {
 
@@ -44,5 +52,45 @@ describe('Server utility: ', function() {
         }
       });
   });
-
 });
+
+describe('Client authentication: ', function() {
+  beforeEach('create new token', function(done) {
+    localStorage.setItem('jwtAlum', JSON.stringify(util.generateToken(5, 'admin@admin.com', 1, 'Admin')));
+    done();
+  });
+
+  after('destroy token in localStorage', function(done) {
+    localStorage.clear();
+    done();
+  });
+
+  it('localStorage has a token', function(done) {
+    expect(localStorage.getItem('jwtAlum')).to.not.be.undefined;
+    done();
+  });
+
+  it('token gets parsed', function(done) {
+    //auth.parseJwt doesn't work due to not having window.atob(), so base64 is used to simulate the function 
+    var decoded = base64.decode(localStorage.getItem('jwtAlum').split('.')[1]);
+    decoded = decoded.substring(0, decoded.length - 1);
+    var parsed = JSON.parse(decoded);
+    expect(parsed.iss).to.equal(5);
+    done();
+
+  });
+
+  it('Destroys the token on logout', function(done) {
+    auth.logout();
+    expect(localStorage.getItem('jwtAlum')).to.be.null;
+    done();
+  });
+
+  it('Verifies token to check if user is logged in', function(done) {
+    expect(!!localStorage.getItem('jwtAlum')).to.equal(true);
+    done();
+  })
+  
+});
+
+

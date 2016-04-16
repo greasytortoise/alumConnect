@@ -21,12 +21,6 @@ module.exports = function(app, express) {
   app.post('/checktoken', util.getPermissions);
   app.post('/login', handler.checkLogin);
 
-  app.post('/test', util.isLoggedIn, function(req, res) {
-    res.send(200);
-  });
-  app.post('/admintest', util.isAdmin, function(req, res) {
-    res.send(200);
-  });
 
   app.post('/changepassword', function(req, res) {
     var tokenUserData = req.token.split('.')[1].user;
