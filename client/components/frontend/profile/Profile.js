@@ -4,18 +4,18 @@ import ProfileField from './ProfileField.js'
 import RestHandler from '../../../util/RestHandler'
 import { Button, Grid, Row, Col, Image} from 'react-bootstrap';
 
+var _map = require('lodash/map');
 
-var request = require('superagent');
 
 class Profile extends React.Component {
 
   constructor (props) {
     super (props);
-
     this.state = {
       profileData: {},
       editing: 0
     };
+    this.profileEdits = {}
   }
 
   componentDidMount() {
@@ -35,17 +35,36 @@ class Profile extends React.Component {
   getUserProfile() {
     var url = '/db/users/user/' + this.props.params.user;
     RestHandler.Get(url, (err, res) => {
-      // console.log(res.body)
       this.setState({
         profileData: res.body,
       });
+      this.profileEdits = {
+        user: res.body.user,
+        sites: {},
+        userInfo:{}
+      }
+    });
+  }
+
+  saveUserProfile(callback) {
+    var url = '/db/users/user/' + this.props.params.user;
+    var data = this.profileEdits;
+    data.userInfo = _map(data.userInfo, function(val){return val});
+    data.sites = _map(data.sites, function(val){return val});
+    RestHandler.Post(url, data, (err, res) => {
+      if (err) {return err;}
+      callback(res);
     });
   }
 
   handleEditProfile(event, filledOutProfileFields) {
-    this.state.editing
-    ? this.setState({ editing: 0})
-    : this.setState({ editing: 1});
+    if(this.state.editing) {
+      this.saveUserProfile( () => {
+        this.setState({ editing: 0})
+      });
+    } else {
+      this.setState({ editing: 1})
+    }
   }
 
   profile() {
@@ -67,9 +86,15 @@ class Profile extends React.Component {
         return (<ProfileField
           fieldDetails={detail}
           editing={this.state.editing}
-          key={index} />);
+          key={index}
+          stageProfileEdits = {this.stageProfileEdits.bind(this)} />);
       });
     }
+  }
+
+  stageProfileEdits(callback) {
+    callback(this.profileEdits.userInfo);
+    console.log(this.profileEdits);
   }
 
   render() {
@@ -85,13 +110,11 @@ class Profile extends React.Component {
         <div className = 'section'>
           <Grid>
             <Row>
-              <Col xs={4}>
-                <Image src={image}
-                   responsive />
+              <Col xs={5} md={4}>
+                <Image src={image} responsive />
               </Col>
-              <Col xs={8}>
+              <Col xs={7} md={8}>
                 <h2>{username}</h2>
-
                 <Button onClick={this.handleEditProfile.bind(this)}>
                   Edit Profile
                 </Button>

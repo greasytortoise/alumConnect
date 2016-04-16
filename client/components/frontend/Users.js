@@ -19,7 +19,10 @@ class Users extends React.Component {
   componentDidMount() {
     RestHandler.Get('/db/groups', (err, res) => {
       var groups = res.body.reverse()
-      var initialGroup = res.body[0]
+      var initialGroup = res.body[0];
+      if(localStorage.selectedGroup) {
+        initialGroup = JSON.parse(localStorage.selectedGroup);
+      }
       this.setState({groups: groups})
       this.setState({selectedGroup: initialGroup})
       this.getUsers(initialGroup.id);
@@ -60,11 +63,8 @@ class Users extends React.Component {
 
   handleGroupSelect(evt, key) {
     this.setState({'selectedGroup': key});
+    localStorage.setItem('selectedGroup', JSON.stringify(key));
     this.getUsers(key.id);
-  }
-  handleFilterUsersInput() {
-    var filterText = this.refs.searchusers.refs.input.value.toLowerCase();
-    this.setState({searchUsersText: filterText});
   }
 
   renderGroups(handleGroupSelect) {
@@ -74,6 +74,11 @@ class Users extends React.Component {
         <MenuItem key={id} eventKey={group} onSelect={handleGroupSelect}>{group_name}</MenuItem>
       );
     });
+  }
+
+  handleFilterUsersInput() {
+    var filterText = this.refs.searchusers.refs.input.value.toLowerCase();
+    this.setState({searchUsersText: filterText});
   }
 
   render() {
