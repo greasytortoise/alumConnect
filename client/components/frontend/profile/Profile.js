@@ -98,8 +98,7 @@ class Profile extends React.Component {
   }
 
   stageProfileEdits(callback) {
-    callback(this.profileEdits.userInfo);
-    console.log(this.profileEdits);
+    callback(this.profileEdits);
   }
 
   render() {

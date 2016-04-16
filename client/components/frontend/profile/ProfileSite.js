@@ -14,14 +14,14 @@ class ProfileSite extends React.Component {
   }
 
   handleFormChange () {
-    var {title, id} = this.props.siteDetails
-    var formValue = this.refs.input.refs.input.value;
-
+    var {id, name, url} = this.props.siteDetails
+    var formValue = this.refs.input.refs.input.value || '';
     this.setState({value: formValue});
     this.props.stageProfileEdits((editedObject) => {
-      editedObject[id] = {
+      editedObject.sites.id = {
         id: id,
-        title: title,
+        name: name,
+        url: url,
         value: formValue
       }
     });
@@ -47,7 +47,8 @@ class ProfileSite extends React.Component {
           <Input type="text"
             addonBefore={url}
             value={value}
-            ref="input"/>
+            ref="input"
+            onChange={this.handleFormChange.bind(this)}/>
         </div>
       );
     }

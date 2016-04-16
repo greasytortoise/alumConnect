@@ -19,7 +19,7 @@ class ProfileField extends React.Component {
 
     this.setState({value: formValue});
     this.props.stageProfileEdits((editedObject) => {
-      editedObject[id] = {
+      editedObject.userInfo[id] = {
         id: id,
         title: title,
         value: formValue
