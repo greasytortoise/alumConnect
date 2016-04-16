@@ -1,3 +1,5 @@
+var $ = require("jquery");
+var _ = require("underscore");
 import React from 'react'
 import { render } from 'react-dom'
 import { browserHistory, Router, Route, Link, IndexRoute } from 'react-router'
@@ -14,7 +16,6 @@ import DashboardNewUser from './components/admin/DashboardNewUser'
 import Groups from './components/admin/Groups/Groups'
 import Sites from './components/admin/Sites/Sites'
 import ProfileFields from './components/admin/ProfileFields/ProfileFields'
-
 
 render((
   <Router history={browserHistory}>
@@ -58,6 +59,3 @@ function requireAdmin(nextState, replace) {
     });
   }
 }
-
-
-
