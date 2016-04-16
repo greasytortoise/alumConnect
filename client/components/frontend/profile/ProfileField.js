@@ -20,6 +20,7 @@ class Bio extends React.Component {
     this.setState({value: formValue});
     this.props.stageProfileEdits((editedObject) => {
       editedObject[id] = {
+        id: id,
         title: title,
         value: formValue
       }

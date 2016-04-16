@@ -4,8 +4,8 @@ import ProfileField from './ProfileField.js'
 import RestHandler from '../../../util/RestHandler'
 import { Button, Grid, Row, Col, Image} from 'react-bootstrap';
 
+var _ = require('lodash');
 
-var request = require('superagent');
 
 class Profile extends React.Component {
 
@@ -49,6 +49,8 @@ class Profile extends React.Component {
   saveUserProfile(callback) {
     var url = '/db/users/user/' + this.props.params.user;
     var data = this.profileEdits;
+    data.userInfo = _.map(data.userInfo, function(val){return val});
+    data.sites = _.map(data.sites, function(val){return val});
     RestHandler.Post(url, data, (err, res) => {
       if (err) {return err;}
       callback(res);

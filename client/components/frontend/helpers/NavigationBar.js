@@ -4,7 +4,7 @@ import $ from 'jquery'
 
 import { Navbar, Nav, NavDropdown, MenuItem, NavItem} from 'react-bootstrap';
 
-  
+
   $(document).on('click', '.navbar-toggle', function(event) {
     $(this).parent().parent().find('.dropdown').addClass('open');
   })
