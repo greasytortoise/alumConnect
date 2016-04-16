@@ -1,6 +1,6 @@
 import React from 'react';
 import {Router, Link} from 'react-router';
-import auth from '../authHelpers.js';
+import auth from '../util/authHelpers.js';
 import request from 'superagent';
 
 import { Grid, Input, ButtonInput } from 'react-bootstrap';

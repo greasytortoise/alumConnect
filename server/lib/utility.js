@@ -5,15 +5,16 @@ var jwtTokenSecret = 'DONALD_TRUMP_HUGE_HANDS_NO_PROBLEM';
 var User = require('../models/user');
 
 
-exports.generateToken = function(userid, email, perm) {
+exports.generateToken = function(userid, email, perm, name) {
   var expires = moment().add('days', 3).valueOf();
   var token = jwt.encode({
     iss: userid,
     exp: expires,
     perm: perm
+
   }, jwtTokenSecret);
 
-  return {token: token, expires: expires, user: email};
+  return {token: token, expires: expires, user: email, name: name };
 
 };
 
@@ -53,8 +54,8 @@ exports.getPermissions = function(req, res) {
 };
 
 exports.isAdmin = function(req, res, next) {
-  var decoded = jwt.decode(req.body.token, jwtTokenSecret);
-  console.log(decoded);
+  var token = JSON.parse(req.body.token).token;
+  var decoded = jwt.decode(token, jwtTokenSecret);
   User.where({id: decoded.iss}).fetch().then(function(user){
     if(user.attributes.permission === 1) {
       next();

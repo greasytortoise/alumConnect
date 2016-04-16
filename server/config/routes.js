@@ -16,6 +16,7 @@ module.exports = function(app, express) {
   app.use('/db/users', userRouter);
   app.use('/db/sites', siteRouter);
   app.use('/db/fields', fieldRouter);
+  app.use('/dashboard/db/users', userRouter);
 
   app.post('/checktoken', util.getPermissions);
   app.post('/login', handler.checkLogin);

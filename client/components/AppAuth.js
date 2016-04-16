@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { browserHistory, Router, Route, Link } from 'react-router'
-import auth from '../authHelpers.js'
+import auth from '../util/authHelpers.js'
 import Login from './Login'
 import Profile from './frontend/profile/Profile'
 

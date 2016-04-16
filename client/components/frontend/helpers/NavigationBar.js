@@ -1,6 +1,6 @@
 import React from 'react';
-import NavLink from './NavLink'
-import $ from 'jquery'
+import NavLink from './NavLink';
+import $ from 'jquery';
 
 import { Navbar, Nav, NavDropdown, MenuItem, NavItem} from 'react-bootstrap';
 

@@ -1,6 +1,7 @@
-import React from 'react'
-import { Input, Button } from 'react-bootstrap'
-import RestHandler from '../../../util/RestHandler'
+import React from 'react';
+import { Input, Button } from 'react-bootstrap';
+import RestHandler from '../../../util/RestHandler';
+var auth = require('../../../util/authHelpers.js');
 
 class EditProfileField extends React.Component {
   constructor(props) {
@@ -26,7 +27,8 @@ class EditProfileField extends React.Component {
     } else {
       var url = '/db/fields/field/' + this.props.value.id;
       var data = {
-        title: this.state.value
+        title: this.state.value,
+        token: auth.getToken()
       };
 
       RestHandler.Post(url, data, (err, res) => {
