@@ -1,11 +1,12 @@
 import React from 'react'
 import ProfileField from './ProfileField'
+import ProfileSite from './ProfileSite'
 import ProfileEditButton from './ProfileEditButton'
 
 // import Image from './Image.js'
 import RestHandler from '../../../util/RestHandler'
 
-import { Button, Grid, Row, Col, Image} from 'react-bootstrap';
+import { Button, Row, Col, Image} from 'react-bootstrap';
 
 var _map = require('lodash/map');
 var auth = require('../../../util/authHelpers.js');
@@ -73,7 +74,7 @@ class Profile extends React.Component {
     });
   }
 
-  profile() {
+  renderProfileFields() {
     if(this.state.profileData.userInfo) {
       return this.state.profileData.userInfo.map((detail, index) => {
         return (<ProfileField
@@ -84,40 +85,55 @@ class Profile extends React.Component {
       });
     }
   }
+  renderProfileSites() {
+    if(this.state.profileData.sites) {
+      return this.state.profileData.sites.map((site, index) => {
+        return (
+          <li key={index}>
+            <ProfileSite
+            siteDetails={site}
+            editing={this.state.editing}
+            stageProfileEdits = {this.stageProfileEdits.bind(this)} />
+          </li>
+        );
+      });
+    }
+  }
 
   stageProfileEdits(callback) {
-    callback(this.profileEdits.userInfo);
-    console.log(this.profileEdits);
+    callback(this.profileEdits);
   }
 
   render() {
     var username = ''
     var image = ''
+    var group = ''
     if (this.state.profileData.user) {
-      username = this.state.profileData.user.username
-      image = this.state.profileData.user.image
+      var {username, image, group} = this.state.profileData.user
     }
 
     return (
       <div>
-        <div className = 'section'>
-          <Grid>
+        <div className='section profile-main'>
             <Row>
-              <Col xs={5} md={4}>
+              <Col xs={12} sm={5} md={4}>
                 <Image src={image} responsive />
               </Col>
-              <Col xs={7} md={8}>
-                <h2>{username}</h2>
+              <Col xs={12} sm={7} md={8}>
                 <ProfileEditButton
                   editing = {this.state.editing}
                   profileEditButtonTapped = {this.profileEditButtonTapped.bind(this)}
                   profileSaveButtonTapped = {this.profileSaveButtonTapped.bind(this)} />
+                <h2>{username}</h2>
+                <h3>Groups: <a href="#">{group}</a></h3>
+                <ul>
+                  {this.renderProfileSites()}
+                </ul>
               </Col>
             </Row>
-          </Grid>
         </div>
-        <div className = 'section'>
-          {this.profile()}
+        <div className = 'section profile-bio'>
+          {this.renderProfileFields()}
           <ProfileEditButton
             editing = {this.state.editing}
             hideEditButton = {true}

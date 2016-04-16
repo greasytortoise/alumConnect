@@ -13,13 +13,13 @@ class ProfileEditButton extends React.Component {
       return (
         <ButtonToolbar>
           <Button onClick={this.props.profileSaveButtonTapped} bsStyle="primary">Save Changes</Button>
-          {/*<Button onClick={this.props.profileEditButtonTapped}>Cancel</Button>*/}
+          <Button onClick={this.props.profileEditButtonTapped}>Cancel</Button>
         </ButtonToolbar>
       )
     } else {
       return this.props.hideEditButton
         ? <div></div>
-        : <Button onClick={this.props.profileEditButtonTapped}>Edit Profile</Button>
+        : <ButtonToolbar><Button onClick={this.props.profileEditButtonTapped}>Edit Profile</Button></ButtonToolbar>
     }
   }
 
