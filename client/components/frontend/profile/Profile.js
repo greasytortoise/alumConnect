@@ -1,5 +1,6 @@
 import React from 'react'
 import ProfileField from './ProfileField'
+import ProfileSite from './ProfileSite'
 import ProfileEditButton from './ProfileEditButton'
 
 // import Image from './Image.js'
@@ -73,11 +74,22 @@ class Profile extends React.Component {
     });
   }
 
-  profile() {
+  renderProfileFields() {
     if(this.state.profileData.userInfo) {
       return this.state.profileData.userInfo.map((detail, index) => {
         return (<ProfileField
           fieldDetails={detail}
+          editing={this.state.editing}
+          key={index}
+          stageProfileEdits = {this.stageProfileEdits.bind(this)} />);
+      });
+    }
+  }
+  renderProfileSites() {
+    if(this.state.profileData.sites) {
+      return this.state.profileData.sites.map((site, index) => {
+        return (<ProfileSite
+          siteDetails={site}
           editing={this.state.editing}
           key={index}
           stageProfileEdits = {this.stageProfileEdits.bind(this)} />);
@@ -101,23 +113,23 @@ class Profile extends React.Component {
     return (
       <div>
         <div className = 'section'>
-          <Grid>
             <Row>
-              <Col xs={5} md={4}>
+              <Col xs={12} sm={5} md={4}>
                 <Image src={image} responsive />
               </Col>
-              <Col xs={7} md={8}>
+              <Col xs={12} sm={7} md={8}>
                 <h2>{username}</h2>
                 <ProfileEditButton
                   editing = {this.state.editing}
                   profileEditButtonTapped = {this.profileEditButtonTapped.bind(this)}
                   profileSaveButtonTapped = {this.profileSaveButtonTapped.bind(this)} />
+
+                {this.renderProfileSites()}
               </Col>
             </Row>
-          </Grid>
         </div>
         <div className = 'section'>
-          {this.profile()}
+          {this.renderProfileFields()}
           <ProfileEditButton
             editing = {this.state.editing}
             hideEditButton = {true}
