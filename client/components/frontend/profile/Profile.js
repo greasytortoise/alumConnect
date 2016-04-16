@@ -1,7 +1,10 @@
 import React from 'react'
-import ProfileField from './ProfileField.js'
+import ProfileField from './ProfileField'
+import ProfileEditButton from './ProfileEditButton'
+
 // import Image from './Image.js'
 import RestHandler from '../../../util/RestHandler'
+
 import { Button, Grid, Row, Col, Image} from 'react-bootstrap';
 
 var _map = require('lodash/map');
@@ -57,30 +60,18 @@ class Profile extends React.Component {
     });
   }
 
-  handleEditProfile(event, filledOutProfileFields) {
-    if(this.state.editing) {
-      this.saveUserProfile( () => {
-        this.setState({ editing: 0})
-      });
-    } else {
-      this.setState({ editing: 1})
-    }
+  profileEditButtonTapped() {
+    this.state.editing
+      ? this.setState({ editing: 0})
+      : this.setState({ editing: 1})
+  }
+  profileSaveButtonTapped() {
+    this.saveUserProfile( () => {
+      this.setState({ editing: 0})
+    });
   }
 
   profile() {
-
-    // return this.state.availableProfileFields.map((field, index) => {
-    //
-    // // if filledOutProfileFields contains the field.id
-    // // set the value to the value
-    // // else set value to ''
-    // // if the balue is blank don't render it on the front end.
-    //
-    // field.value = ''
-    // return (<ProfileField
-    //   fieldDetails={field}
-    //   editing={this.state.editing} />);
-    // });
     if(this.state.profileData.userInfo) {
       return this.state.profileData.userInfo.map((detail, index) => {
         return (<ProfileField
@@ -115,15 +106,21 @@ class Profile extends React.Component {
               </Col>
               <Col xs={7} md={8}>
                 <h2>{username}</h2>
-                <Button onClick={this.handleEditProfile.bind(this)}>
-                  Edit Profile
-                </Button>
+                <ProfileEditButton
+                  editing = {this.state.editing}
+                  profileEditButtonTapped = {this.profileEditButtonTapped.bind(this)}
+                  profileSaveButtonTapped = {this.profileSaveButtonTapped.bind(this)} />
               </Col>
             </Row>
           </Grid>
         </div>
         <div className = 'section'>
           {this.profile()}
+          <ProfileEditButton
+            editing = {this.state.editing}
+            hideEditButton = {true}
+            profileEditButtonTapped = {this.profileEditButtonTapped.bind(this)}
+            profileSaveButtonTapped = {this.profileSaveButtonTapped.bind(this)} />
         </div>
       </div>
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { Input } from 'react-bootstrap';
 
 
-class Bio extends React.Component {
+class ProfileField extends React.Component {
 
   constructor(props) {
     super(props);
@@ -26,15 +26,19 @@ class Bio extends React.Component {
       }
     });
   }
-  renderBioDetails() {
+  renderProfileField() {
     var editing = this.props.editing;
     var {title, id} = this.props.fieldDetails
     var value = this.state.value;
+    var formattedValue = value.split('\n').map(function(paragraph, key) {
+      return (<span key={key}>{paragraph}<br/></span>)
+    });
+
     if(!editing) {
       return (
         <div key={id}>
           <h3>{title}</h3>
-          <p>{value}</p>
+          <p>{formattedValue}</p>
         </div>
       );
     } else {
@@ -52,9 +56,9 @@ class Bio extends React.Component {
 
   render() {
     return (
-      this.renderBioDetails()
+      this.renderProfileField()
     );
   }
 }
 
-module.exports = Bio;
+module.exports = ProfileField;
