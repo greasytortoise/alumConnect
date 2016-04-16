@@ -140,7 +140,7 @@ describe('Group Endpoint: ', function() {
           expect(res.body.group_name).to.equal(mockGroupAttrs[1].group_name);
           done();
         })
-    })
+    });
   });
 
   describe('deleteGroup', function() {

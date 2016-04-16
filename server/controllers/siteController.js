@@ -41,7 +41,7 @@ module.exports = {
       .fetch()
       .then(function(siteExist) {
         if (siteExist && (siteExist.id !== parseInt(id))) {
-          return res.send(400, 'Site already exists!'); 
+          return res.status(400).send('Site already exists!'); 
         }
         Site
           .where({id: id})
@@ -54,7 +54,7 @@ module.exports = {
                 active: data.active || site.get('active')
               })
               .then(function() {
-                res.json(201, site);
+                res.status(201).send(site);
               });
           });
     });    

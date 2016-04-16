@@ -88,8 +88,27 @@ describe('Site Endpoint: ', function() {
   });
 
   describe('modifySite', function() {
-    it('', function(done) {
-      done();
+    it("does not modify a site's name to an existing site's name on a bad post request (400)", function(done) {
+      request(app)
+        .post('/db/sites/site/' + mockSiteIds[1]) // site1
+        .send(mockSiteAttrs[0]) // site0
+        .expect(400)
+        .end(function(err, res) {
+          expect(res.body.group_name).to.not.exist;
+          expect(res.text).to.equal('Site already exists!');
+          done();
+        });
+    });
+
+    it("modifies a site's name on a successful post request (201)", function(done) {
+      request(app)
+        .post('/db/sites/site/' + mockSiteIds[1]) // site1
+        .send(mockSiteAttrs[3]) // site3
+        .expect(201)
+        .end(function(err, res) {
+          expect(res.body.site_name).to.equal(mockSiteAttrs[3].site_name);
+          done();
+        });
     });
   });
 
@@ -102,6 +121,22 @@ describe('Site Endpoint: ', function() {
           expect(res.text).to.equal('deleted!');
           done();
         });
+    });
+
+    it('leaves the field as the original text if an empty string is passed in (201)', function(done) {
+      request(app)
+        .post('/db/sites/site/' + mockSiteIds[1])
+        .send({
+          site_name: '',
+          base_url: 'http://www.UHOH.com'
+        })
+        .expect(201)
+        .end(function(err, res) {
+          expect(res.body.site_name).to.equal(mockSiteAttrs[1].site_name);
+          expect(res.body.base_url).to.equal('http://www.UHOH.com');
+          expect(res.body.active).to.equal(1);
+          done();
+        })
     });
   });
 });
