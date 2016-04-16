@@ -18,7 +18,7 @@ module.exports = {
       .fetch({withRelated: ['users']})
       .then(function(group) {
         if (!group) { 
-          return res.send(200, 'group has no users!'); 
+          return res.status(404).send('There is no such group!'); 
         }
         var users = group.related('users');
         var retObj = {
