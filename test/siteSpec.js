@@ -53,14 +53,37 @@ describe('Site Endpoint: ', function() {
   });
 
   describe('fetchSites', function() {
-    it('', function(done) {
-      done();
+    it('displays all Sites on a successful get request (200)', function(done) {
+      request(app)
+        .get('/db/sites')
+        .expect(200)
+        .end(function(err, res) {
+          expect(res.body).to.have.length.above(2);
+          done();
+        });
     });
   });
 
   describe('createSite', function() {
-    it('', function(done) {
-      done();
+    it('creates a new site on a successful post request (201)', function(done) {
+      request(app)
+        .post('/db/sites')
+        .send(mockSiteAttrs[3]) // site3
+        .expect(201)
+        .end(function(err, res) {
+          expect(res.body.site_name).to.equal(mockSiteAttrs[3].site_name);
+          done();
+        });
+    });
+
+    it('does not create an existing site on a bad post request (400)', function(done) {
+      request(app)
+        .post('/db/sites')
+        .send(mockSiteAttrs[2]) // site2
+        .expect(400)
+        .end(function(err, res) {
+          done();
+        });
     });
   });
 
@@ -71,8 +94,14 @@ describe('Site Endpoint: ', function() {
   });
 
   describe('deleteSite', function() {
-    it('', function(done) {
-      done();
+    it('deletes a site on a successful deletion (201)', function(done) {
+      request(app)
+        .delete('/db/sites/site/' + mockSiteIds[2]) //site2
+        .expect(201)
+        .end(function(err, res) {
+          expect(res.text).to.equal('deleted!');
+          done();
+        });
     });
   });
 });

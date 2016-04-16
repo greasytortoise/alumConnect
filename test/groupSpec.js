@@ -101,7 +101,6 @@ describe('Group Endpoint: ', function() {
         .send(mockGroupAttrs[2]) // group2
         .expect(400)
         .end(function(err, res) {
-          expect(res.body.group_name).to.not.exist;
           expect(res.text).to.equal('Group already exists!');
           done();
         });
@@ -131,6 +130,17 @@ describe('Group Endpoint: ', function() {
           done();
         });
     });
+
+    it('leaves the field as the original text if an empty string is passed in (201)', function(done) {
+      request(app)
+        .post('/db/groups/group/' + mockGroupIds[1])
+        .send({group_name: ''})
+        .expect(201)
+        .end(function(err, res) {
+          expect(res.body.group_name).to.equal(mockGroupAttrs[1].group_name);
+          done();
+        })
+    })
   });
 
   describe('deleteGroup', function() {
