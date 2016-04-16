@@ -111,7 +111,7 @@ module.exports = {
     });
   },
   // http://localhost:3000/db/users
-  // no error handling on this one just yet
+  // need admin permission to create a user
   createUser: function(req, res) {
     var data = req.body;
 
