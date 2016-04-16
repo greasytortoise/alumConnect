@@ -104,14 +104,16 @@ module.exports = {
   // no error handling on this one just yet
   createUser: function(req, res) {
     var data = req.body;
-    Group.where({group_name: data.user.group}).fetch().then(function(group) {
+    console.log(data);
+    Group.where({group_name: data.group}).fetch().then(function(group) {
       return new User({
         // permission and public are not dealt with yet...
-        username: data.user.username,
-        password: data.user.password,
-        email: data.user.email,
-        image: data.user.image,
-        url_hash: data.user.url,
+        username: data.username,
+        password: data.password,
+        email: data.email,
+        image: data.image,
+        //no url yet
+        // url_hash: data.url,
         Group_id: group.id,
         public: 0,
         permission: 0

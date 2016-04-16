@@ -1,6 +1,7 @@
 import React from 'react'
 import {Input, ButtonInput, DropdownButton, MenuItem} from 'react-bootstrap'
 import RestHandler from '../../util/RestHandler'
+var auth = require('../../util/authHelpers.js');
 
 class DashboardNewUser extends React.Component {
   constructor(props) {
@@ -40,17 +41,18 @@ class DashboardNewUser extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
+    
     var name = this.refs.name.getValue();
     var email = this.refs.email.getValue();
     var password = this.refs.password.getValue();
     var group = this.state.group.group_name;
-
+    var token = auth.getToken();
     var data = {
       username: name,
       password: password,
       email: email,
-      group: group
+      group: group,
+      token: token
     };
 
     RestHandler.Post('db/users', data, (err, res) => {

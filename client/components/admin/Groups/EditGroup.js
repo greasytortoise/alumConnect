@@ -1,6 +1,7 @@
 import React from 'react'
 import { Input, Button } from 'react-bootstrap'
 import RestHandler from '../../../util/RestHandler'
+var auth = require('../../../util/authHelpers.js');
 
 class EditGroup extends React.Component {
   constructor(props) {
@@ -26,7 +27,8 @@ class EditGroup extends React.Component {
     } else {
       var url = '/db/groups/group/' + this.props.value.id;
       var data = {
-        group_name: this.state.value
+        group_name: this.state.value,
+        token: util.getToken()
       };
 
       RestHandler.Post(url, data, (err, res) => {

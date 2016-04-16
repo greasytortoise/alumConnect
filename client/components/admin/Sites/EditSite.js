@@ -1,6 +1,7 @@
 import React from 'react'
 import { Input, Button, ListGroupItem } from 'react-bootstrap'
 import RestHandler from '../../../util/RestHandler'
+var auth = require('../../../util/authHelpers.js');
 
 class EditSite extends React.Component {
   constructor(props) {
@@ -28,7 +29,8 @@ class EditSite extends React.Component {
       var url = '/db/sites/site/' + this.props.value.id;
       var data = {
         site_name: this.state.site_name,
-        base_url: this.state.url
+        base_url: this.state.url, 
+        token: auth.getToken()
       };
 
       RestHandler.Post(url, data, (err, res) => {

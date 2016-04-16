@@ -54,7 +54,8 @@ exports.getPermissions = function(req, res) {
 };
 
 exports.isAdmin = function(req, res, next) {
-  var decoded = jwt.decode(req.body.token, jwtTokenSecret);
+  var token = JSON.parse(req.body.token).token;
+  var decoded = jwt.decode(token, jwtTokenSecret);
   User.where({id: decoded.iss}).fetch().then(function(user){
     if(user.attributes.permission === 1) {
       next();
