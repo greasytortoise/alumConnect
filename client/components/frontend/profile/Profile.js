@@ -6,7 +6,7 @@ import ProfileEditButton from './ProfileEditButton'
 // import Image from './Image.js'
 import RestHandler from '../../../util/RestHandler'
 
-import { Button, Grid, Row, Col, Image} from 'react-bootstrap';
+import { Button, Row, Col, Image} from 'react-bootstrap';
 
 var _map = require('lodash/map');
 var auth = require('../../../util/authHelpers.js');
@@ -112,23 +112,23 @@ class Profile extends React.Component {
 
     return (
       <div>
-        <div className = 'section'>
+        <div className='section profile-main'>
             <Row>
               <Col xs={12} sm={5} md={4}>
                 <Image src={image} responsive />
               </Col>
               <Col xs={12} sm={7} md={8}>
-                <h2>{username}</h2>
                 <ProfileEditButton
                   editing = {this.state.editing}
                   profileEditButtonTapped = {this.profileEditButtonTapped.bind(this)}
                   profileSaveButtonTapped = {this.profileSaveButtonTapped.bind(this)} />
+                <h2>{username}</h2>
 
                 {this.renderProfileSites()}
               </Col>
             </Row>
         </div>
-        <div className = 'section'>
+        <div className = 'section profile-bio'>
           {this.renderProfileFields()}
           <ProfileEditButton
             editing = {this.state.editing}

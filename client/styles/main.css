@@ -172,6 +172,25 @@ textarea.form-control {
   -webkit-border-radius:  0 0 3px 3px;
 }
 
+.profile-main .row {
+  margin:0;
+}
+
+.profile-main h2 {
+  margin-top: 0;
+}
+
+.profile-main .btn-toolbar {
+  float: right;
+}
+
+.profile-bio .btn-toolbar .btn {
+  width:48%
+}
+
+.profile-bio .btn-default {
+  float:right;
+}
 
 
 
