@@ -1,6 +1,7 @@
 var bodyParser = require('body-parser');
 var util = require('./utility.js');
 var Promise = require('bluebird');
+var User = require('../models/user.js');
 
 module.exports = {
   getAll: function(attrs, Model) {
@@ -46,7 +47,8 @@ module.exports = {
         //   }
         // });
         if(req.body.password === user.attributes.password) {
-          res.send(200, JSON.stringify({token: util.generateToken(user.attributes.id, user.attributes.email, user.attributes.permission), perm: user.attributes.permission}));
+          res.send(200, JSON.stringify({token: util.generateToken(user.attributes.id, 
+            user.attributes.email, user.attributes.permission, user.attributes.username)}));
         } else {
           res.send(403, 'Invalid Password');
         }
