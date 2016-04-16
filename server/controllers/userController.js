@@ -114,41 +114,47 @@ module.exports = {
   // no error handling on this one just yet
   createUser: function(req, res) {
     var data = req.body;
-    console.log(data);
-    Group.where({group_name: data.group}).fetch().then(function(group) {
-      return new User({
-        // permission and public are not dealt with yet...
-        username: data.username,
-        password: data.password,
-        email: data.email,
-        image: data.image,
-        //no url yet
-        // url_hash: data.url,
-        Group_id: group.id,
-        public: 0,
-        permission: 0
-      }).save().then(function(user) {
-        // may run into async issues
-        data.sites.forEach(function(site) {
-          UserSites.create({
-            rest_url: site.value,
-            User_id: user.id,
-            Site_id: site.id
+
+    Group
+      .where({group_name: data.user.group})
+      .fetch()
+      .then(function(group) {
+        return new User({
+          // permission and public are not dealt with yet...
+          username: data.user.username,
+          password: data.user.password,
+          email: data.user.email,
+          image: data.user.image,
+          // url_hash: data.user.url,
+          Group_id: group.id,
+          public: 0,
+          permission: 0
+        })
+        .save()
+        .then(function(user) {
+          // may run into async issues
+          data.sites.forEach(function(site) {
+            UserSites.create({
+              rest_url: site.value,
+              User_id: user.id,
+              Site_id: site.id
+            });
           });
-        });
-        return user;
-      }).then(function(user) {
-        // may run into async issues
-        data.userInfo.forEach(function(info) {
-          Bios.create({
-            bio: info.value,
-            User_id: user.id,
-            Bio_Field_id: info.id
+          return user;
+        })
+        .then(function(user) {
+          // may run into async issues
+          data.userInfo.forEach(function(info) {
+            Bios.create({
+              bio: info.value,
+              User_id: user.id,
+              Bio_Field_id: info.id
+            });
           });
+        })
+        .then(function() {
+          res.send(201);
         });
-      }).then(function() {
-        res.send(201);
-      });
     });
   },
   // http://localhost:3000/db/users/user/:id
