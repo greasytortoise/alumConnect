@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from 'react-bootstrap';
+import { Button, ButtonToolbar } from 'react-bootstrap';
 
 
 class ProfileEditButton extends React.Component {
@@ -10,25 +10,22 @@ class ProfileEditButton extends React.Component {
   generateButtons() {
 
     if(this.props.editing) {
-      return(
-        <Button onClick={this.props.handleEditProfile}>
-          Edit Profile
-        </Button>
+      return (
+        <ButtonToolbar>
+          <Button onClick={this.props.profileSaveButtonTapped} bsStyle="primary">Save Changes</Button>
+          {/*<Button onClick={this.props.profileEditButtonTapped}>Cancel</Button>*/}
+        </ButtonToolbar>
       )
     } else {
-      return(
-        <Button onClick={this.props.handleEditProfile}>
-          Edit
-        </Button>
-      )
+      return this.props.hideEditButton
+        ? <div></div>
+        : <Button onClick={this.props.profileEditButtonTapped}>Edit Profile</Button>
     }
   }
 
   render() {
     return (
-      <div>
-        {this.generateButtons()}
-      </div>
+        this.generateButtons()
     );
   }
 }

@@ -30,8 +30,8 @@ class ProfileField extends React.Component {
     var editing = this.props.editing;
     var {title, id} = this.props.fieldDetails
     var value = this.state.value;
-    var formattedValue = value.split('\n').map(function(paragraph) {
-      return (<span>{paragraph}<br/></span>)
+    var formattedValue = value.split('\n').map(function(paragraph, key) {
+      return (<span key={key}>{paragraph}<br/></span>)
     });
 
     if(!editing) {
