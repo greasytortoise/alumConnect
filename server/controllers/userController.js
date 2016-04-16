@@ -53,6 +53,8 @@ module.exports = {
   // http://localhost:3000/db/users/user/:id
   fetchUserInfo: function(req, res) {
     var id = req.params.id;
+
+    // user join with groups + bios + userSites
     User
       .where({id: id})
       .fetch({withRelated: ['groups', 'bios', 'userSites']})
@@ -60,42 +62,50 @@ module.exports = {
         if (!user) {
           return res.status(404).send('user does not exist!');
         }
-        var group = user.related('groups');
+
+        // userSites join with sites
         user
           .related('userSites')
           .fetch({withRelated: ['sites']})
           .then(function(userSites) {
-            var sites = userSites.map(function(userSite) {
-              var site = userSite.related('sites');
-              return {
-                id: site.id,
-                name: site.get('site_name'),
-                url: site.get('base_url'),
-                value: userSite.get('rest_url')
-              };
-            });
-            user.related('bios').fetch({withRelated: ['bioFields']}).then(function(bios) {
-              bios = bios.map(function(bio) {
-              var bioField = bio.related('bioFields');
-                return {
-                  id: bioField.id,
-                  title: bioField.get('title'),
-                  value: bio.get('bio')
+
+            // bios join with bioFields
+            user
+              .related('bios')
+              .fetch({withRelated: ['bioFields']})
+              .then(function(bios) {
+                var group = user.related('groups');
+
+                // return one giant blob
+                var retObj = {
+                  user: {
+                    id: user.id,
+                    username: user.get('username'),
+                    password: user.get('password'),
+                    url: user.get('url_hash'),
+                    email: user.get('email'),
+                    group: group.get('group_name'),
+                    image: user.get('image')
+                  },
+                  sites: userSites.map(function(userSite) {
+                    var site = userSite.related('sites');
+                    return {
+                      id: site.id,
+                      name: site.get('site_name'),
+                      url: site.get('base_url'),
+                      value: userSite.get('rest_url')
+                    };
+                  }),
+                  userInfo: bios.map(function(bio) {
+                    var bioField = bio.related('bioFields');
+                    return {
+                      id: bioField.id,
+                      title: bioField.get('title'),
+                      value: bio.get('bio')
+                    };
+                  })
                 };
-              });
-              res.json({
-                user: {
-                  id: user.id,
-                  username: user.get('username'),
-                  password: user.get('password'),
-                  url: user.get('url_hash'),
-                  email: user.get('email'),
-                  group: group.get('group_name'),
-                  image: user.get('image')
-                },
-                sites: sites,
-                userInfo: bios
-              });
+                res.json(retObj);
             });
         });
     });
