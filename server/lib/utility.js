@@ -6,6 +6,7 @@ var jwtTokenSecret = 'DONALD_TRUMP_HUGE_HANDS_NO_PROBLEM';
 
 
 exports.generateToken = function(userid, email, perm, name) {
+  //generates a JSON Web Token(JWT) to be sent with response on successful login attempt
   var expires = moment().add('days', 3).valueOf();
   var token = jwt.encode({
     iss: userid,
@@ -23,8 +24,7 @@ exports.getSecret = function() {
 };
 
 exports.isLoggedIn = function(req, res, next) {
-  //PROBABLY NEEDS ADJUSTMENT
-  //CHECK TO ENSURE JWT SENT WITH REQUESTS
+  //Check token on request to make sure it's valid. 
   var token = (req.body && req.body.token) || (req.query && req.query.access_token) || req.headers['x-access-token'];
   if (token) {
     try {
@@ -46,6 +46,7 @@ exports.isLoggedIn = function(req, res, next) {
 };
 
 exports.getPermissions = function(req, res) {
+  //Query the database for the owner of the token, and returns their permissions(0 for user, 1 for admin);
   var decoded = jwt.decode(req.body.token, jwtTokenSecret);
   User.where({id: decoded.iss}).fetch().then(function(user){
     res.send(200, user.attributes.permission);
@@ -68,6 +69,8 @@ exports.isAdmin = function(req, res, next) {
   //     res.send(403, 'You have requested an admin-only resource without adequete permissions');
   //   }
   // });
+
+  //Middleware that checks for admin permissions before being allowed to continue. 
 
   var token = (req.body && req.body.token) || (req.query && req.query.access_token) || req.headers['x-access-token'];
   if (token) {
