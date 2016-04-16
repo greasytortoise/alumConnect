@@ -1,8 +1,8 @@
 var chai = require('chai');
 var expect = chai.expect;
 var request = require('supertest');
-var Promise = require('bluebird');
 
+var handler = require('../server/lib/handler');
 var groupController = require('../server/controllers/groupController');
 var app = require('../server/app.js');
 
@@ -17,45 +17,18 @@ var mockGroupAttrs = [
   {group_name: 'DO_NOT_USE_TEST_GROUP_3'}
 ];
 
-var getAll = function(attrs, Model) {
-  return Promise.map(attrs, function(attr) {
-    return Model.forge(attr).fetch();
-  })
-  .filter(function(models) {
-    return models;
-  });
-};
-
-var deleteAll = function(models) {
-  return Promise.map(models, function(model) {
-    return model.destroy();
-  });
-};
-
-var createAll = function(attrs, Model) {
-  return Promise.map(attrs, function(attr) {
-    return Model.forge(attr).save();
-  });
-};
-
-var saveIds = function(models) {
-  return models.map(function(model) {
-    return model.id;
-  });
-};
-
 describe('Group Endpoint: ', function() {
   beforeEach('Re-populates database with test groups', function(done) {
-    getAll(mockGroupAttrs, Group)
-      .then(function(groups) { return deleteAll(groups); })
-      .then(function() { return createAll(mockGroupAttrs.slice(0, 3), Group); })
-      .then(function(groups) { mockGroupIds = saveIds(groups); })
+    handler.getAll(mockGroupAttrs, Group)
+      .then(function(groups) { return handler.deleteAll(groups); })
+      .then(function() { return handler.createAll(mockGroupAttrs.slice(0, 3), Group); })
+      .then(function(groups) { mockGroupIds = handler.saveIds(groups); })
       .then(function() { done(); });
   });
 
   after('Deletes all test groups', function(done) {
-    getAll(mockGroupAttrs, Group)
-      .then(function(groups) { return deleteAll(groups) })
+    handler.getAll(mockGroupAttrs, Group)
+      .then(function(groups) { return handler.deleteAll(groups) })
       .then(function() { done(); })
   });
 
