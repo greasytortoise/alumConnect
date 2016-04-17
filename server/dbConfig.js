@@ -5,7 +5,8 @@ var knex = require('knex')({
     user: 'root',
     password: '',
     database: 'alumConnectTest',
-    charset: 'utf8'
+    charset: 'utf8',
+    insecureAuth: true
   }
 });
 var bookshelf = require('bookshelf');
