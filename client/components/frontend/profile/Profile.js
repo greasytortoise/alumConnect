@@ -66,6 +66,11 @@ class Profile extends React.Component {
   profileSaveButtonTapped() {
     this.saveUserProfile( () => {
       this.setState({ editing: 0})
+      this.profileEdits = {
+        user: this.profileEdits.user,
+        sites: {},
+        userInfo:{}
+      }
     });
   }
 
