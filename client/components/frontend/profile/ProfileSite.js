@@ -30,25 +30,27 @@ class ProfileSite extends React.Component {
     // this.props.siteDetails = ~ {id: 4, name: "github", url: "https://www.github.com/", value: "mbresnan1701"}
     console.log(this.props.siteDetails)
     var editing = this.props.editing;
-    var {id, name, url} = this.props.siteDetails
+    var {id, site_name, base_url} = this.props.siteDetails
     var value = this.state.value;
-    var userUrl = <a href={`${url}${value}`}>{value}</a>
+    var userUrl = <a href={`${base_url}${value}`}>{value}</a>
 
-    if(!editing) {
+    if(!editing && value) {
       return (
-        <div>{name}: {userUrl}</div>
+        <div>{site_name}: {userUrl}</div>
       );
     }
-    else {
+    else if(editing) {
       return (
         <div key={id}>
           <Input type="text"
-            addonBefore={url}
+            addonBefore={base_url}
             value={value}
             ref="input"
             onChange={this.handleFormChange.bind(this)}/>
         </div>
       );
+    } else {
+      return(<div></div>)
     }
 
 
