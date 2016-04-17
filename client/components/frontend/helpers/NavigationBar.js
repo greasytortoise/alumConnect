@@ -1,24 +1,67 @@
 import React from 'react';
 import NavLink from './NavLink';
 import $ from 'jquery';
-
 import { Navbar, Nav, NavDropdown, MenuItem, NavItem} from 'react-bootstrap';
+import auth from '../../../util/authHelpers.js'
+import RestHandler from '../../../util/RestHandler'
 
 
-  $(document).on('click', '.navbar-toggle', function(event) {
-    $(this).parent().parent().find('.dropdown').addClass('open');
-  })
-  $(document).click(function (event) {
-      var clickover = $(event.target);
-      var _opened = $(".navbar-collapse").hasClass("navbar-collapse collapse in");
-      if (_opened === true && !clickover.hasClass("navbar-toggle")) {
-          $("button.navbar-toggle").click();
-      }
-  });
+// This is the only spot I'm using jquery. It's so the navigationbar
+// dropdown hides when you click anywhere. If you can do this another way
+// and get rid of jquery, the site will load much lot faster!
+$(document).on('click', '.navbar-toggle', function(event) {
+  $(this).parent().parent().find('.dropdown').addClass('open');
+})
+$(document).click(function (event) {
+    var clickover = $(event.target);
+    var _opened = $(".navbar-collapse").hasClass("navbar-collapse collapse in");
+    if (_opened === true && !clickover.hasClass("navbar-toggle")) {
+        $("button.navbar-toggle").click();
+    }
+});
 
 
 class NavigationBar extends React.Component {
+
+  constructor (props) {
+    super (props);
+    this.state = {
+      loggedInUserData: {},
+    };
+  }
+
+  componentDidMount() {
+    this.getLoggedInUserData();
+  }
+
+  getLoggedInUserData() {
+    //gets the authentication token from util/authHelpers.js
+    //then retrieve the users id from it, get that users info, and display
+    //it in the navigationbar
+    var authToken = auth.parseJwt();
+    if(authToken) {
+      var url = '/db/users/user/' + authToken.iss;
+      RestHandler.Get(url, (err, res) => {
+        this.setState({
+          loggedInUserData: res.body.user,
+        });
+      });
+    }
+  }
+
+  renderMenuItems() {
+    //parse the authtoken and check to see if admin permission = 1
+    var authToken = auth.parseJwt();
+    if (authToken && authToken.perm === 1) {
+      return (
+        <Nav><Navbar.Text><NavLink to="/dashboard">
+          Admin Dashboard
+        </NavLink></Navbar.Text></Nav>)
+    }
+  }
+
   render() {
+    var {username, id, image} = this.state.loggedInUserData
     return (
       <Navbar fixedTop>
         <Navbar.Header>
@@ -28,14 +71,10 @@ class NavigationBar extends React.Component {
           <Navbar.Toggle animation={false} />
         </Navbar.Header>
         <Navbar.Collapse>
-
-          {/*<Nav>
-            <Navbar.Text><NavLink to="/users">Students</NavLink></Navbar.Text>
-          </Nav>*/}
-
+          {this.renderMenuItems()}
           <Nav pullRight>
-            <NavDropdown title="Drake Wang" id="nav-dropdown">
-              <MenuItem header><NavLink to="/logout">Edit profile</NavLink></MenuItem>
+            <NavDropdown title={username || ''} id="nav-dropdown">
+              <MenuItem header><NavLink to={`users/${id}`}>View profile</NavLink></MenuItem>
               <MenuItem header><NavLink to="/logout">Log out</NavLink></MenuItem>
             </NavDropdown>
           </Nav>

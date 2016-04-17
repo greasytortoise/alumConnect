@@ -1,7 +1,6 @@
 import React from 'react'
 import { Input, Button, ListGroupItem } from 'react-bootstrap'
 import RestHandler from '../../../util/RestHandler'
-var auth = require('../../../util/authHelpers.js');
 
 class EditSite extends React.Component {
   constructor(props) {
@@ -29,7 +28,7 @@ class EditSite extends React.Component {
       var url = '/db/sites/site/' + this.props.value.id;
       var data = {
         site_name: this.state.site_name,
-        base_url: this.state.url
+        base_url: this.state.url,
       };
 
       RestHandler.Post(url, data, (err, res) => {
@@ -50,7 +49,7 @@ class EditSite extends React.Component {
     return (
       <div>
         <Input type="text" disabled={this.state.disabled} label={this.state.site_name}
-          buttonAfter={innerButton} value={this.state.url} 
+          buttonAfter={innerButton} value={this.state.url}
           ref="input" onChange={this.handleInputChange.bind(this)} />
       </div>
     );

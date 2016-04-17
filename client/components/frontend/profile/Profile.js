@@ -2,14 +2,10 @@ import React from 'react'
 import ProfileField from './ProfileField'
 import ProfileSite from './ProfileSite'
 import ProfileEditButton from './ProfileEditButton'
-
 // import Image from './Image.js'
 import RestHandler from '../../../util/RestHandler'
-
 import { Button, Row, Col, Image} from 'react-bootstrap';
-
 var _map = require('lodash/map');
-var auth = require('../../../util/authHelpers.js');
 
 
 class Profile extends React.Component {
@@ -104,9 +100,7 @@ class Profile extends React.Component {
   }
 
   render() {
-    var username = ''
-    var image = ''
-    var group = ''
+    var username, image, group = ''
     if (this.state.profileData.user) {
       var {username, image, group} = this.state.profileData.user
     }
