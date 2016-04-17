@@ -19,7 +19,7 @@ var UserSites = require('../server/collections/userSites');
 var Bio = require('../server/models/bio');
 var Bios = require('../server/collections/bios');
 
-
+// GLUCK WRITING THIS
 
 describe('Site Endpoint: ', function() {
   describe('fetchUsers', function() {
@@ -43,7 +43,7 @@ describe('Site Endpoint: ', function() {
   });
 
   describe('deleteUser', function() {
-    
+
   });
 
 
