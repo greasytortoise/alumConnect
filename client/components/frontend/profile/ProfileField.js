@@ -30,18 +30,24 @@ class ProfileField extends React.Component {
     var editing = this.props.editing;
     var {title, id} = this.props.fieldDetails
     var value = this.state.value;
-    var formattedValue = value.split('\n').map(function(paragraph, key) {
-      return (<span key={key}>{paragraph}<br/></span>)
-    });
 
-    if(!editing) {
+
+    //If your not editing the profile and it has a value
+    //
+    if(!editing && value) {
+      var formattedValue = value.split('\n').map((paragraph, key) =>  {
+        return <span key={key}>{paragraph}<br/></span>;
+      });
+
       return (
         <div key={id}>
           <h3>{title}</h3>
           <p>{formattedValue}</p>
         </div>
       );
-    } else {
+    }
+
+    else if(editing) {
       return (
         <div key={id}>
           <h3>{title}</h3>
@@ -51,6 +57,8 @@ class ProfileField extends React.Component {
             onChange={this.handleFormChange.bind(this)} />
         </div>
       );
+    } else {
+      return (<div></div>)
     }
   }
 

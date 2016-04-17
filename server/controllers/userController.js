@@ -84,7 +84,7 @@ module.exports = {
                     var site = userSite.related('sites');
                     return {
                       id: site.id,
-                      name: site.get('site_name'),
+                      site_name: site.get('site_name'),
                       base_url: site.get('base_url'),
                       value: userSite.get('rest_url')
                     };
@@ -180,7 +180,7 @@ module.exports = {
                             userSites.create({
                               rest_url: site.value,
                               User_id: user.id,
-                              Site_id: site.id              
+                              Site_id: site.id
                             });
                           }
                         });
@@ -206,7 +206,7 @@ module.exports = {
                             bios.create({
                               bio: info.value,
                               User_id: user.id,
-                              Bio_Field_id: info.id                             
+                              Bio_Field_id: info.id
                             });
                           }
                         });

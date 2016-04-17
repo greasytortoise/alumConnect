@@ -6,6 +6,8 @@ import ProfileEditButton from './ProfileEditButton'
 import RestHandler from '../../../util/RestHandler'
 import { Button, Row, Col, Image} from 'react-bootstrap';
 var _map = require('lodash/map');
+var _find = require('lodash/find');
+var _clone = require('lodash/clone')
 
 
 class Profile extends React.Component {
@@ -21,29 +23,38 @@ class Profile extends React.Component {
 
   componentDidMount() {
     this.getUserProfile();
-    this.getAvailableFields();
   }
 
-  getAvailableFields() {
-    var url = '/db/fields';
-    RestHandler.Get(url, (err, res) => {
-      this.setState({
-        availableProfileFields: res.body
-      });
-    });
-  }
 
   getUserProfile() {
     var url = '/db/users/user/' + this.props.params.user;
     RestHandler.Get(url, (err, res) => {
-      this.setState({
-        profileData: res.body,
-      });
       this.profileEdits = {
         user: res.body.user,
         sites: {},
         userInfo:{}
       }
+      this.spliceFilledOutFieldsIntoAvailableFields(res.body, 'sites', '/db/sites');
+      // this.spliceFilledOutFieldsIntoAvailableFields(res.body, 'userInfo', '/db/fields');
+    });
+  }
+
+
+
+  spliceFilledOutFieldsIntoAvailableFields(profileData, objectToUpdate, url) {
+    RestHandler.Get(url, (err, res) => {
+      var filledOutFields = profileData[objectToUpdate];
+      var availableFields = res.body;
+      var newObjectWithAllFields = _map(availableFields,(availableField) => {
+        //sets available field to filled out field if it exists
+        var found = _find(filledOutFields, (field) => field.id === availableField.id);
+        return found ? found : availableField;
+      });
+      profileData[objectToUpdate] = newObjectWithAllFields
+      this.setState({
+        profileData: profileData,
+      });
+      // console.log(this.state.profileData);
     });
   }
 
@@ -102,6 +113,8 @@ class Profile extends React.Component {
 
   stageProfileEdits(callback) {
     callback(this.profileEdits);
+    //uncomment the console.log to see what's going on when you edit a field
+    // console.log(this.profileEdits);
   }
 
   render() {
