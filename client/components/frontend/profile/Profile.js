@@ -35,7 +35,7 @@ class Profile extends React.Component {
         userInfo:{}
       }
       this.spliceFilledOutFieldsIntoAvailableFields(res.body, 'sites', '/db/sites');
-      // this.spliceFilledOutFieldsIntoAvailableFields(res.body, 'userInfo', '/db/fields');
+      this.spliceFilledOutFieldsIntoAvailableFields(res.body, 'userInfo', '/db/fields');
     });
   }
 
@@ -64,6 +64,7 @@ class Profile extends React.Component {
     data.userInfo = _map(data.userInfo, function(val){return val});
     data.sites = _map(data.sites, function(val){return val});
     RestHandler.Post(url, data, (err, res) => {
+      console.log(data);
       if (err) {return err;}
       callback(res);
     });

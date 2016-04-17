@@ -14,21 +14,18 @@ class ProfileSite extends React.Component {
   }
 
   handleFormChange () {
-    var {id, name, url} = this.props.siteDetails
+    var {id, site_name, url} = this.props.siteDetails
     var formValue = this.refs.input.refs.input.value || '';
     this.setState({value: formValue});
     this.props.stageProfileEdits((editedObject) => {
       editedObject.sites[id] = {
         id: id,
-        name: name,
-        url: url,
         value: formValue
       }
     });
   }
   renderProfileSite() {
     // this.props.siteDetails = ~ {id: 4, name: "github", url: "https://www.github.com/", value: "mbresnan1701"}
-    console.log(this.props.siteDetails)
     var editing = this.props.editing;
     var {id, site_name, base_url} = this.props.siteDetails
     var value = this.state.value;
