@@ -44,14 +44,14 @@ class DashboardNewUser extends React.Component {
     var name = this.refs.name.getValue();
     var email = this.refs.email.getValue();
     var password = this.refs.password.getValue();
-    var group = this.state.group.group_name;
+    var group = this.state.group.id;
     var data = {
       username: name,
       password: password,
       email: email,
       group: group,
     };
-
+    console.log(data);
     RestHandler.Post('db/users', data, (err, res) => {
 
     });
