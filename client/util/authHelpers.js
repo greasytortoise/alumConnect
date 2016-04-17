@@ -1,3 +1,5 @@
+var RestHandler = require('./RestHandler');
+
 var request = require('superagent');
 var Promise = require('bluebird');
 
@@ -32,17 +34,20 @@ module.exports = {
     //Check user permissions from server.
     if(localStorage.getItem('jwtAlum')) {
 
-    request('POST', '/checktoken')
-      .send({token: JSON.parse(localStorage.getItem('jwtAlum')).token})
-      .end(function(err, res){
-        if(err) {
-          console.log(err);
-        } else {
-          console.log(res);
-          callback(res);
-        }
+    // request('POST', '/checktoken')
+    //   .send({token: JSON.parse(localStorage.getItem('jwtAlum')).token})
+    //   .end(function(err, res){
+    //     if(err) {
+    //       console.log(err);
+    //     } else {
+    //       console.log(res);
+    //       callback(res);
+    //     }
         
-      });
+    //   });
+      RestHandler.Post('/checktoken', {}, callback);
+
+    
     } 
   },
 

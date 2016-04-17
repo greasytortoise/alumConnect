@@ -2,6 +2,7 @@ import React from 'react';
 import {Router, Link} from 'react-router';
 import auth from '../util/authHelpers.js';
 import request from 'superagent';
+import RestHandler from '../util/RestHandler.js';
 
 import { Grid, Input, ButtonInput } from 'react-bootstrap';
 
@@ -26,31 +27,30 @@ const Login = React.createClass({
   },
 
   handleSubmit(event) {
-    event.preventDefault()
+    event.preventDefault();
     const email = this.refs.email.refs.input.value;
     const pass = this.refs.password.refs.input.value;
     var loginComponent = this;
-    request('POST', '/login')
-      .send({email:email, password:pass})
-      .end(function(err, res){
-        if(err) {
-          console.log(err);
-          loginComponent.setState({ error: true });
-        } else {
-          var parseRes = JSON.parse(res.text);
-          localStorage.setItem('jwtAlum', JSON.stringify(parseRes.token));
-          //else redirect based on permissions
-          auth.checkToken(function(response) {
-            if(parseInt(response.text) === 1) {
-              window.location.href = '/dashboard';
-            } else {
-              window.location.href = '/';
-            }
+    RestHandler.Post('/login', {email: email, password: pass}, function(err, res) {
+      if(err) {
+        console.log(err);
+        loginComponent.setState({ error: true });
+      } else {
+        var parseRes = JSON.parse(res.text);
+        localStorage.setItem('jwtAlum', JSON.stringify(parseRes.token));
+        //else redirect based on permissions
+        auth.checkToken(function(err, response) {
+          if(parseInt(response.text) === 1) {
+            window.location.href = '/dashboard';
+          } else {
+            window.location.href = '/';
+          }
 
-          });
+        });
+      }
+    });
 
-        }
-      });
+
   },
 
   render() {

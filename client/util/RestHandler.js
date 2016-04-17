@@ -1,4 +1,5 @@
 var request = require('superagent');
+var auth = require('./authHelpers.js');
 
 var Get = function(url, callback) {
   request
@@ -11,6 +12,9 @@ var Get = function(url, callback) {
 }
 
 var Post = function (url, data, callback) {
+  if(localStorage.getItem('jwtAlum')){
+    data.token = JSON.parse(localStorage.getItem('jwtAlum')).token;
+  }
   request
   .post(url)
   .send(data)
