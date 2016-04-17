@@ -128,7 +128,7 @@ module.exports = {
   modifyUser: function(req, res) {
     var id = req.params.id;
     var data = req.body;
-
+console.log('data: ', data);
     // grab user and join groups + userSites + bios
     User
       .where({id: id})
@@ -164,7 +164,7 @@ module.exports = {
                         // if it has a value then modify it
                         // else delete it
                       // else, create it
-                    return Promise.map(data.sites, function(site) {
+                    return Promise.each(data.sites, function(site) {
                       return userSites
                         .query(function(qb) {
                           qb.where('User_id', '=', id)
@@ -190,7 +190,7 @@ module.exports = {
                     // for each bio in the array
                     // if it exists, modify it
                     // else, create it
-                    return Promise.map(data.userInfo, function(info) {
+                    return Promise.each(data.userInfo, function(info) {
                       return bios
                         .query(function(qb) {
                           qb.where('User_id', '=', id)
@@ -211,8 +211,8 @@ module.exports = {
                           }
                         });
                     });
-
-                  }).then(function() {
+                  })
+                  .then(function() {
                     res.send(201);
                   });
               });
