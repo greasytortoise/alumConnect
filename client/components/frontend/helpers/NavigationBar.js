@@ -78,7 +78,7 @@ class NavigationBar extends React.Component {
           {this.renderMenuItems()}
           <Nav pullRight>
             <NavDropdown title={username || ''} id="nav-dropdown">
-              <MenuItem header><NavLink to={`users/${id}`}>View profile</NavLink></MenuItem>
+              <MenuItem header><NavLink to={`/users/${id}`}>View profile</NavLink></MenuItem>
               <MenuItem header><NavLink to="/logout">Log out</NavLink></MenuItem>
             </NavDropdown>
           </Nav>
