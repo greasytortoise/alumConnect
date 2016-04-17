@@ -46,7 +46,7 @@ class Users extends React.Component {
       var {username, id, image} = user
       return(
         <Col xs={6} sm={4} md={3} lg={3} key={id}>
-          <Link to={{pathname: `users/${id}`}}>
+          <Link to={{pathname: `/users/${id}`}}>
             <div
               className="user-card">
               <Image
