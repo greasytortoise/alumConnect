@@ -27,6 +27,7 @@ class NavigationBar extends React.Component {
     super (props);
     this.state = {
       loggedInUserData: {},
+      permission: 0
     };
   }
 
@@ -38,25 +39,28 @@ class NavigationBar extends React.Component {
     //gets the authentication token from util/authHelpers.js
     //then retrieve the users id from it, get that users info, and display
     //it in the navigationbar
-    var authToken = auth.parseJwt();
-    if(authToken) {
-      var url = '/db/users/user/' + authToken.iss;
-      RestHandler.Get(url, (err, res) => {
-        this.setState({
-          loggedInUserData: res.body.user,
+
+    auth.parseJwtAsync((parsedToken) => {
+      if(parsedToken) {
+        var url = '/db/users/user/' + parsedToken.iss;
+        RestHandler.Get(url, (err, res) => {
+          this.setState({
+            loggedInUserData: res.body.user,
+            permission: parsedToken.perm
+          });
         });
-      });
-    }
+      }
+    });
   }
 
   renderMenuItems() {
-    //parse the authtoken and check to see if admin permission = 1
-    var authToken = auth.parseJwt();
-    if (authToken && authToken.perm === 1) {
+    // if permission === 1, user is admin
+    if( this.state.permission === 1) {
       return (
         <Nav><Navbar.Text><NavLink to="/dashboard">
           Admin Dashboard
-        </NavLink></Navbar.Text></Nav>)
+        </NavLink></Navbar.Text></Nav>
+      )
     }
   }
 
