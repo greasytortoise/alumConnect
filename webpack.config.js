@@ -1,8 +1,8 @@
 module.exports = {
 
-  entry: __dirname + '/client/index.js',
+  entry: './client/index.js',
   output: {
-    path: process.env.NODE_ENV === 'production' ? './dist' : './build',
+    path: process.env.NODE_ENV === 'production' ? './client/dist' : './client/build',
     filename: '/bundle.js'
   },
 
