@@ -11,14 +11,20 @@ var _clone = require('lodash/clone')
 
 
 class Profile extends React.Component {
-
   constructor (props) {
     super (props);
     this.state = {
       profileData: {},
       editing: 0
     };
-    this.profileEdits = {}
+
+    //if profile is edited / saved. sites and userInfo into will
+    // be converted to an arr of objects -- see saveUserProfile()
+    this.profileEdits = {
+      user: {},
+      sites: {},
+      userInfo:{}
+    }
   }
 
   componentDidMount() {
@@ -26,16 +32,20 @@ class Profile extends React.Component {
   }
 
 
+  //getUserProfile does a few things:
+  // 1. Gets the users profile (but doesn't update the state yet)
+  // 2. Run functions to get all the available fields on the site and splice in
+  //    the filled out fields to a profileData object
+  // 3. set the state to profileData, which renders most of the page!
+  // 4. Also initialize this.profileEdits.user incase something is edited
+
   getUserProfile() {
     var url = '/db/users/user/' + this.props.params.user;
     RestHandler.Get(url, (err, res) => {
-      this.profileEdits = {
-        user: res.body.user,
-        sites: {},
-        userInfo:{}
-      }
+
       this.spliceFilledOutFieldsIntoAvailableFields(res.body, 'userInfo', '/db/fields', (profileData) => {
         this.spliceFilledOutFieldsIntoAvailableFields(profileData, 'sites', '/db/sites', (profileData) => {
+          this.profileEdits.user = res.body.user
           this.setState({
             profileData: profileData,
           });
@@ -57,34 +67,6 @@ class Profile extends React.Component {
       });
       profileData[objectToUpdate] = newObjectWithAllFields
       callback(profileData)
-    });
-  }
-
-  saveUserProfile(callback) {
-    var url = '/db/users/user/' + this.props.params.user;
-    var data = this.profileEdits;
-    data.userInfo = _map(data.userInfo, function(val){return val});
-    data.sites = _map(data.sites, function(val){return val});
-    RestHandler.Post(url, data, (err, res) => {
-      console.log(data);
-      if (err) {return err;}
-      callback(res);
-    });
-  }
-
-  profileEditButtonTapped() {
-    this.state.editing
-      ? this.setState({ editing: 0})
-      : this.setState({ editing: 1})
-  }
-  profileSaveButtonTapped() {
-    this.saveUserProfile( () => {
-      this.setState({ editing: 0})
-      this.profileEdits = {
-        user: this.profileEdits.user,
-        sites: {},
-        userInfo:{}
-      }
     });
   }
 
@@ -114,9 +96,49 @@ class Profile extends React.Component {
     }
   }
 
+
+
+  //In saveUserProfile, the api accepts post requests in array format for
+  //data.userInfo and data.sites. I set them up as an object initially because
+  //it's easier to work worth and then convert it to an array before saving.
+  saveUserProfile(callback) {
+    var url = '/db/users/user/' + this.props.params.user;
+    var data = this.profileEdits;
+    data.userInfo = _map(data.userInfo, function(val){return val});
+    data.sites = _map(data.sites, function(val){return val});
+    RestHandler.Post(url, data, (err, res) => {
+      console.log(data);
+      if (err) {return err;}
+      callback(res);
+    });
+  }
+
+  profileEditButtonTapped() {
+    this.state.editing
+      ? this.setState({ editing: 0})
+      : this.setState({ editing: 1})
+  }
+
+  profileSaveButtonTapped() {
+    this.saveUserProfile( () => {
+      this.setState({ editing: 0})
+      this.profileEdits = {
+        user: this.profileEdits.user,
+        sites: {},
+        userInfo:{}
+      }
+    });
+  }
+
+
+
+  // stageProfileEdits is passed into child components where the value can be
+  // edited and saved. It updateds the profileEdits property, which will be
+  // saved when you call saveUserProfile()
+
   stageProfileEdits(callback) {
     callback(this.profileEdits);
-    //uncomment the console.log to see what's going on when you edit a field
+    // //uncomment to see what's being staged when you edit a field
     // console.log(this.profileEdits);
   }
 
@@ -163,10 +185,3 @@ class Profile extends React.Component {
 }
 
 module.exports = Profile;
-
-
-// _handleProfileChange(event) {
-//   event.preventDefault();
-//   console.log(this.refs.val.value);
-//   this.setState({value: this.refs.val.value});
-// }
