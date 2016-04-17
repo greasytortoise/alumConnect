@@ -36,6 +36,7 @@ module.exports = {
   modifySite: function(req, res) {
     var id = req.params.id;
     var data = req.body;
+    console.log('from site: ', data);
     Site
       .where({site_name: data.site_name})
       .fetch()

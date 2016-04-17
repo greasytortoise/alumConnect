@@ -128,7 +128,7 @@ module.exports = {
   modifyUser: function(req, res) {
     var id = req.params.id;
     var data = req.body;
-console.log('data: ', data);
+    console.log('from user: ', data);
     // grab user and join groups + userSites + bios
     User
       .where({id: id})
