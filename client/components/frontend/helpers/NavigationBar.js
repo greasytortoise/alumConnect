@@ -55,7 +55,7 @@ class NavigationBar extends React.Component {
 
   renderMenuItems() {
     // if permission === 1, user is admin
-    if( this.state.permission === 1) {
+    if(this.state.permission === 1) {
       return (
         <Nav><Navbar.Text><NavLink to="/dashboard">
           Admin Dashboard
