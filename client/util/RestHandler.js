@@ -16,12 +16,12 @@ var Post = function (url, data, callback) {
     data.token = JSON.parse(localStorage.getItem('jwtAlum')).token;
   }
   request
-  .post(url)
-  .send(data)
-  .end((err, res) => {
-    err
-      ? console.error('Err in util/restHander ', err)
-      : callback(err, res);
+    .post(url)
+    .send(data)
+    .end((err, res) => {
+      err
+        ? console.error('Err in util/restHander ', err)
+        : callback(err, res);
   });
 }
 
