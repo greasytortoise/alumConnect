@@ -18,7 +18,7 @@ class ProfileSite extends React.Component {
     var formValue = this.refs.input.refs.input.value || '';
     this.setState({value: formValue});
     this.props.stageProfileEdits((editedObject) => {
-      editedObject.sites.id = {
+      editedObject.sites[id] = {
         id: id,
         name: name,
         url: url,
