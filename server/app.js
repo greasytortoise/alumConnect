@@ -3,7 +3,7 @@ var Promise = require('bluebird');
 var app = express();
 //things
 
-var LEX = require('letsencrypt-express');
+var LEX = require('letsencrypt-express').testing();
 
 var middleware = require('./config/middleware');
 var routes = require('./config/routes');
