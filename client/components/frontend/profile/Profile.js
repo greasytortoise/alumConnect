@@ -100,9 +100,9 @@ class Profile extends React.Component {
   }
 
   render() {
-    var username, image, group = ''
+    var username, image, group, id = ''
     if (this.state.profileData.user) {
-      var {username, image, group} = this.state.profileData.user
+      var {username, image, group, id} = this.state.profileData.user
     }
 
     return (
@@ -114,6 +114,7 @@ class Profile extends React.Component {
               </Col>
               <Col xs={12} sm={7} md={8}>
                 <ProfileEditButton
+                  profilesUserId = {id}
                   editing = {this.state.editing}
                   profileEditButtonTapped = {this.profileEditButtonTapped.bind(this)}
                   profileSaveButtonTapped = {this.profileSaveButtonTapped.bind(this)} />
@@ -128,6 +129,7 @@ class Profile extends React.Component {
         <div className = 'section profile-bio'>
           {this.renderProfileFields()}
           <ProfileEditButton
+            profilesUserId = {id}
             editing = {this.state.editing}
             hideEditButton = {true}
             profileEditButtonTapped = {this.profileEditButtonTapped.bind(this)}
