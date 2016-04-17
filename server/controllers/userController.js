@@ -124,9 +124,9 @@ module.exports = {
         email: data.user.email,
         image: data.user.image,
         // url_hash: data.user.url,
-        Group_id: group.id,
-        public: 0,
-        permission: 0
+        Group_id: data.group.id,
+        public: data.user.public,
+        permission: data.user.permission
       })
       .then(function() {
         res.status(201).send('user is created!');
