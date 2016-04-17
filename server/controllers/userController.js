@@ -85,7 +85,7 @@ module.exports = {
                     return {
                       id: site.id,
                       name: site.get('site_name'),
-                      url: site.get('base_url'),
+                      base_url: site.get('base_url'),
                       value: userSite.get('rest_url')
                     };
                   }),
@@ -128,7 +128,7 @@ module.exports = {
   modifyUser: function(req, res) {
     var id = req.params.id;
     var data = req.body;
-console.log('data: ', data);
+    console.log('from user: ', data);
     // grab user and join groups + userSites + bios
     User
       .where({id: id})
