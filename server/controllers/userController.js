@@ -124,7 +124,7 @@ module.exports = {
         email: data.user.email,
         image: data.user.image,
         // url_hash: data.user.url,
-        Group_id: data.group.id,
+        Group_id: data.user.group,
         public: data.user.public,
         permission: data.user.permission
       })
