@@ -67,7 +67,7 @@ const Login = React.createClass({
             onChange={this.handleChange} />
           <Input
             bsSize='large'
-            type="pass"
+            type="password"
             ref="password"
             placeholder='password'
             groupClassName='login-password'
