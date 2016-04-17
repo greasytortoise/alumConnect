@@ -48,7 +48,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack && nodemon server/app.js",
-    "start:dev": "webpack-dev-server --inline --content-base public/ --history-api-fallback",
+    "start:dev": "NODE_ENV=development webpack-dev-server --inline --content-base public/ --history-api-fallback",
     "start:prod": "webpack && node server/app.js",
     "deploy": "NODE_ENV=production webpack -p"
   },

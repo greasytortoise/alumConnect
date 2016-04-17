@@ -65172,7 +65172,7 @@
 	          onChange: this.handleChange }),
 	        _react2.default.createElement(_reactBootstrap.Input, {
 	          bsSize: 'large',
-	          type: 'pass',
+	          type: 'password',
 	          ref: 'password',
 	          placeholder: 'password',
 	          groupClassName: 'login-password',
