@@ -27,8 +27,7 @@ class EditGroup extends React.Component {
     } else {
       var url = '/db/groups/group/' + this.props.value.id;
       var data = {
-        group_name: this.state.value,
-        token: util.getToken()
+        group_name: this.state.value
       };
 
       RestHandler.Post(url, data, (err, res) => {

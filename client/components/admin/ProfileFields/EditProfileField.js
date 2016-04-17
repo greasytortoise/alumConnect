@@ -27,8 +27,7 @@ class EditProfileField extends React.Component {
     } else {
       var url = '/db/fields/field/' + this.props.value.id;
       var data = {
-        title: this.state.value,
-        token: auth.getToken()
+        title: this.state.value
       };
 
       RestHandler.Post(url, data, (err, res) => {

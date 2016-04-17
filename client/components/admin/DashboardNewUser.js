@@ -51,8 +51,7 @@ class DashboardNewUser extends React.Component {
       username: name,
       password: password,
       email: email,
-      group: group,
-      token: token
+      group: group
     };
 
     RestHandler.Post('db/users', data, (err, res) => {

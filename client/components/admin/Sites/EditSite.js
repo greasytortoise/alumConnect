@@ -29,8 +29,7 @@ class EditSite extends React.Component {
       var url = '/db/sites/site/' + this.props.value.id;
       var data = {
         site_name: this.state.site_name,
-        base_url: this.state.url, 
-        token: auth.getToken()
+        base_url: this.state.url
       };
 
       RestHandler.Post(url, data, (err, res) => {

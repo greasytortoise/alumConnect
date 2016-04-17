@@ -56,7 +56,6 @@ class Profile extends React.Component {
     var data = this.profileEdits;
     data.userInfo = _map(data.userInfo, function(val){return val});
     data.sites = _map(data.sites, function(val){return val});
-    data.token = auth.getToken();
     RestHandler.Post(url, data, (err, res) => {
       if (err) {return err;}
       callback(res);
