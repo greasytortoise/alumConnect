@@ -34,14 +34,19 @@ class Profile extends React.Component {
         sites: {},
         userInfo:{}
       }
-      this.spliceFilledOutFieldsIntoAvailableFields(res.body, 'sites', '/db/sites');
-      this.spliceFilledOutFieldsIntoAvailableFields(res.body, 'userInfo', '/db/fields');
+      this.spliceFilledOutFieldsIntoAvailableFields(res.body, 'userInfo', '/db/fields', (profileData) => {
+        this.spliceFilledOutFieldsIntoAvailableFields(profileData, 'sites', '/db/sites', (profileData) => {
+          this.setState({
+            profileData: profileData,
+          });
+        });
+      });
     });
   }
 
 
 
-  spliceFilledOutFieldsIntoAvailableFields(profileData, objectToUpdate, url) {
+  spliceFilledOutFieldsIntoAvailableFields(profileData, objectToUpdate, url, callback) {
     RestHandler.Get(url, (err, res) => {
       var filledOutFields = profileData[objectToUpdate];
       var availableFields = res.body;
@@ -51,10 +56,7 @@ class Profile extends React.Component {
         return found ? found : availableField;
       });
       profileData[objectToUpdate] = newObjectWithAllFields
-      this.setState({
-        profileData: profileData,
-      });
-      // console.log(this.state.profileData);
+      callback(profileData)
     });
   }
 

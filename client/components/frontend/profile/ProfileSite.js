@@ -14,7 +14,7 @@ class ProfileSite extends React.Component {
   }
 
   handleFormChange () {
-    var {id, site_name, url} = this.props.siteDetails
+    var {id} = this.props.siteDetails
     var formValue = this.refs.input.refs.input.value || '';
     this.setState({value: formValue});
     this.props.stageProfileEdits((editedObject) => {
