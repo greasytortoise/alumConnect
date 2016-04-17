@@ -77,8 +77,8 @@ values
 insert into Users
   (username, password, email, image, url_hash, public, permission, Group_id)
 values
-  ('Jonas', 'aaaaaa', 'j@mail.com', '/assets/jonas.jpg', 'x2y2z2', 0, 0, 1),
   ('Matt', 'bbbbbb', 'm@mail.com', '/assets/matt.jpg', 'i3j3k3', 0, 0, 1),
+  ('Jonas', 'aaaaaa', 'j@mail.com', '/assets/jonas.jpg', 'x2y2z2', 0, 0, 1),
   ('Alamu', 'cccccc', 'a@mail.com', '/assets/alamu.jpg', 'n3m3o3', 0, 0, 1),
   ('Drake', 'aaaaaa', 'd@mail.com', '/assets/drake.jpg', 'a1b1c1', 0, 0, 1),
   ('Admin', 'admin', 'admin@admin.com', '/assets/trump.jpg', 'ndas2q', 0, 1, 1),
@@ -95,8 +95,8 @@ values
 insert into User_Sites
   (rest_url, User_id, Site_id)
 values
-  ('mikejonas', 1, 4),
-  ('mbresnan1701', 2, 4),
+  ('mbresnan1701', 1, 4),
+  ('mikejonas', 2, 4),
   ('alamuv', 3, 4),
   ('yochess', 4, 4),
   ('yochess', 4, 1);
