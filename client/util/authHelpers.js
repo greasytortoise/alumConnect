@@ -5,7 +5,7 @@ var Promise = require('bluebird');
 
 module.exports = {
 
- 
+
   getToken() {
     //returns the JWT in localstorage
     return localStorage.getItem('jwtAlum');
@@ -14,10 +14,10 @@ module.exports = {
   logout() {
     //Deletes the token from localstorage
     localStorage.removeItem('jwtAlum');
-    
+
   },
 
-  
+
 
   loggedIn() {
     //Check if token exists. If it does, check the expiration date, and return boolean representing logged in status
@@ -43,25 +43,32 @@ module.exports = {
     //       console.log(res);
     //       callback(res);
     //     }
-        
+
     //   });
       RestHandler.Post('/checktoken', {}, callback);
 
-    
-    } 
+
+    }
   },
 
 
   onChange() {},
 
   parseJwt(){
-    //parses the token to get the juicy data inside. 
+    //parses the token to get the juicy data inside.
     if(localStorage.getItem('jwtAlum') !== null) {
       return JSON.parse(atob(localStorage.getItem('jwtAlum').split('.')[1]));
     } else {
       return null;
     }
-  }
+  },
 
+  parseJwtAsync(callback) {
+    if(this.parseJwt) {
+      callback(this.parseJwt());
+    } else {
+      callback(undefined);
+    }
+  }
 
 }
