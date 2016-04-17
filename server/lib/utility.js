@@ -54,10 +54,7 @@ exports.getPermissions = function(req, res) {
 };
 
 exports.isAdmin = function(req, res, next) {
-
-  // change from drake: I think it already a parsed obj 
-  // var token = JSON.parse(req.body.token).token;
-  var token = req.body.token.token;
+  var token = JSON.parse(req.body.token).token;
   var decoded = jwt.decode(token, jwtTokenSecret);
   User.where({id: decoded.iss}).fetch().then(function(user){
     if(user.attributes.permission === 1) {
