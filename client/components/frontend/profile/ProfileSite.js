@@ -28,6 +28,7 @@ class ProfileSite extends React.Component {
   }
   renderProfileSite() {
     // this.props.siteDetails = ~ {id: 4, name: "github", url: "https://www.github.com/", value: "mbresnan1701"}
+    console.log(this.props.siteDetails)
     var editing = this.props.editing;
     var {id, name, url} = this.props.siteDetails
     var value = this.state.value;
@@ -39,7 +40,6 @@ class ProfileSite extends React.Component {
       );
     }
     else {
-
       return (
         <div key={id}>
           <Input type="text"

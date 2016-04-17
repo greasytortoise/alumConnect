@@ -34,24 +34,27 @@ class Profile extends React.Component {
         sites: {},
         userInfo:{}
       }
-      this.getAvailableUserInfoFields(res.body);
+      this.spliceFilledOutFieldsIntoAvailableFields(res.body, 'sites', '/db/sites');
+      // this.spliceFilledOutFieldsIntoAvailableFields(res.body, 'userInfo', '/db/fields');
     });
   }
 
-  getAvailableUserInfoFields(profileData) {
-    var url = '/db/fields';
-    console.log(profileData);
+
+
+  spliceFilledOutFieldsIntoAvailableFields(profileData, objectToUpdate, url) {
     RestHandler.Get(url, (err, res) => {
-      var filledOutFields = profileData.userInfo
-      var availableFields = res.body
-      profileData.userInfo = _map(availableFields,(availableField) => {
+      var filledOutFields = profileData[objectToUpdate];
+      var availableFields = res.body;
+      var newObjectWithAllFields = _map(availableFields,(availableField) => {
         //sets available field to filled out field if it exists
         var found = _find(filledOutFields, (field) => field.id === availableField.id);
         return found ? found : availableField;
       });
+      profileData[objectToUpdate] = newObjectWithAllFields
       this.setState({
         profileData: profileData,
       });
+      // console.log(this.state.profileData);
     });
   }
 
