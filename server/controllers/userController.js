@@ -113,53 +113,27 @@ module.exports = {
     });
   },
   // http://localhost:3000/db/users
+  // no error handling yet
   createUser: function(req, res) {
     var data = req.body;
 
-    Group
-      .where({group_name: data.user.group})
-      .fetch()
-      .then(function(group) {
-        return new User({
-          username: data.user.username,
-          password: data.user.password,
-          email: data.user.email,
-          image: data.user.image,
-          // url_hash: data.user.url,
-          Group_id: group.id,
-          public: 0,
-          permission: 0
-        })
-        .save()
-        .then(function(user) {
-          // may run into async issues
-          data.sites.forEach(function(site) {
-            UserSites.create({
-              rest_url: site.value,
-              User_id: user.id,
-              Site_id: site.id
-            });
-          });
-          return user;
-        })
-        .then(function(user) {
-          // may run into async issues
-          data.userInfo.forEach(function(info) {
-            Bios.create({
-              bio: info.value,
-              User_id: user.id,
-              Bio_Field_id: info.id
-            });
-          });
-        })
-        .then(function() {
-          res.send(201);
-        });
-    });
+    Users
+      .create({
+        username: data.user.username,
+        password: data.user.password,
+        email: data.user.email,
+        image: data.user.image,
+        // url_hash: data.user.url,
+        Group_id: group.id,
+        public: 0,
+        permission: 0
+      })
+      .then(function() {
+        res.status(201).send('user is created!');
+      });
   },
   // http://localhost:3000/db/users/user/:id
   // no error handling yet
-
   modifyUser: function(req, res) {
     var id = req.params.id;
     var data = req.body;
@@ -195,7 +169,9 @@ module.exports = {
                   })
                   .then(function(user) {
                     // for each site in the array
-                      // if it exists, modify it
+                      // if it exists
+                        // if it has a value then modify it
+                        // else delete it
                       // else, create it
                     return Promise.map(data.sites, function(site) {
                       return userSites
