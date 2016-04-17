@@ -14,14 +14,13 @@ class ProfileField extends React.Component {
   }
 
   handleFormChange () {
-    var {title, id} = this.props.fieldDetails
+    var {id} = this.props.fieldDetails
     var formValue = this.refs.input.refs.input.value;
 
     this.setState({value: formValue});
     this.props.stageProfileEdits((editedObject) => {
       editedObject.userInfo[id] = {
         id: id,
-        title: title,
         value: formValue
       }
     });
