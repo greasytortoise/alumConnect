@@ -85,7 +85,7 @@ module.exports = {
                     return {
                       id: site.id,
                       name: site.get('site_name'),
-                      url: site.get('base_url'),
+                      base_url: site.get('base_url'),
                       value: userSite.get('rest_url')
                     };
                   }),
