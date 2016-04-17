@@ -2,7 +2,7 @@ module.exports = {
 
   entry: './client/index.js',
   output: {
-    path: __dirname + "/client",
+    path: process.env.NODE_ENV === 'production' ? './dist' : './build',
     filename: '/bundle.js'
   },
 
@@ -15,7 +15,9 @@ module.exports = {
         {
           presets:['es2015', 'react']
         }
-      }
+      },
+      { test: /\.css$/, loader: "style-loader!css-loader" }
+
     ]
   }
 }
