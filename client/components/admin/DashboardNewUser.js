@@ -1,7 +1,6 @@
 import React from 'react'
 import {Input, ButtonInput, DropdownButton, MenuItem} from 'react-bootstrap'
 import RestHandler from '../../util/RestHandler'
-var auth = require('../../util/authHelpers.js');
 
 class DashboardNewUser extends React.Component {
   constructor(props) {
@@ -32,26 +31,25 @@ class DashboardNewUser extends React.Component {
   }
 
   handleGroupSelect(evt, key) {
-    console.log(key); 
+    console.log(key);
     this.setState({
       group: key
-    });  
+    });
     console.log('group', this.state.group);
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    
+
     var name = this.refs.name.getValue();
     var email = this.refs.email.getValue();
     var password = this.refs.password.getValue();
     var group = this.state.group.group_name;
-    var token = auth.getToken();
     var data = {
       username: name,
       password: password,
       email: email,
-      group: group
+      group: group,
     };
 
     RestHandler.Post('db/users', data, (err, res) => {
@@ -73,16 +71,16 @@ class DashboardNewUser extends React.Component {
       <form onSubmit={this.handleSubmit.bind(this)}>
         <Input type="text" label="Name" placeholder="Enter name"
           ref="name" />
-        <Input type="email" label="Email Address" placeholder="Enter email" 
+        <Input type="email" label="Email Address" placeholder="Enter email"
           ref="email" />
         <Input type="password" label="Password" placeholder="Enter new password"
-          ref="password" /> 
+          ref="password" />
 
         <label>Group</label>
         <DropdownButton title={groupName}>
           {this.renderGroups(this.handleGroupSelect.bind(this))}
         </DropdownButton>
-   
+
         <ButtonInput type="submit" value="Submit" />
       </form>
     );

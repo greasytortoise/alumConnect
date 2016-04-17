@@ -1,7 +1,6 @@
 import React from 'react';
 import { Input, Button } from 'react-bootstrap';
 import RestHandler from '../../../util/RestHandler';
-var auth = require('../../../util/authHelpers.js');
 
 class EditProfileField extends React.Component {
   constructor(props) {
@@ -27,7 +26,7 @@ class EditProfileField extends React.Component {
     } else {
       var url = '/db/fields/field/' + this.props.value.id;
       var data = {
-        title: this.state.value
+        title: this.state.value,
       };
 
       RestHandler.Post(url, data, (err, res) => {
@@ -47,7 +46,7 @@ class EditProfileField extends React.Component {
     const innerButton = <Button onClick={this.handleClick.bind(this)}>{button}</Button>;
     return (
       <div>
-        <Input type="text" disabled={this.state.disabled} buttonAfter={innerButton} value={this.state.value} 
+        <Input type="text" disabled={this.state.disabled} buttonAfter={innerButton} value={this.state.value}
           ref="input" onChange={this.handleInputChange.bind(this)} />
       </div>
     );
