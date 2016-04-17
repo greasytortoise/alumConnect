@@ -16,6 +16,9 @@ app.post('/admintest', util.isAdmin, function(req, res) {
   res.send(200);
 });
 
+// mocha -r mock-local-storage
+// must include mock-local-storage or tests wont work
+
 describe('Server utility: ', function() {
 
   it('token exists', function(done) {
