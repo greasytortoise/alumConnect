@@ -7,7 +7,8 @@ class Sites extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      sites: []
+      sites: [], 
+      error: false
     }
   }
 
@@ -21,7 +22,7 @@ class Sites extends React.Component {
     return this.state.sites.map(function(site) {
       var {id, site_name, base_url} = site;
       return (
-        <EditSite value={site} />
+        <EditSite key={id} value={site} />
       );
     });
   }
@@ -36,12 +37,22 @@ class Sites extends React.Component {
       base_url: url
     };
 
-    RestHandler.Post('/db/sites', siteInfo, (err, res) => {
-      if (err) {return err;}
-      this.setState({sites: this.state.sites.concat(res.body)})
-    });
+    if (site === '' || url === '') {
+      this.setState({error: true})
+    } else {
+      RestHandler.Post('/db/sites', siteInfo, (err, res) => {
+        if (err) {
+          console.error(err);
+          this.setState({error: true});
+        } else if(res.status === 201) {
+          this.setState({sites: this.state.sites.concat(res.body)});
+        }
+      });
 
-    this.clearForm();
+      this.clearForm();      
+    }
+
+
   }
 
   clearForm() {
@@ -65,8 +76,13 @@ class Sites extends React.Component {
           <Input type="text"  ref="url" 
             placeholder="Enter site url  example: https://www.github.com/" />
 
-          <ButtonInput type="submit" value="Submit"/>
+          <ButtonInput bsStyle="primary" type="submit" value="Submit"/>
         </form>
+
+        {this.state.error && (
+          <p>Enter a Site Name and URL.</p>
+        )}
+
       </div>
     );
   }

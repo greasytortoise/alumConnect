@@ -45,7 +45,7 @@ class EditProfileField extends React.Component {
     this.state.disabled ? button = 'edit' : button = 'save';
     const innerButton = <Button onClick={this.handleClick.bind(this)}>{button}</Button>;
     return (
-      <div>
+      <div key={this.props.value.id}>
         <Input type="text" disabled={this.state.disabled} buttonAfter={innerButton} value={this.state.value} 
           ref="input" onChange={this.handleInputChange.bind(this)} />
       </div>

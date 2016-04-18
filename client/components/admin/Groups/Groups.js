@@ -7,7 +7,8 @@ class Groups extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      groups: []
+      groups: [],
+      error: false
     }
   }
 
@@ -21,7 +22,7 @@ class Groups extends React.Component {
     return this.state.groups.map(function(group) {
       var {id, group_name} = group;
       return (
-        <EditGroup value={group} />
+        <EditGroup key={id} value={group} />
       );
     });
   }
@@ -33,12 +34,16 @@ class Groups extends React.Component {
       group_name: group
     };
 
-    RestHandler.Post('/db/groups', groupInfo, (err, res) => {
-      if (err) {return err;}
-      this.setState({groups: this.state.groups.concat(res.body)})
-    });
+    if(group === '') {
+      this.setState({error: true});
+    } else {    
+      RestHandler.Post('/db/groups', groupInfo, (err, res) => {
+        if (err) {return err;}
+        this.setState({groups: this.state.groups.concat(res.body)})
+      });
 
-    this.clearForm();
+      this.clearForm();
+    }
   }
 
   clearForm() {
@@ -59,8 +64,11 @@ class Groups extends React.Component {
           <Input type="text" label="Add Group" 
             placeholder="Enter group name" ref="group" />
 
-          <ButtonInput type="submit" value="Submit"/>
+          <ButtonInput bsStyle="primary" type="submit" value="Submit"/>
         </form>
+        {this.state.error && (
+          <p>Enter a Group Name.</p>
+        )}
       </div>
     );
   }
