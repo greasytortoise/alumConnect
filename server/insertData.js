@@ -83,7 +83,7 @@ Promise.each(groups, function(group) {
           });
         } else {
           // these guys don't have thier name match with the site
-          console.log(studentBio[0]);
+          // console.log(studentBio[0]);
         }
       });
   });
