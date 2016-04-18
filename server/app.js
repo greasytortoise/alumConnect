@@ -11,7 +11,7 @@ middleware(app, express);
 routes(app, express);
 
 var lex = LEX.create({
-  configDir: /*require('os').homedir()*/ './config',
+  configDir: require('homedir')() + '/etc/letsencrypt',
   approveRegistration: function (hostname, cb) {
     cb(null, {
       domains: [hostname],
