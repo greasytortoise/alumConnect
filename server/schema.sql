@@ -76,13 +76,7 @@ values
 insert into Users
   (username, password, email, image, url_hash, public, permission, Group_id)
 values
-  ('Admin', '$2a$10$OJDiRQNkpHyyoi4CC546ZejIhMpRXsI86/tbBr74vsZEN4qtquA5y', 'admin@admin.com', '/assets/trump.jpg', 'ndas2q', 0, 1, 1);
-  ('Matt', '$2a$10$d2i8p6B4pno7tDRpUMaAF.lcCHAmAQ4pVfD84OzsPl2Md/sXmwvoq', 'm@mail.com', '/assets/matt.jpg', 'i3j3k3', 0, 0, 1),
-  ('Jonas', '$2a$10$d2i8p6B4pno7tDRpUMaAF.lcCHAmAQ4pVfD84OzsPl2Md/sXmwvoq', 'j@mail.com', '/assets/jonas.jpg', 'x2y2z2', 0, 0, 1),
-  ('Alamu', '$2a$10$d2i8p6B4pno7tDRpUMaAF.lcCHAmAQ4pVfD84OzsPl2Md/sXmwvoq', 'a@mail.com', '/assets/alamu.jpg', 'n3m3o3', 0, 0, 1),
-  ('Drake', '$2a$10$d2i8p6B4pno7tDRpUMaAF.lcCHAmAQ4pVfD84OzsPl2Md/sXmwvoq', 'd@mail.com', '/assets/drake.jpg', 'a1b1c1', 0, 0, 1),
-  ('Admin', '$2a$10$OJDiRQNkpHyyoi4CC546ZejIhMpRXsI86/tbBr74vsZEN4qtquA5y', 'admin@admin.com', '/assets/trump.jpg', 'ndas2q', 0, 1, 1),
-  ('someGuy', '$2a$10$d2i8p6B4pno7tDRpUMaAF.lcCHAmAQ4pVfD84OzsPl2Md/sXmwvoq', 'e@mail.com', '/assets/someguy.jpg', 'fdasdf', 0, 0, 2);
+  ('Admin', 'admin', 'admin@admin.com', '/assets/trump.jpg', 'ndas2q', 0, 1, 1);
 
 insert into Sites
   (site_name, base_url, active)
