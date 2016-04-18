@@ -14,7 +14,6 @@ var Groups = require('./collections/groups');
 var Bio = require('./models/bio');
 var Bios = require('./collections/bios');
 
-
 var groups = ['hr36', 'hr37', 'hr38', 'hr39', 'hr40', 'hr41'];
 var students = [];
 var biographies = bioFile.bioArray;
