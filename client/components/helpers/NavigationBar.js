@@ -1,9 +1,9 @@
 import React from 'react';
-import NavLink from '../helpers/NavLink';
+import NavLink from './NavLink';
 import $ from 'jquery';
 import { Navbar, Nav, NavDropdown, MenuItem, NavItem} from 'react-bootstrap';
-import auth from '../../../util/authHelpers.js'
-import RestHandler from '../../../util/RestHandler'
+import auth from '../../util/authHelpers.js'
+import RestHandler from '../../util/RestHandler'
 
 
 // This is the only spot I'm using jquery. It's so the navigationbar
@@ -11,6 +11,8 @@ import RestHandler from '../../../util/RestHandler'
 // and get rid of jquery, the site will load much lot faster!
 $(document).on('click', '.navbar-toggle', function(event) {
   $(this).parent().parent().find('.dropdown').addClass('open');
+  $("#wrapper").toggleClass("toggled");
+
 })
 $(document).click(function (event) {
     var clickover = $(event.target);
@@ -64,10 +66,30 @@ class NavigationBar extends React.Component {
     }
   }
 
-  render() {
+  navbarToggleDisplay() {
     var {username, id, image} = this.state.loggedInUserData
+    if(this.props.isAdminBar) {
+      return(
+        <Nav pullRight></Nav>
+      )
+    } else {
+      return(
+        <Nav pullRight>
+          {this.renderMenuItems()}
+          <NavDropdown title={username || ''} id="nav-dropdown">
+            <MenuItem header><a href={`/users/${id}`}>View profile</a></MenuItem>
+            <MenuItem header><a href="/logout">Log out</a></MenuItem>
+          </NavDropdown>
+        </Nav>
+      )
+    }
+  }
+
+  render() {
+    var showInverse = this.props.isAdminBar ? true : false;
+
     return (
-      <Navbar fixedTop>
+      <Navbar fixedTop inverse={showInverse}>
         <Navbar.Header>
           <Navbar.Brand>
             <NavLink to="/" onlyActiveOnIndex>Hack Reactor</NavLink>
@@ -75,13 +97,7 @@ class NavigationBar extends React.Component {
           <Navbar.Toggle animation={false} />
         </Navbar.Header>
         <Navbar.Collapse>
-          {this.renderMenuItems()}
-          <Nav pullRight>
-            <NavDropdown title={username || ''} id="nav-dropdown">
-              <MenuItem header><a href={`/users/${id}`}>View profile</a></MenuItem>
-              <MenuItem header><a href="/logout">Log out</a></MenuItem>
-            </NavDropdown>
-          </Nav>
+          {this.navbarToggleDisplay()}
         </Navbar.Collapse>
       </Navbar>
     );
