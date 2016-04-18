@@ -58,7 +58,7 @@ To sum up the rest of my interests... I love traveling and trying all kinds of n
 
 
 
-Edison Huff
+Edison DuBose Huf
 ­
 
 Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!) Edison Huff ( Rhymes with Medicine Stuff)
@@ -370,7 +370,7 @@ I had never even heard of most programming languages a little over a year ago (I
 Fun random stuff?
 My middle name also has two x's ­ Roxxanne! I also love all pets and am the person who will run over to make friends with a dog on the sidewalk.
 
- 
+
 
 
 Evan Chen
@@ -426,11 +426,9 @@ Coding experience?
 Took some classes that used Python and R in college. Self­taught myself more python in order to automated tasks at my research position and eventually developed systems to track and provide feedback to clinical trial participants. Also dabbled in CSS and javascript in order to develop websites for research participants to interact with. Random statistical programming here and there as well.
 ­
 
-
-
 Fun random stuff?
 I love traveling and have visited 12 countries this year. I am also a big skier (though I haven't been yet this year) and usually like to go to the gym, but 6 months of travel has left me painfully out of shape.
- 
+
 
 
 
@@ -438,8 +436,6 @@ Ian deBoisblanc
 ­
 
 Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
-
-
 My name is Ian. Usually I go by Ian, sometimes by E. Or also by I. Whatever works.
 Last name is deBoisblanc. It's French. Pronounced like duh­bwa­blanc (that last syllable rhymes with honk without the k and like half the n, or exactly like blanc from Sauvignon Blanc for you winos).
 ­
@@ -450,7 +446,7 @@ I spent the past year working as a business consultant at a data­analytics firm
 
 What city are you coming from to be here at HR?
 I've been living in SF for the past year, but I'm originally from New Orleans. I talk about it all the time, so you probably won't forget.
- 
+
 
 Tech interests?
 I love all things space related­­it's my dream to see the Earth from outer space before I die. Fingers crossed for space tourism taking off! I'm also fascinated by what people can bring to life by combining art and technology.
@@ -458,7 +454,7 @@ I love all things space related­­it's my dream to see the Earth from outer spa
 
 Coding experience?
 I took a java class in school, and have done a bit of Arduino in my free time. Nothing serious, just enough to get excited about it.
-­
+
 
 Fun random stuff?
 I love good beers, tossing frisbee, and park chillin'.
@@ -648,7 +644,7 @@ I love spending time in cafes or outdoors with my free time. I also spend a lot 
 
 
 
-Sivaguru Periyasamy
+Siva Periyasamy
 ­
 
 Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!) Sivaguru Periyasamy
@@ -680,6 +676,8 @@ I'm a decent cook and I love dogs.
 
 
 Erick Paepke
+
+
 Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!) Erick Paepke (Pep­kee)
 ­
 
@@ -741,7 +739,7 @@ This is the hardest one. Does anyone else feel like they're writing a weird okcu
 
 
 
-Thomas Hoffmann
+Thomas Hoffman
 ­
 
 Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
@@ -922,6 +920,7 @@ I love to eat, I love to cook, and I love nearly any outdoor adventure so long a
  
 
 
+
 Megan Ring
 ­
 
@@ -1042,7 +1041,7 @@ I enjoy working out and have become a big fan of meditation and yoga over the pa
 
 
 
-Josh Sheller
+Joshua Sheller
 ­
 
 Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!) Joshua Sheller. Most call me Sheller, but Josh or Joshua are both just as well to me.

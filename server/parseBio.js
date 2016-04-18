@@ -7,7 +7,13 @@ var bioArray = [];
 [hr38str, hr39str].forEach(function(giantStr) {
   var group = giantStr.split('\n\n\n\n')
   group.forEach(function(person) {
-    var data = person.split('\n\n');
+    var data = person.split('\n\n')
+      .map(function(datum) {
+        // there is a weird '-' character that is not showing up
+        // after \n
+        return datum.replace(/\n­$/g, '').trim();
+      });
+
     bioArray.push(data);
   });
 });

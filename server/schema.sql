@@ -59,7 +59,7 @@ create table Bio_Fields (
 
 create table Bios (
   id int not null auto_increment,
-  bio varchar(1023),
+  bio varchar(2047),
   User_id int not null,
   Bio_Field_id int not null,
   primary key(id),
