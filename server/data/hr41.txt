@@ -320,7 +320,6 @@ I picked up some HTML and CSS through my jobs in marketing, which led me to take
 
 
 I love doing anything that brings me outside hiking, biking, and skiing especially. Other interests include reading, travel, meditation, and I recently took up rock climbing. I'm also a huge Dodgers fan!
-￼San Francisco :D
 
 
 
@@ -336,7 +335,7 @@ Then went to work at a couple startups (Nextdoor.com, then Coursera)
 Currently still at Coursera working as a Product Designer!
 
 
-I like teaching a lot and am currently working on a Skillshare course re: app design.
+San Francisco :D
 
 
 Machine Learning, games, changing human behavior with technology, learning/edtech, rapid app development
@@ -346,6 +345,7 @@ HTML, CSS, and some JS
 A few courses in Java, C++, and Ruby/Rails in college Random side projects like my design portfolio
 
 
+I like teaching a lot and am currently working on a Skillshare course re: app design.
 I've got two cats!
 I want to start a youtube channel with design tips and guidance for high schoolers and college students. I have been looking forward to doing a programming bootcamp for a while!
 
@@ -391,7 +391,6 @@ My favourite pie is Raspberry Pi.
 
 
 Mostly Javascript, with a little Swift and Ruby.
-￼Telegraph Prep
 
 
 I like hill sprints, love my electric skateboard, did a self-sustained 21 day solo kayak expedition in Haida Gwaii, went to early French immersion, and have an alarming passion for Tartine croissants.
@@ -414,7 +413,7 @@ Berkeley, CA
 Mindfulness/Mental Health apps, EdTech, games
 
 
-Very little mostly self-taught and practice through
+Very little mostly self-taught and practice through Telegraph Prep
 
 
 I chose my current apartment based on it's proximity to a Domino's Pizza
@@ -501,8 +500,6 @@ I finished a Biochemistry degree at UCLA where I did a lot of clinical work and 
 
 
 Born/raised in San Francisco, back in San Francisco living at home.
-￼I'm into cars, bikes (let me know if you need a tune up!), LoL, good food, gymming, playing basketball, and coding!
-￼JavaScript.
 
 
 Car tech (everything about cars), AI, gaming, and hacking.
@@ -512,6 +509,7 @@ Very noob, started last October... I only know JS, HTML, and CSS, but I spend a 
 
 
 I gained 20 pounds the within first month I started learning programming.
+I'm into cars, bikes (let me know if you need a tune up!), LoL, good food, gymming, playing basketball, and coding!
 
 
 
@@ -531,7 +529,7 @@ Mexico City
 Machine Learning, Algorithms and Security
 
 
-I am familiar with Java and Self taught HTML, CSS and
+I am familiar with Java and Self taught HTML, CSS and￼JavaScript.
 
 
 I really like to play tennis, love dancing tropical music like salsa
