@@ -10,9 +10,18 @@ var Groups = require('./collections/groups');
 var Group = require('./models/group');
 
 var students = [];
-for (var groupedStudents in studentFile.students) {
-  students = students.concat(studentFile.students[groupedStudents]);
+for (var group in studentFile.students) {
+  var people = studentFile.students[group];
+  people.forEach(function(person) {
+    var lower = person.name.toLowerCase();
+    var splitName = lower.split(' ');
+    person.image = '/' + splitName[0] + '-' + splitName[1] + '.jpg';
+    students.push(person);
+  });
+
+  // students = students.concat(studentFile.students[group]);
 }
+
 
 var groups = ['hr36', 'hr37', 'hr38', 'hr39', 'hr40', 'hr41'];
 
