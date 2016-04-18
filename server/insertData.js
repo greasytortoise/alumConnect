@@ -70,6 +70,10 @@ Promise.each(groups, function(group) {
         // console.log(user);
         if (user) {
           return Promise.each(studentBio, function(description, index) {
+            if (index > 6) {
+              console.log(studentBio[0]);
+
+            }
             if (index > 0) {
               Bios.create({
                 bio: description,
