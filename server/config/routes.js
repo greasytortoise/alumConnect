@@ -21,7 +21,6 @@ module.exports = function(app, express) {
   app.post('/checktoken', util.getPermissions);
   app.post('/login', handler.checkLogin);
 
-
   app.post('/changepassword', function(req, res) {
     var tokenUserData = req.token.split('.')[1].user;
     Users.where({id: tokenUserData.id}).fetch().then(function(user){

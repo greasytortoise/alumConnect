@@ -5,7 +5,12 @@ var knex = require('knex')({
     user: 'root',
     password: '',
     database: 'alumConnectTest',
-    charset: 'utf8'
+    charset: 'utf8',
+    insecureAuth: true
+  },
+   pool: {
+    min: 0,
+    max: 666
   }
 });
 var bookshelf = require('bookshelf');
