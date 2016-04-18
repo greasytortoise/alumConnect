@@ -2,7 +2,7 @@ var express = require('express');
 var Promise = require('bluebird');
 var app = express();
 
-// var LEX = require('letsencrypt-express');
+var LEX = require('letsencrypt-express');
 
 var middleware = require('./config/middleware');
 var routes = require('./config/routes');
@@ -20,6 +20,7 @@ var lex = LEX.create({
     });
   }
 });
+
 
 
 var lex = LEX.create({
