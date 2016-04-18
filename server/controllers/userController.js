@@ -77,6 +77,7 @@ module.exports = {
                     password: user.get('password'),
                     url: user.get('url_hash'),
                     email: user.get('email'),
+                    group_id: group.id,
                     group: group.get('group_name'),
                     image: user.get('image')
                   },

@@ -17,7 +17,7 @@ var Bios = require('./collections/bios');
 
 var groups = ['hr36', 'hr37', 'hr38', 'hr39', 'hr40', 'hr41'];
 var students = [];
-var bios = bioFile.bioArray;
+var biographies = bioFile.bioArray;
 
 for (var group in studentFile.students) {
   var people = studentFile.students[group];
@@ -39,13 +39,13 @@ Promise.each(groups, function(group) {
   return Groups
     .create({group_name: group});
 })
-.then(function(groups) {
+.then(function() {
   return Promise.each(students, function(student) {
     return Group
       .where({group_name: 'hr' + student.cohort})
       .fetch()
       .then(function(group) {
-        return Users
+        Users
           .create({
             username: student.name,
             password: 'password',
@@ -60,16 +60,35 @@ Promise.each(groups, function(group) {
 
   });
 })
-// .then(function(groups) {
-//   return Promise.each(bios, function(studentBio) {
-//     return User
-//       .where({username: studentBio[0]})
-//       .fetch()
-//       .then(function(user) {
-//         return Promise.each(user, );
-//       });
-//   });
-// })
+.then(function() {
+  return Promise.each(biographies, function(studentBio) {
+    // console.log(studentBio[0]);
+    return User
+      .where({username: studentBio[0]})
+      .fetch()
+      .then(function(user) {
+        // console.log(user);
+        if (user) {
+          return Promise.each(studentBio, function(description, index) {
+            if (index > 6) {
+              console.log(studentBio[0]);
+
+            }
+            if (index > 0) {
+              Bios.create({
+                bio: description,
+                User_id: user.id,
+                Bio_Field_id: index
+              });
+            }
+          });
+        } else {
+          // these guys don't have thier name match with the site
+          console.log(studentBio[0]);
+        }
+      });
+  });
+})
 .then(function() {
   console.log('done!');
   db.knex.destroy();
