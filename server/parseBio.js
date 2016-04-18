@@ -1,9 +1,10 @@
 var fs = require('fs');
 var hr38str = fs.readFileSync('./data/hr38.txt', 'utf8');
 var hr39str = fs.readFileSync('./data/hr39.txt', 'utf8');
-var hr40str = fs.readFileSync('./data/hr40.txt', 'utf8')
+var hr40str = fs.readFileSync('./data/hr40.txt', 'utf8');
+var hr41str = fs.readFileSync('./data/hr41.txt', 'utf8')
 
-var groups = [hr38str, hr39str, hr40str]
+var groups = [hr38str, hr39str, hr40str, hr41str];
 var bioArray = [];
 
 groups.forEach(function(giantStr) {
