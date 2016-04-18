@@ -26,8 +26,7 @@ render((
     </Route>
 
     <route path="/dashboard" component={Dashboard} onEnter={requireAdmin}>
-      <IndexRoute component={DashboardHome}/>
-      <Route path="/dashboard/users" component={DashboardUsers} onEnter={requireAdmin}/>
+      <IndexRoute component={DashboardUsers}/>
       <Route path="/dashboard/newuser" component={DashboardNewUser} onEnter={requireAdmin}/>
       <Route path="/dashboard/groups" component={Groups} onEnter={requireAdmin}/>
       <Route path="/dashboard/sites" component={Sites} onEnter={requireAdmin}/>
