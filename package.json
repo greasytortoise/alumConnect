@@ -46,7 +46,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha -r mock-local-storage test/",
     "start": "webpack && nodemon server/app.js",
     "start:dev": "NODE_ENV=development webpack-dev-server --inline --content-base public/ --history-api-fallback",
     "start:prod": "webpack && node server/app.js",
