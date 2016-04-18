@@ -36,7 +36,7 @@ var lex = LEX.create({
 
 lex.onRequest = app;
 
-lex.listen([3000], [1337, 5001], function () {
+lex.listen([3000], [443, 1337], function () {
   var protocol = ('requestCert' in this) ? 'https': 'http';
   console.log("Listening at " + protocol + '://localhost:' + this.address().port);
 });
