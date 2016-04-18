@@ -2,7 +2,7 @@
 // before running this script!
 
 var Promise = require('bluebird');
-var studentFile = require('./studentData');
+var studentFile = require('./data/studentData');
 var bioFile = require('./parseBio');
 
 var request = require('request');
