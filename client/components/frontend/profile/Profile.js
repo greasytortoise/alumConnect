@@ -2,7 +2,8 @@ import React from 'react'
 import ProfileField from './ProfileField'
 import ProfileSite from './ProfileSite'
 import ProfileEditButton from './ProfileEditButton'
-// import Image from './Image.js'
+import ProfileSidebar from './ProfileSidebar'
+
 import RestHandler from '../../../util/RestHandler'
 import { Button, Row, Col, Image} from 'react-bootstrap';
 var _map = require('lodash/map');
@@ -149,8 +150,9 @@ class Profile extends React.Component {
     }
 
     return (
-      <div>
-        <div className='section profile-main'>
+      <Row>
+        <Col xs={12} md={9} className='float-right'>
+          <div className='section profile-main'>
             <Row>
               <Col xs={12} sm={5} md={4}>
                 <Image src={image} responsive />
@@ -168,17 +170,22 @@ class Profile extends React.Component {
                 </ul>
               </Col>
             </Row>
-        </div>
-        <div className = 'section profile-bio'>
-          {this.renderProfileFields()}
-          <ProfileEditButton
-            profilesUserId = {id}
-            editing = {this.state.editing}
-            hideEditButton = {true}
-            profileEditButtonTapped = {this.profileEditButtonTapped.bind(this)}
-            profileSaveButtonTapped = {this.profileSaveButtonTapped.bind(this)} />
-        </div>
-      </div>
+          </div>
+          <div className = 'section profile-bio'>
+            {this.renderProfileFields()}
+            <ProfileEditButton
+              profilesUserId = {id}
+              editing = {this.state.editing}
+              hideEditButton = {true}
+              profileEditButtonTapped = {this.profileEditButtonTapped.bind(this)}
+              profileSaveButtonTapped = {this.profileSaveButtonTapped.bind(this)} />
+          </div>
+        </Col>
+
+        <Col xs={12} md={3}>
+          <ProfileSidebar groupId={40} />
+        </Col>
+      </Row>
 
     );
   }

@@ -10,7 +10,7 @@ textarea.form-control {
   background-color: #fff;
 }
 #main {
-    margin-top: 70px;
+  margin-top: 70px;
 }
 
 .page-login {
@@ -206,6 +206,9 @@ textarea.form-control {
 }
 
 .profile-bio .btn-default {
+  float:right;
+}
+.float-right {
   float:right;
 }
 
