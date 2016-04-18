@@ -1,6 +1,6 @@
-import React from 'react';
-import { Input, Button } from 'react-bootstrap';
-import RestHandler from '../../../util/RestHandler';
+import React from 'react'
+import { Input, Button } from 'react-bootstrap'
+import RestHandler from '../../../util/RestHandler'
 
 class EditProfileField extends React.Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class EditProfileField extends React.Component {
     } else {
       var url = '/db/fields/field/' + this.props.value.id;
       var data = {
-        title: this.state.value,
+        title: this.state.value
       };
 
       RestHandler.Post(url, data, (err, res) => {
@@ -45,8 +45,8 @@ class EditProfileField extends React.Component {
     this.state.disabled ? button = 'edit' : button = 'save';
     const innerButton = <Button onClick={this.handleClick.bind(this)}>{button}</Button>;
     return (
-      <div>
-        <Input type="text" disabled={this.state.disabled} buttonAfter={innerButton} value={this.state.value}
+      <div key={this.props.value.id}>
+        <Input type="text" disabled={this.state.disabled} buttonAfter={innerButton} value={this.state.value} 
           ref="input" onChange={this.handleInputChange.bind(this)} />
       </div>
     );

@@ -7,7 +7,8 @@ class ProfileFields extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fields: []
+      fields: [],
+      error: false
     }
   }
 
@@ -21,7 +22,7 @@ class ProfileFields extends React.Component {
     return this.state.fields.map(function(field) {
       var {id, title} = field;
       return (
-        <EditProfileField value={field} />
+        <EditProfileField key={id} value={field} />
       );
     });
   }
@@ -34,12 +35,16 @@ class ProfileFields extends React.Component {
       title: field
     };
 
-    RestHandler.Post('/db/fields', fieldInfo, (err, res) => {
-      if (err) {return err;}
-      this.setState({fields: this.state.fields.concat(res.body)})
-    });
+    if (field === '') {
+      this.setState({error: true});
+    } else {      
+      RestHandler.Post('/db/fields', fieldInfo, (err, res) => {
+        if (err) {return err;}
+        this.setState({fields: this.state.fields.concat(res.body)})
+      });
 
-    this.clearForm();
+      this.clearForm();
+    }
   }
 
   clearForm() {
@@ -61,8 +66,11 @@ class ProfileFields extends React.Component {
           <Input type="text" label="Add Profile field" 
             placeholder="Enter field name" ref="field" />
 
-          <ButtonInput type="submit" value="Submit"/>
+          <ButtonInput bsStyle="primary" type="submit" value="Submit"/>
         </form>
+        {this.state.error && (
+          <p>Enter a Profile Field.</p>
+        )}
       </div>
     );
   }

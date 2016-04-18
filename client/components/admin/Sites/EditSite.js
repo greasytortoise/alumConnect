@@ -47,9 +47,9 @@ class EditSite extends React.Component {
     this.state.disabled ? button = 'edit' : button = 'save';
     const innerButton = <Button onClick={this.handleClick.bind(this)}>{button}</Button>;
     return (
-      <div>
-        <Input type="text" disabled={this.state.disabled} label={this.state.site_name}
-          buttonAfter={innerButton} value={this.state.url}
+      <div key={this.props.value.id}>
+        <Input type="text" label={this.state.site_name}
+          disabled={this.state.disabled} buttonAfter={innerButton} value={this.state.url} 
           ref="input" onChange={this.handleInputChange.bind(this)} />
       </div>
     );
