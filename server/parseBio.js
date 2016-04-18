@@ -1,7 +1,7 @@
 var fs = require('fs');
-var hr38str = fs.readFileSync('./hr38.txt', 'utf8');
-var hr39str = fs.readFileSync('./hr39.txt', 'utf8');
-var hr40str = fs.readFileSync('./hr40.txt', 'utf8')
+var hr38str = fs.readFileSync('./data/hr38.txt', 'utf8');
+var hr39str = fs.readFileSync('./data/hr39.txt', 'utf8');
+var hr40str = fs.readFileSync('./data/hr40.txt', 'utf8')
 
 var groups = [hr38str, hr39str, hr40str]
 var bioArray = [];
