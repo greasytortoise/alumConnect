@@ -23,7 +23,7 @@
   height: 100%;
   margin-left: -250px;
   overflow-y: auto;
-  background: #000;
+  background: #1d2025;
 }
 
 #wrapper.toggled #sidebar-wrapper {

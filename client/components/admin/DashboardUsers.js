@@ -25,7 +25,7 @@ class DashboardUsers extends React.Component {
           showFilter={true}
           tableClassName='table'
           useGriddleStyles={false}
-          columns={["id", "username", "email", "group_id", "public"]}/>
+          columns={["username", "email", "group", "id"]}/>
       </div>
     );
   }
