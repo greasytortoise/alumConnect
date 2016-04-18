@@ -19,6 +19,7 @@ exports.generateToken = function(userid, email, perm, name) {
 
 };
 
+
 exports.getSecret = function() {
   return jwtTokenSecret;
 };
@@ -56,20 +57,6 @@ exports.getPermissions = function(req, res) {
 
 
 exports.isAdmin = function(req, res, next) {
-  // if(req.body.token === undefined) {
-  //   res.send(403, 'You have requested an admin-only resource without adequete permissions');
-  // }
-  // console.log(req.body.token);
-  // var token = JSON.parse(req.body.token).token;
-  // var decoded = jwt.decode(token, jwtTokenSecret);
-  // User.where({id: decoded.iss}).fetch().then(function(user){
-  //   if(user.attributes.permission === 1) {
-  //     next();
-  //   } else {
-  //     res.send(403, 'You have requested an admin-only resource without adequete permissions');
-  //   }
-  // });
-
   //Middleware that checks for admin permissions before being allowed to continue. 
 
   var token = (req.body && req.body.token) || (req.query && req.query.access_token) || req.headers['x-access-token'];
