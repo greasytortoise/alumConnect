@@ -19,9 +19,10 @@ var Post = function (url, data, callback) {
     .post(url)
     .send(data)
     .end((err, res) => {
-      err
-        ? console.error('Err in util/restHander ', err)
-        : callback(err, res);
+      if(err) {
+        console.error('Err in util/restHander ', err);
+      } 
+      callback(err, res);
   });
 }
 

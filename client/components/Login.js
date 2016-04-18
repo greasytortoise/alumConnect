@@ -32,10 +32,12 @@ const Login = React.createClass({
     const pass = this.refs.password.refs.input.value;
     var loginComponent = this;
     RestHandler.Post('/login', {email: email, password: pass}, function(err, res) {
+      console.log(res);
       if(err) {
         console.log(err);
         loginComponent.setState({ error: true });
-      } else {
+
+      } else if(res.status === 200) {
         var parseRes = JSON.parse(res.text);
         localStorage.setItem('jwtAlum', JSON.stringify(parseRes.token));
         //else redirect based on permissions
@@ -47,7 +49,7 @@ const Login = React.createClass({
           }
 
         });
-      }
+      } 
     });
 
 
