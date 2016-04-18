@@ -16,8 +16,14 @@ for (var group in studentFile.students) {
   var people = studentFile.students[group];
   people.forEach(function(person) {
     var lower = person.name.toLowerCase();
-    var splitName = lower.split(' ');
-    person.image = '/assets/' + splitName[0] + '-' + splitName[1] + '.jpg';
+
+    if (lower === 'danny tuñón') {
+      lower = 'danny tunon';
+    }
+
+    var dashName = lower.split(' ').join('-');
+
+    person.image = '/assets/' + dashName + '.jpg';
     students.push(person);
   });
 }
