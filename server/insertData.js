@@ -3,14 +3,21 @@
 
 var Promise = require('bluebird');
 var studentFile = require('./studentData');
+var bioFile = require('./parseBio');
+
 var request = require('request');
 var db = require('./dbConfig');
+var User = require('./models/user');
 var Users = require('./collections/users');
-var Groups = require('./collections/groups');
 var Group = require('./models/group');
+var Groups = require('./collections/groups');
+var Bio = require('./models/bio');
+var Bios = require('./collections/bios');
+
 
 var groups = ['hr36', 'hr37', 'hr38', 'hr39', 'hr40', 'hr41'];
 var students = [];
+var bios = bioFile.bioArray;
 
 for (var group in studentFile.students) {
   var people = studentFile.students[group];
@@ -53,9 +60,16 @@ Promise.each(groups, function(group) {
 
   });
 })
-.then(function() {
-  
-})
+// .then(function(groups) {
+//   return Promise.each(bios, function(studentBio) {
+//     return User
+//       .where({username: studentBio[0]})
+//       .fetch()
+//       .then(function(user) {
+//         return Promise.each(user, );
+//       });
+//   });
+// })
 .then(function() {
   console.log('done!');
   db.knex.destroy();
