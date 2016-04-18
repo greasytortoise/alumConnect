@@ -3,12 +3,16 @@ var expect = chai.expect;
 var request = require('supertest');
 var Promise = require('bluebird');
 
+var auth = require('../client/util/authHelpers.js');
 var handler = require('../server/lib/handler');
+var util = require('../server/lib/utility');
 var siteController = require('../server/controllers/siteController');
 var app = require('../server/app.js');
 
 var Site = require('../server/models/site');
 var Sites = require('../server/collections/sites');
+
+var token = util.generateToken(5, 'admin@admin.com', 1, 'Admin');
 
 var mockSiteIds;
 var mockSiteAttrs = [
@@ -66,8 +70,10 @@ describe('Site Endpoint: ', function() {
 
   describe('createSite', function() {
     it('creates a new site on a successful post request (201)', function(done) {
+
       request(app)
         .post('/db/sites')
+        .set('x-access-token', token.token)
         .send(mockSiteAttrs[3]) // site3
         .expect(201)
         .end(function(err, res) {
@@ -79,6 +85,7 @@ describe('Site Endpoint: ', function() {
     it('does not create an existing site on a bad post request (400)', function(done) {
       request(app)
         .post('/db/sites')
+        .set('x-access-token', token.token)
         .send(mockSiteAttrs[2]) // site2
         .expect(400)
         .end(function(err, res) {
@@ -91,6 +98,7 @@ describe('Site Endpoint: ', function() {
     it("does not modify a site's name to an existing site's name on a bad post request (400)", function(done) {
       request(app)
         .post('/db/sites/site/' + mockSiteIds[1]) // site1
+        .set('x-access-token', token.token)
         .send(mockSiteAttrs[0]) // site0
         .expect(400)
         .end(function(err, res) {
@@ -103,6 +111,7 @@ describe('Site Endpoint: ', function() {
     it("modifies a site's name on a successful post request (201)", function(done) {
       request(app)
         .post('/db/sites/site/' + mockSiteIds[1]) // site1
+        .set('x-access-token', token.token)
         .send(mockSiteAttrs[3]) // site3
         .expect(201)
         .end(function(err, res) {
@@ -114,6 +123,7 @@ describe('Site Endpoint: ', function() {
     it('leaves the field as the original text if an empty string is passed in (201)', function(done) {
       request(app)
         .post('/db/sites/site/' + mockSiteIds[1])
+        .set('x-access-token', token.token)
         .send({
           site_name: '',
           base_url: ''
@@ -132,6 +142,7 @@ describe('Site Endpoint: ', function() {
     it('deletes a site on a successful deletion (201)', function(done) {
       request(app)
         .delete('/db/sites/site/' + mockSiteIds[2]) //site2
+        .set('x-access-token', token.token)
         .expect(201)
         .end(function(err, res) {
           expect(res.text).to.equal('deleted!');
