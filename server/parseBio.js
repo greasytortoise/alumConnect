@@ -13,7 +13,8 @@ groups.forEach(function(giantStr) {
       .map(function(datum) {
         // there is a weird '-' character that is not showing up
         // after \n
-        return datum.replace(/\n­$/g, '').trim();
+        // return datum.replace(/\n­$/g, '').trim();
+        return datum.trim();
       });
 
     bioArray.push(data);

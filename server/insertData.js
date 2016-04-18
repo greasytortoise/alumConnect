@@ -2,7 +2,7 @@
 // before running this script!
 
 var Promise = require('bluebird');
-var studentFile = require('./studentData');
+var studentFile = require('./data/studentData');
 var bioFile = require('./parseBio');
 
 var request = require('request');
@@ -27,10 +27,10 @@ for (var group in studentFile.students) {
     if (lower === 'danny tuñón') {
       lower = 'danny tunon';
     }
+    var dashName = lower.split(' ');
+    person.image = '/assets/' + dashName.join('-') + '.jpg';
+    person.email = dashName.join('_') + '@hr.com'
 
-    var dashName = lower.split(' ').join('-');
-
-    person.image = '/assets/' + dashName + '.jpg';
     students.push(person);
   });
 }
@@ -48,8 +48,8 @@ Promise.each(groups, function(group) {
         Users
           .create({
             username: student.name,
-            password: 'password',
-            email: 'email@mail.com',
+            password: '$2a$10$d2i8p6B4pno7tDRpUMaAF.lcCHAmAQ4pVfD84OzsPl2Md/sXmwvoq',
+            email: student.email,
             image: student.image,
             Group_id: group.id,
             public: 0,

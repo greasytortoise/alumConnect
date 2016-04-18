@@ -1,13 +1,13 @@
 Tasio Victoria
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
-Tasio Victoria. Victoria is my last name. (pronunciation: Tah ­ see ­ oh)
-­
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
+Tasio Victoria. Victoria is my last name. (pronunciation: Tah  see  oh)
+
 
 What have you been up to before Hack Reactor?
 Spent the last few years getting my CS degree from the University of Miami. After college I wanted to learn more about web development and modern programming practices so I signed up for HR.
-­
+
 
 What city are you coming from to be here at HR?
 Miami, FL
@@ -15,11 +15,11 @@ Miami, FL
 
 Tech interests?
 My tech interests include: Internet of Things, Automation, Automotive Software, and A.I.
-­
+
 
 Coding experience?
 Java from college. Basic web development skills. Some database modeling experience. Some Android programming experience.
-­
+
 
 Fun random stuff?
 I enjoy living a somewhat balanced lifestyle. I'm into healthy eating, nutrition, and regular exercise. I enjoy going out for drinks from time to time.
@@ -28,27 +28,27 @@ I enjoy living a somewhat balanced lifestyle. I'm into healthy eating, nutrition
 
 
 Benny Hung
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
 Benny Hung
-­
+
 
 What have you been up to before Hack Reactor?
 I studied in UC Berkeley for a few years with an intended Computer Science major before I took a 1.5 year break to do professional gaming (League of Legends). I heard about Hack Reactor a long while back, but still planned to continue my education at Cal and get my career until this past summer. Instead of studying for another 2 years, I finally decided to go with the Hack Reactor route.
-­
+
 
 What city are you coming from to be here at HR?
 I currently live off of the UC Berkeley campus and was born and raised in the Bay Area.
-­
+
 
 Tech interests?
 For quite some time now, I've wanted to develop some sort of app to help improve the lives of people who use it. I don't know what it is I want to develop yet, but I hope I can figure it out in the next couple months.
-­
+
 
 Coding experience?
 I took one class, CS61A, at UC Berkeley which was in Python and a Beginner's C++ class at a community college. Aside from that, I've only read a few chapters and articles here and there.
-­
+
 
 Fun random stuff?
 BEER! I love beer (prefer the darker ones like porters and stouts, but IPA is great, too!). I also love me some scotch or whiskey.
@@ -59,33 +59,33 @@ To sum up the rest of my interests... I love traveling and trying all kinds of n
 
 
 Edison DuBose Huf
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!) Edison Huff ( Rhymes with Medicine Stuff)
-­
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!) Edison Huff ( Rhymes with Medicine Stuff)
+
 
 What have you been up to before Hack Reactor?
 I grew up in New Hampshire then got a BS in Molecular Biology, Chemistry,
 and wasting time on league of legends from the College of William and Mary in Virginia. (I see you XDG Benny). I came out to California to do bacterial genetic engineering and then wound up working for Bayer Healthcare. I just finished up my last project there yesterday (Hence the late reply).
-­
+
 
 What city are you coming from to be here at HR?
 I moved from San Jose to Oakland to be closer to school.
 I'm currently one block from 19th St Bart and will be commuting from there.
-­
+
 
 Tech interests?
 In terms of hobbies I love playing with home automation, phillips hue has been a lot of fun and I want to get better with the android app Tasker to streamline things in the home.
 I think Augmented reality will be a very real thing in the near future (i mean we already have snapchat filters).
 For work I'm just hoping that I'll find something as meaningful as my work at Bayer.
-­
+
 
 Coding experience?
 I took a couple years of class in Highschool, C#, VB, and Java
 I wanted to become an independent mobile app developer in 2015 and made moves towards that by studying on codecademy, and working with an awesome framework called Meteor.js
 I got hung up on facebook integration and decided I could use a little
 more structure.
-­
+
 
 Fun random stuff?
 I have Panamanian citizenship. I've driven from NH to CA. I like to spend my time being bad at guitar, indoor rock climbing, and taking photos.
@@ -94,32 +94,32 @@ I have Panamanian citizenship. I've driven from NH to CA. I like to spend my tim
 
 
 Brian Fogg
-­
+
 
 Preferred name
 Brian Fogg (silent second g. "fog")
-­
+
 
 What have you been up to before Hack Reactor?
-­ Working as a sound and lighting technician for special events, live music, large shows around the bay area.
-­ Performing and recording in several bands. Drums and
+ Working as a sound and lighting technician for special events, live music, large shows around the bay area.
+ Performing and recording in several bands. Drums and
  keyboards.
-­ Teaching / working at a k­8 school in El Cerrito.
-­
+ Teaching / working at a k8 school in El Cerrito.
+
 
 What city are you coming from to be here at HR?
-I live in El Cerrito but I'll be staying in the mission district for the duration of HR. ­ 
+I live in El Cerrito but I'll be staying in the mission district for the duration of HR.  
 
 
 Tech interests?
-­ Software control of theatrical lighting systems.
-­ Exploring new methods to control my music recording and studio production workflows. ­ Design of new instruments which require advanced software.
-­ Building automation and organization systems for disorganized people.
-­
+ Software control of theatrical lighting systems.
+ Exploring new methods to control my music recording and studio production workflows.  Design of new instruments which require advanced software.
+ Building automation and organization systems for disorganized people.
+
 
 Coding experience?
 I started using max msp a few years ago. I eventually hit the limit of what this visual programming system could do and started experimenting with php, javascript and lately a little ruby. C is on the horizon.
-­
+
 
 Fun random stuff?
 I've been teaching music for several years now. I'll probably try and give a talk on music theory at some point. If you're at all interested in music theory or musicianship, get in touch!
@@ -128,28 +128,28 @@ I've been teaching music for several years now. I'll probably try and give a tal
 
 
 Gerrit Yntema
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
-Gerrit Yntema. I go by Gerrit, pronounced like Garrett. My last name is tough so bare with me. EIN­tuh­muh or something like that.
-­
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
+Gerrit Yntema. I go by Gerrit, pronounced like Garrett. My last name is tough so bare with me. EINtuhmuh or something like that.
+
 
 What have you been up to before Hack Reactor?
 I've been living and working in Santa Monica at a startup online tutoring company for the past year doing digital marketing, product design and biz dev. Before that I lived in Detroit doing real estate development. Born and raised in
  Michigan, graduated from University of Michigan in 2011.
-­
+
 
 What city are you coming from to be here at HR?
 Santa Monica, CA.
-­
+
 
 Tech interests?
 I'm extremely interested in things like AI and how tech is changing the way people communicate and connect. I'm very into things that are will designed.
-­
+
 
 Coding experience?
 A C++ class in college, Visual Basic coding at one of my jobs and HTML/CSS at my most recent job while designing our UI. Outside of that, just playing around with online courses.
-­
+
 
 Fun random stuff?
 I'm a big fan of outdoor activities: surfing, climbing, snowboarding, hiking, fly fishing, etc. If anyone is down for some day trips on Sundays, let me know!
@@ -159,57 +159,57 @@ I've had three different jobs since I graduated college in 2011 and I've never b
 
 
 Shane McGraw
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!) 
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!) 
 Shane McGraw (I go by Shane).
-­
+
 
 What have you been up to before Hack Reactor?
 I've been working at a webinar company, heading up their tech support team and learning JS in my free time. Before 2014 I lived in the Midwest, graduating from Purdue (I see that Big 10, Gerrit!), and moving to SF afterwards.
-­
+
 
 What city are you coming from to be here at HR?
 Not much of a change in location; I
  live here in San Francisco.
-­
+
 
 Tech interests?
 Love data visualization! I also teeter between amazement and a slight fear of automation / AI... but I think it's awesome.
-­
+
 
 Coding experience?
 I started learning C and MATLAB in college, and have since developed a few web pages for work here and there with HTML, CSS, & JS. Many a day spent on Stack Overflow.
-­
+
 
 Fun random stuff?
-Really enjoy music­ I sing a bit and play a few instruments. Also love backpacking and exploring northern CA. I've been told I do a mean early­20th century mobster impression.
+Really enjoy music I sing a bit and play a few instruments. Also love backpacking and exploring northern CA. I've been told I do a mean early20th century mobster impression.
 
 
 
 
 Daniel Kim
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
 My name is Daniel Kim. If want to call me Danny, either is fine!
-­
+
 
 What have you been up to before Hack Reactor?
 I graduated last year at Sacramento State with a bachelors in Economics. I didn't work in my field because it's something I did not have passion for. Why did I major in it? I wanted to work for Wall Street, but realize down the road that it isn't for me lol. Basically, I was walking aimlessly, until I found about Hack Reactor. This is what I want to do as a career and hobby.
-­
+
 
 What city are you coming from to be here at HR?
  I am coming from the city San Jose!
-­
+
 
 Tech interests?
-I really love tech and science. Any type of innovation gets my geeky­energy rolling. Star Trek fans anyone? I always had this fascination with tech that contributes to the betterment of mankind. I am big fan of Tesla, and it's these type of people who inspire me and to 'never stay comfortable in life.' I always want to have goals, and not live day by day. I can't forget Neil Degrasse Tyson, Michio Kaku, and Bill­Nye (Bill Bill Bill)! They really contribute to making science cool. In the near future, I really want to get into robotics. I think it is the future, especially the medical augmentation aspect (maybe even augmentation addict centers, a good idea for you! lol).
-­
+I really love tech and science. Any type of innovation gets my geekyenergy rolling. Star Trek fans anyone? I always had this fascination with tech that contributes to the betterment of mankind. I am big fan of Tesla, and it's these type of people who inspire me and to 'never stay comfortable in life.' I always want to have goals, and not live day by day. I can't forget Neil Degrasse Tyson, Michio Kaku, and BillNye (Bill Bill Bill)! They really contribute to making science cool. In the near future, I really want to get into robotics. I think it is the future, especially the medical augmentation aspect (maybe even augmentation addict centers, a good idea for you! lol).
+
 
 Coding experience?
  None. I started to learn in April, but that is about it. I was kind of on and off, then I got serious. To be honest, I really wished I went into this field a lot earlier. I just had this imposter syndrome that this is the field of geniuses. However, I realize anyone can do anything as long as you stay on course and stay passionate. Better late than never.
-­
+
 
 Fun random stuff?
 Not much to say as I stayed indoor most of the time lol. I played a lot of video games from Atari, Genesis, to the PS4! Occasionally, I would go outdoor with my father as he likes to hunt Boars, Bears, and Deer. I don't like hunting, but I do sometimes reload ammo for for my dad lol. Also, I had many pets, especially hunting dogs. So far, I have had pet Snakes, Mice, Guinea pigs, lizards, fishes, Cherokee birds, many dogs and cats, piglets, and even a pigeon! Currently, I have 4 dogs; They are 2 Walker hounds, Maltese and a Chihuahua. Recently, I got really into whiskey. I enjoy Bourbon, Scotch, and Irish whisky, in a (putting on the big boy pants) glass, neat! If you're wanting a drink, I'll join you!
@@ -218,27 +218,27 @@ Not much to say as I stayed indoor most of the time lol. I played a lot of video
 
 
 Elliot Plant
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!) 
-Elliot Plant (EL­ee­it).
-­
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!) 
+Elliot Plant (ELeeit).
+
 
 What have you been up to before Hack Reactor?
 I've been studying Mechanical Engineering at UCLA, interning at Tesla Motors, and surfing. I realized all of my favorite classes had been coding or design classes, so I figured I would do Hack Reactor to finally focus on something I really love.
-­
+
 
 What city are you coming from to be here at HR?
 Los Angeles, but I grew up in the Bay Area.
-­
+
 
 Tech interests?
  I'm a huge fan of wearables and Arduino stuff, and I think the world of tiny computers in everything is going to be pretty awesome. I also like puzzles and simple AI video games.
-­
+
 
 Coding experience?
 I was introduced to CS in college via C++ and Matlab. Along the way, I've done some development in the Arduino IDE, LabView, Swift, and Lisp. I've really liked JavaScript so far, but CSS is still somewhat of a mystery to me.
-­
+
 
 Fun random stuff?
 I love building everything from wires and solder to hamers and nails. I learned to surf recently and I've found it addicting, so I would love to try to catch some waves with you guys! I also like working out with friends, so I'll be looking for a workout buddy.
@@ -247,30 +247,30 @@ I love building everything from wires and solder to hamers and nails. I learned 
 
 
 Andrew Bresee
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
 Andrew Bresee (try saying Zebra a bunch of times fast until the last syllable comes first and the first comes last) "zeBRA zeBRA zeBRA....BRAze"
-­
+
 
 What have you been up to before Hack Reactor?
 I graduated from the University of Maryland College Park in May 2014. I then spent a year in San Luis Obispo CA as a Team Leader for an AmeriCorp program called the Watershed Stewards Program.
-  Before that I was interning for an environmental consulting firm that did urban stream restoration, and before that I was working for a non­profit I cofounded in college.
-­
+  Before that I was interning for an environmental consulting firm that did urban stream restoration, and before that I was working for a nonprofit I cofounded in college.
+
 
 What city are you coming from to be here at HR?
 I was living in San Luis Obispo (SLO) for a year. A nice beach town right between San Francisco and Los Angeles. Before that I was living in College Park Maryland, a suburb of Washington DC.
-­
+
 
 Tech interests?
 Oh lots of stuff! But the two fields I am most interested in are AI and Virtual Reality. I get excited by the applications of VR and the potential gains humanity can make from AI.
 I am particularly excited by the future of big data analytics and the potential insights we can make with really cheap measuring equipment everywhere.
 Lower hanging fruit would be designing web interfaces and general UI. I like design and making websites both look nice and function very well.
-­
+
 
 Coding experience?
 Very little besides the precourse. I played around on coderbyte for a little before applying to HR.
-­
+
 
 Fun random stuff?
 I really like to cook! I am a big fan of experimenting with flavors and tastes. You all may experience me bring in some interesting dishes (depending on how much time I have).
@@ -281,28 +281,28 @@ I am also interested in human behavior and motivation. I like to think a lot abo
 
 
 Jake Pace
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
-Jake Pace ­ pronounced just like you’d expect.
-­
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
+Jake Pace  pronounced just like you’d expect.
+
 
 What have you been up to before Hack Reactor?
 I graduated from the University of Missouri in 2011, interned for a semester, then moved back to Australia (where I grew up). I spent 3 years there working in digital advertising as a project/account manager, but wanted to get my hands dirty and actually start creating things myself. I moved back to
 America in April and took a few months off to visit family and study for HR while I waited for my work permit. Since that arrived, I’ve been doing freelance digital marketing consulting/project management.
-­
+
 
 What city are you coming from to be here at HR?
 Carbondale, IL. Previously Melbourne, Australia.
-­
+
 
 Tech interests?
-Consumer­facing products that are enjoyable to use and address a real need for users. Sounds easy, but it goes disastrously wrong all the time (Tidal, Apple Maps, every Blackberry device for the last 5 years).
-­
+Consumerfacing products that are enjoyable to use and address a real need for users. Sounds easy, but it goes disastrously wrong all the time (Tidal, Apple Maps, every Blackberry device for the last 5 years).
+
 
 Coding experience?
-Not much ­ just some basic HTML/CSS in college and a weird text adventure game I built in JS.
-­
+Not much  just some basic HTML/CSS in college and a weird text adventure game I built in JS.
+
 
 Fun random stuff?
 I love film and TV (majored in Cinema Studies & Media Studies), so I’m always happy to give or receive a recommendation.
@@ -311,30 +311,30 @@ I love film and TV (majored in Cinema Studies & Media Studies), so I’m always 
 
 
 Jacques Uys
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
 Firsttname: Jacques (like the weresquirrel || Cousteau) and Surname: Uys (pronouced "Ace").
-­
+
 
 What have you been up to before Hack Reactor?
 Was a designer/photographer who started doing web design and coding.
 The majority was spent working as a front end developer. Was before joining Hack Reactor, I was part of the UX team for a price comparison website.
-­
+
 
 What city are you coming from to be here at HR?
 Cape Town, South Africa.
-­
+
 
 Tech interests?
 My interests in technology are secondary to what it can do for the end user.
 I am always gratified by how technology can delight and ease the lifes of others.
 As programmers we are empowered to be creators and we can make ideas come to life!
-­
+
 
 Coding experience?
 HTML, CSS, some JS, jQuery, PHP, dabble in some Python (nothing serious). Other: Some frameworks, CMS' and libraries (JS and CSS).
-­ 
+ 
 
 Fun random stuff?
 I love travelling and meeting new people: Mozambique, Namibia, Mauritius, Argentina, Uruguay, Brazil, Paraguay, Chile, U.K, France, Switzerland, Italy, Spain, Germany and the Netherlands.
@@ -345,56 +345,56 @@ Phonetically my surname (Uys), sounds like " ice" in Afrikaans. People always ma
 
 
 Alexxis Johnson
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
-Alexxis Johnson (yes, it's really spelled with two x's!) ­ it's pronounced liked Alexis, but Siri always pronounces it funny.
-­
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
+Alexxis Johnson (yes, it's really spelled with two x's!)  it's pronounced liked Alexis, but Siri always pronounces it funny.
+
 
 What have you been up to before Hack Reactor?
 I work in marketing for a medical supply company and attend school part time. I haven't made too much progress towards a college degree yet, but I do plan to get one eventually. I also spend a lot of time doing things in the arts (singing, piano, writing, etc.) as well as various physical activities like swimming and yoga. Always busy!
-­
+
 
 What city are you coming from to be here at HR?
 I'm coming from Sunny San Diego!
-­
+
 
 Tech interests?
-My favorite thing about tech is how we continue to compact and lessen the need for hardware and bulk. The less money we need to spend updating hefty hardware and the less space we need to store it, the better things are! I'm also interesting in AI and cyber security, but I don't know too much about either. Maybe those are some good learning projects post­HR :)
-­
+My favorite thing about tech is how we continue to compact and lessen the need for hardware and bulk. The less money we need to spend updating hefty hardware and the less space we need to store it, the better things are! I'm also interesting in AI and cyber security, but I don't know too much about either. Maybe those are some good learning projects postHR :)
+
 
 Coding experience?
-I had never even heard of most programming languages a little over a year ago (I was planning on studying English and foreign languages). I started trying to learn Objective­C to build an app right before Swift was released, but I realized I was in way over my head, so I took two intro classes in Java and C++. I also did a few courses online with Udacity for Front­End Web Dev, as well as courses on Code School and other free online classes.
-­
+I had never even heard of most programming languages a little over a year ago (I was planning on studying English and foreign languages). I started trying to learn ObjectiveC to build an app right before Swift was released, but I realized I was in way over my head, so I took two intro classes in Java and C++. I also did a few courses online with Udacity for FrontEnd Web Dev, as well as courses on Code School and other free online classes.
+
 
 Fun random stuff?
-My middle name also has two x's ­ Roxxanne! I also love all pets and am the person who will run over to make friends with a dog on the sidewalk.
+My middle name also has two x's  Roxxanne! I also love all pets and am the person who will run over to make friends with a dog on the sidewalk.
 
 
 
 
 Evan Chen
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
 Evan Chen
-­
+
 
 What have you been up to before Hack Reactor?
 I graduated from USC with a B.S. in Business Administration in 2011. I've been working at Amazon.com since then in a variety of different roles. I'm currently a Sr. Marketing Manager for A mazon Business, a new marketplace that takes the Amazon.com experience and redesigns it for business customers.
-­
+
 
 What city are you coming from to be here at HR?
 I'm moving from Seattle, but I also grew up nearby in Palo Alto.
-­
+
 
 Tech interests?
-I'm particularly interested in the intersection of technology and real­world applications, and how it redefines the world around us (see W hy Software Is Eating The World) .
+I'm particularly interested in the intersection of technology and realworld applications, and how it redefines the world around us (see W hy Software Is Eating The World) .
 
 
 Coding experience?
 I took HTML/CSS, Java, and C++ courses in high school, but I didn't become serious about studying CS until after I graduated from college. I've since taken a few online courses (I ntroduction to Computer Science, A lgorithms: Design and Analysis, and S tartup Engineering)  and a SQL course for Amazon employees.
-­
+
 
 Fun random stuff?
 I love to travel. I spent two years living in Taiwan when I was young. I had a summer internship in Shanghai. I also studied abroad for one semester in Budapest. In total, I've been to 21 countries (and counting): Austria, Belgium, Canada, China, Croatia, England, France, Germany, Hungary, Ireland, Japan, Mexico, Montenegro, Netherlands, Serbia, South Korea, Spain, Switzerland, Taiwan, Thailand, and USA.
@@ -404,27 +404,27 @@ I also love to play and watch sports. I'm a big fan of USC football, the 49ers, 
 
 
 Griffin Michl
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
 Griffin Michl
-­
+
 
 What have you been up to before Hack Reactor?
 I spend the past 6 months traveling primarily in Southeast Asia. Before that I spent 2 years doing public health and epidemiology research at a hospital in Boston. Grew up in Boston and graduated with a Math degree from UC Santa Barbara in '13.
-­
+
 
 What city are you coming from to be here at HR?
 Boston
-­
+
 
 Tech interests?
 I like data science, but I don't think I have enough exposure to other areas to know in what exactly I'm interested.
-­
+
 
 Coding experience?
-Took some classes that used Python and R in college. Self­taught myself more python in order to automated tasks at my research position and eventually developed systems to track and provide feedback to clinical trial participants. Also dabbled in CSS and javascript in order to develop websites for research participants to interact with. Random statistical programming here and there as well.
-­
+Took some classes that used Python and R in college. Selftaught myself more python in order to automated tasks at my research position and eventually developed systems to track and provide feedback to clinical trial participants. Also dabbled in CSS and javascript in order to develop websites for research participants to interact with. Random statistical programming here and there as well.
+
 
 Fun random stuff?
 I love traveling and have visited 12 countries this year. I am also a big skier (though I haven't been yet this year) and usually like to go to the gym, but 6 months of travel has left me painfully out of shape.
@@ -433,24 +433,24 @@ I love traveling and have visited 12 countries this year. I am also a big skier 
 
 
 Ian deBoisblanc
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
 My name is Ian. Usually I go by Ian, sometimes by E. Or also by I. Whatever works.
-Last name is deBoisblanc. It's French. Pronounced like duh­bwa­blanc (that last syllable rhymes with honk without the k and like half the n, or exactly like blanc from Sauvignon Blanc for you winos).
-­
+Last name is deBoisblanc. It's French. Pronounced like duhbwablanc (that last syllable rhymes with honk without the k and like half the n, or exactly like blanc from Sauvignon Blanc for you winos).
+
 
 What have you been up to before Hack Reactor?
-I spent the past year working as a business consultant at a data­analytics firm. It was a great opportunity, but left me looking for more of a creative outlet. So I took a few months off, did some travel in SE Asia, learned to sew, and built an island for my kitchen.
-­
+I spent the past year working as a business consultant at a dataanalytics firm. It was a great opportunity, but left me looking for more of a creative outlet. So I took a few months off, did some travel in SE Asia, learned to sew, and built an island for my kitchen.
+
 
 What city are you coming from to be here at HR?
 I've been living in SF for the past year, but I'm originally from New Orleans. I talk about it all the time, so you probably won't forget.
 
 
 Tech interests?
-I love all things space related­­it's my dream to see the Earth from outer space before I die. Fingers crossed for space tourism taking off! I'm also fascinated by what people can bring to life by combining art and technology.
-­
+I love all things space relatedit's my dream to see the Earth from outer space before I die. Fingers crossed for space tourism taking off! I'm also fascinated by what people can bring to life by combining art and technology.
+
 
 Coding experience?
 I took a java class in school, and have done a bit of Arduino in my free time. Nothing serious, just enough to get excited about it.
@@ -463,28 +463,28 @@ I love good beers, tossing frisbee, and park chillin'.
 
 
 Rohit Mathew
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
-Hi Everyone my name is Rohit Mathew. (Ro­heet). I go by Rohit but I'll occasionally answer to clever nicknames
-­
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
+Hi Everyone my name is Rohit Mathew. (Roheet). I go by Rohit but I'll occasionally answer to clever nicknames
+
 
 What have you been up to before Hack Reactor?
-I've been working as a software consultant for the past 2 years; doing a mix of business analysis and Java development. I work for a firm that builds IT solutions for our clients on a large­scale and also helps with their technology strategy as a whole.
-­
+I've been working as a software consultant for the past 2 years; doing a mix of business analysis and Java development. I work for a firm that builds IT solutions for our clients on a largescale and also helps with their technology strategy as a whole.
+
 
 What city are you coming from to be here at HR?
 I grew up in the Bay Area but went down to SoCal for college and lived in Atlanta and India since then. I made my way back here a couple years ago and I'm currently living in Fremont, CA.
-­
+
 
 Tech interests?
 I've had a passion for technology and tinkering since I was young; pulling open my dad's computer and putting it back together. I
 studied mechanical engineering in college with the intention of going into the automotive industry but I found programming and software development more interesting and particularity now with the rise of robotics and AI, I think that software will be a significant component of any engineering disciple in the future. I also love consumer tech and I spend alot of my free time on tech blogs reading about how these devices are changing our lives
-­
+
 
 Coding experience?
 Took a C++ course in college, and used Matlab for several classes. Been working with Java and some basic HTML/JS/CSS at my job for the past couple years.
-­
+
 
 Fun random stuff? 
 I love a good book, particularity SciFI or Fantasy, so I've been engrossed in all the Star Wars mania the past couple months. I enjoy hiking and have been trying to explore more of the Bay Area.
@@ -493,88 +493,88 @@ I love a good book, particularity SciFI or Fantasy, so I've been engrossed in al
 
 
 Maryam Aljimaz
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
 Maryam Aljimaz
-­
+
 
 What have you been up to before Hack Reactor?
 I am a teaching assistant
-­
+
 
 What city are you coming from to be here at HR?
 Kuwait
-­
+
 
 Tech interests?
 I graduated from the computer engineering department. I have always enjoyed programming and playing with hardware. I ended up working as a network administrator because it was a
 mystery to me, I then shifted to my current job because it offered an opportunity to travel.
-­
+
 
 Coding experience?
 C and Java in college and some hardware programming language. Also, used Java and ASP to automate tasks to make sure my network devices were up and running *good old days!* Oh and I have a hate/love relationship with algorithms!
-­
+
 
 Fun random stuff?
-Love to read, love cats, love to go on adventures ­ last one was skydiving!
+Love to read, love cats, love to go on adventures  last one was skydiving!
 
 
 
 
 Sondra Silverhawk
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
 I'm Sondra Silverhawk.
-­
+
 
 What have you been up to before Hack Reactor?
 I studied Environmental Science in college, then went for a PhD in biology, but had to leave the program early because of a death in the family. I was able to finish a masters, and then I took some time off to figure out what I wanted to do next. Academia no longer appealed, there weren't many interesting private sector opportunities for biologists, and I was burnt out on it, anyway. I did some writing, worked as an editor for a while, improved my cooking skills, and taught myself to code. Surprisingly coding was the thing I enjoyed most, and since the job prospects are great, it was the clear winner.
-­
+
 
 What city are you coming from to be here at HR?
 I currently live in Portland.
-­
+
 
 Tech interests?
-I'm still exploring all the possibilities. So far I'm really interested in machine learning and natural language processing. I did the machine learning class on Coursera, and it was mind­bending. I loved it.
-­
+I'm still exploring all the possibilities. So far I'm really interested in machine learning and natural language processing. I did the machine learning class on Coursera, and it was mindbending. I loved it.
+
 
 Coding experience?
 I took a class in grad school that focused on the use of Matlab in biomedical engineering. The professor gave us some code to hack on, and after the class I wanted to learn more so I downloaded Stanford's CS106A, an intro to computer science in Java. After I finished that I went through Learn Python the Hard Way, and did an evening class here in Portland, at Epicodus. At this point I've done the beginner stuff to death, and am looking forward to more advanced challenges at Hack Reactor.
-­
+
 
 Fun random stuff?
-I do a lot of reading and I love to travel. A few years ago I played Earthbound for the first time, and after I beat it I played it through again. The world is so unique, and the game play is simple but satisfying. Since then I've been thinking about making my own old­school RPG, but too many projects, too little time. I also love Katamari Damacy. It's brilliant.
+I do a lot of reading and I love to travel. A few years ago I played Earthbound for the first time, and after I beat it I played it through again. The world is so unique, and the game play is simple but satisfying. Since then I've been thinking about making my own oldschool RPG, but too many projects, too little time. I also love Katamari Damacy. It's brilliant.
 
 
 
 
 Max Kroshka
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
 My first name is Maksym, but i go by Max or Maks (which sounds the same, at least to me). Last name is Kroshka, looks complicated but sounds exactly the way it looks.
-­
+
 
 What have you been up to before Hack Reactor?
 Back in university my major was International Relationships (which is pretty much a little bit about everything), but i never got to work in that field since i moved to USA. I have 5 years of experience in Hospitality Business working as a server and manager assistant, so it is a big change for me coming into this.
-­
+
 
 What city are you coming from to be here at HR?
 I am originally from Ukraine, moved to NYC when i was 18 and 3 years later moved to San Francisco. I am one of the few lucky people in our cohort who does not have to face a big challenge of moving from another city, getting used to new weather and stuff like that. :)
-­
+
 
 Tech interests?
 I would love to work on something that helps people save at least a little bit of their time, cause,
 you know, time is a "money". (Replace money with something you value the most)
-­
+
 
 Coding experience?
 I studied a little bit of ancient programming languages Turbo Pascal and Delphi back in high school. And some of HTML and CSS in university. Nothing that i could actually remember when i have decided to learn to code 1.5 ago :)
 I took lots of online courses on HTML, CSS, JS and tiny bit of Ruby. Then went through HackPrep class here is SF. That's about it.
-­
+
 
 Fun random stuff?
 Sometimes i might sound a little bit cold or mean, but i really don't mean that. There are this big differences between Eastern European and American culture and mentality that i am still trying to get rid off, so please don't mind me :D
@@ -584,28 +584,28 @@ I also like great food, sports, beers and travel.
 
 
 Joe Miller
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
 Joe Miller
-­
+
 
 What have you been up to before Hack Reactor?
 I lived abroad until coming back to the US for college. I graduated with a degree in classical guitar in 2013 and have been freelancing music and webpages for the past two years.
-­
+
 
 What city are you coming from to be here at HR?
 Bellingham WA, an hour north of Seattle. It is one of the most rainy
  places in the country.
-­
+
 
 Tech interests?
 I have been interested in Bitcoin for a couple of years and would love to do something crypto currency / blockchain related. Also I have a couple of raspberry pis that I fool around with.
-­
+
 
 Coding experience?
 HTML, CSS, Foundation5/Bootstrap, a little PHP, and I have done one project using Ruby on Rails. I started with JS a couple of months ago and am really liking it, I also took an online intro to CS course on MITX that used python.
-­
+
 
 Fun random stuff?
 I love to travel and this summer for two months I went to eastern Europe and then over to Spain. I play ultimate frisbee when I can and enjoy classical guitar and piano.
@@ -614,29 +614,29 @@ I love to travel and this summer for two months I went to eastern Europe and the
 
 
 Daniel Wong
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
 Hey everyone! I go by Daniel Wong, although some people call me Danny. Whichever one flows off your tongue more naturally.
-­
+
 
 What have you been up to before Hack Reactor?
 I graduated from UC Berkeley in 2014 with a degree in molecular and cell biology. While interviewing at med schools I decided not to pursue that anymore. In the meantime I continued a research project at Berkeley (studied developmental biology... random fact: I worked with frogs and did experiments with their embryos) I was working on since college.
-­
+
 
 What city are you coming from to be
 here at HR?
 Born and raised in Fremont, but moved with my family to Hercules, a small city 15 minutes north of Berkeley. Thankfully
 there is a bus line 1 minute from my house that brings me straight to SF downtown.
-­
+
 
 Tech interests?
 I think self driving cars will be in the spotlight in the next decade.
-­
+
 
 Coding experience?
 I learned everything I know from books/internet in the past three months.
-­
+
 
 Fun random stuff?
 I love spending time in cafes or outdoors with my free time. I also spend a lot of time in SF exploring different restaurants with friends. Anything with good company is a great time for me!
@@ -645,28 +645,28 @@ I love spending time in cafes or outdoors with my free time. I also spend a lot 
 
 
 Siva Periyasamy
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!) Sivaguru Periyasamy
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!) Sivaguru Periyasamy
 Friends call me Shiva. The even more diminutive 'Shiv' works too.
-­
+
 
 What have you been up to before Hack Reactor?
 I did med school in India & practiced medicine for 5 years. Been doing a couple of web projects recently.
-­
+
 
 What city are you coming from to be here at HR?
 I'm coming in from Raleigh, NC where
  I've lived since 2013.
-­
+
 
 Tech interests?
 Data visualization, Functional Programming (really planning to learn Lisp some day)
-­
+
 
 Coding experience?
 Did some coding in high school programming contests (don't remember much now). Then med school intervened. I've been running a Linux server for pet projects for a long time. Some python. HTML/CSS, jQuery for the aforementioned web projects. Decided to do this full time & got serious since July this year, with Eloquent Javascript for company. Love that book by the way. I'm really interested in building tools which help build stuff. Kind of like Underscore.js
-­
+
 
 Fun random stuff?
 Love to read. I like hiking, photography, long drives. Hoping to do something combining all three after the course.
@@ -678,26 +678,26 @@ I'm a decent cook and I love dogs.
 Erick Paepke
 
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!) Erick Paepke (Pep­kee)
-­
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!) Erick Paepke (Pepkee)
+
 
 What have you been up to before Hack Reactor?
 I finished my master's degree in structural engineering at UC Berkeley just a couple of weeks ago. I entered my master's program directly after finishing my bachelor's degree in civil engineering at UC Berkeley in 2014.
-­
+
 
 What city are you coming from to be here at HR?
 I moved to Berkeley in August of 2010
  after spending my childhood in Sacramento, CA.
-­
+
 
 Tech interests?
 My tech interests are broad, but to name a few: data visualization, machine learning, and AI.
-­
+
 
 Coding experience?
-I have basic proficiency in Java and Matlab (including data structures). I've taken a couple of college­level courses, and I've done a bit of self­studying.
-This past semester, I was a graduate student instructor for a freshman­level Matlab course at Cal.
-­
+I have basic proficiency in Java and Matlab (including data structures). I've taken a couple of collegelevel courses, and I've done a bit of selfstudying.
+This past semester, I was a graduate student instructor for a freshmanlevel Matlab course at Cal.
+
 
 Fun random stuff?
 For a year, I was the construction manager of Cal's concrete canoe team. Annually, the team builds and races a 20ft+ canoe made entirely of concrete and reinforcement!
@@ -707,30 +707,30 @@ Some of my interests/hobbies: snowboarding, surfing, longboarding, hiking, bikin
 
 
 Nick Echols
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
 Nick Echols (EK HOLS)
-­
+
 
 What have you been up to before Hack Reactor?
-I've been working as a cook(and a lot of other things) for a small take­out restaurant in Berkeley for the last four years. Also playing in a crappy
+I've been working as a cook(and a lot of other things) for a small takeout restaurant in Berkeley for the last four years. Also playing in a crappy
 rock and roll band at sparsely attended bar shows, and watching better bands perform at better venues :P
-­
+
 
 What city are you coming from to be here at HR?
 Oakland
-­
+
 
 Tech interests?
 I'm very interested in using tech in art/music/immersion/entertainment/experience, and other words like that. I would like to help make magical, otherworldly experiences with people who are more artistically creative than I am.
 Of course this includes things like arduino, and other stuff that makes flashes and beeps. On a related note, I spend a lot of my free time on instructables
-Also, I hope to do not­evil (even not­douchey if that's possible) things with my programming skills coming out of HR
-­
+Also, I hope to do notevil (even notdouchey if that's possible) things with my programming skills coming out of HR
+
 
 Coding experience?
-I took an intro to computer science course my first quarter of UCSD, fell in love with programming, and did a lot more throughout my time there, minoring in CS. After that, I decided I needed a big change, so I didn't pursue a tech­related career. I did keep learning on my own though, and picked up a few new programming skills and languages on the way. I ultimately decided that I seriously enjoy this stuff and I wanna dive in and actually make a career out of it.
-­
+I took an intro to computer science course my first quarter of UCSD, fell in love with programming, and did a lot more throughout my time there, minoring in CS. After that, I decided I needed a big change, so I didn't pursue a techrelated career. I did keep learning on my own though, and picked up a few new programming skills and languages on the way. I ultimately decided that I seriously enjoy this stuff and I wanna dive in and actually make a career out of it.
+
 
 Fun random stuff?
 This is the hardest one. Does anyone else feel like they're writing a weird okcupid profile?
@@ -740,27 +740,27 @@ This is the hardest one. Does anyone else feel like they're writing a weird okcu
 
 
 Thomas Hoffman
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
 Thomas Hoffmann
-­
+
 
 What have you been up to before Hack Reactor?
-This past Spring I graduated from the University of Maine with a B.S. in Bioengineering. I originally intended to continue on to medical school, but ultimately decided it just wasn’t something I was passionate about. Since then, while half­heartedly applying to a variety of jobs, I started to get more into programming, eventually realizing it was something I wanted to pursue more seriously.
-­
+This past Spring I graduated from the University of Maine with a B.S. in Bioengineering. I originally intended to continue on to medical school, but ultimately decided it just wasn’t something I was passionate about. Since then, while halfheartedly applying to a variety of jobs, I started to get more into programming, eventually realizing it was something I wanted to pursue more seriously.
+
 
 What city are you coming from to be here at HR?
 Hampden, Maine (definitely looking forward to the change in weather).
-­
+
 
 Tech interests?
 There are many tech areas I find interesting, such as cybersecurity, the intersection of biology and technology, machine learning, gaming, software
 development (applications and systems), and augmented reality, among others. I hope to learn more about my interests and hopefully find one I am passionate about.
-­
+
 
 Coding experience?
-I began programming near the end college by teaching myself the basics of Python. While I enjoyed it, I never really did much with it. Other than that, the majority of my coding experience has been learning HTML/CSS and Javascript over the past 3­4 months.
+I began programming near the end college by teaching myself the basics of Python. While I enjoyed it, I never really did much with it. Other than that, the majority of my coding experience has been learning HTML/CSS and Javascript over the past 34 months.
 
  
 Fun random stuff?
@@ -770,28 +770,28 @@ I am a very active person and love learning to play new sports (always wanted to
 
 
 Jacob Lee
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
 My name is Donghee, but I use Jacob as my english name.
-­
+
 
 What have you been up to before Hack Reactor?
 I was in the steel industry when I was in Korea. Since I immigrated to here, I have pursued continuing education and have worked in the
  real estate industry.
-­
+
 
 What city are you coming from to be here at HR?
 I was born and raised in Korea. My current residence is in New York.
-­
+
 
 Tech interests?
 I am interested in Finance technology. I am also interested in data visualization, data science. I hope to find discover more about tech via this experience.
-­
+
 
 Coding experience?
 I have some programming experience when I was in college, but I forgot everything because It was long time ago. After that I had some experience with HTML, CSS, Javascript through online course.
-­
+
 
 Fun random stuff?
 I love flying and traveling. I am planning on taking classes to obtain a private pilot license in the near future.
@@ -800,44 +800,44 @@ I love flying and traveling. I am planning on taking classes to obtain a private
 
 
 Frank Shieh
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
 My name's Franklin Shieh. I go by Frank. Last name is pronounced like "Shay".
-­
+
 
 What have you been up to before Hack Reactor?
 I just graduated from USC in December 2015 having studied Business Administration for 3.5 years. I've spent the last two summers interning at Barclays Investment Bank in their Menlo Park Technology Coverage group supporting the team on mergers & acquisitions and capital raises.
-­
+
 
 What city are you coming from to be here at HR?
-I've been living in Los Angeles from 2012­now, but I'm originally from Palo Alto.
-­
+I've been living in Los Angeles from 2012now, but I'm originally from Palo Alto.
+
 
 Tech interests?
 I think there's still too much about tech that I don't know about, so I can't say for sure what I'm most interested in yet. But at the moment, I'd love to explore more in automation, machine learning, SaaS and the sharing economy (to put it in buzzwords).
-­
+
 
 Coding experience?
-Zero; before self­studying through online resources, the only "coding" experience I had was writing an IF statement in excel and copy­pasting someone else's VBA code.
-­
+Zero; before selfstudying through online resources, the only "coding" experience I had was writing an IF statement in excel and copypasting someone else's VBA code.
+
 
 Fun random stuff?
-I enjoy running/road cycling/weight­lifting, so am looking for a workout partner. I sometimes play saxophone/clarinet and am a big fan of jazz music. Also very interested in exploring the city.
+I enjoy running/road cycling/weightlifting, so am looking for a workout partner. I sometimes play saxophone/clarinet and am a big fan of jazz music. Also very interested in exploring the city.
 
 
 
  
 Veliko Markov
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
-My first name is Veliko [vel­eek­o], last name Markov.
-­
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
+My first name is Veliko [veleeko], last name Markov.
+
 
 What have you been up to before Hack Reactor?
 The last four years I spent working in corporate travel.
-­
+
 
 What city are you coming from to be here at HR?
 I was born and raised in Bulgaria. The last five years I have been living in San Francisco.
@@ -847,12 +847,12 @@ Tech interests?
 If we define "tech interest" as something that I like hearing or reading about, then too many. Here are some:
 ● Any technology that can displace the big banks. ●
 ● Any technology that can displace oil and coal like nuclear, solar, wind etc. ●
-● Everything automotive, especially car design, electric vehicles and self­driving cars. ●
-­
+● Everything automotive, especially car design, electric vehicles and selfdriving cars. ●
+
 
 Coding experience?
-I did some coding in Pascal back in high­school and found it really interesting. Some experience with HTML, CSS and JavaScript. My main goal with joining Hack Reactor is to finally advance one of my "interests" into a vocation.
-­
+I did some coding in Pascal back in highschool and found it really interesting. Some experience with HTML, CSS and JavaScript. My main goal with joining Hack Reactor is to finally advance one of my "interests" into a vocation.
+
 
 Fun random stuff?
 If I was left alone on an island with a lot of books and drawing supplies, I would probably fail to notice that people are missing.
@@ -861,59 +861,59 @@ If I was left alone on an island with a lot of books and drawing supplies, I wou
 
 
 Victoria Tran
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
-Hi everyone! My name is Victoria Tran ­­ Pretty
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
+Hi everyone! My name is Victoria Tran  Pretty
 straightforward
-­
+
 
 What have you been up to before Hack Reactor?
 I was majoring in psychology at a community college in Orange County, but decided to take a break from school to save up money. I moved up to the bay area about 1.5 years ago & heard about HR through a friend & decided to take the plunge.
-­
+
 
 What city are you coming from to be here at HR?
 Huntington Beach to San Leandro to San Francisco! :)
-  Job­wise? As of now, I would like to be making games in the future, but I haven't really exposed myself to all the other options. There's just so many!
+  Jobwise? As of now, I would like to be making games in the future, but I haven't really exposed myself to all the other options. There's just so many!
 
 
 Tech interests?
-­
+
 
 Coding experience?
-Does Xanga count? After I discovered HR, I studied from the ground up for about a year before I felt comfortable applying. Self­taught JS, HMTL, CSS, & some Ruby.
-­
+Does Xanga count? After I discovered HR, I studied from the ground up for about a year before I felt comfortable applying. Selftaught JS, HMTL, CSS, & some Ruby.
+
 
 Fun random stuff?
-I love reading. Mostly sci­fi or fantasy, but I'm open to suggestions! I also love singing & playing my ukulele when I have the urge to learn a new song. I started taking Brazilian Jiu­Jitsu classes last year, but ultimately took a break because of work & studies, so I'm excited to get back into it after HR!
+I love reading. Mostly scifi or fantasy, but I'm open to suggestions! I also love singing & playing my ukulele when I have the urge to learn a new song. I started taking Brazilian JiuJitsu classes last year, but ultimately took a break because of work & studies, so I'm excited to get back into it after HR!
 COFFEE.. I love coffee!! Tea is cool too
   
 
 
 
 Colin Whitmarsh
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
-Colin Whitmarsh (WIT­marsh)
-­
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
+Colin Whitmarsh (WITmarsh)
+
 
 What have you been up to before Hack Reactor?
 Since graduating college in 2011, I've been working in renewables (energy efficiency,
 solar, and wind) and have been coming to terms with the fact I like burritos almost as much as pizza. Sometimes the decision is too overwhelming and I have a milkshake.
-­
+
 
 What city are you coming from to be here at HR?
 Berkeley. I lived in DC for a few years and then moved to Berkeley last fall to be closer to family.
-­
+
 
 Tech interests?
 I'm interested in software that makes clean energy cheaper and easier to implement. I'm also interested in machine learning and how it can be used to help the grid be more efficient and integrate with more renewable sources.
-­
+
 
 Coding experience?
 I s t a r t e d c o d e c a d e m y . c o m  i n S e p t e m b e r a n d w e n t f r o m t h e r e . B e f o r e t h a t I h a d n o e x p e r i e n c e actually coding, although at my last company I worked with developers to improve our homegrown software. Working with them made me realize I might really enjoy coding.
-­
+
 
 Fun random stuff?
 I love to eat, I love to cook, and I love nearly any outdoor adventure so long as there's a beer at the end of the road.
@@ -922,58 +922,58 @@ I love to eat, I love to cook, and I love nearly any outdoor adventure so long a
 
 
 Megan Ring
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
-Megan Ring (meh­gehn)
-­
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
+Megan Ring (mehgehn)
+
 
 What have you been up to before Hack Reactor?
 Studied Architecture at UC Berkeley, then worked in the field for 3 years. Quit in April, but still doing contract work since then.
-­
+
 
 What city are you coming from to be here at HR?
 I've been in Oakland for a few years now. I'll be commuting via BART, from MacArthur station
-­
+
 
 Tech interests?
 the Internet of Things, data visualizations (d3!), and anything that will help cities be more sustainable in the wake of the continuing influx of urban populations. AI (and AI r isk! ) is on my radar, though, because of this great WaitButWhy post on S uper Intelligence and why EVERYBODY should care.
-­
+
 
 Coding experience?
 Zero, before questioning my career. Did Codecademy,
 CodeSchool, FreeCodeCamp, CodeWars, etc. and I'm really excited about creating/building digital spaces!
-­
+
 
 Fun random stuff?
-I love anything outdoors ­ camping, hiking and swimming in the summer, snowboarding in the winter. I have an awesome rabbit (pet) named Domino. I weld, mostly gas(Oxy/Acetylene) and TIG, and I like to build things.
+I love anything outdoors  camping, hiking and swimming in the summer, snowboarding in the winter. I have an awesome rabbit (pet) named Domino. I weld, mostly gas(Oxy/Acetylene) and TIG, and I like to build things.
  
 
 
 
 Vince Cipriani
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
-Vince Cipriani (last name has been Americanized to Sip­Re­Ann­E)
-­
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
+Vince Cipriani (last name has been Americanized to SipReAnnE)
+
 
 What have you been up to before Hack Reactor?
 Graduated w/ a BS in Industrial Engineering in 2009. I've been working at a DC IoT startup ever since. First role was managing their supply chain, then business analyst doing a lot w/ SQL and business intelligence. Finally, I transitioned to software engineering about 8 months ago.
-­
+
 
 What city are you coming from to be here at HR?
 Grew up in northern West Virginia. Have
  lived in the DC metro for the past 6 years.
-­
+
 
 Tech interests?
 I have a strong interest in SaaS platforms and building tools to solve real world business problems. In general, I like solving problems and as long as the problem is interesting and worth solving, I can get excited about it.
-­
+
 
 Coding experience?
 I planned on attending HR a year ago, but my company let me transition to software so I postponed my enrollment. I've been writing C# and SQL for the past ~8 months. Its been mostly backend work so I'm excited to dive into the frontend.
-­
+
 
 Fun random stuff?
 I got engaged in September; hopefully my fiancee will still be waiting for me when I finish HR. I enjoy hiking, mountain biking and concerts in my spare time.
@@ -982,28 +982,28 @@ I got engaged in September; hopefully my fiancee will still be waiting for me wh
 
 
 Jarrett Gliner
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
-Jarrett Gliner ­ Easy to pronounce, confusing to spell!
-­
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
+Jarrett Gliner  Easy to pronounce, confusing to spell!
+
 
 What have you been up to before Hack Reactor?
 I graduated from UC Santa Barbara in 2014, with a BA in Psychology and a minor in Technology Management and Entrepreneurship. I had always known I wanted to work in Tech, and even taught myself a bit of coding in High School, but I was initially more interested in the business/marketing side of the industry. After taking a Python course in college, I realized that coding was actually my passion and that I should have majored in CS all along. Unfortunately, it was too late at that point to change.
-After graduating, I went on to work at a Santa Barbara­based mid­stage startup called FindTheBest (now called Graphiq) as a Product Manager. I was stoked that the role was relatively technical, but after a year of working there, I knew I had to dive head­first into the real deal and become a developer.
-­
+After graduating, I went on to work at a Santa Barbarabased midstage startup called FindTheBest (now called Graphiq) as a Product Manager. I was stoked that the role was relatively technical, but after a year of working there, I knew I had to dive headfirst into the real deal and become a developer.
+
 
 What city are you coming from to be here at HR?
 Santa Barbara (grew up in San Diego).
-­
+
 
 Tech interests?
-One of my goals in being a developer is to improve how we socialize in the age of “always on” by 1) using technology as a tool for socializing rather than a distraction from it, and 2) giving long­time connections who would not ordinarily interact a more natural way to keep in touch. Expanding on the first point: while it’s disappointing that casual group get­togethers can have periods where everyone is silently checking their phones, there’s more we can do than just removing the phones from the equation. A game like Q uiplash (which I'm always down to play if we ever have time) already does a great job of this, but there are not many other applications that have people interacting in the same way. For the second point, activities such as Fantasy Sports can keep a group connected despite their distance and differing schedules. However, in order to make that possible, everyone in the group must have a mutual interest in the sport, so there is room to expand that concept as well.
-­
+One of my goals in being a developer is to improve how we socialize in the age of “always on” by 1) using technology as a tool for socializing rather than a distraction from it, and 2) giving longtime connections who would not ordinarily interact a more natural way to keep in touch. Expanding on the first point: while it’s disappointing that casual group gettogethers can have periods where everyone is silently checking their phones, there’s more we can do than just removing the phones from the equation. A game like Q uiplash (which I'm always down to play if we ever have time) already does a great job of this, but there are not many other applications that have people interacting in the same way. For the second point, activities such as Fantasy Sports can keep a group connected despite their distance and differing schedules. However, in order to make that possible, everyone in the group must have a mutual interest in the sport, so there is room to expand that concept as well.
+
 
 Coding experience?
-I taught myself HTML/CSS and took a class in Python. At FindTheBest, my role required me to learn mySQL/Database management and basic JS, as well as a funky “visual­programming” application called Pentaho Data Integration (imagine a high­level language like Python or JS, but instead of typing code, you drag and connect boxes on a grid that represent various functions).
-­
+I taught myself HTML/CSS and took a class in Python. At FindTheBest, my role required me to learn mySQL/Database management and basic JS, as well as a funky “visualprogramming” application called Pentaho Data Integration (imagine a highlevel language like Python or JS, but instead of typing code, you drag and connect boxes on a grid that represent various functions).
+
 
 Fun random stuff?
 I’m into pretty much any hobby that involves creativity. Whether it’s playing/producing music, cooking, writing, messing around in Photoshop, or even video games, I love turning nothing into something. Besides that, I’m a Football nut (even though being a Chargers fan is... difficult at times). Also, I’m all about craft beer and whiskey.
@@ -1012,28 +1012,28 @@ I’m into pretty much any hobby that involves creativity. Whether it’s playin
 
 
 Anthony Salierno
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
-Anthony Salierno. I don't really pronounce the "i" in my last name, so I say it like suh­LAIR­no.
-­
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
+Anthony Salierno. I don't really pronounce the "i" in my last name, so I say it like suhLAIRno.
+
 
 What have you been up to before Hack Reactor?
-Most recently I worked as an analyst at Bridgewater Associates, a hedge fund in Westport, CT. Prior to that I worked as an analyst at BMO Capital Markets, an investment bank in New York City. Before that I graduated from Villanova University in 2010 having majored in finance and accounting. I knew finance wasn't what I really wanted to do long­term and after becoming more and more obsessed with tech and the future every day for the past few years I finally found out about Hack Reactor and was ecstatic to follow a path that made sense to me.
+Most recently I worked as an analyst at Bridgewater Associates, a hedge fund in Westport, CT. Prior to that I worked as an analyst at BMO Capital Markets, an investment bank in New York City. Before that I graduated from Villanova University in 2010 having majored in finance and accounting. I knew finance wasn't what I really wanted to do longterm and after becoming more and more obsessed with tech and the future every day for the past few years I finally found out about Hack Reactor and was ecstatic to follow a path that made sense to me.
  
 
 What city are you coming from to be here at HR?
 I moved from NYC where I've lived for the past five years since graduating from college.
-­
+
 
 Tech interests?
 1.) Artificial Intelligence and Machine Learning 2.) Human Longevity and Medical Innovation 3.) Space Exploration and Colonization
-I'm really interested in being part of building a better future. People have never been more empowered than now to take part in improving the world and I want to make a contribution that I'm proud of. If anyone is interested in the future and what it might look like I plan on starting a meet up group in SF after Hack Reactor ends (when we have lives again haha) for entrepreneurially minded people who think long­term so I hope to see some of you there!
-­
+I'm really interested in being part of building a better future. People have never been more empowered than now to take part in improving the world and I want to make a contribution that I'm proud of. If anyone is interested in the future and what it might look like I plan on starting a meet up group in SF after Hack Reactor ends (when we have lives again haha) for entrepreneurially minded people who think longterm so I hope to see some of you there!
+
 
 Coding experience?
 I basically started from scratch to get into Hack Reactor. I had tried a Swift course a year earlier but didn't stick with it because I couldn't make time.
-­
+
 
 Fun random stuff?
 I enjoy working out and have become a big fan of meditation and yoga over the past couple of years. I'm also very interested in the future of humanity, the universe / space, evolution and psychology.
@@ -1042,27 +1042,27 @@ I enjoy working out and have become a big fan of meditation and yoga over the pa
 
 
 Joshua Sheller
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!) Joshua Sheller. Most call me Sheller, but Josh or Joshua are both just as well to me.
-­
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!) Joshua Sheller. Most call me Sheller, but Josh or Joshua are both just as well to me.
+
 
 What have you been up to before Hack Reactor?
 I graduated from Pepperdine University with a Business Major and Applied Math Minor in 2012. For the past couple of years I’ve been running a lab for a startup working to perfect a process dealing with fractional distillation and gas chromatography (just a fancy way of saying separating and analyzing oils we are distilling). Fingers crossed some of our work will make a real difference for those fighting multiple sclerosis, alzheimer’s, certain types of cancer, and some other very ugly stuff.
-­
+
 
 What city are you coming from to be here at HR?
 I was born and raised in a small town in Iowa, moved to CA for college, and have been back and forth between the east
 and west coast a few times since. I’m currently coming from visiting family in Mason City, Iowa.
-­
+
 
 Tech interests?
 After reading about / playing around with some Javascript and Ruby/Rails I realized that the numbers we put together through excel sheets in our most recent lab work (which took us several months) could have been analyzed in days, minutes, or less. Blew my mind! I’m fascinated by the ability of 20 lines of code to reach 20 million people and can’t wait to learn more about data analysis, and any other area of Javascript with the potential to make a positive dent in the universe!
-­
+
 
 Coding experience?
-After college I helped build the “coding” side of my sister’s startup (Nearly Newlywed ­ check us out on Shark Tank!). This was mostly only html/css with a bit of the Shopify templating language Liquid. I also recently finished a very rough first draft of a poker odds training / analysis “app” if anyone is into cards. That is about it, so I’ll be playing catch up with all of you.
-­
+After college I helped build the “coding” side of my sister’s startup (Nearly Newlywed  check us out on Shark Tank!). This was mostly only html/css with a bit of the Shopify templating language Liquid. I also recently finished a very rough first draft of a poker odds training / analysis “app” if anyone is into cards. That is about it, so I’ll be playing catch up with all of you.
+
 
 Fun random stuff?
 I love to backpack and explore the world / other ways of life. I enjoy reading / hiking / lifting / anything active. I try to surround myself with people smarter than me, and I’ve just met forty plus of you, so I look forward to learning from all of you!
@@ -1071,27 +1071,27 @@ I love to backpack and explore the world / other ways of life. I enjoy reading /
 
 
 Orlando Castillo
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
-Orlando Castillo (The double L's in my last name are pronounced like a Y). My nickname is Lance, and a lot of my friends call me that, but Lance or Orlando (or any other variant of that, I get Lando sometimes from Star Wars fans) is good with me! ­ 
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
+Orlando Castillo (The double L's in my last name are pronounced like a Y). My nickname is Lance, and a lot of my friends call me that, but Lance or Orlando (or any other variant of that, I get Lando sometimes from Star Wars fans) is good with me!  
 
 
 What have you been up to before Hack Reactor?
-I just graduated this past May from University of Pennsylvania with a degree in Biophysics. Since then, I have been working as a Research Technician at the Children's Hospital of Pennsylvania on a project involved in the creation of an "artificial womb" for premature babies. While working there, my main responsibilities involved improving their data management and analysis for the project, using VBScript, HTML, some JavaScript, and Excel to streamline their data input and subsequent calculation process. I also had to help take care of the baby lambs they were using to model a human fetus. I used to be Pre­med, but my persistent hobby for topics in computer science along with the work I've been doing as a member of this research team has reinforced the idea that a career in computer science may be more suited to my passions and talents than one in medicine!
-­
+I just graduated this past May from University of Pennsylvania with a degree in Biophysics. Since then, I have been working as a Research Technician at the Children's Hospital of Pennsylvania on a project involved in the creation of an "artificial womb" for premature babies. While working there, my main responsibilities involved improving their data management and analysis for the project, using VBScript, HTML, some JavaScript, and Excel to streamline their data input and subsequent calculation process. I also had to help take care of the baby lambs they were using to model a human fetus. I used to be Premed, but my persistent hobby for topics in computer science along with the work I've been doing as a member of this research team has reinforced the idea that a career in computer science may be more suited to my passions and talents than one in medicine!
+
 
 What city are you coming from to be here at HR?
 Philadelphia, Pennsylvania (I've lived here all my life, so I'm really excited to live in a new environment!)
-­
+
 
 Tech interests?
-I've always been interested in computer science. When I was younger, I was really interested in trying to build an iPhone App, so I learned C on my Macbook and then Objective­C before playing around with Cocoa to build very basic apps. Later on in college, I would often take study breaks by taking courses on Codeacademy or reading online about some computer topic simply because it allowed my mind to switch gears from whatever I was studying at the moment and I always found the content stimulating. Lately, I've been trying to play around with Linux distros, it's my first time using them so right now I'm running an Ubuntu distro.
-­
+I've always been interested in computer science. When I was younger, I was really interested in trying to build an iPhone App, so I learned C on my Macbook and then ObjectiveC before playing around with Cocoa to build very basic apps. Later on in college, I would often take study breaks by taking courses on Codeacademy or reading online about some computer topic simply because it allowed my mind to switch gears from whatever I was studying at the moment and I always found the content stimulating. Lately, I've been trying to play around with Linux distros, it's my first time using them so right now I'm running an Ubuntu distro.
+
 
 Coding experience?
-I taught myself C and Objective­C in high school. I took an intro to Computer Science Course as an undergraduate where I learned some Java. A lot of my physics classes required me to program in Matlab with some Python occasionally thrown in as part of my studies. I've been studying codeacademy and, in order to write scripts with the software my research team uses for data capture, I've learned VBscript, HTML, Javascript, and CSS. Lastly, recently I've started teaching myself Haskell, because as a functional programming language it requires you to think differently about how you write programs and I think that adopting a different perspective in the way you program can be helpful to solving problems. Additionally, from what I hear, there seems to be a lot of talk about functional programming vs. imperative programming, so I feel like having a bit of experience with both can be valuable.
-­
+I taught myself C and ObjectiveC in high school. I took an intro to Computer Science Course as an undergraduate where I learned some Java. A lot of my physics classes required me to program in Matlab with some Python occasionally thrown in as part of my studies. I've been studying codeacademy and, in order to write scripts with the software my research team uses for data capture, I've learned VBscript, HTML, Javascript, and CSS. Lastly, recently I've started teaching myself Haskell, because as a functional programming language it requires you to think differently about how you write programs and I think that adopting a different perspective in the way you program can be helpful to solving problems. Additionally, from what I hear, there seems to be a lot of talk about functional programming vs. imperative programming, so I feel like having a bit of experience with both can be valuable.
+
 
 Fun random stuff?
 I'm a pretty big Star Wars fun, so I've really been enjoying all the hype that's coming back to the stories with the new movie that came out. I also recently started to engage in a more active lifestyle so I always try and work out every day. Lastly, I'm a big reader, so I always enjoy talking about a good book or new novel if anyone every has any suggestions. I'm so excited to meet everyone and look forward to staying in SF!
@@ -1100,27 +1100,27 @@ I'm a pretty big Star Wars fun, so I've really been enjoying all the hype that's
 
 
 Kyle Corbelli
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
 Hi everyone, my name is Kyle Corbelli. Nothing crazy about the pronunciation.
 
 
 What have you been up to before Hack Reactor?
-Working, hiking, surfing, coding, road tripping (I'm typing this right now in a cozy snow­covered bungalow in Utah). But as far as all the professional stuff goes, I started working as an actuarial analyst right out of college and somehow found my way into sales. It's been fun but I'm not quite extroverted enough to want to pack in 30 years of that whole thing.
-­
+Working, hiking, surfing, coding, road tripping (I'm typing this right now in a cozy snowcovered bungalow in Utah). But as far as all the professional stuff goes, I started working as an actuarial analyst right out of college and somehow found my way into sales. It's been fun but I'm not quite extroverted enough to want to pack in 30 years of that whole thing.
+
 
 What city are you coming from to be here at HR?
 I spent my first couple decades living the Bay Area (Petaluma then Berkeley then Oakland) but have most recently been living in San Diego. It'll be weird at Hack Reactor to be the only guy in the cohort coming from Southern California who likes to hike and surf.
-­
+
 
 Tech interests?
-A few concrete topics I think I might enjoy include data science, modeling, machine learning, building tools, and well­intentioned applications aimed at making people happy. Really though, I just like developing software applications. I like the process itself: the focus, the freedom, the challenge, the creation, the headphones, the coffee.
-­
+A few concrete topics I think I might enjoy include data science, modeling, machine learning, building tools, and wellintentioned applications aimed at making people happy. Really though, I just like developing software applications. I like the process itself: the focus, the freedom, the challenge, the creation, the headphones, the coffee.
+
 
 Coding experience?
-I majored in Math at Cal with a concentration in Stat so I had a lot of fun with Matlab, R, and C. My first real­world "program" was a data analysis and visualization tool I wrote in VBA during an actuarial internship. What I wouldn't give to see that mess of code today. Over the past year or so I've been teaching myself the web technologies, built a couple things for work, and deployed a little mobile­friendly MEAN­stack web app that I use in my day­to­day. For the last few weeks I've been working through a book on Java to up my OO game and get some experience with a statically typed language.
-­
+I majored in Math at Cal with a concentration in Stat so I had a lot of fun with Matlab, R, and C. My first realworld "program" was a data analysis and visualization tool I wrote in VBA during an actuarial internship. What I wouldn't give to see that mess of code today. Over the past year or so I've been teaching myself the web technologies, built a couple things for work, and deployed a little mobilefriendly MEANstack web app that I use in my daytoday. For the last few weeks I've been working through a book on Java to up my OO game and get some experience with a statically typed language.
+
 
 Fun random stuff?
 v a r  k y l e =   { n ame: " Kyle",  i nterests: [ 
@@ -1144,26 +1144,26 @@ console. l og( " Hi my name is " +  kyle. n ame +  " and I like " +  kyle. r and
 
 
 Liz Mallalieu
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
 Elizabeth Mallalieu. Most people call me Liz, but anything works :)
-­
+
 
 What have you been up to before Hack Reactor? I graduated from Colgate University in 2013 with a degree in Economics, but decided to go a different route after college working for a small electronic music startup doing a little bit of everything from editorial and content creation to media partnerships with festivals and event ticketing. The website didn’t work very well causing a lot of problems for us, so I ended up learning a bit about the web. After that, I decided I wanted to move to the engineering side of startups and started to learn coding on my own. During this time, I did an internship at Foursquare in product ops, which solidified my desire to become a full time programmer.
-­
+
 
 What city are you coming from to be here at HR?
 NYC. I’m definitely looking forward to escaping the cold winter this year!
-­
+
 
 Tech interests?
 I have recently become interested in blockchain technology, specifically the ways it can be applied to so many different industries. It’s a really interesting time to become a programmer, and I’m excited to be a part of it!
-­
+
 
 Coding experience?
 I did some very basic programming in SAS and Stata to work with data sets for an econometrics course in college, but didn’t do much beyond that until I started exploring the many online resources about a year ago to see if coding was something I actually wanted to pursue as a career. I didn’t get too serious with it until this summer, when I took Hack Reactor Remote Prep, and studied for the Hack Reactor interview process.
-­
+
 
 Fun random stuff?
 I love music and going to shows, and I am a hockey fan (go Rangers!). I love exploring new cities so I’m looking forward to getting to know SF with all of you. Hopefully we won't be too busy/wiped out to hang out together on Sundays!
@@ -1172,27 +1172,27 @@ I love music and going to shows, and I am a hockey fan (go Rangers!). I love exp
 
 
 John Domingo
-­
 
-Preferred name (first and last, and proper pronunciation for either or both if needed ­ it helps so much!)
+
+Preferred name (first and last, and proper pronunciation for either or both if needed  it helps so much!)
 John Domingo (as in Sunday)
-­
+
 
 What have you been up to before Hack Reactor? Studied Marine Science at UC Berkeley until 2013 and then applied to work at a small geology lab. Although I didn’t have any of the technical skills to be an analyst, they hired me anyway to help with some data entry and marketing projects. I spent the last two years working my way up as the database administrator and now I’m primarily lab software consultant. Small company though
 so there’s a bit of title inflation I guess :p
-­
+
 
 What city are you coming from to be here at HR?
 I've live in Dogtown, Oakland for a little over two years now :) Originally from San Diego!
-­
+
 
 Tech interests?
 I’m interested in data viz, WebGL, machine learning, robotics, mobile dev, and data science. I’m having a blast learning frontend technologies because my current job as a DBA has me looking at tables and tables for days.
-­
+
 
 Coding experience?
 Basic HTML when Xanga was around; Java in high school (although I only retained the OOP concepts); MATLAB and Scheme (dialect of Lisp) in college; and Basic, SQL, Visual Basic + VBA (Access, Excel and Outlook) for work.
-­
+
 
 Fun random stuff?
 I like to cook and bake a lot, although most times it’s a hit or miss :p I really enjoy CrossFit and boxing so I’m a bit sad that I’m going to have to scale back once HR starts. If anyone else is interested, we should keep each other in check! I will be aiming for the 7am classes near 19th street BART on weekdays. I also like to run around Lake Merritt every Sunday :)
