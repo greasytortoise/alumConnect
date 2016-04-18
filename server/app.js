@@ -1,5 +1,6 @@
 var express = require('express');
 var Promise = require('bluebird');
+var os = require('os');
 var app = express();
 
 
@@ -13,7 +14,7 @@ routes(app, express);
 
 
 var lex = LEX.create({
-  configDir: '../tls/',
+  configDir: '/etc/letsencrypt',
   approveRegistration: function (hostname, cb) {
     cb(null, {
       domains: ['donkit.com'],
