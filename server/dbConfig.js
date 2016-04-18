@@ -1,9 +1,9 @@
 var knex = require('knex')({
   client: 'mysql',
   connection: {
-    host: '107.170.1.73',
+    host: 'http://107.170.1.73',
     user: 'root',
-    password: '',
+    password: '1234',
     database: 'alumConnectTest',
     charset: 'utf8',
     insecureAuth: true
