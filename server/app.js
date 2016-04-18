@@ -24,7 +24,7 @@ var lex = LEX.create({
 
 
 var lex = LEX.create({
-  configDir: require('os').homedir() +  '/etc/letsencrypt',
+  configDir: require('homedir')() +  '/etc/letsencrypt',
   approveRegistration: function (hostname, cb) {
     cb(null, {
       domains: [hostname],
