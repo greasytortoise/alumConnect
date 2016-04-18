@@ -52,7 +52,11 @@ Promise.each(groups, function(group) {
       });
 
   });
-}).then(function() {
+})
+.then(function() {
+  
+})
+.then(function() {
   console.log('done!');
   db.knex.destroy();
 });
