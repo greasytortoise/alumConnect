@@ -83,7 +83,6 @@ class Users extends React.Component {
 
   render() {
     var groupName = this.state.selectedGroup.group_name || '';
-    debugger;
     const innerDropdown = (
       <DropdownButton bsStyle='default' title={groupName} id='dropdown-groups'>
         {this.renderGroups(this.handleGroupSelect.bind(this))}

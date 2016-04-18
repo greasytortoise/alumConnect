@@ -1,26 +1,49 @@
 import React from 'react'
 import { Link } from 'react-router'
+import RestHandler from '../../../util/RestHandler'
 
 
 
 
 class ProfileSidebar extends React.Component {
 
-  getClassMates() {
-    var url = '/db/groups/' + this.props.params.groupId;
-    RestHandler.Get(url, (err, res) => {
+  constructor (props) {
+    super (props);
+    this.state = {
+      groupMembers: {}
+    };
+  }
 
+  componentDidMount() {
+    this.getClassMates(this.props.groupId);
+  }
+
+  getClassMates(groupId) {
+    var url = '/db/groups/group/' + this.props.groupId;
+    RestHandler.Get(url, (err, res) => {
+      this.setState({groupMembers: res.body})
     });
+  }
+
+  renderSidebar() {
+    if(this.state.groupMembers.users) {
+      return this.state.groupMembers.users.map(function(user) {
+        return(
+          <li key={user.id}>
+            <Link to={`/users/${user.id}`}>{user.username}</Link>
+            {/*<Link to={`/users/${user.id}`}>{user.username}</Link>*/}
+          </li>
+        )
+      })
+    }
   }
 
   render() {
     return(
-        <ul className="sidebar-nav">
-          <li><Link to="/dashboard">View Users</Link></li>
-          <li><Link to="/dashboard/newuser">Add New User</Link></li>
-          <li><Link to="/dashboard/groups">Manage Groups</Link></li>
-          <li><Link to="/dashboard/sites">Manage Sites</Link></li>
-          <li><Link to="/dashboard/profile-fields">Manage Profile Fields</Link></li>
+        <ul className="sidebar-users">
+          <li><h4>{this.props.group} ClassMates</h4></li>
+
+          {this.renderSidebar()}
         </ul>
     )
   }

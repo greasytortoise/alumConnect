@@ -28,8 +28,20 @@ class Profile extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    //For when the route changes from something like /users/3 to /users/6
+    //When clicking on the sidebar url
+    if(nextProps) {
+      this.state = {
+        profileData: {},
+        editing: 0
+      }
+      this.getUserProfile(nextProps.params.user);
+    }
+  }
+
   componentDidMount() {
-    this.getUserProfile();
+    this.getUserProfile(this.props.params.user);
   }
 
 
@@ -40,8 +52,8 @@ class Profile extends React.Component {
   // 3. set the state to profileData, which renders most of the page!
   // 4. Also initialize this.profileEdits.user incase something is edited
 
-  getUserProfile() {
-    var url = '/db/users/user/' + this.props.params.user;
+  getUserProfile(userId) {
+    var url = '/db/users/user/' + userId;
     RestHandler.Get(url, (err, res) => {
 
       this.spliceFilledOutFieldsIntoAvailableFields(res.body, 'userInfo', '/db/fields', (profileData) => {
@@ -144,14 +156,18 @@ class Profile extends React.Component {
   }
 
   render() {
-    var username, image, group, id = ''
+    var username, image, group, group_id, id = ''
     if (this.state.profileData.user) {
-      var {username, image, group, id} = this.state.profileData.user
+      var {username, image, group, group_id, id} = this.state.profileData.user
+    }
+    var profileSidebar;
+    if(group_id) {
+      profileSidebar = <ProfileSidebar groupId={group_id} group={group} />;
     }
 
     return (
       <Row>
-        <Col xs={12} md={9} className='float-right'>
+        <Col xs={12} sm={9} xl={10} className='float-right'>
           <div className='section profile-main'>
             <Row>
               <Col xs={12} sm={5} md={4}>
@@ -182,8 +198,8 @@ class Profile extends React.Component {
           </div>
         </Col>
 
-        <Col xs={12} md={3}>
-          <ProfileSidebar groupId={40} />
+        <Col xs={12} sm={3} xl={2}>
+          {profileSidebar}
         </Col>
       </Row>
 
