@@ -9,21 +9,18 @@ var Users = require('./collections/users');
 var Groups = require('./collections/groups');
 var Group = require('./models/group');
 
+var groups = ['hr36', 'hr37', 'hr38', 'hr39', 'hr40', 'hr41'];
 var students = [];
+
 for (var group in studentFile.students) {
   var people = studentFile.students[group];
   people.forEach(function(person) {
     var lower = person.name.toLowerCase();
     var splitName = lower.split(' ');
-    person.image = '/' + splitName[0] + '-' + splitName[1] + '.jpg';
+    person.image = '/assets/' + splitName[0] + '-' + splitName[1] + '.jpg';
     students.push(person);
   });
-
-  // students = students.concat(studentFile.students[group]);
 }
-
-
-var groups = ['hr36', 'hr37', 'hr38', 'hr39', 'hr40', 'hr41'];
 
 Promise.each(groups, function(group) {
   return Groups
