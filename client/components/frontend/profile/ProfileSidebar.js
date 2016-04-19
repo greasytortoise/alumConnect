@@ -30,7 +30,7 @@ class ProfileSidebar extends React.Component {
       return this.state.groupMembers.users.map(function(user) {
         return(
           <li key={user.id}>
-            <Link to={`/users/${user.id}`}>{user.username}</Link>
+            <Link to={`/users/${user.id}`}  activeClassName="active">{user.username}</Link>
             {/*<Link to={`/users/${user.id}`}>{user.username}</Link>*/}
           </li>
         )

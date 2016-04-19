@@ -222,15 +222,16 @@ textarea.form-control {
 
 .sidebar-users li a {
   display: block;
-  padding: 4px 0;
+  padding: 4px 0px 4px 6px;
   text-decoration: none;
   color: #999999;
 }
 
-.sidebar-users li a:hover {
+.sidebar-users li a:hover,
+.sidebar-users li a.active  {
   text-decoration: none;
   color: #333;
-  background: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.6);
 }
 
 .sidebar-users li a:active,
