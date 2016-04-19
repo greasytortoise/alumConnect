@@ -42,6 +42,7 @@ Alumni networking platform
 
 ### Challenges:
 
+* We're gathering so much data about the users -- their likes, interests, github, linkedin accounts, and more can easily be added. Use this data to create new features! Eg: blog feed, linkedin api to populate additional fields in the user profile, ect, 
 * Currently, a clever user of the site can spoof the JWT of an admin and do bad things. Prevent this from happening.
 * Refactor to use Flux
 * Add more features to admin dashboard(change user password, group, etc)
