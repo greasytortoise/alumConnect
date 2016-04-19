@@ -25,6 +25,7 @@ class DashboardUsers extends React.Component {
           showFilter={true}
           tableClassName='table'
           useGriddleStyles={false}
+          resultsPerPage={25}
           columns={["username", "email", "group", "id"]}/>
       </div>
     );
