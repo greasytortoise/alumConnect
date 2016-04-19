@@ -1,8 +1,10 @@
+Demo: https://donkit.com:1337/
+
 # alumConnect
 Alumni networking platform
 
 
-### To create database: ###
+### To create database and populate with sample data: ###
  **note from drake: database is still in test mode**
   * $ mysql -u root < server/schema.sql
   * $ node server/insertData.js
