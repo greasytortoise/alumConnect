@@ -1,4 +1,5 @@
 Demo: https://donkit.com:1337/
+Login as admin, and have fun =D  u: admin@admin.com p: admin
 
 # alumConnect
 Alumni networking platform
