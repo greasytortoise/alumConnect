@@ -22,9 +22,15 @@ Alumni networking platform
   * Default Admin login information: email: admin@admin.com password: admin
   * Default user login information: email: firstname_lastname@hr.com password: user 
 
+### Frontend:
+* client/index.js: We're using react router! You can see the routes in this file. If you open it up you'll see a bunch of imports. The router needs to know about these compoents to direct the user to them when they go to a url. In render, you can see the router in action! If you're unsure what component is being rendered on a certain url, just check the router.
+* client/components/admin: this is where all the components that controll the admin dashboard. You can manage and add new users, edit profile fields, add sites that users can be a part of and hopefully more!
+* client/components/frontend: this is where the actual site that users view lives. It's pretty simple, we essentially have users and profiles. Hopefully this will be extended out more!
+* client/components/frontend/profile handles a lot! It's responsible for getting all the user profile info from our /db/users/user/:id api and nicely displaying it. Additionally, users or admins can edit profile fields, based on their permissions. Hopefully this is built out enough to where you won't need to touch it much, and continue expanding or using the frameowrk in other ways!
+
 
 ### API: 
-(These have been upated, so some might not work!)
+(These have been upated,)
 * get: <http://localhost:3000/db/groups>
 * get: <http://localhost:3000/db/groups/group:id>
 * post: <http://localhost:3000/db/groups>
@@ -32,16 +38,13 @@ Alumni networking platform
 * get:  <http://localhost:3000/db/users>
 * get:  <http://localhost:3000/db/users/user/:id>
 * post: <http://localhost:3000/db/users/>
-* ---
-* get:  <http://localhost:3000/db/networks>
-* get:  <http://localhost:3000/db/networks/network/:id>
-* post: <http://localhost:3000/db/networks>
-* ---
-* get:  <http://localhost:3000/db/bios>
-* get:  <http://localhost:3000/db/bios/bio:id>
-* post: <http://localhost:3000/db/bios>
 
+* ---
+* get:  <http://localhost:3000/db/sites>
+* post: <http://localhost:3000/db/sites>
 
+* get:  <http://localhost:3000/db/fields>
+* post: <http://localhost:3000/db/fields>
 ### Challenges:
 
 * We're gathering so much data about the users -- their likes, interests, github, linkedin accounts, and more can easily be added. Use this data to create new features! Eg: blog feed, linkedin api to populate additional fields in the user profile, ect, 
