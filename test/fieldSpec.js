@@ -13,7 +13,7 @@ var app = require('../server/app.js');
 var Field = require('../server/models/bioField');
 var Fields = require('../server/collections/bioFields');
 
-var token = util.generateToken(5, 'admin@admin.com', 1, 'Admin');
+var token = util.generateToken(1, 'admin@admin.com', 1, 'Admin');
 
 var mockFieldIds;
 var mockFieldAttrs = [

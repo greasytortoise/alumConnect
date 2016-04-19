@@ -12,7 +12,7 @@ var app = require('../server/app.js');
 var Site = require('../server/models/site');
 var Sites = require('../server/collections/sites');
 
-var token = util.generateToken(5, 'admin@admin.com', 1, 'Admin');
+var token = util.generateToken(1, 'admin@admin.com', 1, 'Admin');
 
 var mockSiteIds;
 var mockSiteAttrs = [

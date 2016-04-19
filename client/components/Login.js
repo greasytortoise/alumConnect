@@ -28,6 +28,7 @@ const Login = React.createClass({
 
   handleSubmit(event) {
     event.preventDefault();
+    //get email and password 
     const email = this.refs.email.refs.input.value;
     const pass = this.refs.password.refs.input.value;
     var loginComponent = this;

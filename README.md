@@ -10,10 +10,12 @@ Alumni networking platform
 ### Make sure you use webpack to generate a client/bundle.js: ###
 
   * (make sure you npm install your dependencies)
-  * (make sure you get rid of all client side bower stuff)
   * Install webpack globally (npm install -g webpack)
   * run: webpack --watch
   * Start the server visit http://localhost:3000/
+  * For production: 'npm run deploy' creates the minified production bundle.  
+  * client/index.html Developtment: script src="/build/bundle.js" Production: src="/dist/bundle.js"
+  * TESTING: npm test
 
 ### API: 
 

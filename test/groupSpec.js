@@ -11,7 +11,7 @@ var app = require('../server/app.js');
 var Group = require('../server/models/group');
 var Groups = require('../server/collections/groups');
 
-var token = util.generateToken(5, 'admin@admin.com', 1, 'Admin');
+var token = util.generateToken(1, 'admin@admin.com', 1, 'Admin');
 
 var mockGroupIds;
 var mockGroupAttrs = [
