@@ -3,12 +3,17 @@ var expect = chai.expect;
 var request = require('supertest');
 var Promise = require('bluebird');
 
+var auth = require('../client/util/authHelpers.js');
 var handler = require('../server/lib/handler');
+var util = require('../server/lib/utility');
+
 var bioFieldController = require('../server/controllers/fieldController');
 var app = require('../server/app.js');
 
 var Field = require('../server/models/bioField');
 var Fields = require('../server/collections/bioFields');
+
+var token = util.generateToken(1, 'admin@admin.com', 1, 'Admin');
 
 var mockFieldIds;
 var mockFieldAttrs = [
@@ -56,6 +61,7 @@ describe('BioField Endpoint: ', function() {
     it('creates a new field on a successful post request (201)', function(done) {
       request(app)
         .post('/db/fields')
+        .set('x-access-token', token.token)
         .send(mockFieldAttrs[3]) // field3
         .expect(201)
         .end(function(err, res) {
@@ -69,6 +75,7 @@ describe('BioField Endpoint: ', function() {
     it("modifies a field's name on a successful post request (201)", function(done) {
       request(app)
         .post('/db/fields/field/' + mockFieldIds[1]) // field1
+        .set('x-access-token', token.token)
         .send(mockFieldAttrs[3]) // field3
         .expect(201)
         .end(function(err, res) {
@@ -80,6 +87,7 @@ describe('BioField Endpoint: ', function() {
     it('leaves the field as the original text if an empty string is passed in (201)', function(done) {
       request(app)
         .post('/db/fields/field/' + mockFieldIds[1])
+        .set('x-access-token', token.token)
         .send({title: '',})
         .expect(201)
         .end(function(err, res) {
@@ -94,6 +102,7 @@ describe('BioField Endpoint: ', function() {
     it('deletes a field on a successful deletion (201)', function(done) {
       request(app)
         .delete('/db/fields/field/' + mockFieldIds[2]) //field2
+        .set('x-access-token', token.token)
         .expect(201)
         .end(function(err, res) {
           expect(res.text).to.equal('deleted!');

@@ -1,8 +1,10 @@
 var express = require('express');
 var Promise = require('bluebird');
+var os = require('os');
 var app = express();
 
-var LEX = require('letsencrypt-express').testing();
+
+var LEX = require('letsencrypt-express');
 
 var middleware = require('./config/middleware');
 var routes = require('./config/routes');
@@ -10,24 +12,12 @@ var routes = require('./config/routes');
 middleware(app, express);
 routes(app, express);
 
-var lex = LEX.create({
-  configDir: /*require('os').homedir()*/ './config',
-  approveRegistration: function (hostname, cb) {
-    cb(null, {
-      domains: [hostname],
-      email: 'bresnan.mw@gmail.com',
-      agreeTos: true,
-    });
-  }
-});
-
-
 
 var lex = LEX.create({
-  configDir: /*require('os').homedir()*/ './config',
+  configDir: '/etc/letsencrypt',
   approveRegistration: function (hostname, cb) {
     cb(null, {
-      domains: [hostname],
+      domains: ['donkit.com'],
       email: 'bresnan.mw@gmail.com',
       agreeTos: true,
     });
