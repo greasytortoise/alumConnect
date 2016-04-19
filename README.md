@@ -24,21 +24,21 @@ Alumni networking platform
 
 
 ### API: 
-
+(These have been upated, so some might not work!)
 * get: <http://localhost:3000/db/groups>
-* get: <http://localhost:3000/db/groups/:id>
+* get: <http://localhost:3000/db/groups/group:id>
 * post: <http://localhost:3000/db/groups>
 * ---
 * get:  <http://localhost:3000/db/users>
-* get:  <http://localhost:3000/db/users/:id>
-* post: <http://localhost:3000/db/users>
+* get:  <http://localhost:3000/db/users/user/:id>
+* post: <http://localhost:3000/db/users/>
 * ---
 * get:  <http://localhost:3000/db/networks>
-* get:  <http://localhost:3000/db/networks/:id>
+* get:  <http://localhost:3000/db/networks/network/:id>
 * post: <http://localhost:3000/db/networks>
 * ---
 * get:  <http://localhost:3000/db/bios>
-* get:  <http://localhost:3000/db/bios/:id>
+* get:  <http://localhost:3000/db/bios/bio:id>
 * post: <http://localhost:3000/db/bios>
 
 
