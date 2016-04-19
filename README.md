@@ -47,6 +47,7 @@ Alumni networking platform
 * We're gathering so much data about the users -- their likes, interests, github, linkedin accounts, and more can easily be added. Use this data to create new features! Eg: blog feed, linkedin api to populate additional fields in the user profile, ect, 
 * Currently, a clever user of the site can spoof the JWT of an admin and do bad things. Prevent this from happening.
 * Refactor to use Flux
+* Refactor to use server side rendering
 * Add more features to admin dashboard(change user password, group, etc)
 * alumConnect is by invite only. Set up a way to generate a unique default password for the user, which can be changed on first login, and send an email to the supplied address with their password. 
 * Allow users to change their own password
