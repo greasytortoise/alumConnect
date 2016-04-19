@@ -946,7 +946,7 @@ Joey Chin
 Alice Yu
 
 
- Alice Yu, pronounced how it looks. "Yu" is like "You."
+Alice Yu, pronounced how it looks. "Yu" is like "You."
 
 
  I was Director of Community at M​eteor,​a nontechnical role in a very technical company. Meteor was a big part of my inspiration to learn programming and JavaScript in particular. I was at Meteor for 2.5 years, beginning as employee #7 as a junior community manager, m o v i n g i n t o a p r i m a r i l y c​o n t e n t ​r o l e l a t e r , a n d￼finally becoming a director with a team of two people.
