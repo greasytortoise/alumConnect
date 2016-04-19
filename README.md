@@ -43,11 +43,10 @@ Alumni networking platform
 * get:  <http://localhost:3000/db/users>
 * get:  <http://localhost:3000/db/users/user/:id>
 * post: <http://localhost:3000/db/users/>
-
 * ---
 * get:  <http://localhost:3000/db/sites>
 * post: <http://localhost:3000/db/sites>
-
+* ---
 * get:  <http://localhost:3000/db/fields>
 * post: <http://localhost:3000/db/fields>
 ### Challenges:
