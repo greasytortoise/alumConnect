@@ -1,18 +1,13 @@
-Demo: https://donkit.com:1337/
-
-https://donkit.com:1337/login  (Login as admin, and have explore! )
-
-u: admin@admin.com p: admin  
-
-
 # alumConnect
-Alumni networking platform
+A React CMS. Currently manages authentication, user profiles, and an admin dashboard with configurable options.
 
 
 ### To create database and populate with sample data: ###
  **note from drake: database is still in test mode**
   * $ mysql -u root < server/schema.sql
   * $ node server/insertData.js
+  * client side admin password: u: admin@admin.com p: admin  
+
 
 
 ### Make sure you use webpack to generate a client/bundle.js: ###
