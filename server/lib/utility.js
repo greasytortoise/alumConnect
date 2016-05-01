@@ -2,8 +2,7 @@ var bcrypt = require('bcrypt');
 var jwt = require('jwt-simple');
 var moment = require('moment');
 var User = require('../models/user');
-var jwtTokenSecret = 'DONALD_TRUMP_HUGE_HANDS_NO_PROBLEM';
-
+var config = require('../config/githubAPIConfig.js');
 
 exports.generateToken = function(userid, email, perm, name) {
   //generates a JSON Web Token(JWT) to be sent with response on successful login attempt
@@ -13,7 +12,7 @@ exports.generateToken = function(userid, email, perm, name) {
     exp: expires,
     perm: perm
 
-  }, jwtTokenSecret);
+  }, config.sessionSecret);
 
   return {token: token, expires: expires, user: email, name: name };
 
@@ -21,7 +20,7 @@ exports.generateToken = function(userid, email, perm, name) {
 
 
 exports.getSecret = function() {
-  return jwtTokenSecret;
+  return config.sessionSecret;
 };
 
 exports.isLoggedIn = function(req, res, next) {
@@ -29,7 +28,7 @@ exports.isLoggedIn = function(req, res, next) {
   var token = (req.body && req.body.token) || (req.query && req.query.access_token) || req.headers['x-access-token'];
   if (token) {
     try {
-      var decoded = jwt.decode(token, jwtTokenSecret);
+      var decoded = jwt.decode(token, config.sessionSecret);
 
       if (decoded.exp <= Date.now()) {
         res.send(400, 'Access token has expired');
@@ -48,7 +47,7 @@ exports.isLoggedIn = function(req, res, next) {
 
 exports.getPermissions = function(req, res) {
   //Query the database for the owner of the token, and returns their permissions(0 for user, 1 for admin);
-  var decoded = jwt.decode(req.body.token, jwtTokenSecret);
+  var decoded = jwt.decode(req.body.token, config.sessionSecret);
   User.where({id: decoded.iss}).fetch().then(function(user){
     res.send(200, user.attributes.permission);
   });
@@ -62,7 +61,7 @@ exports.isAdmin = function(req, res, next) {
   var token = (req.body && req.body.token) || (req.query && req.query.access_token) || req.headers['x-access-token'];
   if (token) {
     try {
-      var decoded = jwt.decode(token, jwtTokenSecret);
+      var decoded = jwt.decode(token, config.sessionSecret);
       User.where({id: decoded.iss}).fetch().then(function(user){
         if(user.attributes.permission === 1) {
           next();

@@ -22,6 +22,8 @@
     "multer": "^1.1.0",
     "mysql": "^2.10.2",
     "nodemon": "^1.9.1",
+    "passport": "^0.3.2",
+    "passport-github": "^1.1.0",
     "react": "^0.14.8",
     "react-bootstrap": "^0.28.5",
     "react-dom": "^0.14.8",
@@ -48,7 +50,7 @@
   },
   "scripts": {
     "test": "mocha -r mock-local-storage test/",
-    "start": "webpack && nodemon server/app.js",
+    "start": "webpack --watch && nodemon server/app.js",
     "start:dev": "NODE_ENV=development webpack-dev-server --inline --content-base public/ --history-api-fallback",
     "start:prod": "webpack && node server/app.js",
     "deploy": "NODE_ENV=production webpack -p"

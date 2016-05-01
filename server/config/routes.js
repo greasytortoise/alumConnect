@@ -3,12 +3,17 @@ var db = require('../dbConfig');
 var util = require('../lib/utility.js');
 var bcrypt = require('bcrypt');
 var handler = require('../lib/handler');
+
+var passport = require('passport');
+var GithubStrategy = require('passport-github').Strategy;
+
 var groupRouter = require('../routers/groupRouter');
 var userRouter = require('../routers/userRouter');
 var siteRouter = require('../routers/siteRouter');
 var fieldRouter = require('../routers/fieldRouter');
 var userSiteRouter = require('../routers/userSiteRouter');
 var bioRouter = require('../routers/bioRouter');
+var bioRouter = require('../routers/authRouter');
 
 module.exports = function(app, express) {
   app.use('/db/groups', groupRouter);
@@ -16,6 +21,7 @@ module.exports = function(app, express) {
   app.use('/db/sites', siteRouter);
   app.use('/db/fields', fieldRouter);
   app.use('/dashboard/db/users', userRouter);
+  app.use('/auth', authRouter);
 
   app.post('/checktoken', util.getPermissions);
   app.post('/login', handler.checkLogin);
@@ -23,6 +29,12 @@ module.exports = function(app, express) {
   app.post('/user/uploadimage', function(req, res) {
     // res.status(204).end();
   })
+  // app.get('/auth', passport.authenticate('github'));
+  // app.get('/auth/error', auth.error);
+  // app.get('/auth/callback',
+  //   passport.authenticate('github', {failureRedirect: '/auth/error'}),
+  //   auth.callback
+  // );
 
   app.post('/changepassword', function(req, res) {
     var tokenUserData = req.token.split('.')[1].user;
