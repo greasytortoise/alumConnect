@@ -76,7 +76,7 @@ values
 insert into Users
   (username, password, email, image, url_hash, public, permission, Group_id)
 values
-  ('Admin', '$2a$10$OJDiRQNkpHyyoi4CC546ZejIhMpRXsI86/tbBr74vsZEN4qtquA5y', 'admin@admin.com', '/assets/trump.jpg', 'ndas2q', 0, 1, 1);
+  ('Admin', '$2a$10$OJDiRQNkpHyyoi4CC546ZejIhMpRXsI86/tbBr74vsZEN4qtquA5y', 'admin@admin.com', '/assets/photos/trump.jpg', 'ndas2q', 0, 1, 1);
 
 insert into Sites
   (site_name, base_url, active)

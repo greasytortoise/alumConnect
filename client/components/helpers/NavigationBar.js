@@ -87,12 +87,14 @@ class NavigationBar extends React.Component {
 
   render() {
     var showInverse = this.props.isAdminBar ? true : false;
-
+    var logo = showInverse ? 'logo-dark.png' : 'logo.png'
     return (
       <Navbar fixedTop inverse={showInverse}>
         <Navbar.Header>
           <Navbar.Brand>
-            <NavLink to="/" onlyActiveOnIndex>Hack Reactor</NavLink>
+            <NavLink to="/" onlyActiveOnIndex>
+              <img className="image" src={`../assets/${logo}`} />
+            </NavLink>
           </Navbar.Brand>
           <Navbar.Toggle animation={false} />
         </Navbar.Header>

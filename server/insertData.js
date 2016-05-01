@@ -1,4 +1,4 @@
-// run mysql -u root < schema.sql 
+// run mysql -u root < schema.sql
 // before running this script!
 
 var Promise = require('bluebird');
@@ -27,7 +27,7 @@ for (var group in studentFile.students) {
       lower = 'danny tunon';
     }
     var dashName = lower.split(' ');
-    person.image = '/assets/' + dashName.join('-') + '.jpg';
+    person.image = '/assets/photos/' + dashName.join('-') + '.jpg';
     person.email = dashName.join('_') + '@hr.com'
 
     students.push(person);
@@ -53,8 +53,8 @@ Promise.each(groups, function(group) {
             Group_id: group.id,
             public: 0,
             permission: 0
-          }); 
-        
+          });
+
       });
 
   });

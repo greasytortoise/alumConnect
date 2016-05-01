@@ -10,7 +10,7 @@ textarea.form-control {
   background-color: #fff;
 }
 #main {
-  margin-top: 70px;
+  margin-top: 80px;
 }
 
 .page-login {
@@ -92,7 +92,13 @@ textarea.form-control {
   -ms-transition: height 0.01s;
   -o-transition: height 0.01s;
   transition: height 0.01s;
+}
 
+.navbar-brand {
+    height:65px;
+  }
+.navbar-brand>img {
+    height:38px;
 }
 
 .navbar-text {
@@ -108,7 +114,9 @@ textarea.form-control {
     float: left;
     padding: 15px;
 }
-
+.navbar-default .navbar-right {
+  margin-top: 10px;
+}
 .navbar-default .navbar-nav>li>a {
     color: #777;
 }
