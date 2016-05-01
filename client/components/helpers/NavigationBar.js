@@ -92,7 +92,9 @@ class NavigationBar extends React.Component {
       <Navbar fixedTop inverse={showInverse}>
         <Navbar.Header>
           <Navbar.Brand>
-            <NavLink to="/" onlyActiveOnIndex>Hack Reactor</NavLink>
+            <NavLink to="/" onlyActiveOnIndex>
+              <img className="image" src="../assets/logo.png" />
+            </NavLink>
           </Navbar.Brand>
           <Navbar.Toggle animation={false} />
         </Navbar.Header>
