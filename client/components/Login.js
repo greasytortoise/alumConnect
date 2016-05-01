@@ -60,21 +60,7 @@ const Login = React.createClass({
       <div id='loginFormWrapper'>
         <form id='loginForm' onSubmit={this.handleSubmit}>
           <h2>Please login</h2>
-          <Input
-            bsSize='large'
-            type="email"
-            ref="email"
-            placeholder='email'
-            groupClassName='login-name'
-            onChange={this.handleChange} />
-          <Input
-            bsSize='large'
-            type="password"
-            ref="password"
-            placeholder='password'
-            groupClassName='login-password'
-            onChange={this.handleChange} />
-          <ButtonInput bsStyle="primary" bsSize="large" type="submit" block>Login</ButtonInput>
+          <ButtonInput bsStyle="primary" bsSize="large" type="submit" block>Login with Github</ButtonInput>
 
         </form>
         {this.state.error && (

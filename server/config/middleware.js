@@ -20,6 +20,9 @@ var passport = require('passport');
 var GithubStrategy = require('passport-github').Strategy;
 var config = require('./githubAPIConfig.js');
 var Promise = require('bluebird');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+
 
 module.exports = function(app, express) {
   app.use(bodyParser.json());
@@ -32,9 +35,11 @@ module.exports = function(app, express) {
   });
   app.use(express.cookieParser());
   app.use(express.session({secret: 'mysecret'}));
+  app.use(cookieParser());
+  app.use(session({secret: config.sessionSecret}));
   app.use(passport.initialize());
   app.use(passport.session());
-
+  console.log(config.githubClientSecret);
   passport.use(new GithubStrategy({
     clientID: config.githubClientId,
     clientSecret: config.githubClientSecret,

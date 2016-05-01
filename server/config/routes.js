@@ -13,7 +13,7 @@ var siteRouter = require('../routers/siteRouter');
 var fieldRouter = require('../routers/fieldRouter');
 var userSiteRouter = require('../routers/userSiteRouter');
 var bioRouter = require('../routers/bioRouter');
-var bioRouter = require('../routers/authRouter');
+var authRouter = require('../routers/authRouter');
 
 module.exports = function(app, express) {
   app.use('/db/groups', groupRouter);

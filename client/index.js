@@ -24,6 +24,10 @@ render((
       <IndexRoute component={Users}/>
       <Route path="/users/:user" component={Profile}/>
     </Route>
+    <Route path="/auth" component={Login}>
+      <IndexRoute component={Login}/>
+      <Route path="/auth/callback" onEnter={redirectSwitch}/>
+    </Route>
 
     <route path="/dashboard" component={Dashboard} onEnter={requireAdmin}>
       <IndexRoute component={DashboardUsers}/>
@@ -35,23 +39,30 @@ render((
   </Router>
 ), document.getElementById('app'))
 
+function redirectSwitch() {
+  if(false) {
+    window.location.href = '/dashboard';
+  } else {
+    window.location.href = '/';
+  }
+}
 
 function requireAuth(nextState, replace) {
-  if (!auth.loggedIn()) {
-    replace({
-      pathname: '/login',
-      state: { nextPathname: nextState.location.pathname }
-    })
-  }
+  // if (!auth.loggedIn()) {
+  //   replace({
+  //     pathname: '/login',
+  //     state: { nextPathname: nextState.location.pathname }
+  //   })
+  // }
 }
 
 
 function requireAdmin(nextState, replace) {
-  var token = auth.parseJwt();
-  if(!auth.loggedIn() || token.perm !== 1) {
-    replace({
-      pathname: '/login',
-      state: { nextPathname: nextState.location.pathname }
-    });
-  }
+  // var token = auth.parseJwt();
+  // if(!auth.loggedIn() || token.perm !== 1) {
+  //   replace({
+  //     pathname: '/login',
+  //     state: { nextPathname: nextState.location.pathname }
+  //   });
+  // }
 }
