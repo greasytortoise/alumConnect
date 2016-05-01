@@ -5,7 +5,7 @@ var bcrypt = require('bcrypt');
 var handler = require('../lib/handler');
 
 var passport = require('passport');
-var GithubStrategy = require('passport-github').Strategy;
+var GithubStrategy = require('passport-github2').Strategy;
 
 var groupRouter = require('../routers/groupRouter');
 var userRouter = require('../routers/userRouter');
@@ -22,19 +22,11 @@ module.exports = function(app, express) {
   app.use('/db/fields', fieldRouter);
   app.use('/dashboard/db/users', userRouter);
   app.use('/auth', authRouter);
-
-  app.post('/checktoken', util.getPermissions);
-  app.post('/login', handler.checkLogin);
-
+  
   app.post('/user/uploadimage', function(req, res) {
     // res.status(204).end();
   })
-  // app.get('/auth', passport.authenticate('github'));
-  // app.get('/auth/error', auth.error);
-  // app.get('/auth/callback',
-  //   passport.authenticate('github', {failureRedirect: '/auth/error'}),
-  //   auth.callback
-  // );
+
 
   app.post('/changepassword', function(req, res) {
     var tokenUserData = req.token.split('.')[1].user;

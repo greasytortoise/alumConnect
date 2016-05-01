@@ -17,14 +17,12 @@ import ProfileFields from './components/admin/ProfileFields/ProfileFields'
 render((
   <Router history={browserHistory}>
 
-    <Route path="/login" component={Login}/>
-    <Route path="/logout" component={Login} onEnter={auth.logout}/>
 
     <Route path="/" component={App}>
       <IndexRoute component={Users}/>
       <Route path="/users/:user" component={Profile}/>
     </Route>
-    <Route path="/auth" component={Login}>
+    <Route path="/login" component={Login}>
       <IndexRoute component={Login}/>
       <Route path="/auth/callback" onEnter={redirectSwitch}/>
     </Route>
