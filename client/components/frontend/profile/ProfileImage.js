@@ -46,7 +46,8 @@ class ProfileImage extends React.Component {
             <Image src={this.props.src} responsive />
             <Button bsStyle="primary" onClick={this.showEditModal.bind(this)}>
               Launch small demo modal
-            </Button>          </div>
+            </Button>
+           </div>
         )
       } else {
         return(
@@ -87,6 +88,18 @@ const MyLargeModal = React.createClass({
         </Modal.Header>
         <Modal.Body>
           <h4>Wrapped Text</h4>
+            <div>
+            <form
+              name="secret"
+              encType="multipart/form-data"
+              method="POST"
+              action="/user/uploadimage" >
+                <input type="hidden" name="filename" value="asdf.jpg"/>
+                <input type="file" id="profilePic" name="upl"/>
+                <br/>
+                <input type="submit" value="submit"/>
+              </form>
+            </div>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.props.onHide}>Close</Button>
