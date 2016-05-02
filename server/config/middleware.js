@@ -23,7 +23,8 @@ var Promise = require('bluebird');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var methodOverride = require('method-override');
-
+var User = require('../models/user');
+var Users = require('../collections/users');
 
 module.exports = function(app, express) {
   app.use(function (req, res, next) {
@@ -64,29 +65,36 @@ module.exports = function(app, express) {
     callbackURL: config.githubCallbackUrl
   }, function(accessToken, refreshToken, profile, done){
     process.nextTick(function() {
-      console.log(profile)
+      var profileObj = {
+        id: profile.id,
+        handle: profile.username
+      };
       return done(null, {
         accessToken: accessToken,
-        profile: profile
+        userData: profileObj
       });
     })
   }));
 
   passport.serializeUser(function(user, done) {
-    // for the time being tou can serialize the user 
-    // object {accessToken: accessToken, profile: profile }
-    // In the real app you might be storing on the id like user.profile.id 
-    console.log('SERIALIZE CALLED');
     done(null, user);
   });
 
-  passport.deserializeUser(function(user, done) {
+  passport.deserializeUser(function(userObj, done) {
     // If you are storing the whole user on session we can just pass to the done method, 
     // But if you are storing the user id you need to query your db and get the user 
-    //object and pass to done() 
-        console.log(user);
+    //object and pass to done()
+    // User.where({handle: userObj.userData.handle }).fetch()
+    //   .then(function(user) {
+    //     if (!user) {
+    //       done(null, null);
+    //     } else {
+    //       done(null, user);
+    //     }
 
-    done(null, user);
+    //   });
+    
+    done(null, userObj);
   });
 
 };
