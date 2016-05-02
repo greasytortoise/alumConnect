@@ -40,6 +40,16 @@ authRouter.route('/callback')
       res.redirect('/');
     });
 
+authRouter.route('/islogged') 
+  .get(util.isLoggedIn, function(req, res){
+    res.status(200).send('true');
+  });
+
+authRouter.route('/isadmin') 
+  .get(util.isLoggedIn, util.isAdmin, function(req, res){
+    res.status(200).send('true');
+  }); 
+
 authRouter.route('/getpermissions')
   .get(util.isLoggedIn, function(req, res) {
     User.where({githubid: req.user.userData.id}).fetch()
@@ -49,7 +59,7 @@ authRouter.route('/getpermissions')
         } else {
           res.status(200).send(user.permissions);
         }
-      })
-  })
+      });
+  });
 
 module.exports = authRouter;

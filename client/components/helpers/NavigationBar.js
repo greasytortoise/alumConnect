@@ -42,17 +42,17 @@ class NavigationBar extends React.Component {
     //then retrieve the users id from it, get that users info, and display
     //it in the navigationbar
 
-    auth.parseJwtAsync((parsedToken) => {
-      if(parsedToken) {
-        var url = '/db/users/user/' + parsedToken.iss;
-        RestHandler.Get(url, (err, res) => {
-          this.setState({
-            loggedInUserData: res.body.user,
-            permission: parsedToken.perm
-          });
-        });
-      }
-    });
+    // auth.parseJwtAsync((parsedToken) => {
+    //   if(parsedToken) {
+    //     var url = '/db/users/user/' + parsedToken.iss;
+    //     RestHandler.Get(url, (err, res) => {
+    //       this.setState({
+    //         loggedInUserData: res.body.user,
+    //         permission: parsedToken.perm
+    //       });
+    //     });
+    //   }
+    // });
   }
 
   renderMenuItems() {

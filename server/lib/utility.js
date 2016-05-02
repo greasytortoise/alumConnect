@@ -9,7 +9,7 @@ exports.isLoggedIn = function(req, res, next) {
   if (req.isAuthenticated()) {
     next();
   } else {
-    res.redirect('/login');
+    res.send(403);
   }
 };
 
@@ -21,11 +21,11 @@ exports.isAdmin = function(req, res, next) {
         if(user.permissions === 1) {
           next();
         } else {
-          res.redirect('/')
+          res.send(403);
         }
       });
   } else {
-    res.redirect('/login');
+    res.send(403);
   }
 };
 
