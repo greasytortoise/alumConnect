@@ -1,4 +1,5 @@
 import React from 'react'
+import ProfileImage from './ProfileImage'
 import ProfileField from './ProfileField'
 import ProfileSite from './ProfileSite'
 import ProfileEditButton from './ProfileEditButton'
@@ -49,9 +50,8 @@ class Profile extends React.Component {
   // 1. Gets the users profile (but doesn't update the state yet)
   // 2. Run functions to get all the available fields on the site and splice in
   //    the filled out fields to a profileData object
-  // 3. set the state to profileData, which renders most of the page!
-  // 4. Also initialize this.profileEdits.user incase something is edited
-
+  // 3. sets the state to profileData, which renders most of the page!
+  // 4. initializes this.profileEdits.user to currently vieweing user
   getUserProfile(userId) {
     var url = '/db/users/user/' + userId;
     RestHandler.Get(url, (err, res) => {
@@ -66,9 +66,6 @@ class Profile extends React.Component {
       });
     });
   }
-
-
-
   spliceFilledOutFieldsIntoAvailableFields(profileData, objectToUpdate, url, callback) {
     RestHandler.Get(url, (err, res) => {
       var filledOutFields = profileData[objectToUpdate];
@@ -83,6 +80,8 @@ class Profile extends React.Component {
     });
   }
 
+
+
   renderProfileFields() {
     if(this.state.profileData.userInfo) {
       return this.state.profileData.userInfo.map((detail, index) => {
@@ -94,6 +93,7 @@ class Profile extends React.Component {
       });
     }
   }
+
   renderProfileSites() {
     if(this.state.profileData.sites) {
       return this.state.profileData.sites.map((site, index) => {
@@ -171,7 +171,7 @@ class Profile extends React.Component {
           <div className='section profile-main'>
             <Row>
               <Col xs={12} sm={5} md={4}>
-                <Image src={image} responsive />
+                <ProfileImage src={image} editing={this.state.editing} />
               </Col>
               <Col xs={12} sm={7} md={8}>
                 <ProfileEditButton
