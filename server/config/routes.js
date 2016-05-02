@@ -21,7 +21,7 @@ module.exports = function(app, express) {
   app.post('/login', handler.checkLogin);
 
   app.post('/user/uploadimage', function(req, res) {
-    res.status(204).end();
+    // res.status(204).end();
   })
 
   app.post('/changepassword', function(req, res) {

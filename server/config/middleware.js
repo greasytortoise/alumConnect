@@ -13,9 +13,7 @@ var storage = multer.diskStorage({
 });
 var upload = multer({
   storage: storage,
-  onFileUploadStart: function (file) {
-    console.log(file.name + ' is starting ...');
-  },
+  limits: { fileSize: 1 * 1000 * 500} // 500kb
 });
 
 
@@ -23,4 +21,9 @@ module.exports = function(app, express) {
   app.use(bodyParser.json());
   app.use(express.static(__dirname + '/../../client'));
   app.use(upload.single('upl'));
+  app.use(function(err, req, res, next) {
+    if(err.code = 'LIMIT_FILE_SIZE') {
+      console.log('image upload limited to 500kb');
+    }
+  });
 };
