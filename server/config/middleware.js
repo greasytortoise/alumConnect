@@ -46,8 +46,6 @@ module.exports = function(app, express) {
       console.log('image upload limited to 500kb');
     }
   });
-  app.use(express.cookieParser());
-  app.use(express.session({secret: 'mysecret'}));
   app.use(cookieParser());
   app.use(session({secret: config.sessionSecret}));
   app.use(methodOverride());
