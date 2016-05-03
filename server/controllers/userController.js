@@ -152,11 +152,11 @@ module.exports = {
                 // modify user info
                 user
                   .save({
-                    username: data.user.username || user.get('username'),
-                    password: data.user.password || user.get('password'),
-                    email: data.user.email || user.get('email'),
-                    image: data.user.image || user.get('image'),
-                    url_hash: data.user.url || user.get('url_hash'),
+                    username: data.user.username,
+                    password: data.user.password,
+                    email: data.user.email,
+                    image: data.user.image,
+                    url_hash: data.user.url,
                     Group_id: group.id
                   })
                   .then(function(user) {
@@ -175,7 +175,7 @@ module.exports = {
                         .then(function(userSite) {
                           if (userSite.at(0)) {
                             userSite.at(0).save({
-                              rest_url: site.value || userSite.get('rest_url')
+                              rest_url: site.value
                             });
                           } else {
                             userSites.create({
