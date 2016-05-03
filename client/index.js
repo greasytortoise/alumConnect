@@ -19,94 +19,21 @@ render((
   <Router history={browserHistory}>
 
 
-    <Route path="/" component={App} onEnter={requireAuth()}>
-      <IndexRoute component={Users} onEnter={requireAuth} />
-      <Route path="/users/:user" component={Profile} onEnter={requireAuth} />
-    </Route>
-    <Route path="/login" component={Login} >
-      <IndexRoute component={Login}/>
-      <Route path="/auth/callback" onEnter={redirectSwitch}/>
+    <Route path="/" component={App} onEnter={auth.requireAuth}>
+      <IndexRoute component={Users} onEnter={auth.requireAuth} />
+      <Route path="/users/:user" component={Profile} onEnter={auth.requireAuth} />
     </Route>
 
-    <route path="/dashboard" component={Dashboard} onEnter={requireAdmin}>
+    <Route path="/login" component={Login} />
+    <Route path="/logout" onEnter={auth.logout} />
+
+    <route path="/dashboard" component={Dashboard} onEnter={auth.requireAdmin}>
       <IndexRoute component={DashboardUsers}/>
-      <Route path="/dashboard/newuser" component={DashboardNewUser} onEnter={requireAdmin}/>
-      <Route path="/dashboard/groups" component={Groups} onEnter={requireAdmin}/>
-      <Route path="/dashboard/sites" component={Sites} onEnter={requireAdmin}/>
-      <Route path="/dashboard/profile-fields" component={ProfileFields} onEnter={requireAdmin}/>
+      <Route path="/dashboard/newuser" component={DashboardNewUser} onEnter={auth.requireAdmin}/>
+      <Route path="/dashboard/groups" component={Groups} onEnter={auth.requireAdmin}/>
+      <Route path="/dashboard/sites" component={Sites} onEnter={auth.requireAdmin}/>
+      <Route path="/dashboard/profile-fields" component={ProfileFields} onEnter={auth.requireAdmin}/>
     </route>
   </Router>
 ), document.getElementById('app'))
 
-function validateLogin(err, res) {
-  if(err || res.status !== 200) {
-    // replace({
-    //   pathname: '/login',
-    //   state: { nextPathname: nextState.location.pathname }
-    // });
-    this.transitionTo('/login')
-
-  }
-
-};
-function redirectSwitch(nextState, replace, callback) {
-  RestHandler.Get('/auth/getpermissions', function(err, res) {
-    // if(res.text === '1') {
-    //   callback()
-    //   // window.location.href = '/dashboard';
-    // } else {
-    //   // window.location.href = '/';
-    // }
-    callback(err, res);
-  });
-
-};
-
-function requireAuth(nextState, replace, callback) {
-  // if (!auth.loggedIn()) {
-  //   replace({
-  //     pathname: '/login',
-  //     state: { nextPathname: nextState.location.pathname }
-  //   })
-  // }
-  console.log('!!!!!!!!!!');
-  RestHandler.Get('/auth/islogged', function(err, res) {
-    console.log(res);
-    // if(res.status === 200) {
-    //   replace({
-    //     pathname: '/login',
-    //     state: { nextPathname: nextState.location.pathname }
-    //   });
-    // }
-      // callback(err, res);
-      if(err || res.statusCode !== 200) {
-        console.log('THINFASDKASSAD');
-        replace({
-          pathname: '/login',
-          state: { nextPathname: nextState.location.pathname }
-        });
-      }
-
-  });
-};
-
-
-function requireAdmin(nextState, replace) {
-  // var token = auth.parseJwt();
-  // if(!auth.loggedIn() || token.perm !== 1) {
-  //   replace({
-  //     pathname: '/login',
-  //     state: { nextPathname: nextState.location.pathname }
-  //   });
-  // }
-  RestHandler.Get('/auth/isadmin', function(err, res) {
-    // if(res.status !== 200) {
-    //   replace({
-    //     pathname: '/login',
-    //     state: { nextPathname: nextState.location.pathname }
-    //   });
-    // }
-      callback(err, res);
-
-  });
-};

@@ -11,6 +11,12 @@ module.exports = {
         var retObj = users.map(function(user) {
           var group = user.related('groups');
           return {
+            /*
+
+            MODIFICATIONS HERE
+
+
+            */
             id: user.id,
             username: user.get('username'),
             password: user.get('password'),
@@ -32,6 +38,12 @@ module.exports = {
       .then(function(users) {
         var retObj = users.map(function(user) {
           return {
+                        /*
+
+            MODIFICATIONS HERE
+
+
+            */
             id: user.id,
             username: user.get('username'),
             password: user.get('password'),
@@ -70,6 +82,12 @@ module.exports = {
                 var group = user.related('groups');
 
                 // return one giant blob
+                /*
+
+                MODIFICATIONS HERE
+
+
+                */
                 var retObj = {
                   user: {
                     id: user.id,
@@ -108,7 +126,12 @@ module.exports = {
   // no error handling yet
   createUser: function(req, res) {
     var data = req.body;
+     /*
 
+     MODIFICATIONS HERE
+
+
+     */
     Users
       .create({
         username: data.user.username,
@@ -150,6 +173,13 @@ module.exports = {
                 var group = user.related('groups');
 
                 // modify user info
+                
+                /*
+
+                MODIFICATIONS HERE
+
+
+                */
                 user
                   .save({
                     username: data.user.username,

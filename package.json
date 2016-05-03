@@ -13,6 +13,7 @@
     "cookie-parser": "^1.4.1",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
+    "flash": "^1.1.0",
     "griddle-react": "^0.4.1",
     "jquery": "^2.2.3",
     "jwt-simple": "^0.5.0",

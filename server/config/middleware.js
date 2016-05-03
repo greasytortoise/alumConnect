@@ -26,6 +26,7 @@ var methodOverride = require('method-override');
 var User = require('../models/user');
 var Users = require('../collections/users');
 
+
 module.exports = function(app, express) {
   app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Credentials', true);
@@ -55,7 +56,7 @@ module.exports = function(app, express) {
     secret: config.sessionSecret, 
     resave: false, 
     saveUninitialized: false
-  }));  
+  }));
   app.use(passport.initialize());
   app.use(passport.session());
 
@@ -65,6 +66,7 @@ module.exports = function(app, express) {
     callbackURL: config.githubCallbackUrl
   }, function(accessToken, refreshToken, profile, done){
     process.nextTick(function() {
+
       var profileObj = {
         id: profile.id,
         handle: profile.username

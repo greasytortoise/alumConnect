@@ -10,7 +10,6 @@ authRouter.route('/')
 
 authRouter.route('/logout')
   .get(function(req, res) {
-    console.log('LOGGING OUT ');
     req.logout();
     req.session.destroy();
     res.redirect('/login');
@@ -29,15 +28,30 @@ authRouter.route('/callback')
       // whether the user exists and if exists redirect 
       // or if not you many need to create user.
       console.log(req.user.userData.handle)
-      // console.log(req.session)
-      // User.where({githubid: userObj.userData.id }).fetch()
+      // User.where({handle: req.user.userData.handle}).fetch()
       //   .then(function(user) {
-      //     if (!user) {
-      //       done(null, null);
-      //     } else {
-      //       done(null, user);
-      //     }
+           // if (!user) {
+              //do SOMETHING
+       //     } else {
+                // var store = user.permissions === 1 ? '8609213322' : '2319028362';
+                // res.cookie('ac', store, { httpOnly: false})
+                // if (store === '8609213322') {
+                //   res.redirect('/dashboard');
+                // } else {
+                //   res.redirect('/');
+                // }
+       //     }
+
+      //   })
+
+
+      //COOKIES  OM NOM NOM
+      // '2319028362' is regular user
+      // '8609213322' is ADMIN
+      
+      res.cookie('ac', '2319028362', { httpOnly: false});
       res.redirect('/');
+
     });
 
 authRouter.route('/islogged') 
@@ -49,17 +63,5 @@ authRouter.route('/isadmin')
   .get(util.isLoggedIn, util.isAdmin, function(req, res){
     res.status(200).send('true');
   }); 
-
-authRouter.route('/getpermissions')
-  .get(util.isLoggedIn, function(req, res) {
-    User.where({githubid: req.user.userData.id}).fetch()
-      .then(function(user) {
-        if(err) {
-          throw err;
-        } else {
-          res.status(200).send(user.permissions);
-        }
-      });
-  });
 
 module.exports = authRouter;
