@@ -6,6 +6,11 @@ import NavigationBar from '../helpers/NavigationBar.js'
 
 
 class Dashboard extends React.Component {
+
+  componentWillMount() {
+
+  }
+  
   render() {
     return(
       <div id="wrapper">

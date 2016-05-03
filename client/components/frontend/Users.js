@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 import { Row, Col, DropdownButton, MenuItem, Input, Image } from 'react-bootstrap';
+import auth from '../../util/authHelpers.js'
 
 import RestHandler from '../../util/RestHandler';
 

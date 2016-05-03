@@ -3,6 +3,7 @@ import { render } from 'react-dom'
 import { browserHistory, Router, Route, Link, IndexRoute } from 'react-router'
 import App from './components/frontend/App'
 import auth from './util/authHelpers.js'
+import RestHandler from './util/RestHandler.js'
 import Profile from './components/frontend/profile/Profile'
 import Users from './components/frontend/Users'
 import Login from './components/Login'
@@ -17,41 +18,22 @@ import ProfileFields from './components/admin/ProfileFields/ProfileFields'
 render((
   <Router history={browserHistory}>
 
-    <Route path="/login" component={Login}/>
-    <Route path="/logout" component={Login} onEnter={auth.logout}/>
 
-    <Route path="/" component={App}>
-      <IndexRoute component={Users}/>
-      <Route path="/users/:user" component={Profile}/>
+    <Route path="/" component={App} onEnter={auth.requireAuth}>
+      <IndexRoute component={Users} onEnter={auth.requireAuth} />
+      <Route path="/users/:user" component={Profile} onEnter={auth.requireAuth} />
     </Route>
 
-    <route path="/dashboard" component={Dashboard} onEnter={requireAdmin}>
+    <Route path="/login" component={Login} />
+    <Route path="/logout" onEnter={auth.logout} />
+
+    <route path="/dashboard" component={Dashboard} onEnter={auth.requireAdmin}>
       <IndexRoute component={DashboardUsers}/>
-      <Route path="/dashboard/newuser" component={DashboardNewUser} onEnter={requireAdmin}/>
-      <Route path="/dashboard/groups" component={Groups} onEnter={requireAdmin}/>
-      <Route path="/dashboard/sites" component={Sites} onEnter={requireAdmin}/>
-      <Route path="/dashboard/profile-fields" component={ProfileFields} onEnter={requireAdmin}/>
+      <Route path="/dashboard/newuser" component={DashboardNewUser} onEnter={auth.requireAdmin}/>
+      <Route path="/dashboard/groups" component={Groups} onEnter={auth.requireAdmin}/>
+      <Route path="/dashboard/sites" component={Sites} onEnter={auth.requireAdmin}/>
+      <Route path="/dashboard/profile-fields" component={ProfileFields} onEnter={auth.requireAdmin}/>
     </route>
   </Router>
 ), document.getElementById('app'))
 
-
-function requireAuth(nextState, replace) {
-  if (!auth.loggedIn()) {
-    replace({
-      pathname: '/login',
-      state: { nextPathname: nextState.location.pathname }
-    })
-  }
-}
-
-
-function requireAdmin(nextState, replace) {
-  var token = auth.parseJwt();
-  if(!auth.loggedIn() || token.perm !== 1) {
-    replace({
-      pathname: '/login',
-      state: { nextPathname: nextState.location.pathname }
-    });
-  }
-}

@@ -1,10 +1,13 @@
 var express = require('express');
 var Promise = require('bluebird');
 var os = require('os');
+var passport = require('passport');
+var GithubStrategy = require('passport-github2').Strategy;
+var config = require('./config/githubAPIConfig.js');
+
 var app = express();
 
-
-var LEX = require('letsencrypt-express');
+var LEX = require('letsencrypt-express').testing();
 
 var middleware = require('./config/middleware');
 var routes = require('./config/routes');

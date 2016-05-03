@@ -5,70 +5,49 @@ var Promise = require('bluebird');
 
 module.exports = {
 
+  redirectSwitch() {
+    var temp = getCookie('ac');
 
-  getToken() {
-    //returns the JWT in localstorage
-    return localStorage.getItem('jwtAlum');
+    if(!temp) {
+      window.location.href = '/login';
+    } else if (temp === '8609213322' ) {
+      window.location.href = '/dashboard';
+    } else if (temp === '2319028362') {
+      window.location.href = '/';
+    }
+    
+  },
+
+  requireAuth(nextState, replace) {
+    var temp = getCookie('ac');
+
+    if (!temp || (temp !== '2319028362' && temp !== '8609213322')){
+      replace({
+        pathname: '/login',
+        state: { nextPathname: nextState.location.pathname }
+      });
+    }
+  },
+
+  requireAdmin(nextState, replace){
+    var temp = getCookie('ac');
+
+    if (!temp || temp !== '8609213322') {
+      replace({
+        pathname: '/login',
+        state: { nextPathname: nextState.location.pathname }
+      });
+    }
   },
 
   logout() {
-    //Deletes the token from localstorage
-    localStorage.removeItem('jwtAlum');
-
-  },
-
-
-
-  loggedIn() {
-    //Check if token exists. If it does, check the expiration date, and return boolean representing logged in status
-    if(localStorage.getItem('jwtAlum')) {
-      var timeout = JSON.parse(atob(localStorage.getItem('jwtAlum').split('.')[1])).exp;
-      if(Date.now() >= timeout) {
-        localStorage.removeItem('jwtAlum');
-      }
-    }
-    return !!localStorage.getItem('jwtAlum');
-  },
-
-  checkToken(callback) {
-    //Check user permissions from server.
-    if(localStorage.getItem('jwtAlum')) {
-
-    // request('POST', '/checktoken')
-    //   .send({token: JSON.parse(localStorage.getItem('jwtAlum')).token})
-    //   .end(function(err, res){
-    //     if(err) {
-    //       console.log(err);
-    //     } else {
-    //       console.log(res);
-    //       callback(res);
-    //     }
-
-    //   });
-      RestHandler.Post('/checktoken', {}, callback);
-
-
-    }
-  },
-
-
-  onChange() {},
-
-  parseJwt(){
-    //parses the token to get the juicy data inside.
-    if(localStorage.getItem('jwtAlum') !== null) {
-      return JSON.parse(atob(localStorage.getItem('jwtAlum').split('.')[1]));
-    } else {
-      return null;
-    }
-  },
-
-  parseJwtAsync(callback) {
-    if(this.parseJwt) {
-      callback(this.parseJwt());
-    } else {
-      callback(undefined);
-    }
+    document.cookie = 'ac' + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    window.location.href = '/login';
   }
+}
 
+var getCookie = function(name) {
+  var regexp = new RegExp("(?:^" + name + "|;\s*"+ name + ")=(.*?)(?:;|$)", "g");
+  var result = regexp.exec(document.cookie);
+  return (result === null) ? null : result[1];
 }
