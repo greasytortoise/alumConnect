@@ -24,7 +24,7 @@ module.exports = function(app, express) {
   app.use('/auth', authRouter);
   
   app.post('/user/uploadimage', function(req, res) {
-    // res.status(204).end();
+    res.status(204).end();
   })
 
 

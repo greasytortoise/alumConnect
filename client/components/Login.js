@@ -37,8 +37,10 @@ const Login = React.createClass({
     return (
       <div id='loginFormWrapper'>
         <form id='loginForm' onSubmit={this.handleSubmit}>
-          <h2>Please login</h2>
-          <ButtonInput bsStyle="primary" bsSize="large" type="submit" block>Login with Github</ButtonInput>
+          <img className="image" src='../assets/logo.png' />
+
+          <h3>Student Network</h3>
+          <ButtonInput bsStyle="primary" bsSize="large" type="submit" block>Log in with Github</ButtonInput>
 
         </form>
 
