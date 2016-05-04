@@ -27,6 +27,7 @@ authRouter.route('/callback')
       // In the real application you might need to check 
       // whether the user exists and if exists redirect 
       // or if not you many need to create user.
+      console.log('IN CALLBACK FUNC')
       console.log(req.user.userData.handle)
       // User.where({handle: req.user.userData.handle}).fetch()
       //   .then(function(user) {
@@ -49,8 +50,15 @@ authRouter.route('/callback')
       // '2319028362' is regular user
       // '8609213322' is ADMIN
       
-      res.cookie('ac', '2319028362', { httpOnly: false});
-      res.redirect('/');
+      res.cookie('ac', '8609213322', { httpOnly: false});
+      setTimeout( function(){
+
+          res.redirect('/');
+        
+      }, 3000);
+
+
+        
 
     });
 
