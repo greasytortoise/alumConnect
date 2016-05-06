@@ -19,20 +19,20 @@ render((
   <Router history={browserHistory}>
 
 
-    <Route path="/" component={App} onfEnter={auth.requireAuth}>
-      <IndexRoute component={Users} onfEnter={auth.requireAuth} />
-      <Route path="/users/:user" component={Profile} onfEnter={auth.requireAuth} />
+    <Route path="/" component={App} onEnterEnter={auth.requireAuth}>
+      <IndexRoute component={Users} onEnterEnter={auth.requireAuth} />
+      <Route path="/users/:user" component={Profile} onEnterEnter={auth.requireAuth} />
     </Route>
 
     <Route path="/login" component={Login} />
-    <Route path="/logout" onfEnter={auth.logout} />
+    <Route path="/logout" onEnterEnter={auth.logout} />
 
-    <route path="/dashboard" component={Dashboard} onfEnter={auth.requireAdmin}>
+    <route path="/dashboard" component={Dashboard} onEnterEnter={auth.requireAdmin}>
       <IndexRoute component={DashboardUsers}/>
-      <Route path="/dashboard/newuser" component={DashboardNewUser} onfEnter={auth.requireAdmin}/>
-      <Route path="/dashboard/groups" component={Groups} onfEnter={auth.requireAdmin}/>
-      <Route path="/dashboard/sites" component={Sites} onfEnter={auth.requireAdmin}/>
-      <Route path="/dashboard/profile-fields" component={ProfileFields} onfEnter={auth.requireAdmin}/>
+      <Route path="/dashboard/newuser" component={DashboardNewUser} onEnterEnter={auth.requireAdmin}/>
+      <Route path="/dashboard/groups" component={Groups} onEnterEnter={auth.requireAdmin}/>
+      <Route path="/dashboard/sites" component={Sites} onEnterEnter={auth.requireAdmin}/>
+      <Route path="/dashboard/profile-fields" component={ProfileFields} onEnterEnter={auth.requireAdmin}/>
     </route>
   </Router>
 ), document.getElementById('app'))
