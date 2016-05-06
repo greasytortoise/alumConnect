@@ -27,14 +27,14 @@ class ProfileImage extends React.Component {
   getLoggedInUserData() {
     //gets the authentication token from util/authHelpers.js
     //and retrieves permission and user id
-    auth.parseJwtAsync((parsedToken) => {
-      if(parsedToken) {
-        this.setState({
-          loggedInUserId: parsedToken.iss,
-          permission: parsedToken.perm
-        });
-      }
-    });
+    // auth.parseJwtAsync((parsedToken) => {
+    //   if(parsedToken) {
+    //     this.setState({
+    //       loggedInUserId: parsedToken.iss,
+    //       permission: parsedToken.perm
+    //     });
+    //   }
+    // });
   }
 
 
@@ -94,7 +94,7 @@ const MyLargeModal = React.createClass({
               encType="multipart/form-data"
               method="POST"
               action="/user/uploadimage" >
-                <input type="hidden" name="filename" value="asdf.jpg"/>
+                <input type="hidden" name="title" placeholder="title"/>
                 <input type="file" id="profilePic" name="upl"/>
                 <br/>
                 <input type="submit" value="submit"/>
