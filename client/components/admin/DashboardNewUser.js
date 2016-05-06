@@ -1,5 +1,7 @@
 import React from 'react'
 import {Input, ButtonInput, DropdownButton, MenuItem} from 'react-bootstrap'
+import Select from 'react-select';
+
 import RestHandler from '../../util/RestHandler'
 
 class DashboardNewUser extends React.Component {
@@ -7,7 +9,8 @@ class DashboardNewUser extends React.Component {
     super (props);
     this.state = {
       groups: [],
-      group: {}
+      group: {},
+			selectedGroups: []
     };
   }
 
@@ -17,6 +20,8 @@ class DashboardNewUser extends React.Component {
 
   getGroups() {
     RestHandler.Get('/db/groups', (err, res) => {
+      //res.body.map is a Workaround to get the Select valueKey working.
+      res.body.map(obj => obj['idString'] = obj['id'].toString())
       this.setState({groups: res.body});
     });
   }
@@ -69,7 +74,16 @@ class DashboardNewUser extends React.Component {
     });
   }
 
+
+	handleSelectChange (selectedGroups) {
+		console.log('You\'ve selected:', selectedGroups);
+		this.setState({ selectedGroups });
+	}
+
+
   render() {
+    console.log(this.state.groups);
+
     var groupName = this.state.group.group_name || 'Select Group';
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
@@ -80,10 +94,17 @@ class DashboardNewUser extends React.Component {
         <Input type="password" label="Password" placeholder="Enter new password"
           ref="password" />
 
-        <label>Group</label>
-        <DropdownButton title={groupName}>
-          {this.renderGroups(this.handleGroupSelect.bind(this))}
-        </DropdownButton>
+        <label>Group(s)</label>
+
+        <Select
+          multi
+          simpleValue
+          disabled={this.state.disabled} value={this.state.selectedGroups} placeholder="Select groups"
+          labelKey="group_name"
+          valueKey="idString"
+          options={this.state.groups}
+          onChange={this.handleSelectChange.bind(this)} />
+
 
         <ButtonInput type="submit" value="Submit" />
       </form>

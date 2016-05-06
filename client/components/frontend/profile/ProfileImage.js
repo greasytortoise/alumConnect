@@ -94,7 +94,7 @@ const MyLargeModal = React.createClass({
               encType="multipart/form-data"
               method="POST"
               action="/user/uploadimage" >
-                <input type="hidden" name="filename" value="asdf.jpg"/>
+                <input type="hidden" name="title" placeholder="title"/>
                 <input type="file" id="profilePic" name="upl"/>
                 <br/>
                 <input type="submit" value="submit"/>
