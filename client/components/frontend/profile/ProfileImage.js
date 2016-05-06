@@ -27,14 +27,14 @@ class ProfileImage extends React.Component {
   getLoggedInUserData() {
     //gets the authentication token from util/authHelpers.js
     //and retrieves permission and user id
-    auth.parseJwtAsync((parsedToken) => {
-      if(parsedToken) {
-        this.setState({
-          loggedInUserId: parsedToken.iss,
-          permission: parsedToken.perm
-        });
-      }
-    });
+    // auth.parseJwtAsync((parsedToken) => {
+    //   if(parsedToken) {
+    //     this.setState({
+    //       loggedInUserId: parsedToken.iss,
+    //       permission: parsedToken.perm
+    //     });
+    //   }
+    // });
   }
 
 
