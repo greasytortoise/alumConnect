@@ -6,7 +6,7 @@ var Get = function(url, callback) {
     .get(url)
     .end((err, res) => {
       err
-        ? console.error('Err in util/restHander ', err)
+        ? callback(err, res)
         : callback(err, res);
     });
 }
@@ -21,7 +21,7 @@ var Post = function (url, data, callback) {
     .end((err, res) => {
       if(err) {
         console.error('Err in util/restHander ', err);
-      } 
+      }
       callback(err, res);
   });
 }

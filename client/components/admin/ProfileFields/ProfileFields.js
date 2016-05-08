@@ -37,7 +37,7 @@ class ProfileFields extends React.Component {
 
     if (field === '') {
       this.setState({error: true});
-    } else {      
+    } else {
       RestHandler.Post('/db/fields', fieldInfo, (err, res) => {
         if (err) {return err;}
         this.setState({fields: this.state.fields.concat(res.body)})
@@ -57,13 +57,13 @@ class ProfileFields extends React.Component {
   render() {
     return (
       <div>
-        <h4>Profile Fields</h4>
+        <h3 className="dashboard-title">Profile Fields</h3>
         <ListGroup>
           {this.renderFields()}
         </ListGroup>
         <form onSubmit={this.handleSubmit.bind(this)}>
 
-          <Input type="text" label="Add Profile field" 
+          <Input type="text" label="Add Profile field"
             placeholder="Enter field name" ref="field" />
 
           <ButtonInput bsStyle="primary" type="submit" value="Submit"/>

@@ -36,7 +36,7 @@ class Groups extends React.Component {
 
     if(group === '') {
       this.setState({error: true});
-    } else {    
+    } else {
       RestHandler.Post('/db/groups', groupInfo, (err, res) => {
         if (err) {return err;}
         this.setState({groups: this.state.groups.concat(res.body)})
@@ -56,12 +56,12 @@ class Groups extends React.Component {
   render() {
     return (
       <div>
-        <h4>Groups</h4>
+        <h3 className="dashboard-title">Groups</h3>
         <ListGroup>
           {this.renderGroups()}
         </ListGroup>
         <form onSubmit={this.handleSubmit.bind(this)}>
-          <Input type="text" label="Add Group" 
+          <Input type="text" label="Add Group"
             placeholder="Enter group name" ref="group" />
 
           <ButtonInput bsStyle="primary" type="submit" value="Submit"/>

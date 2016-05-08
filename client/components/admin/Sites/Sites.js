@@ -7,7 +7,7 @@ class Sites extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      sites: [], 
+      sites: [],
       error: false
     }
   }
@@ -49,7 +49,7 @@ class Sites extends React.Component {
         }
       });
 
-      this.clearForm();      
+      this.clearForm();
     }
 
 
@@ -65,15 +65,15 @@ class Sites extends React.Component {
   render() {
     return (
       <div>
-        <h4>Sites</h4>
+        <h3 className="dashboard-title">Sites</h3>
         <ListGroup>
           {this.renderSites()}
         </ListGroup>
         <form onSubmit={this.handleSubmit.bind(this)}>
 
-          <Input type="text" label="Add Site" 
+          <Input type="text" label="Add Site"
             placeholder="Enter site name" ref="site" />
-          <Input type="text"  ref="url" 
+          <Input type="text"  ref="url"
             placeholder="Enter site url  example: https://www.github.com/" />
 
           <ButtonInput bsStyle="primary" type="submit" value="Submit"/>
