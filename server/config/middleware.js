@@ -66,7 +66,7 @@ module.exports = function(app, express) {
     process.nextTick(function() {
 
       var profileObj = {
-        id: profile.id,
+        githubid: profile.id,
         handle: profile.username
       };
       return done(null, {

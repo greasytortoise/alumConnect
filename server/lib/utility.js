@@ -27,5 +27,6 @@ exports.isAdmin = function(req, res, next) {
   } else {
     res.redirect('/login');
   }
+  // next();
 };
 

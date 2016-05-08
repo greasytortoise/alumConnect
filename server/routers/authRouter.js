@@ -24,23 +24,19 @@ authRouter.route('/error')
 authRouter.route('/callback')
     .get(passport.authenticate('github', { failureRedirect: '/auth/error'}),
     function(req, res) {
-      // In the real application you might need to check 
-      // whether the user exists and if exists redirect 
-      // or if not you many need to create user.
-      console.log('IN CALLBACK FUNC')
-      console.log(req.user.userData.handle)
-      User.where({handle: req.user.userData.handle}).fetch()
+      User.where({githubid: req.user.userData.githubid}).fetch()
         .then(function(user) {
-          var store = user.permissions === 1 ? 1 : 0;
+          var store = user.attributes.permission === 1 ? 1 : 0;
           res.cookie('ac', store, { httpOnly: false})
           res.cookie('cu', user.id, { httpOnly: false});
+          console.log(store);
           if (store === 1) {
             res.redirect('/dashboard');
           } else {
             res.redirect('/');
           }
      
-        });      
+        });    
     });
 
 authRouter.route('/islogged') 
