@@ -27,19 +27,6 @@ module.exports = function(app, express) {
     res.status(204).end();
   })
 
-
-  app.post('/changepassword', function(req, res) {
-    var tokenUserData = req.token.split('.')[1].user;
-    Users.where({id: tokenUserData.id}).fetch().then(function(user){
-      bcrypt.hash(req.body.password, 10, function(err, hash) {
-
-        //DO THING WITH HASH
-        //SAVE NEW PW TO DB!
-
-      });
-    });
-  });
-
   app.get('*', function (request, response){
     console.log('directing to index');
     response.sendFile(path.resolve(__dirname,  '../../client/index.html'))

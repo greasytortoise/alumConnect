@@ -74,6 +74,8 @@ class NavigationBar extends React.Component {
 
   navbarToggleDisplay() {
     var {username, id, image} = this.state.loggedInUserData
+          // <NavItem header><a href={`/users/${id}`}>View profile</a></NavItem>
+
     if(this.props.isAdminBar) {
       return(
         <Nav pullRight></Nav>
@@ -104,9 +106,10 @@ class NavigationBar extends React.Component {
           </Navbar.Brand>
           <Navbar.Toggle animation={false} />
         </Navbar.Header>
-        <Navbar.Collapse>
-          {this.navbarToggleDisplay()}
-        </Navbar.Collapse>
+        <Nav pullRight>
+          <NavItem header><a href='auth/logout'>Log out</a></NavItem>
+        </Nav>
+
       </Navbar>
     );
   }

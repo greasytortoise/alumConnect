@@ -29,37 +29,18 @@ authRouter.route('/callback')
       // or if not you many need to create user.
       console.log('IN CALLBACK FUNC')
       console.log(req.user.userData.handle)
-      // User.where({handle: req.user.userData.handle}).fetch()
-      //   .then(function(user) {
-           // if (!user) {
-              //do SOMETHING
-       //     } else {
-                // var store = user.permissions === 1 ? '8609213322' : '2319028362';
-                // res.cookie('ac', store, { httpOnly: false})
-                // if (store === '8609213322') {
-                //   res.redirect('/dashboard');
-                // } else {
-                //   res.redirect('/');
-                // }
-       //     }
-
-      //   })
-
-
-      //COOKIES  OM NOM NOM
-      // '2319028362' is regular user
-      // '8609213322' is ADMIN
-      
-      res.cookie('ac', '8609213322', { httpOnly: false});
-      setTimeout( function(){
-
-          res.redirect('/');
-        
-      }, 3000);
-
-
-        
-
+      User.where({handle: req.user.userData.handle}).fetch()
+        .then(function(user) {
+          var store = user.permissions === 1 ? 1 : 0;
+          res.cookie('ac', store, { httpOnly: false})
+          res.cookie('cu', user.id, { httpOnly: false});
+          if (store === 1) {
+            res.redirect('/dashboard');
+          } else {
+            res.redirect('/');
+          }
+     
+        });      
     });
 
 authRouter.route('/islogged') 
