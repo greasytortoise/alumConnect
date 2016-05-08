@@ -19,7 +19,7 @@ class DashboardUsers extends React.Component {
   render() {
     return(
       <div>
-        <h2>Users</h2>
+        <h3 className="dashboard-title">Users</h3>
         <Griddle
           results={this.state.users}
           showFilter={true}

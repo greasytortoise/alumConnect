@@ -130,37 +130,41 @@ class DashboardNewUser extends React.Component {
     var disableButton = !this.state.githubInfo || this.state.githubInfo === 'loading';
 
     return (
-      <form onSubmit={this.handleSubmit.bind(this)}>
-        <Input type="text" label="Full Name" placeholder="Enter name"
-          ref="name" />
-        <Input
-          type="text"
-          label="Github Username"
-          placeholder="Enter Github Username"
-          ref="githubUsername"
-          onChange={function() {
-            this.setState({githubInfo: 'loading'});
-            this.delayGithubTillTypingEnds()
-          }.bind(this)}/>
+      <div>
+        <h3 className="dashboard-title">Add new user</h3>
+        <form onSubmit={this.handleSubmit.bind(this)}>
+          <Input type="text" label="Full Name" placeholder="Enter name"
+            ref="name" />
+          <Input
+            type="text"
+            label="Github Username"
+            placeholder="Enter Github Username"
+            ref="githubUsername"
+            onChange={function() {
+              this.setState({githubInfo: 'loading'});
+              this.delayGithubTillTypingEnds()
+            }.bind(this)}/>
 
-        <label>Group(s)</label>
+          <label>Group(s)</label>
 
-        <Select
-          multi
-          simpleValue
-          disabled={this.state.disabled} value={this.state.selectedGroups} placeholder="Select groups"
-          labelKey="group_name"
-          valueKey="idString"
-          options={this.state.groups}
-          onChange={this.handleSelectChange.bind(this)} />
-          <br />
-        <ButtonInput
-          className="float-left add-new-user-button"
-          type="submit"
-          value="Submit"
-          disabled={disableButton}/>
-        {foundGithubUserMessage}
-      </form>
+          <Select
+            multi
+            simpleValue
+            disabled={this.state.disabled} value={this.state.selectedGroups} placeholder="Select groups"
+            labelKey="group_name"
+            valueKey="idString"
+            options={this.state.groups}
+            onChange={this.handleSelectChange.bind(this)} />
+            <br />
+          <ButtonInput
+            className="float-left add-new-user-button"
+            bsStyle="primary"
+            type="submit"
+            value="Submit"
+            disabled={disableButton}/>
+          {foundGithubUserMessage}
+        </form>
+      </div>
     );
   }
 }
