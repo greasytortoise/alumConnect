@@ -50,6 +50,7 @@ Promise.each(groups, function(group) {
             password: '$2a$10$d2i8p6B4pno7tDRpUMaAF.lcCHAmAQ4pVfD84OzsPl2Md/sXmwvoq',
             email: student.email,
             image: student.image,
+            url_hash: 'n/a',
             Group_id: group.id, // needs to be removed
             public: 0,
             permission: 0
