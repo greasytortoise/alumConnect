@@ -11,7 +11,7 @@ class Sidebar extends React.Component {
           <li><Link to="/dashboard/newuser">Add New User</Link></li>
           <li><Link to="/dashboard/groups">Manage Groups</Link></li>
           <li><Link to="/dashboard/sites">Manage Sites</Link></li>
-          <li><Link to="/auth/logout">Logout</Link></li>
+          <li><a href="/auth/logout">Logout</a></li>
         </ul>
       </div>
     )

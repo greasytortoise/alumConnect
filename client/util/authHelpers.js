@@ -7,7 +7,7 @@ module.exports = {
 
   requireAuth(nextState, replace) {
     //check cookie 'ac' value to assertain user permissions. If inadequete, redirect to login
-    var temp = getCookie('ac');
+    var temp = module.exports.getCookie('ac');
     if (!temp || (temp !== '1' && temp !== '0')){
       replace({
         pathname: '/login',
@@ -18,7 +18,7 @@ module.exports = {
 
   requireAdmin(nextState, replace){
     //check cookie 'ac' value to assertain user permissions. If inadequete, redirect to login
-    var temp = getCookie('ac');
+    var temp = module.exports.getCookie('ac');
     if (!temp || temp !== '1') {
       replace({
         pathname: '/login',
@@ -26,13 +26,15 @@ module.exports = {
       });
 
     }
+  },
+
+  getCookie(name) {
+    //cookie reader. OM NOM NOM. 
+    var regexp = new RegExp("(?:^" + name + "|;\s*"+ name + ")=(.*?)(?:;|$)", "g");
+    var result = regexp.exec(document.cookie);
+    return (result === null) ? null : result[1];
   }
 };
 
-var getCookie = function(name) {
-  //cookie reader. OM NOM NOM. 
-  var regexp = new RegExp("(?:^" + name + "|;\s*"+ name + ")=(.*?)(?:;|$)", "g");
-  var result = regexp.exec(document.cookie);
-  return (result === null) ? null : result[1];
-}
+
 

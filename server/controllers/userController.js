@@ -58,7 +58,7 @@ module.exports = {
   // http://localhost:3000/db/users/user/:id
   fetchUserInfo: function(req, res) {
     var id = req.params.id;
-
+    console.log(req.params.id);
     // user join with groups + bios + userSites
     User
       .where({id: id})
