@@ -3,7 +3,7 @@ var siteController = require('../controllers/siteController');
 var util = require('../lib/utility.js');
 
 siteRouter.route('/')
-  .get(siteController.fetchSites)
+  .get(util.isLoggedIn, siteController.fetchSites)
   .post(util.isAdmin, siteController.createSite);
 
 siteRouter.route('/site/:id')

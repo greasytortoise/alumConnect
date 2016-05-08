@@ -11,8 +11,13 @@ authRouter.route('/')
 authRouter.route('/logout')
   .get(function(req, res) {
     req.logout();
-    req.session.destroy();
-    res.redirect('/login');
+    req.session.destroy(function(err) {
+      if (err) {
+        console.log(err);
+      } 
+      res.redirect('/login');
+      
+    });
   });
 
 
@@ -29,14 +34,13 @@ authRouter.route('/callback')
           var store = user.attributes.permission === 1 ? 1 : 0;
           res.cookie('ac', store, { httpOnly: false})
           res.cookie('cu', user.id, { httpOnly: false});
-          console.log(store);
           if (store === 1) {
             res.redirect('/dashboard');
           } else {
             res.redirect('/');
           }
      
-        });    
+        });
     });
 
 authRouter.route('/islogged') 

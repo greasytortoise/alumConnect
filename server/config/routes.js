@@ -26,7 +26,7 @@ module.exports = function(app, express) {
   app.post('/user/uploadimage', function(req, res) {
     res.status(204).end();
   })
-
+  
   app.get('*', function (request, response){
     console.log('directing to index');
     response.sendFile(path.resolve(__dirname,  '../../client/index.html'))

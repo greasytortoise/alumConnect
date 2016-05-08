@@ -3,14 +3,14 @@ var userController = require('../controllers/userController');
 var util = require('../lib/utility.js');
 
 userRouter.route('/')
-  .get(userController.fetchUsers)
+  .get(util.isLoggedIn, userController.fetchUsers)
   .post(util.isAdmin, userController.createUser);
 
 userRouter.route('/group/:id')
-  .get(userController.fetchUsersByGroup);
+  .get(util.isLoggedIn, userController.fetchUsersByGroup);
 
 userRouter.route('/user/:id')
-  .get(userController.fetchUserInfo)
+  .get(util.isLoggedIn, userController.fetchUserInfo)
   .post(util.isLoggedIn, userController.modifyUser)
   .delete(util.isAdmin, userController.deleteUser);
 
