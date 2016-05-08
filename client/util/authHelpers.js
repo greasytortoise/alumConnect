@@ -1,27 +1,14 @@
-var RestHandler = require('./RestHandler');
+import { browserHistory, Router, Route, Link, IndexRoute } from 'react-router'
 
 var request = require('superagent');
 var Promise = require('bluebird');
-
+var RestHandler = require('./RestHandler.js');
 module.exports = {
 
-  redirectSwitch() {
-    var temp = getCookie('ac');
-
-    if(!temp) {
-      window.location.href = '/login';
-    } else if (temp === '8609213322' ) {
-      window.location.href = '/dashboard';
-    } else if (temp === '2319028362') {
-      window.location.href = '/';
-    }
-    
-  },
-
   requireAuth(nextState, replace) {
+    //check cookie 'ac' value to assertain user permissions. If inadequete, redirect to login
     var temp = getCookie('ac');
-
-    if (!temp || (temp !== '2319028362' && temp !== '8609213322')){
+    if (!temp || (temp !== '1' && temp !== '0')){
       replace({
         pathname: '/login',
         state: { nextPathname: nextState.location.pathname }
@@ -30,24 +17,22 @@ module.exports = {
   },
 
   requireAdmin(nextState, replace){
+    //check cookie 'ac' value to assertain user permissions. If inadequete, redirect to login
     var temp = getCookie('ac');
-
-    if (!temp || temp !== '8609213322') {
+    if (!temp || temp !== '1') {
       replace({
         pathname: '/login',
         state: { nextPathname: nextState.location.pathname }
       });
-    }
-  },
 
-  logout() {
-    document.cookie = 'ac' + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    window.location.href = '/login';
+    }
   }
-}
+};
 
 var getCookie = function(name) {
+  //cookie reader. OM NOM NOM. 
   var regexp = new RegExp("(?:^" + name + "|;\s*"+ name + ")=(.*?)(?:;|$)", "g");
   var result = regexp.exec(document.cookie);
   return (result === null) ? null : result[1];
 }
+
