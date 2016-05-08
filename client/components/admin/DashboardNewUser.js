@@ -1,8 +1,11 @@
 import React from 'react'
 import {Input, ButtonInput, DropdownButton, MenuItem} from 'react-bootstrap'
 import Select from 'react-select';
-
 import RestHandler from '../../util/RestHandler'
+var _debounce = require('lodash/debounce');
+
+
+
 
 class DashboardNewUser extends React.Component {
   constructor(props) {
@@ -10,10 +13,14 @@ class DashboardNewUser extends React.Component {
     this.state = {
       groups: [],
       group: {},
-			selectedGroups: []
+      selectedGroups: [],
+      githubInfo: undefined
     };
+    this.delayGithubTillTypingEnds = _debounce(this.handleCheckGithub,500);
   }
-
+  fetchGithubInfo(){
+    console.log(this.state.selectedGroups);
+  }
   componentDidMount () {
     this.getGroups();
   }
@@ -47,31 +54,39 @@ class DashboardNewUser extends React.Component {
     event.preventDefault();
 
     var name = this.refs.name.getValue();
-    var email = this.refs.email.getValue();
-    var password = this.refs.password.getValue();
+    var githubUsername = this.refs.githubUsername.getValue();
     var group = this.state.group.id;
     var data = {
       user: {
+        githubId: this.state.githubInfo.id,
         username: name,
-        password: password,
-        email: email,
-        group: group,
       },
+      groups: this.state.selectedGroups,
       sites: [],
       userInfo: []
+
+      // user: {
+      //   username: name,
+      //   password: password,
+      //   email: email,
+      //   group: group,
+      // },
+      // sites: [],
+      // userInfo: []
     };
     console.log(data);
-    RestHandler.Post('db/users', data, (err, res) => {
-
-    });
+    // RestHandler.Post('db/users', data, (err, res) => {
+    //
+    // });
     this.clearForm();
   }
 
   clearForm() {
-    const fields = ['name', 'email', 'password'];
+    const fields = ['name', 'githubUsername'];
     fields.map(field => {
       this.refs[field].refs['input'].value = '';
     });
+    this.setState({selectedGroups: []});
   }
 
 
@@ -79,20 +94,54 @@ class DashboardNewUser extends React.Component {
 		console.log('You\'ve selected:', selectedGroups);
 		this.setState({ selectedGroups });
 	}
+	handleCheckGithub () {
+    var githubUsername = this.refs.githubUsername.getValue();
+    var url = 'https://api.github.com/users/' + githubUsername;
+
+    RestHandler.Get(url, (err, res) => {
+      if(err) {
+        this.setState({githubInfo: undefined});
+      } else {
+        this.setState({githubInfo: res.body});
+      }
+    });
+	}
 
 
   render() {
     console.log(this.state.groups);
-
     var groupName = this.state.group.group_name || 'Select Group';
+
+    var foundGithubUserMessage
+    if(this.state.githubInfo === undefined) {
+      foundGithubUserMessage = <span className="findingGithubInfo">Enter a valid github username</span>
+    } else if (this.state.githubInfo === 'loading'){
+      foundGithubUserMessage = <span className="findingGithubInfo">Loading...</span>
+    } else {
+      var login = this.state.githubInfo.login;
+      var id = this.state.githubInfo.id;
+      var url = this.state.githubInfo.html_url;
+      var name = this.state.githubInfo.name;
+      foundGithubUserMessage = <span className="findingGithubInfo" >
+        found <a href={url} target="_blank">{login} on github</a>: (name: {name}, id: {id})
+      </span>
+    }
+
+    var disableButton = !this.state.githubInfo || this.state.githubInfo === 'loading';
+
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
-        <Input type="text" label="Name" placeholder="Enter name"
+        <Input type="text" label="Full Name" placeholder="Enter name"
           ref="name" />
-        <Input type="email" label="Email Address" placeholder="Enter email"
-          ref="email" />
-        <Input type="password" label="Password" placeholder="Enter new password"
-          ref="password" />
+        <Input
+          type="text"
+          label="Github Username"
+          placeholder="Enter Github Username"
+          ref="githubUsername"
+          onChange={function() {
+            this.setState({githubInfo: 'loading'});
+            this.delayGithubTillTypingEnds()
+          }.bind(this)}/>
 
         <label>Group(s)</label>
 
@@ -104,9 +153,13 @@ class DashboardNewUser extends React.Component {
           valueKey="idString"
           options={this.state.groups}
           onChange={this.handleSelectChange.bind(this)} />
-
-
-        <ButtonInput type="submit" value="Submit" />
+          <br />
+        <ButtonInput
+          className="float-left add-new-user-button"
+          type="submit"
+          value="Submit"
+          disabled={disableButton}/>
+        {foundGithubUserMessage}
       </form>
     );
   }
