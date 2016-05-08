@@ -20,6 +20,7 @@ module.exports = {
             id: user.id,
             handle: user.get('handle'),
             githubid: user.get('githubid'),
+            name: user.get('name'),
             url: user.get('url_hash'),
             image: user.get('image'),
             email: user.get('email'),
@@ -47,6 +48,7 @@ module.exports = {
             id: user.id,
             handle: user.get('handle'),
             githubid: user.get('githubid'),
+            name: user.get('name'),
             url: user.get('url_hash'),
             image: user.get('image'),
             email: user.get('email')
@@ -93,6 +95,7 @@ module.exports = {
                     id: user.id,
                     handle: user.get('handle'),
                     githubid: user.get('githubid'),
+                    name: user.get('name'),
                     url: user.get('url_hash'),
                     email: user.get('email'),
                     group_id: group.id,
@@ -136,6 +139,7 @@ module.exports = {
       .create({
         handle: data.user.handle,
         githubid: data.user.githubid,
+        name: user.get('name'),
         email: data.user.email,
         image: data.user.image,
         // url_hash: data.user.url,
@@ -184,6 +188,7 @@ module.exports = {
                   .save({
                     handle: data.user.handle,
                     githubid: data.user.githubid,
+                    name: user.get('name'),
                     email: data.user.email,
                     image: data.user.image,
                     url_hash: data.user.url,

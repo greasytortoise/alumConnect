@@ -23,6 +23,7 @@ create table Users (
   id int not null auto_increment,
   handle varchar(255),
   githubid int,
+  name varchar(255),
   email varchar(255),
   image varchar(255),
   url_hash varchar(255),
@@ -74,9 +75,9 @@ values
   ('staff');
 
 insert into Users
-  (handle, githubid, email, image, url_hash, public, permission, Group_id)
+  (handle, githubid, name, email, image, url_hash, public, permission, Group_id)
 values
-  ('mbresnan1701', 15022604, 'admin@admin.com', '/assets/photos/trump.jpg', 'ndas2q', 0, 1, 1);
+  ('mbresnan1701', 15022604, 'DONALD TRUMP', 'admin@admin.com', '/assets/photos/trump.jpg', 'ndas2q', 0, 1, 1);
 
 insert into Sites
   (site_name, base_url, active)
