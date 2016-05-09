@@ -21,8 +21,9 @@ create table Groups (
 
 create table Users (
   id int not null auto_increment,
-  username varchar(255),
-  password varchar(255),
+  handle varchar(255),
+  githubid int,
+  name varchar(255),
   email varchar(255),
   image varchar(255),
   url_hash varchar(255),
@@ -74,9 +75,9 @@ values
   ('staff');
 
 insert into Users
-  (username, password, email, image, url_hash, public, permission, Group_id)
+  (handle, githubid, name, email, image, url_hash, public, permission, Group_id)
 values
-  ('Admin', '$2a$10$OJDiRQNkpHyyoi4CC546ZejIhMpRXsI86/tbBr74vsZEN4qtquA5y', 'admin@admin.com', '/assets/photos/trump.jpg', 'ndas2q', 0, 1, 1);
+  ('mbresnan1701', 15022604, 'DONALD TRUMP', 'admin@admin.com', '/assets/photos/trump.jpg', 'ndas2q', 0, 1, 1);
 
 insert into Sites
   (site_name, base_url, active)

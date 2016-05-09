@@ -32,28 +32,4 @@ module.exports = {
     });
   },
 
-  checkLogin: function(req, res) {
-
-    User.where({email: req.body.email}).fetch().then(function(user){
-      if(user === null) {
-        res.send(401, 'No user with that email');
-      } else {
-        bcrypt.compare(req.body.password, user.attributes.password, function(err, isMatch){
-          if(isMatch) {
-            res.send(200, JSON.stringify({token: util.generateToken(user.attributes.id, 
-              user.attributes.email, user.attributes.permission, user.attributes.username)}));
-          } else {
-            res.send(401, 'Invalid Password');
-
-          }
-        });
-        // if(req.body.password === user.attributes.password) {
-        //   res.send(200, JSON.stringify({token: util.generateToken(user.attributes.id, 
-        //     user.attributes.email, user.attributes.permission, user.attributes.username)}));
-        // } else {
-        //   res.send(403, 'Invalid Password');
-        // }
-      }
-    });
-  }
 };

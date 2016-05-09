@@ -18,8 +18,9 @@ module.exports = {
 
             */
             id: user.id,
-            username: user.get('username'),
-            password: user.get('password'),
+            handle: user.get('handle'),
+            githubid: user.get('githubid'),
+            name: user.get('name'),
             url: user.get('url_hash'),
             image: user.get('image'),
             email: user.get('email'),
@@ -45,8 +46,9 @@ module.exports = {
 
             */
             id: user.id,
-            username: user.get('username'),
-            password: user.get('password'),
+            handle: user.get('handle'),
+            githubid: user.get('githubid'),
+            name: user.get('name'),
             url: user.get('url_hash'),
             image: user.get('image'),
             email: user.get('email')
@@ -58,7 +60,7 @@ module.exports = {
   // http://localhost:3000/db/users/user/:id
   fetchUserInfo: function(req, res) {
     var id = req.params.id;
-
+    console.log(req.params.id);
     // user join with groups + bios + userSites
     User
       .where({id: id})
@@ -91,8 +93,9 @@ module.exports = {
                 var retObj = {
                   user: {
                     id: user.id,
-                    username: user.get('username'),
-                    password: user.get('password'),
+                    handle: user.get('handle'),
+                    githubid: user.get('githubid'),
+                    name: user.get('name'),
                     url: user.get('url_hash'),
                     email: user.get('email'),
                     group_id: group.id,
@@ -134,8 +137,9 @@ module.exports = {
      */
     Users
       .create({
-        username: data.user.username,
-        password: data.user.password,
+        handle: data.user.handle,
+        githubid: data.user.githubid,
+        name: user.get('name'),
         email: data.user.email,
         image: data.user.image,
         // url_hash: data.user.url,
@@ -182,8 +186,9 @@ module.exports = {
                 */
                 user
                   .save({
-                    username: data.user.username,
-                    password: data.user.password,
+                    handle: data.user.handle,
+                    githubid: data.user.githubid,
+                    name: user.get('name'),
                     email: data.user.email,
                     image: data.user.image,
                     url_hash: data.user.url,

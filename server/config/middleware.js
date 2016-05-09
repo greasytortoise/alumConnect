@@ -66,7 +66,7 @@ module.exports = function(app, express) {
     process.nextTick(function() {
 
       var profileObj = {
-        id: profile.id,
+        githubid: profile.id,
         handle: profile.username
       };
       return done(null, {
@@ -81,20 +81,15 @@ module.exports = function(app, express) {
   });
 
   passport.deserializeUser(function(userObj, done) {
-    // If you are storing the whole user on session we can just pass to the done method, 
-    // But if you are storing the user id you need to query your db and get the user 
-    //object and pass to done()
-    // User.where({handle: userObj.userData.handle }).fetch()
-    //   .then(function(user) {
-    //     if (!user) {
-    //       done(null, null);
-    //     } else {
-    //       done(null, user);
-    //     }
+    User.where({githubid: userObj.userData.githubid }).fetch()
+      .then(function(user) {
+        if (!user) {
+          done(null, null);
+        } else {
+          done(null, user);
+        }
 
-    //   });
-    
-    done(null, userObj);
+      });    
   });
 
 };

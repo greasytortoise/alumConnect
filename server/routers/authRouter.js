@@ -10,9 +10,17 @@ authRouter.route('/')
 
 authRouter.route('/logout')
   .get(function(req, res) {
+    //Destroy session, clear client cookies, and redirect to login page
     req.logout();
-    req.session.destroy();
-    res.redirect('/login');
+    req.session.destroy(function(err) {
+      if (err) {
+        console.log(err);
+      } 
+      res.clearCookie('ac')
+      res.clearCookie('cu')
+      res.redirect('/login');
+      
+    });
   });
 
 
@@ -24,42 +32,20 @@ authRouter.route('/error')
 authRouter.route('/callback')
     .get(passport.authenticate('github', { failureRedirect: '/auth/error'}),
     function(req, res) {
-      // In the real application you might need to check 
-      // whether the user exists and if exists redirect 
-      // or if not you many need to create user.
-      console.log('IN CALLBACK FUNC')
-      console.log(req.user.userData.handle)
-      // User.where({handle: req.user.userData.handle}).fetch()
-      //   .then(function(user) {
-           // if (!user) {
-              //do SOMETHING
-       //     } else {
-                // var store = user.permissions === 1 ? '8609213322' : '2319028362';
-                // res.cookie('ac', store, { httpOnly: false})
-                // if (store === '8609213322') {
-                //   res.redirect('/dashboard');
-                // } else {
-                //   res.redirect('/');
-                // }
-       //     }
-
-      //   })
-
-
-      //COOKIES  OM NOM NOM
-      // '2319028362' is regular user
-      // '8609213322' is ADMIN
-      
-      res.cookie('ac', '8609213322', { httpOnly: false});
-      setTimeout( function(){
-
-          res.redirect('/');
-        
-      }, 3000);
-
-
-        
-
+      //Fetch user from DB, store their permission status and user id in cookies, redirect to root or dashboard
+      //depending on whether user is admin or not
+      User.where({githubid: req.user.userData.githubid}).fetch()
+        .then(function(user) {
+          var store = user.attributes.permission === 1 ? 1 : 0;
+          res.cookie('ac', store, { httpOnly: false})
+          res.cookie('cu', user.id, { httpOnly: false});
+          if (store === 1) {
+            res.redirect('/dashboard');
+          } else {
+            res.redirect('/');
+          }
+     
+        });
     });
 
 authRouter.route('/islogged') 
