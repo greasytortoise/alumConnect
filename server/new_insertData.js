@@ -46,12 +46,10 @@ Promise.each(groups, function(group) {
       .then(function(group) {
         return Users
           .create({
-            username: student.name,
-            password: '$2a$10$d2i8p6B4pno7tDRpUMaAF.lcCHAmAQ4pVfD84OzsPl2Md/sXmwvoq',
+            name: student.name,
             email: student.email,
             image: student.image,
             url_hash: 'n/a',
-            Group_id: group.id, // needs to be removed
             public: 0,
             permission: 0
           })
@@ -67,7 +65,7 @@ Promise.each(groups, function(group) {
   return Promise.each(biographies, function(studentBio) {
     // console.log(studentBio[0]);
     return User
-      .where({username: studentBio[0]})
+      .where({name: studentBio[0]})
       .fetch()
       .then(function(user) {
         // console.log(user);
