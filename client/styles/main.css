@@ -223,6 +223,24 @@ textarea.form-control {
 .profile-bio .btn-default {
   float:right;
 }
+
+.change-image-button {
+  padding:0;
+  border:0;
+  position: relative;
+}
+
+.change-image-button .label-overlay {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.73);
+  width: 100%;
+  overflow: hidden;
+  bottom: 0;
+  padding: 10px;
+  color: #fff;
+  font-size:16px;
+}
+
 .float-right {
   float:right;
 }
