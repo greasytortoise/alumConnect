@@ -12,16 +12,8 @@ userRouter.route('/group/:id')
   .get(userController.fetchUsersByGroup2);
 
 userRouter.route('/user/:id')
-  .get(userController.fetchUserInfo2)
-  .post(util.isLoggedIn, userController.modifyUser2)
-  .delete(util.isAdmin, userController.deleteUser2);
-
-userRouter.route('/group/:id')
-  .get(util.isLoggedIn, userController.fetchUsersByGroup);
-
-userRouter.route('/user/:id')
-  .get(util.isLoggedIn, userController.fetchUserInfo)
+  .get(util.isLoggedIn, userController.fetchUserInfo2)
   .post(util.isLoggedIn, userController.modifyUser)
-  .delete(util.isAdmin, userController.deleteUser);
+  .delete(util.isAdmin, userController.deleteUser2);
 
 module.exports = userRouter;
