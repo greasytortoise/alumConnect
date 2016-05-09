@@ -51,16 +51,19 @@ class DashboardNewUser extends React.Component {
     var group = this.state.group.id;
     var data = {
       user: {
-        githubId: this.state.githubInfo.id,
-        username: name,
+        githubid: this.state.githubInfo.id,
+        handle: githubUsername,
+        name: name
       },
       groups: this.state.selectedGroups.split(',')
     };
     console.log(data);
-    // RestHandler.Post('db/users', data, (err, res) => {
-    //
-    // });
-    this.clearForm();
+    RestHandler.Post('db/users', data, (err, res) => {
+      if(err) {
+        console.log(err)
+      }
+      this.clearForm();
+    });
   }
 
   clearForm() {

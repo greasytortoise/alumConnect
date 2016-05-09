@@ -3,7 +3,7 @@ var fieldController = require('../controllers/fieldController');
 var util = require('../lib/utility.js');
 
 fieldRouter.route('/')
-  .get(fieldController.fetchFields)
+  .get(util.isLoggedIn, fieldController.fetchFields)
   .post(util.isAdmin, fieldController.createField);
 
 fieldRouter.route('/field/:id')

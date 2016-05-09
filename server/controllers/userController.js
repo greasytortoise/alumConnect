@@ -272,8 +272,9 @@ module.exports = {
           var groups = user.related('groups');
           return {
             id: user.id,
-            username: user.get('username'),
-            password: user.get('password'),
+            handle: user.get('handle'),
+            githubid: user.get('githubid'),
+            name: user.get('name'),
             url: user.get('url_hash'),
             image: user.get('image'),
             email: user.get('email'),
@@ -298,8 +299,9 @@ module.exports = {
           var groups = user.related('groups');
           return {
             id: user.id,
-            username: user.get('username'),
-            password: user.get('password'),
+            handle: user.get('handle'),
+            githubid: user.get('githubid'),
+            name: user.get('name'),
             url: user.get('url_hash'),
             image: user.get('image'),
             email: user.get('email'),
@@ -316,31 +318,29 @@ module.exports = {
   createUser2: function(req, res) {
     var data = req.body;
     Users
-      .fetch({withRelated: ['groups']})
-      .then(function(user) {
-        var groups = user.related('groups');
-        user
-          .create({
-            username: data.user.username,
-            password: data.user.password,
-            email: data.user.email,
-            image: data.user.image,
-            url_hash: data.user.url,
-            // Group_id: data.user.group,
-            public: data.user.public,
-            permission: data.user.permission
-          })
-          .then(function(user) {
-
-            res.status(201).send('user is created!');
-          });
-
+      .create({
+        handle: data.user.handle,
+        githubid: data.user.githubid,
+        name: data.user.name,
+        email: data.user.email,
+        image: data.user.image,
+        // url_hash: data.user.url,
+        Group_id: data.groups,
+        public: 1,
+        permission: 0
+      })
+      .then(function() {
+        res.status(201).send('user is created!');
+      })
+      .catch(function(err) {
+        throw err;
+        res.status(500).send('error creating user');
       });
   },
 
   fetchUserInfo2: function(req, res) {
     var id = req.params.id;
-
+    console.log(req.params.id);
     // user join with groups + bios + userSites
     User
       .where({id: id})
@@ -366,8 +366,10 @@ module.exports = {
                 var retObj = {
                   user: {
                     id: user.id,
-                    username: user.get('username'),
-                    password: user.get('password'),
+                    handle: user.get('handle'),
+                    githubid: user.get('githubid'),
+                    name: user.get('name'),
+                    url: user.get('url_hash'),
                     email: user.get('email'),
                     group_id: groups.id,
                     group: groups.get('group_name'),
@@ -402,6 +404,42 @@ module.exports = {
   },
 
   modifyUser2: function(req, res) {
+  // http://localhost:3000/db/users
+  // no error handling yet
+  createUser: function(req, res) {
+    console.log('CREATING USER');
+    console.log(req.body);
+    var data = req.body;
+     /*
+
+     MODIFICATIONS HERE
+
+
+     */
+    Users
+      .create({
+        handle: data.user.handle,
+        githubid: data.user.githubid,
+        name: data.user.name,
+        email: data.user.email,
+        image: data.user.image,
+        // url_hash: data.user.url,
+        Group_id: data.groups,
+        public: 1,
+        permission: 0
+      })
+      .then(function() {
+        console.log('THE END IS NEAR!!!!!! REPENT!!!!!')
+        res.status(201).send('user is created!');
+      })
+      .catch(function(err) {
+        throw err;
+        res.status(500).send('error creating user');
+      });
+  },
+  // http://localhost:3000/db/users/user/:id
+  // no error handling yet
+  modifyUser: function(req, res) {
     var id = req.params.id;
     var data = req.body;
     console.log('from user: ', data);
@@ -434,8 +472,9 @@ module.exports = {
                 */
                 user
                   .save({
-                    username: data.user.username,
-                    password: data.user.password,
+                    handle: data.user.handle,
+                    githubid: data.user.githubid,
+                    name: user.get('name'),
                     email: data.user.email,
                     image: data.user.image,
                     url_hash: data.user.url,
