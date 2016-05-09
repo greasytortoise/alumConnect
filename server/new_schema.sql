@@ -19,19 +19,29 @@ create table Groups (
   primary key(id)
 );
 
+-- It seems like the front-end is based off of group_id here currently
+
 create table Users (
   id int not null auto_increment,
-  handle varchar(255),
-  githubid int,
-  name varchar(255),
+  username varchar(255),
+  password varchar(255),
   email varchar(255),
   image varchar(255),
   url_hash varchar(255),
   public int,
   permission int,
-  Group_id int not null,
+  Group_id int not null, -- NEEDS TO BE REMOVED
   primary key(id),
-  foreign key(Group_id) references Groups(id)
+  foreign key(Group_id) references Groups(id) -- NEEDS TO BE REMOVED
+);
+
+create table Groups_Users ( -- NEW MANY-MANY TABLE
+  id int not null auto_increment,
+  Group_id int not null,
+  User_id int not null,
+  primary key(id),
+  foreign key(Group_id) references Groups(id),
+  foreign key(User_id) references Users(id)
 );
 
 create table Sites (
@@ -73,12 +83,20 @@ insert into Groups
   (group_name)
 values
   ('staff'),
-  ('president');
+  ('test group');
 
-insert into Users
-  (handle, githubid, name, email, image, url_hash, public, permission, Group_id)
+insert into Users -- Group_id needs to be removed
+  (username, password, email, image, url_hash, public, permission, Group_id)
+  -- (username, password, email, image, url_hash, public, permission)
 values
-  ('mbresnan1701', 15022604, 'DONALD TRUMP', 'admin@admin.com', '/assets/photos/trump.jpg', 'ndas2q', 0, 1, 1);
+  ('Admin', '$2a$10$OJDiRQNkpHyyoi4CC546ZejIhMpRXsI86/tbBr74vsZEN4qtquA5y', 'admin@admin.com', '/assets/photos/trump.jpg', 'ndas2q', 0, 1, 1);
+  -- ('Admin', '$2a$10$OJDiRQNkpHyyoi4CC546ZejIhMpRXsI86/tbBr74vsZEN4qtquA5y', 'admin@admin.com', '/assets/photos/trump.jpg', 'ndas2q', 0, 1);
+
+insert into Groups_Users -- new addition
+  (user_id, group_id)
+values
+  (1, 1),
+  (1, 2);
 
 insert into Sites
   (site_name, base_url, active)

@@ -1,18 +1,21 @@
 var bodyParser = require('body-parser');
 var util = require('../lib/utility.js');
 var multer  = require('multer');
+var sharp = require('sharp');
+
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'client/assets')
   },
   filename: function (req, file, cb) {
-    // console.log(req)
-    console.dir(file);
+    console.dir(file)
+    // console.dir(file);
     cb(null, file.originalname)
   }
 });
+var memstorage = multer.memoryStorage()
 var upload = multer({
-  storage: storage,
+  storage: memstorage,
   limits: { fileSize: 1 * 1000 * 500} // 500kb
 });
 
@@ -51,8 +54,8 @@ module.exports = function(app, express) {
   app.use(methodOverride());
   app.use(cookieParser(config.sessionSecret));
   app.use(session({
-    secret: config.sessionSecret, 
-    resave: false, 
+    secret: config.sessionSecret,
+    resave: false,
     saveUninitialized: false
   }));
   app.use(passport.initialize());
@@ -88,7 +91,6 @@ module.exports = function(app, express) {
         } else {
           done(null, user);
         }
-
       });    
   });
 
