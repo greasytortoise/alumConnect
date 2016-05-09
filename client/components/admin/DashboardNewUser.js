@@ -56,7 +56,6 @@ class DashboardNewUser extends React.Component {
       },
       groups: this.state.selectedGroups.split(',')
     };
-    debugger;
     console.log(data);
     // RestHandler.Post('db/users', data, (err, res) => {
     //
@@ -74,7 +73,6 @@ class DashboardNewUser extends React.Component {
 
 
 	handleSelectChange (selectedGroups) {
-    debugger;
 		this.setState({ selectedGroups });
 	}
 	handleCheckGithub () {
