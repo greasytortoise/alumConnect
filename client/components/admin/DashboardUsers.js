@@ -21,43 +21,44 @@ class DashboardUsers extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      users: []
-
+      users: [],
+      key: 666
     }
   }
 
   componentWillMount() {
     RestHandler.Get('/db/users', (err, res) => {
       var users = res.body;
-      for(var user in users) {
-        console.log(user);
-        users[user].link = this.getLink(users[user].id);
+      for(var i = 0; i < users.length; i++) {
+        users[i].link = this.getLink(users[i].id, i);
       }
       this.setState({users: users});
 
     });
   }
   
-  getLink(id) {
-    console.log(this);
+  getLink(id, index) {
+    var info = JSON.stringify({id: id, index: index});
     return (
-      <div data={id} onClick={this.deleteUser.bind(this)}>
+      <div data={info} onClick={this.deleteUser.bind(this)}>
         Delete User
       </div>
     );
   }
 
   deleteUser(e) {
-    var targetId = $(e.target).attr('data');
+    var that = this;
+    var data = JSON.parse($(e.target).attr('data'));
     e.preventDefault();
     request
-      .delete('/db/users/user/' + targetId)
+      .delete('/db/users/user/' + data.id)
       .end(function(err, res) {
         if(err) {
           console.log(err)
         } else {
           console.log('User deleted');
-          
+          that.state.users.splice(parseInt(data.index), 1);
+          that.setState({ key: Math.random() });
         }
       });
   }
@@ -70,6 +71,7 @@ class DashboardUsers extends React.Component {
           results={this.state.users}
           rowMetadata={rowMetadata}
           showFilter={true}
+          key={this.state.key}
           ref='usertable'
           tableClassName='table'
           useGriddleStyles={false}
