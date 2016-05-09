@@ -29,9 +29,16 @@ create table Users (
   url_hash varchar(255),
   public int,
   permission int,
+  primary key(id)
+);
+
+create table Groups_Users ( -- NEW MANY-MANY TABLE
+  id int not null auto_increment,
   Group_id int not null,
+  User_id int not null,
   primary key(id),
-  foreign key(Group_id) references Groups(id)
+  foreign key(Group_id) references Groups(id),
+  foreign key(User_id) references Users(id)
 );
 
 create table Sites (
@@ -76,10 +83,16 @@ values
   ('president');
 
 insert into Users
-  (handle, githubid, name, email, image, url_hash, public, permission, Group_id)
+  (handle, githubid, name, email, image, url_hash, public, permission)
 values
-  ('mbresnan1701', 15022604, 'DONALD TRUMP', 'admin@admin.com', '/assets/photos/trump.jpg', 'ndas2q', 0, 1, 1);
+  ('mbresnan1701', 15022604, 'DONALD TRUMP', 'admin@admin.com', '/assets/photos/trump.jpg', 'ndas2q', 0, 1);
 
+insert into Groups_Users -- new addition
+  (user_id, group_id)
+values
+  (1, 1),
+  (1, 2);
+  
 insert into Sites
   (site_name, base_url, active)
 values
