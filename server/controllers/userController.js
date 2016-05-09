@@ -325,7 +325,6 @@ module.exports = {
         email: data.user.email,
         image: data.user.image,
         // url_hash: data.user.url,
-        Group_id: data.groups,
         public: 1,
         permission: 0
       })
