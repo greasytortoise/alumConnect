@@ -1,18 +1,21 @@
 var bodyParser = require('body-parser');
 var util = require('../lib/utility.js');
 var multer  = require('multer');
+var sharp = require('sharp');
+
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'client/assets')
   },
   filename: function (req, file, cb) {
-    // console.log(req)
-    console.dir(file);
+    console.dir(file)
+    // console.dir(file);
     cb(null, file.originalname)
   }
 });
+var memstorage = multer.memoryStorage()
 var upload = multer({
-  storage: storage,
+  storage: memstorage,
   limits: { fileSize: 1 * 1000 * 500} // 500kb
 });
 
@@ -51,8 +54,8 @@ module.exports = function(app, express) {
   app.use(methodOverride());
   app.use(cookieParser(config.sessionSecret));
   app.use(session({
-    secret: config.sessionSecret, 
-    resave: false, 
+    secret: config.sessionSecret,
+    resave: false,
     saveUninitialized: false
   }));
   app.use(passport.initialize());
@@ -81,8 +84,8 @@ module.exports = function(app, express) {
   });
 
   passport.deserializeUser(function(userObj, done) {
-    // If you are storing the whole user on session we can just pass to the done method, 
-    // But if you are storing the user id you need to query your db and get the user 
+    // If you are storing the whole user on session we can just pass to the done method,
+    // But if you are storing the user id you need to query your db and get the user
     //object and pass to done()
     // User.where({handle: userObj.userData.handle }).fetch()
     //   .then(function(user) {
@@ -93,7 +96,7 @@ module.exports = function(app, express) {
     //     }
 
     //   });
-    
+
     done(null, userObj);
   });
 
