@@ -336,8 +336,8 @@ module.exports = {
         throw err;
         res.status(500).send('error creating user');
       });
-  },
-
+    },
+    
   fetchUserInfo2: function(req, res) {
     var id = req.params.id;
     console.log(req.params.id);
@@ -403,40 +403,10 @@ module.exports = {
     });
   },
 
-  modifyUser2: function(req, res) {
+  // modifyUser2: function(req, res) {
   // http://localhost:3000/db/users
   // no error handling yet
-  createUser: function(req, res) {
-    console.log('CREATING USER');
-    console.log(req.body);
-    var data = req.body;
-     /*
 
-     MODIFICATIONS HERE
-
-
-     */
-    Users
-      .create({
-        handle: data.user.handle,
-        githubid: data.user.githubid,
-        name: data.user.name,
-        email: data.user.email,
-        image: data.user.image,
-        // url_hash: data.user.url,
-        Group_id: data.groups,
-        public: 1,
-        permission: 0
-      })
-      .then(function() {
-        console.log('THE END IS NEAR!!!!!! REPENT!!!!!')
-        res.status(201).send('user is created!');
-      })
-      .catch(function(err) {
-        throw err;
-        res.status(500).send('error creating user');
-      });
-  },
   // http://localhost:3000/db/users/user/:id
   // no error handling yet
   modifyUser: function(req, res) {
