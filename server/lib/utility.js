@@ -16,9 +16,10 @@ exports.isLoggedIn = function(req, res, next) {
 exports.isAdmin = function(req, res, next) {
 
   if (req.isAuthenticated()) {
-    User.where({githubid: req.user.userData.githubid}).fetch()
+    console.log(req.user);
+    User.where({githubid: req.user.attributes.githubid}).fetch()
       .then(function(user) {
-        if(user.permission === 1) {
+        if(user.attributes.permission === 1) {
           next();
         } else {
           res.redirect('/');
