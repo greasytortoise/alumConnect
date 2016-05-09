@@ -8,7 +8,7 @@ class ProfileImage extends React.Component {
     super(props);
     this.state = {
       loggedInUserId: -1,
-      permission: 0,
+      permission: 1,
       editModal: false
     }
   }
@@ -43,9 +43,12 @@ class ProfileImage extends React.Component {
       if(this.props.editing) {
         return (
           <div>
-            <Image src={this.props.src} responsive />
-            <Button bsStyle="primary" onClick={this.showEditModal.bind(this)}>
-              Launch small demo modal
+            <Button
+              bsStyle="link"
+              className="change-image-button"
+              onClick={this.showEditModal.bind(this)}>
+              <Image src={this.props.src} responsive />
+              <div className="label-overlay">Edit image</div>
             </Button>
            </div>
         )

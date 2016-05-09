@@ -59,6 +59,7 @@ class Profile extends React.Component {
       this.spliceFilledOutFieldsIntoAvailableFields(res.body, 'userInfo', '/db/fields', (profileData) => {
         this.spliceFilledOutFieldsIntoAvailableFields(profileData, 'sites', '/db/sites', (profileData) => {
           this.profileEdits.user = res.body.user
+          console.log(profileData);
           this.setState({
             profileData: profileData,
           });
@@ -156,13 +157,14 @@ class Profile extends React.Component {
   }
 
   render() {
-    var username, image, group, group_id, id = ''
+    var username, image, groups, id = ''
     if (this.state.profileData.user) {
-      var {username, image, group, group_id, id} = this.state.profileData.user
+      var {username, image, id} = this.state.profileData.user
     }
+    var groups = this.state.profileData.groups;
     var profileSidebar;
-    if(group_id) {
-      profileSidebar = <ProfileSidebar groupId={group_id} group={group} />;
+    if(groups) {
+      profileSidebar = <ProfileSidebar groups={groups} />;
     }
 
     return (
@@ -180,7 +182,7 @@ class Profile extends React.Component {
                   profileEditButtonTapped = {this.profileEditButtonTapped.bind(this)}
                   profileSaveButtonTapped = {this.profileSaveButtonTapped.bind(this)} />
                 <h2>{username}</h2>
-                <h3>Groups: <a href="#">{group}</a></h3>
+                {/*<h3>Groups: <a href="#">{group}</a></h3>*/}
                 <ul>
                   {this.renderProfileSites()}
                 </ul>
