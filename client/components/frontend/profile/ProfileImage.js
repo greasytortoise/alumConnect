@@ -8,7 +8,7 @@ class ProfileImage extends React.Component {
     super(props);
     this.state = {
       loggedInUserId: -1,
-      permission: 0,
+      permission: 1,
       editModal: false
     }
   }

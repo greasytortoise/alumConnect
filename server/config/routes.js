@@ -3,6 +3,8 @@ var db = require('../dbConfig');
 var util = require('../lib/utility.js');
 var bcrypt = require('bcrypt');
 var handler = require('../lib/handler');
+var sharp = require('sharp');
+
 
 var passport = require('passport');
 var GithubStrategy = require('passport-github2').Strategy;
@@ -22,9 +24,23 @@ module.exports = function(app, express) {
   app.use('/db/fields', fieldRouter);
   app.use('/dashboard/db/users', userRouter);
   app.use('/auth', authRouter);
-  
+
   app.post('/user/uploadimage', function(req, res) {
-    res.status(204).end();
+
+    console.log(req.file);
+    // console.log(req.file.buffer);
+
+    sharp(req.file.buffer)
+      .resize(800, 530)
+      .crop(sharp.strategy.entropy)
+      .jpeg()
+      .toFile('client/assets/uploads/output.jpg', function(err) {
+        // output.jpg is a 300 pixels wide and 200 pixels high image
+        // containing a scaled and cropped version of input.jpg
+        res.status(204).end();
+
+      });
+
   })
 
 

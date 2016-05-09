@@ -4,9 +4,6 @@ import Select from 'react-select';
 import RestHandler from '../../util/RestHandler'
 var _debounce = require('lodash/debounce');
 
-
-
-
 class DashboardNewUser extends React.Component {
   constructor(props) {
     super (props);
@@ -18,9 +15,6 @@ class DashboardNewUser extends React.Component {
     };
     this.delayGithubTillTypingEnds = _debounce(this.handleCheckGithub,500);
   }
-  fetchGithubInfo(){
-    console.log(this.state.selectedGroups);
-  }
   componentDidMount () {
     this.getGroups();
   }
@@ -28,6 +22,7 @@ class DashboardNewUser extends React.Component {
   getGroups() {
     RestHandler.Get('/db/groups', (err, res) => {
       //res.body.map is a Workaround to get the Select valueKey working.
+      //it ads a property with a stringified id to res.body.
       res.body.map(obj => obj['idString'] = obj['id'].toString())
       this.setState({groups: res.body});
     });
@@ -43,11 +38,9 @@ class DashboardNewUser extends React.Component {
   }
 
   handleGroupSelect(evt, key) {
-    console.log(key);
     this.setState({
       group: key
     });
-    console.log('group', this.state.group);
   }
 
   handleSubmit(event) {
@@ -61,18 +54,7 @@ class DashboardNewUser extends React.Component {
         githubId: this.state.githubInfo.id,
         username: name,
       },
-      groups: this.state.selectedGroups,
-      sites: [],
-      userInfo: []
-
-      // user: {
-      //   username: name,
-      //   password: password,
-      //   email: email,
-      //   group: group,
-      // },
-      // sites: [],
-      // userInfo: []
+      groups: this.state.selectedGroups.split(',')
     };
     console.log(data);
     // RestHandler.Post('db/users', data, (err, res) => {
@@ -91,7 +73,6 @@ class DashboardNewUser extends React.Component {
 
 
 	handleSelectChange (selectedGroups) {
-		console.log('You\'ve selected:', selectedGroups);
 		this.setState({ selectedGroups });
 	}
 	handleCheckGithub () {
@@ -109,7 +90,6 @@ class DashboardNewUser extends React.Component {
 
 
   render() {
-    console.log(this.state.groups);
     var groupName = this.state.group.group_name || 'Select Group';
 
     var foundGithubUserMessage
@@ -146,7 +126,6 @@ class DashboardNewUser extends React.Component {
             }.bind(this)}/>
 
           <label>Group(s)</label>
-
           <Select
             multi
             simpleValue
@@ -170,6 +149,8 @@ class DashboardNewUser extends React.Component {
 }
 
 module.exports = DashboardNewUser;
+
+// {user: Object, groups: "7,1"}
 
 //<Input type="text" addonBefore="https://www.linkedin.com/in/" label="Networks" placeholder="Enter LinkedIn Username" />
 // <Input type="text" addonBefore="https://github.com/" placeholder="Enter Github Handle" />

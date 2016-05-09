@@ -33,6 +33,7 @@
     "react-dom": "^0.14.8",
     "react-router": "^2.0.1",
     "react-select": "^1.0.0-beta13",
+    "sharp": "^0.14.1",
     "spdy": "^3.2.3",
     "superagent": "^1.8.3"
   },
