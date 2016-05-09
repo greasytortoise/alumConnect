@@ -32,6 +32,8 @@ class Users extends React.Component {
 
   getUsers(groupId) {
     var getUrl = groupId ? '/db/users/group/' + groupId : '/db/users'
+    // var getUrl = groupId ? '/db/groups/group/' + groupId : '/db/users'
+
     RestHandler.Get(getUrl, (err, res) => {
       this.setState({users: res.body})
     });
