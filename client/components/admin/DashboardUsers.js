@@ -10,7 +10,7 @@ class DashboardUsers extends React.Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     RestHandler.Get('/db/users', (err, res) => {
       this.setState({users: res.body})
     });
@@ -26,7 +26,7 @@ class DashboardUsers extends React.Component {
           tableClassName='table'
           useGriddleStyles={false}
           resultsPerPage={25}
-          columns={["username", "email", "group", "id"]}/>
+          columns={["name", "email", "group", "id"]}/>
       </div>
     );
   }
