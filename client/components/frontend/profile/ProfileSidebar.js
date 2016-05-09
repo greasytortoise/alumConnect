@@ -16,10 +16,10 @@ class ProfileSidebar extends React.Component {
   }
 
   componentDidMount() {
-    this.getClassMates(this.props.groups);
+    this.getGroupMates(this.props.groups);
   }
 
-  getClassMates(groups) {
+  getGroupMates(groups) {
     for(var key in groups) {
       var url = '/db/groups/group/' + key;
       var classMates = {};
@@ -28,16 +28,7 @@ class ProfileSidebar extends React.Component {
         this.setState({usersGroups: classMates})
       });
     }
-
   }
-  // <li><h4>{groupTitle} ClassMates</h4>
-  //   <ul>
-  //     <li key={user.id}>
-  //       <Link to={`/users/${user.id}`}  activeClassName="active">{user.username}</Link>
-  //     </li>
-  //   </ul>
-  // </li>
-
 
   renderSidebar() {
     var usersGroups = this.state.usersGroups;
