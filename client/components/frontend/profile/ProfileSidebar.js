@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 import RestHandler from '../../../util/RestHandler'
+var _map = require('lodash/map')
 
 
 
@@ -10,41 +11,55 @@ class ProfileSidebar extends React.Component {
   constructor (props) {
     super (props);
     this.state = {
-      groupMembers: {}
+      usersGroups: {}
     };
   }
 
   componentDidMount() {
-    this.getClassMates(this.props.groupId);
+    this.getGroupMates(this.props.groups);
   }
 
-  getClassMates(groupId) {
-    var url = '/db/groups/group/' + this.props.groupId;
-    RestHandler.Get(url, (err, res) => {
-      this.setState({groupMembers: res.body})
-    });
+  getGroupMates(groups) {
+    for(var key in groups) {
+      var url = '/db/groups/group/' + key;
+      var classMates = {};
+      RestHandler.Get(url, (err, res) => {
+        classMates[res.body.group_name] = res.body.users;
+        this.setState({usersGroups: classMates})
+      });
+    }
   }
 
   renderSidebar() {
-    if(this.state.groupMembers.users) {
-      return this.state.groupMembers.users.map(function(user) {
-        return(
-          <li key={user.id}>
-            <Link to={`/users/${user.id}`}  activeClassName="active">{user.username}</Link>
-            {/*<Link to={`/users/${user.id}`}>{user.username}</Link>*/}
-          </li>
-        )
-      })
-    }
+    var usersGroups = this.state.usersGroups;
+    return _map(usersGroups, (members, title) => {
+      return(
+        this.renderSidebarGroup(title, members)
+      );
+    })
+  }
+  renderSidebarGroup(groupTitle, members) {
+    return (
+      <ul className="sidebar-users">
+        <li><h4>{groupTitle} ClassMates</h4></li>
+        {this.renderGroupMembers(members)}
+      </ul>
+    );
+  }
+
+  renderGroupMembers(members) {
+    return members.map(function(user) {
+      return(
+        <li key={user.id}>
+          <Link to={`/users/${user.id}`}  activeClassName="active">{user.username}</Link>
+        </li>
+      )
+    });
   }
 
   render() {
     return(
-        <ul className="sidebar-users">
-          <li><h4>{this.props.group} ClassMates</h4></li>
-
-          {this.renderSidebar()}
-        </ul>
+      <div>{this.renderSidebar()}</div>
     )
   }
 }
