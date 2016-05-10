@@ -19,30 +19,30 @@ class Users extends React.Component {
 
   componentDidMount() {
     RestHandler.Get('/db/groups', (err, res) => {
-      var groups = res.body.reverse()
+      var groups = res.body.reverse();
       var initialGroup = res.body[0];
       if(localStorage.selectedGroup) {
-        initialGroup = JSON.parse(localStorage.selectedGroup);
+        initialGroup = JSON.parse(localStorage.getItem('selectedGroup'));
       }
-      this.setState({groups: groups})
-      this.setState({selectedGroup: initialGroup})
+      this.setState({ groups: groups });
+      this.setState({selectedGroup: initialGroup });
       this.getUsers(initialGroup.id);
     });
   }
 
   getUsers(groupId) {
-    var getUrl = groupId ? '/db/groups/group/' + groupId : '/db/users'
+    var getUrl = groupId ? '/db/groups/group/' + groupId : '/db/users';
     // var getUrl = groupId ? '/db/groups/group/' + groupId : '/db/users'
 
     RestHandler.Get(getUrl, (err, res) => {
-      this.setState({users: res.body.users})
+      this.setState({ users: res.body.users });
     });
   }
 
   usersList() {
-    var searchUsersText = this.state.searchUsersText
-    var users = this.state.users.filter(function(name) {
-      return name.name.toLowerCase().includes(searchUsersText)
+    var searchUsersText = this.state.searchUsersText;
+    var users = this.state.users.filter(function(user) {
+      return user.name.toLowerCase().includes(searchUsersText);
     });
 
     return users.map(function(user, index) {

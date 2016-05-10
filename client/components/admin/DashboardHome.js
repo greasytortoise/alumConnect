@@ -7,21 +7,21 @@ class DashboardHome extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      userCount: undefined
-    }
+      userCount: undefined,
+    };
   }
 
   componentDidMount() {
     RestHandler.Get('/db/users', (err, res) => {
-      this.setState({userCount: res.body.length})
+      this.setState({ userCount: res.body.length });
     });
   }
 
   render() {
-    return(
+    return (
       <div>
         <Alert bsStyle='success'>
-          <strong>It Works!</strong> good job you are ready
+          <strong>It Works!</strong> good job you are ready 
         </Alert>
         <div><Link to='/dashboard/users'>{this.state.userCount} users</Link></div>
       </div>
