@@ -31,22 +31,22 @@ class Users extends React.Component {
   }
 
   getUsers(groupId) {
-    var getUrl = groupId ? '/db/users/group/' + groupId : '/db/users'
+    var getUrl = groupId ? '/db/groups/group/' + groupId : '/db/users'
     // var getUrl = groupId ? '/db/groups/group/' + groupId : '/db/users'
 
     RestHandler.Get(getUrl, (err, res) => {
-      this.setState({users: res.body})
+      this.setState({users: res.body.users})
     });
   }
 
   usersList() {
     var searchUsersText = this.state.searchUsersText
     var users = this.state.users.filter(function(name) {
-      return name.username.toLowerCase().includes(searchUsersText)
+      return name.name.toLowerCase().includes(searchUsersText)
     });
 
     return users.map(function(user, index) {
-      var {username, id, image} = user
+      var {name, id, image} = user
       return(
         <Col xs={6} sm={4} md={3} lg={3} key={id}>
           <Link to={{pathname: `/users/${id}`}}>
@@ -56,7 +56,7 @@ class Users extends React.Component {
                 src={image}
                 responsive
                 />
-              <h4>{username}</h4>
+              <h4>{name}</h4>
             </div>
           </Link>
         </Col>

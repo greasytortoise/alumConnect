@@ -51,7 +51,7 @@ class ProfileSidebar extends React.Component {
     return members.map(function(user) {
       return(
         <li key={user.id}>
-          <Link to={`/users/${user.id}`}  activeClassName="active">{user.username}</Link>
+          <Link to={`/users/${user.id}`}  activeClassName="active">{user.name}</Link>
         </li>
       )
     });

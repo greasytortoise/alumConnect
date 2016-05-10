@@ -45,7 +45,7 @@ class NavigationBar extends React.Component {
   //       loggedInUserData: res.body.user,
   //       permission: auth.getCookie('ac')
   //     });
-  //   }); 
+  //   });
   // }
 
   // handeLogout(e) {
@@ -65,7 +65,6 @@ class NavigationBar extends React.Component {
   }
 
   navbarToggleDisplay() {
-    // var {username, id, image} = this.state.loggedInUserData
     var id = auth.getCookie('cu');
     if(this.props.isAdminBar) {
       return(
