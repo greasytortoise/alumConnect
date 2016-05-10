@@ -28,14 +28,12 @@ module.exports = function(app, express) {
 
   app.post('/user/uploadimage', function(req, res) {
 
-    console.log(req.file);
-    // console.log(req.file.buffer);
-
+    var fileName = 'client/assets/uploads/' + req.body.title + '.jpg'
     sharp(req.file.buffer)
       .resize(800, 530)
       .crop(sharp.strategy.entropy)
       .jpeg()
-      .toFile('client/assets/uploads/output.jpg', function(err) {
+      .toFile(fileName, function(err) {
         // output.jpg is a 300 pixels wide and 200 pixels high image
         // containing a scaled and cropped version of input.jpg
         res.status(204).end();

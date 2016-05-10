@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, Button, Modal } from 'react-bootstrap';
+import { Image, Button, ButtonInput, Modal, } from 'react-bootstrap';
 import auth from '../../../util/authHelpers.js'
 
 
@@ -70,7 +70,7 @@ class ProfileImage extends React.Component {
   render() {
     return (
       <div>
-        <MyLargeModal show={this.state.editModal} onHide={this.hideEditModal.bind(this)} />
+        <SelectImageModal id={this.state.loggedInUserId} show={this.state.editModal} onHide={this.hideEditModal.bind(this)} />
         {this.renderImage()}
       </div>
     );
@@ -81,9 +81,21 @@ class ProfileImage extends React.Component {
 
 
 
+class SelectImageModal extends React.Component {
 
-const MyLargeModal = React.createClass({
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedImage: undefined,
+    }
+  }
+
+  doSomething() {
+    console.log('heyyy');
+  };
+
   render() {
+
     return (
       <Modal {...this.props} aria-labelledby="contained-modal-title-md">
         <Modal.Header closeButton>
@@ -97,10 +109,21 @@ const MyLargeModal = React.createClass({
               encType="multipart/form-data"
               method="POST"
               action="/user/uploadimage" >
-                <input type="hidden" name="title" placeholder="title"/>
-                <input type="file" id="profilePic" name="upl"/>
+                <input
+                  type="hidden"
+                  name="title"
+                  value={this.props.id}
+                  placeholder="title"/>
+                <input
+                  type="file"
+                  id="profilePic"
+                  name="upl"/>
                 <br/>
                 <input type="submit" value="submit"/>
+                {/*<ButtonInput
+                  type="submit"
+                  value="Submit" />*/}
+
               </form>
             </div>
         </Modal.Body>
@@ -110,7 +133,7 @@ const MyLargeModal = React.createClass({
       </Modal>
     );
   }
-});
+};
 
 
 
