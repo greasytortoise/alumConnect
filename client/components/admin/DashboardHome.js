@@ -21,7 +21,7 @@ class DashboardHome extends React.Component {
     return(
       <div>
         <Alert bsStyle='success'>
-          <strong>It Works!</strong> good job you are ready
+          <strong>It Works!</strong> good job you are ready 
         </Alert>
         <div><Link to='/dashboard/users'>{this.state.userCount} users</Link></div>
       </div>
