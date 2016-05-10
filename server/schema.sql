@@ -1,7 +1,7 @@
 /** Make sure to create (or re-create) the database
  *  before running this code. To do this, run:
  *
- *  $ mysql -u root < server/schema
+ *  $ mysql -u root < server/schema.sql
  *
  *  Note: Change password if necessary.
  *  Also at the bottom are dummy variables to
@@ -37,8 +37,8 @@ create table Groups_Users ( -- NEW MANY-MANY TABLE
   Group_id int not null,
   User_id int not null,
   primary key(id),
-  foreign key(Group_id) references Groups(id),
-  foreign key(User_id) references Users(id)
+  foreign key(Group_id) references Groups(id) ON DELETE CASCADE,
+  foreign key(User_id) references Users(id) ON DELETE CASCADE
 );
 
 create table Sites (
@@ -55,8 +55,9 @@ create table User_Sites (
   User_id int not null,
   Site_id int not null,
   primary key(id),
-  foreign key(User_id) references Users(id),
-  foreign key(Site_id) references Sites(id)
+  foreign key(User_id) references Users(id) ON DELETE CASCADE,
+  foreign key(Site_id) references Sites(id) ON DELETE CASCADE
+
 );
 
 create table Bio_Fields (
@@ -71,8 +72,8 @@ create table Bios (
   User_id int not null,
   Bio_Field_id int not null,
   primary key(id),
-  foreign key(User_id) references Users(id),
-  foreign key(Bio_Field_id) references Bio_Fields(id)
+  foreign key(User_id) references Users(id) ON DELETE CASCADE,
+  foreign key(Bio_Field_id) references Bio_Fields(id) ON DELETE CASCADE
 );
 
 
