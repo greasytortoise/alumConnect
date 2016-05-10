@@ -2,6 +2,10 @@ var bodyParser = require('body-parser');
 var util = require('../lib/utility.js');
 var multer  = require('multer');
 var sharp = require('sharp');
+const configWP = require('../../webpack.config.js');
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -38,6 +42,13 @@ module.exports = function(app, express) {
     res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
     next();
   });
+  const compiler = webpack(configWP);
+
+  if (process.env.NODE_ENV !== 'production') {
+    app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: configWP.output.publicPath }));
+    app.use(webpackHotMiddleware(compiler));
+  }
+
   app.use(bodyParser());
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
