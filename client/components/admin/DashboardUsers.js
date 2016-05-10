@@ -80,7 +80,7 @@ class DashboardUsers extends React.Component {
           tableClassName='table'
           useGriddleStyles={false}
           resultsPerPage={25}
-          columns={["name", "email", "group", "id", "link"]}/>
+          columns={["id", "name", "email", "link"]}/>
       </div>
     );
   }
