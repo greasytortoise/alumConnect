@@ -17,8 +17,8 @@ module.exports = {
       .where({id: id})
       .fetch({withRelated: ['users']})
       .then(function(group) {
-        if (!group) { 
-          return res.status(404).send('There is no such group!'); 
+        if (!group) {
+          return res.status(404).send('There is no such group!');
         }
         var users = group.related('users');
         var retObj = {
@@ -27,7 +27,7 @@ module.exports = {
           users: users.map(function(user) {
             return {
               id: user.id,
-              username: user.get('username'),
+              name: user.get('name'),
               image: user.get('image')
             };
           })
@@ -42,8 +42,8 @@ module.exports = {
       .where({group_name: data.group_name})
       .fetch()
       .then(function(groupExist) {
-        if (groupExist) { 
-          return res.status(400).send('Group already exists!'); 
+        if (groupExist) {
+          return res.status(400).send('Group already exists!');
         }
         Groups
           .create({group_name: data.group_name})
@@ -60,8 +60,8 @@ module.exports = {
       .where({group_name: data.group_name})
       .fetch()
       .then(function(group) {
-        if (group && (group.id !== parseInt(id))) { 
-          return res.status(400).send('Group name is taken!'); 
+        if (group && (group.id !== parseInt(id))) {
+          return res.status(400).send('Group name is taken!');
         }
         Group
           .where({id: id})

@@ -25,7 +25,6 @@ class ProfileSidebar extends React.Component {
       var classMates = {};
       RestHandler.Get(url, (err, res) => {
         classMates[res.body.group_name] = res.body.users;
-        debugger;
         this.setState({usersGroups: classMates})
       });
     }
