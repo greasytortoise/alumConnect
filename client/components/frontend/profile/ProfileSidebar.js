@@ -25,6 +25,7 @@ class ProfileSidebar extends React.Component {
       var classMates = {};
       RestHandler.Get(url, (err, res) => {
         classMates[res.body.group_name] = res.body.users;
+        debugger;
         this.setState({usersGroups: classMates})
       });
     }
@@ -51,7 +52,7 @@ class ProfileSidebar extends React.Component {
     return members.map(function(user) {
       return(
         <li key={user.id}>
-          <Link to={`/users/${user.id}`}  activeClassName="active">{user.username}</Link>
+          <Link to={`/users/${user.id}`}  activeClassName="active">{user.name}</Link>
         </li>
       )
     });

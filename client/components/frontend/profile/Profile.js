@@ -157,9 +157,9 @@ class Profile extends React.Component {
   }
 
   render() {
-    var username, image, groups, id = ''
+    var name, image, groups, id = ''
     if (this.state.profileData.user) {
-      var {username, image, id} = this.state.profileData.user
+      var {name, image, id} = this.state.profileData.user
     }
     var groups = this.state.profileData.groups;
     var profileSidebar;
@@ -181,7 +181,7 @@ class Profile extends React.Component {
                   editing = {this.state.editing}
                   profileEditButtonTapped = {this.profileEditButtonTapped.bind(this)}
                   profileSaveButtonTapped = {this.profileSaveButtonTapped.bind(this)} />
-                <h2>{username}</h2>
+                <h2>{name}</h2>
                 {/*<h3>Groups: <a href="#">{group}</a></h3>*/}
                 <ul>
                   {this.renderProfileSites()}
