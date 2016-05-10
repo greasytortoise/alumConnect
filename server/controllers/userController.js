@@ -291,7 +291,6 @@ module.exports = {
   fetchUsersByGroup2: function(req, res) {
     var groupId = req.params.id;
     Users
-      .query('where', 'Group_id', '=', groupId)
       .fetch({withRelated: ['groups']})
       .then(function(users) {
         // console.log(users);
