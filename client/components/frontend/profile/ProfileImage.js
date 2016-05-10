@@ -48,7 +48,7 @@ class ProfileImage extends React.Component {
               className="change-image-button"
               onClick={this.showEditModal.bind(this)}>
               <Image src={this.props.src} responsive />
-              <div className="label-overlay">Edit image</div>
+              <div className="label-overlay">Change image ✎</div>
             </Button>
            </div>
         )

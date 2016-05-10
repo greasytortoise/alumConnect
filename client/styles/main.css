@@ -228,6 +228,8 @@ textarea.form-control {
   padding:0;
   border:0;
   position: relative;
+  box-shadow: 0px 0px 4px #888;
+  border:1px solid #fff;
 }
 
 .change-image-button .label-overlay {
@@ -239,6 +241,10 @@ textarea.form-control {
   padding: 10px;
   color: #fff;
   font-size:16px;
+}
+
+.change-image-button:hover .label-overlay {
+  background: rgba(43, 48, 52, 0.75);
 }
 
 .float-right {
