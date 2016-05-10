@@ -37,10 +37,9 @@ class DashboardUsers extends React.Component {
     });
   }
   
-  getLink(id, index) {
-    var info = JSON.stringify({id: id, index: index});
+  getLink(id) {
     return (
-      <div data={info} onClick={this.deleteUser.bind(this)}>
+      <div data={id} onClick={this.deleteUser.bind(this)}>
         Delete User
       </div>
     );
@@ -48,16 +47,21 @@ class DashboardUsers extends React.Component {
 
   deleteUser(e) {
     var that = this;
-    var data = JSON.parse($(e.target).attr('data'));
+    var data = $(e.target).attr('data');
     e.preventDefault();
     request
-      .delete('/db/users/user/' + data.id)
+      .delete('/dashboard/db/users/user/' + data)
       .end(function(err, res) {
         if(err) {
           console.log(err)
         } else {
           console.log('User deleted');
-          that.state.users.splice(parseInt(data.index), 1);
+          for (var i = 0; i < that.state.users.length; i++) {
+            if (that.state.users[i].id == data) {
+              that.state.users.splice(i, 1);
+              break;
+            }
+          }
           that.setState({ key: Math.random() });
         }
       });
