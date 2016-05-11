@@ -142,8 +142,8 @@
 .deleteLink {
   background-image: url('../assets/delete.png');
   background-size: contain;
-  height: 20px;
-  width: 20px;
+  height: 18px;
+  width: 18px;
   margin: 0 auto;
 }
 
