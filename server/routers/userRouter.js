@@ -13,7 +13,7 @@ userRouter.route('/group/:id')
 
 userRouter.route('/user/:id')
   .get(util.isLoggedIn, userController.fetchUserInfo2)
-  .post(util.isLoggedIn, userController.modifyUser)
+  .post(util.isLoggedIn, userController.modifyUser2)
   .delete(util.isAdmin, userController.deleteUser2);
 
 module.exports = userRouter;
