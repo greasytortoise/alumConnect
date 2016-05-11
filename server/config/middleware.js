@@ -1,4 +1,5 @@
 var bodyParser = require('body-parser');
+var path = require('path');
 var util = require('../lib/utility.js');
 var multer  = require('multer');
 var sharp = require('sharp');
@@ -54,6 +55,7 @@ module.exports = function(app, express) {
   app.use(bodyParser.urlencoded({ extended: true }));
 
   app.use(express.static(__dirname + '/../../client'));
+
   app.use(upload.single('upl'));
   app.use(function(err, req, res, next) {
     if(err.code = 'LIMIT_FILE_SIZE') {

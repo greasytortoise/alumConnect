@@ -1,9 +1,10 @@
-import React from 'react'
-import Griddle from 'griddle-react'
+import React from 'react';
+import Griddle from 'griddle-react';
 import RestHandler from '../../util/RestHandler';
 import $ from 'jquery';
 import request from 'superagent';
 import { Modal, Button } from 'react-bootstrap';
+import { Link } from 'react-router';
 
 var rowMetadata = {
     "bodyCssClassName": function(rowData) {
@@ -15,7 +16,7 @@ var rowMetadata = {
             return "blue-row";
         }
         return "default-row";
-    }
+    },
 };
 
 class DashboardUsers extends React.Component {
@@ -37,10 +38,21 @@ class DashboardUsers extends React.Component {
       var users = res.body;
       for (var i = 0; i < users.length; i++) {
         users[i].Delete = this.getDeleteLink(users[i].id, users[i].name);
+        users[i].Profile = this.getProfileLink(users[i].id);
       }
       this.setState({ users: users });
 
     });
+  }
+  getProfileLink(id) {
+    return (
+      <div className="userLink"
+      >
+        <Link to={{ pathname: `/users/${id}` }}>
+          View Profile
+        </Link>
+      </div>
+   );
   }
 
   getDeleteLink(id, name) {
@@ -128,7 +140,7 @@ class DashboardUsers extends React.Component {
           tableClassName='table'
           useGriddleStyles={false}
           resultsPerPage={25}
-          columns={["id", "name", "email", "Delete"]}/>
+          columns={["id", "name", "email", "Profile", "Delete"]}/>
       </div>
     );
   }

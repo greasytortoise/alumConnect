@@ -1,4 +1,4 @@
-var path = require('path')
+var path = require('path');
 var db = require('../dbConfig');
 var util = require('../lib/utility.js');
 var bcrypt = require('bcrypt');
@@ -18,6 +18,7 @@ var bioRouter = require('../routers/bioRouter');
 var authRouter = require('../routers/authRouter');
 
 module.exports = function(app, express) {
+
   app.use('/db/groups', groupRouter);
   app.use('/db/users', userRouter);
   app.use('/db/sites', siteRouter);
@@ -41,10 +42,11 @@ module.exports = function(app, express) {
 
       });
 
-  })
-  
-  app.get('*', function (request, response){
-    console.log('directing to index');
-    response.sendFile(path.resolve(__dirname,  '../../client/index.html'))
   });
+
+  app.get('*', function (request, response) {
+    console.log('directing to index');
+    response.sendFile(path.resolve(__dirname, '../../client/index.html'));
+  });
+
 };
