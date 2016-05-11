@@ -33,5 +33,5 @@ render((
       <Route path="/dashboard/profile-fields" component={ProfileFields} onEnter={auth.requireAdmin}/>
     </route>
   </Router>
-), document.getElementById('app'))
+), document.getElementById('app'));
 
