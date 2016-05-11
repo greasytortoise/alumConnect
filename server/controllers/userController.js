@@ -173,7 +173,7 @@ module.exports = {
   //               var group = user.related('groups');
 
   //               // modify user info
-                
+
   //               /*
 
   //               MODIFICATIONS HERE
@@ -327,6 +327,12 @@ module.exports = {
         public: 1,
         permission: 0
       })
+      .then(function(user) {
+        // console.log(groups_users);
+        return Promise.each(data.groups, function(group) {
+          user.groups().attach(group);
+        });
+      })
       .then(function() {
         res.status(201).send('user is created!');
       })
@@ -335,7 +341,7 @@ module.exports = {
         res.status(500).send('error creating user');
       });
     },
-    
+
   fetchUserInfo2: function(req, res) {
     var id = req.params.id;
     console.log(req.params.id);
@@ -407,7 +413,7 @@ module.exports = {
 
   // http://localhost:3000/db/users/user/:id
   // no error handling yet
-  modifyUser: function(req, res) {
+  modifyUser2: function(req, res) {
     var id = req.params.id;
     var data = req.body;
     console.log('from user: ', data);
@@ -431,7 +437,7 @@ module.exports = {
                 var group = user.related('groups');
 
                 // modify user info
-                
+
                 /*
 
                 MODIFICATIONS HERE
