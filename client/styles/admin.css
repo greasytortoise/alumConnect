@@ -138,3 +138,18 @@
   color: #fff;
   background: none;
 }
+
+.deleteLink {
+  background-image: url('../assets/delete.png');
+  background-size: contain;
+  height: 20px;
+  width: 20px;
+  margin: 0 auto;
+}
+
+.modal-container {
+  position: relative;
+}
+.modal-container .modal, .modal-container .modal-backdrop {
+  position: absolute;
+}

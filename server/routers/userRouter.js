@@ -5,11 +5,11 @@ var util = require('../lib/utility.js');
 // adding 2 to the end of each modified methods
 
 userRouter.route('/')
-  .get(userController.fetchUsers2)
+  .get(util.isLoggedIn, userController.fetchUsers2)
   .post(util.isAdmin, userController.createUser2);
 
 userRouter.route('/group/:id')
-  .get(userController.fetchUsersByGroup2);
+  .get(util.isLoggedIn, userController.fetchUsersByGroup2);
 
 userRouter.route('/user/:id')
   .get(util.isLoggedIn, userController.fetchUserInfo2)
