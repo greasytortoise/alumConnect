@@ -496,7 +496,7 @@ module.exports = {
                         .then(function(bio) {
                           if (bio.at(0)) {
                             bio.at(0).save({
-                              bio: info.value || bio.get('bio')
+                              bio: info.value
                             });
                           } else {
                             bios.create({
