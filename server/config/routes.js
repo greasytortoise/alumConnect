@@ -29,8 +29,11 @@ module.exports = function(app, express) {
   app.post('/user/uploadimage', function(req, res) {
     console.log(req.body);
     console.log(req.body.title);
-    // var fileName = 'client/assets/uploads' + req.body.title
-    var fileName = 'client/assets/uploads/tet.jpg'
+    var fileName = 'client/' + req.body.title
+    var fileName1 = 'client/assets/uploads/tet.jpg'
+
+    console.log(fileName)
+    console.log(fileName1)
 
     sharp(req.file.buffer)
       .resize(800, 530)
