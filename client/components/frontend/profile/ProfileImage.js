@@ -1,6 +1,7 @@
 import React from 'react'
 import { Image, Button, ButtonInput, Modal, } from 'react-bootstrap';
 import auth from '../../../util/authHelpers.js'
+import RestHandler from '../../../util/RestHandler'
 
 
 class ProfileImage extends React.Component {
@@ -90,8 +91,12 @@ class SelectImageModal extends React.Component {
     }
   }
 
-  doSomething() {
-    console.log('heyyy');
+  doSomething(data) {
+    // RestHandler.Post(url, data, (err, res) => {
+    //   console.log(data);
+    //   if (err) {return err;}
+    //   callback(res);
+    // });
   };
 
   render() {
@@ -120,10 +125,10 @@ class SelectImageModal extends React.Component {
                   name="upl"/>
                 <br/>
                 <input type="submit" value="submit"/>
-                {/*<ButtonInput
+                <ButtonInput
                   type="submit"
-                  value="Submit" />*/}
-
+                  value="Submit"
+                  onClick = {this.doSomething.bind(this)} />
               </form>
             </div>
         </Modal.Body>
