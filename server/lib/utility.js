@@ -30,3 +30,23 @@ exports.isAdmin = function(req, res, next) {
   }
 };
 
+exports.filterUsers = function(usersArr, githubid) {
+  var allowedGroups;
+  var currentUserGroup;
+  User.where({githubid: githubid}).fetch()
+    .then(function(user) {
+      for (var group in user.groups) {
+        if (user.group[group] === 'staff' || user.group[group] === 'admin') {
+          return usersArr;
+        } else {
+          currentUserGroup = group;
+          //Query new group/group table
+
+        }
+      }
+    });
+
+
+  return filteredUsers;
+};
+
