@@ -5,7 +5,6 @@ var User = require('../models/user');
 var config = require('../config/githubAPIConfig.js');
 
 exports.isLoggedIn = function(req, res, next) {
-
   if (req.isAuthenticated()) {
     next();
   } else {
@@ -16,7 +15,6 @@ exports.isLoggedIn = function(req, res, next) {
 exports.isAdmin = function(req, res, next) {
 
   if (req.isAuthenticated()) {
-    console.log(req.user);
     User.where({githubid: req.user.attributes.githubid}).fetch()
       .then(function(user) {
         if(user.attributes.permission === 1) {
@@ -41,7 +39,7 @@ exports.filterUsers = function(usersArr, githubid) {
         } else {
           currentUserGroup = group;
           //Query new group/group table
-
+          
         }
       }
     });

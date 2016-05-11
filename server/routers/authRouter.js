@@ -6,7 +6,7 @@ var GithubStrategy = require('passport-github2').Strategy;
 var User = require('../models/user');
 
 authRouter.route('/')
-  .get(passport.authenticate('github', {scopes: [ 'user:email' ]}));
+  .get(passport.authenticate('github', { scopes: [ 'user:email' ]}));
 
 authRouter.route('/logout')
   .get(function(req, res) {
@@ -34,11 +34,11 @@ authRouter.route('/callback')
     function(req, res) {
       //Fetch user from DB, store their permission status and user id in cookies, redirect to root or dashboard
       //depending on whether user is admin or not
-      User.where({githubid: req.user.userData.githubid}).fetch()
+      User.where({ githubid: req.user.userData.githubid }).fetch()
         .then(function(user) {
           var store = user.attributes.permission === 1 ? 1 : 0;
-          res.cookie('ac', store, { httpOnly: false})
-          res.cookie('cu', user.id, { httpOnly: false});
+          res.cookie('ac', store, { httpOnly: false });
+          res.cookie('cu', user.id, { httpOnly: false });
           if (store === 1) {
             res.redirect('/dashboard');
           } else {
