@@ -70,7 +70,7 @@ class ProfileImage extends React.Component {
   render() {
     return (
       <div>
-        <SelectImageModal id={this.state.loggedInUserId} show={this.state.editModal} onHide={this.hideEditModal.bind(this)} />
+        <SelectImageModal imageUrl={this.props.src}  show={this.state.editModal} onHide={this.hideEditModal.bind(this)} />
         {this.renderImage()}
       </div>
     );
@@ -95,7 +95,7 @@ class SelectImageModal extends React.Component {
   };
 
   render() {
-
+    console.log(this.props);
     return (
       <Modal {...this.props} aria-labelledby="contained-modal-title-md">
         <Modal.Header closeButton>
@@ -112,7 +112,7 @@ class SelectImageModal extends React.Component {
                 <input
                   type="hidden"
                   name="title"
-                  value={this.props.id}
+                  value={this.props.imageUrl}
                   placeholder="title"/>
                 <input
                   type="file"

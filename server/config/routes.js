@@ -27,8 +27,11 @@ module.exports = function(app, express) {
   app.use('/auth', authRouter);
 
   app.post('/user/uploadimage', function(req, res) {
+    console.log(req.body);
+    console.log(req.body.title);
+    // var fileName = 'client/assets/uploads' + req.body.title
+    var fileName = 'client/assets/uploads/tet.jpg'
 
-    var fileName = 'client/assets/uploads/' + req.body.title + '.jpg'
     sharp(req.file.buffer)
       .resize(800, 530)
       .crop(sharp.strategy.entropy)

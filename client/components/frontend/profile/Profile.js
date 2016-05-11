@@ -173,7 +173,9 @@ class Profile extends React.Component {
           <div className='section profile-main'>
             <Row>
               <Col xs={12} sm={5} md={4}>
-                <ProfileImage src={image} editing={this.state.editing} />
+                <ProfileImage
+                  src={image}
+                  editing={this.state.editing} />
               </Col>
               <Col xs={12} sm={7} md={8}>
                 <ProfileEditButton
