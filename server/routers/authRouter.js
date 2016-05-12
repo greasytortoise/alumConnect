@@ -15,14 +15,51 @@ authRouter.route('/logout')
     req.session.destroy(function(err) {
       if (err) {
         console.log(err);
-      } 
-      res.clearCookie('ac')
-      res.clearCookie('cu')
+      }
+      res.clearCookie('ac');
+      res.clearCookie('cu');
       res.redirect('/login');
-      
     });
   });
 
+authRouter.route('/sessionreload')
+  .get((req, res) => {
+    if (req.session) {
+      console.log('sess called');
+      req.session.reload((err) => {
+        if (err) {
+          console.log(err);
+          res.status(401).send();
+        }
+        res.status(200).send();
+      });
+    } else {
+      res.status(401).send();
+    }
+    // if (req.session) {
+    //   res.status(200).send();
+    // } else {
+    //   res.status(401).send();
+    // }
+  });
+
+authRouter.route('/refreshcookies')
+  .get((req, res) => {
+    console.log(req.user);
+    // User.where({ githubid: req.user.userData.githubid }).fetch()
+    //   .then((user) => {
+    //     const store = user.attributes.permission === 1 ? 1 : 0;
+    //     res.cookie('ac', store, { httpOnly: false });
+    //     res.cookie('cu', user.id, { httpOnly: false });
+    //     // if (store === 1) {
+    //     //   res.redirect('/dashboard');
+    //     // } else {
+    //     //   res.redirect('/');
+    //     // }
+    //     res.send();
+    //   });
+    res.send();
+  });
 
 authRouter.route('/error')
   .get(function(req, res) {
@@ -44,7 +81,6 @@ authRouter.route('/callback')
           } else {
             res.redirect('/');
           }
-     
         });
     });
 
