@@ -15,14 +15,35 @@ authRouter.route('/logout')
     req.session.destroy(function(err) {
       if (err) {
         console.log(err);
-      } 
-      res.clearCookie('ac')
-      res.clearCookie('cu')
+      }
+      res.clearCookie('ac');
+      res.clearCookie('cu');
       res.redirect('/login');
-      
     });
   });
 
+authRouter.route('/sessionreload')
+  .get((req, res) => {
+    if (req.user) {
+      req.session.reload((err) => {
+        if (err) {
+          console.log(err);
+          res.send('false');
+        }
+        res.send('true');
+      });
+    } else {
+      res.send('false');
+    }
+  });
+
+authRouter.route('/refreshcookies')
+  .get((req, res) => {
+    const store = req.user.attributes.permission === 1 ? 1 : 0;
+    res.cookie('ac', store, { httpOnly: false });
+    res.cookie('cu', req.user.attributes.id, { httpOnly: false });
+    res.send();
+  });
 
 authRouter.route('/error')
   .get(function(req, res) {
@@ -44,7 +65,6 @@ authRouter.route('/callback')
           } else {
             res.redirect('/');
           }
-     
         });
     });
 

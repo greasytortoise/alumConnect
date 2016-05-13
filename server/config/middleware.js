@@ -1,4 +1,5 @@
 var bodyParser = require('body-parser');
+var redisClient = require('redis').createClient();
 var path = require('path');
 var util = require('../lib/utility.js');
 var multer  = require('multer');
@@ -10,18 +11,18 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'client/assets')
+    cb(null, 'client/assets');
   },
   filename: function (req, file, cb) {
-    console.dir(file)
+    console.dir(file);
     // console.dir(file);
-    cb(null, file.originalname)
-  }
+    cb(null, file.originalname);
+  },
 });
-var memstorage = multer.memoryStorage()
+var memstorage = multer.memoryStorage();
 var upload = multer({
   storage: memstorage,
-  limits: { fileSize: 1 * 1000 * 500} // 500kb
+  limits: { fileSize: 1 * 1000 * 500 }, // 500kb
 });
 
 var passport = require('passport');
@@ -36,6 +37,8 @@ var Users = require('../collections/users');
 
 
 module.exports = function(app, express) {
+  var RedisStore = require('connect-redis')(session);
+
   app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Credentials', true);
     res.header('Access-Control-Allow-Origin', req.headers.origin);
@@ -54,23 +57,29 @@ module.exports = function(app, express) {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
 
-  app.use(express.static(__dirname + '/../../client'));
+  app.use(express.static(__dirname + '/../../client/'));
 
   app.use(upload.single('upl'));
   app.use(function(err, req, res, next) {
-    if(err.code = 'LIMIT_FILE_SIZE') {
+    if (err.code = 'LIMIT_FILE_SIZE') {
       console.log('image upload limited to 500kb');
     }
   });
-  app.use(cookieParser());
-  app.use(session({secret: config.sessionSecret}));
-  app.use(methodOverride());
+  app.use(require('morgan')('dev'));
   app.use(cookieParser(config.sessionSecret));
+
   app.use(session({
+    store: new RedisStore({
+      host: 'localhost',
+      port: 6379,
+      db: 0,
+      client: redisClient,
+    }),
+    cookie: { maxAge: (24 * 3600 * 1000 * 30) }, // 30 Days in ms
     secret: config.sessionSecret,
-    resave: false,
-    saveUninitialized: false
   }));
+
+  app.use(methodOverride());
   app.use(passport.initialize());
   app.use(passport.session());
 

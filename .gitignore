@@ -9,6 +9,8 @@ client/bundle.js
 client/build/bundle.js
 client/assets/uploads/
 server/config/githubAPIConfig.js
+sessions
+dump.rdb
 
 # Floobits
 .floo
