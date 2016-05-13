@@ -11,7 +11,7 @@ import Login from './components/Login'
 import Dashboard from './components/admin/Dashboard'
 import DashboardHome from './components/admin/DashboardHome'
 import DashboardUsers from './components/admin/DashboardUsers'
-import DashboardNewUser from './components/admin/DashboardNewUser'
+import DashboardNewUser from './components/admin/NewUser/NewUser'
 import Groups from './components/admin/Groups/Groups'
 import Sites from './components/admin/Sites/Sites'
 import ProfileFields from './components/admin/ProfileFields/ProfileFields'
@@ -74,4 +74,3 @@ restoreSession()
       doRender();
     }
   });
-

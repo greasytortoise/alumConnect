@@ -124,28 +124,34 @@ class SelectImageModal extends React.Component {
 
   onDrop(files) {
      console.log('Received files: ', files);
+     var imageUrl = this.props.imageUrl;
      var file = files[0];
 
-     var reader = new FileReader();
+    //  var reader = new FileReader();
+    //  reader.onload = function(evt) {
+    //   //  evt.target.result
+    //    debugger;
+     //
+    //    var postData = {file: evt.target.result, title: imageUrl}
+    //    RestHandler.Post('user/uploadimage', postData, (err, res) => {
+    //      if(err) {
+    //        debugger;
+    //        console.log(err)
+    //      }
+    //      this.clearForm();
+    //    });
+    //   };
+     //
+    //  reader.readAsArrayBuffer(file);
 
-     reader.onload = function(evt) {
+    var postData = {file: file, title: this.props.imageUrl}
+    RestHandler.Post('user/uploadimage', postData, (err, res) => {
+      if(err) {
+        console.log(err)
+      }
+      this.clearForm();
+    });
 
-       debugger;
-        // xhr.send(evt.target.result);
-      };
-
-     reader.readAsBinaryString(file);
-
-
-     debugger;
-     var postData = {file: file, title: this.props.imageUrl}
-     RestHandler.Post('user/uploadimage', postData, (err, res) => {
-       if(err) {
-         debugger;
-         console.log(err)
-       }
-       this.clearForm();
-     });
 
    }
 

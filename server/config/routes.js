@@ -34,9 +34,10 @@ module.exports = function(app, express) {
     console.log(fileName);
 
     var file = req.body.file.preview;
-    console.log('file size: ', file.size);
+    var buffer = new Buffer(file, "binary");
+    console.log('Buffer: ', buffer);
 
-    sharp(file)
+    sharp(buffer)
       .resize(800, 530)
       .crop(sharp.strategy.entropy)
       .jpeg()

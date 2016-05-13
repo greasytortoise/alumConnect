@@ -1,7 +1,7 @@
 import React from 'react'
 import {Input, ButtonInput, DropdownButton, MenuItem} from 'react-bootstrap'
 import Select from 'react-select';
-import RestHandler from '../../util/RestHandler'
+import RestHandler from '../../../util/RestHandler'
 var _debounce = require('lodash/debounce');
 
 class DashboardNewUser extends React.Component {
@@ -28,20 +28,6 @@ class DashboardNewUser extends React.Component {
     });
   }
 
-  renderGroups(handleGroupSelect) {
-    return this.state.groups.map (function(group) {
-      var {id, group_name} = group;
-      return (
-        <MenuItem key={id} eventKey={group} onSelect={handleGroupSelect}>{group_name}</MenuItem>
-      );
-    });
-  }
-
-  handleGroupSelect(evt, key) {
-    this.setState({
-      group: key
-    });
-  }
 
   handleSubmit(event) {
     event.preventDefault();
@@ -74,10 +60,6 @@ class DashboardNewUser extends React.Component {
     this.setState({selectedGroups: []});
   }
 
-
-	handleSelectChange (selectedGroups) {
-		this.setState({ selectedGroups });
-	}
 	handleCheckGithub () {
     var githubUsername = this.refs.githubUsername.getValue();
     var url = 'https://api.github.com/users/' + githubUsername;
@@ -91,10 +73,12 @@ class DashboardNewUser extends React.Component {
     });
 	}
 
+  handleGroupSelect (selectedGroups) {
+		this.setState({ selectedGroups });
+	}
 
   render() {
     var groupName = this.state.group.group_name || 'Select Group';
-
     var foundGithubUserMessage
     if(this.state.githubInfo === undefined) {
       foundGithubUserMessage = <span className="findingGithubInfo">Enter a valid github username</span>
@@ -136,7 +120,7 @@ class DashboardNewUser extends React.Component {
             labelKey="group_name"
             valueKey="idString"
             options={this.state.groups}
-            onChange={this.handleSelectChange.bind(this)} />
+            onChange={this.handleGroupSelect.bind(this)} />
             <br />
           <ButtonInput
             className="float-left add-new-user-button"
@@ -152,8 +136,3 @@ class DashboardNewUser extends React.Component {
 }
 
 module.exports = DashboardNewUser;
-
-// {user: Object, groups: "7,1"}
-
-//<Input type="text" addonBefore="https://www.linkedin.com/in/" label="Networks" placeholder="Enter LinkedIn Username" />
-// <Input type="text" addonBefore="https://github.com/" placeholder="Enter Github Handle" />
