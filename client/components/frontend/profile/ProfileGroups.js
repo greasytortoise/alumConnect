@@ -16,6 +16,7 @@ class ProfileGroups extends React.Component {
 
   componentDidMount() {
     this.setState({selectedGroups: this.props.selectedGroups})
+    this.handleGroupSelect(this.props.selectedGroups);
     this.getAvailableGroups();
   }
 
@@ -29,6 +30,7 @@ class ProfileGroups extends React.Component {
   }
 
   handleGroupSelect (selectedGroups) {
+    debugger;
 		this.setState({ selectedGroups });
 	}
 
