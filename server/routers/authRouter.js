@@ -24,39 +24,21 @@ authRouter.route('/logout')
 
 authRouter.route('/sessionreload')
   .get((req, res) => {
-    if (req.session) {
-      console.log('sess called');
+    if (req.user) {
       req.session.reload((err) => {
         if (err) {
           console.log(err);
-          res.status(401).send();
+          res.send('false');
         }
-        res.status(200).send();
+        res.send('true');
       });
     } else {
-      res.status(401).send();
+      res.send('false');
     }
-    // if (req.session) {
-    //   res.status(200).send();
-    // } else {
-    //   res.status(401).send();
-    // }
   });
 
 authRouter.route('/refreshcookies')
   .get((req, res) => {
-    console.log(req.user);
-    // User.where({ githubid: req.user.attributes.githubid }).fetch()
-    //   .then((user) => {
-    //     const store = user.attributes.permission === 1 ? 1 : 0;
-    //     res.cookie('ac', store, { httpOnly: false });
-    //     res.cookie('cu', user.id, { httpOnly: false });
-    //     // if (store === 1) {
-    //     //   res.redirect('/dashboard');
-    //     // } else {
-    //     //   res.redirect('/');
-    //     // }
-    //   });
     const store = req.user.attributes.permission === 1 ? 1 : 0;
     res.cookie('ac', store, { httpOnly: false });
     res.cookie('cu', req.user.attributes.id, { httpOnly: false });

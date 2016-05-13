@@ -22,7 +22,7 @@ const restoreSession = () => {
       if (err) {
         console.log(err);
       } else {
-        resolve(res.statusCode);
+        resolve(res.text);
       }
     });
   });
@@ -34,7 +34,7 @@ const restoreCookies = () => {
       if (err) {
         console.log(err);
       } else {
-        resolve(res.statusCode);
+        resolve();
       }
     });
   });
@@ -64,7 +64,8 @@ const doRender = () => {
 
 restoreSession()
   .then((status) => {
-    if (status === 200) {
+    console.log(status);
+    if (status === 'true' && !auth.getCookie('cu')) {
       restoreCookies()
         .then(() => {
           doRender();

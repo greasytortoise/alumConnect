@@ -67,42 +67,19 @@ module.exports = function(app, express) {
   });
   app.use(require('morgan')('dev'));
   app.use(cookieParser(config.sessionSecret));
+
   app.use(session({
     store: new RedisStore({
       host: 'localhost',
       port: 6379,
       db: 0,
-      cookie: { maxAge: (24 * 3600 * 1000 * 30) }, // 30 Days in ms
       client: redisClient,
     }),
     cookie: { maxAge: (24 * 3600 * 1000 * 30) }, // 30 Days in ms
     secret: config.sessionSecret,
   }));
+
   app.use(methodOverride());
-
-  // var sessOptions = {
-  //   path: './tmp/sessions/',  //directory where session files will be stored
-  //   useAsync: true,
-  //   reapInterval: 5000,
-  //   maxAge: 10000000000000,
-  // };
-
-  // if (process.env.NODE_ENV === 'development') {
-  //   var FileStore = require('session-file-store')(session);
-  //   app.use(session({
-  //     secret: config.sessionSecret,
-  //     resave: true,
-  //     saveUninitialized: true,
-  //     store: new FileStore(sessOptions),
-  //   }));
-  // } else {
-  //   app.use(session({
-  //     secret: config.sessionSecret,
-  //     resave: true,
-  //     saveUninitialized: false,
-  //   }));
-  // }
-
   app.use(passport.initialize());
   app.use(passport.session());
 
