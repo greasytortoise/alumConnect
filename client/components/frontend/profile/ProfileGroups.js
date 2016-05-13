@@ -7,19 +7,19 @@ class ProfileGroups extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedGroups: [],
+      groups: [],
     };
   }
 
   componentDidMount() {
-    this.setState({value: this.props.siteDetails.value})
+    this.setState({groups: this.props.groups})
   }
 
   renderProfileSite() {
     var editing = this.props.editing;
-    var value = this.state.value;
+    var groups = this.state.groups;
 
-    if(!editing && value) {
+    if(!editing && groups) {
       return (
         <div>not editing</div>
       );
