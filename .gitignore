@@ -4,6 +4,7 @@
 iisnode.yml
 npm-debug.log
 node_modules
+build/
 client/bower_components
 client/bundle.js
 client/build/bundle.js

@@ -1,9 +1,10 @@
 import React from 'react'
+import ProfileSidebar from './ProfileSidebar'
 import ProfileImage from './ProfileImage'
 import ProfileField from './ProfileField'
 import ProfileSite from './ProfileSite'
+import ProfileGroups from './ProfileGroups'
 import ProfileEditButton from './ProfileEditButton'
-import ProfileSidebar from './ProfileSidebar'
 
 import RestHandler from '../../../util/RestHandler'
 import { Button, Row, Col, Image} from 'react-bootstrap';
@@ -110,6 +111,16 @@ class Profile extends React.Component {
     }
   }
 
+  renderProfileGroups() {
+    if(this.state.profileData.groups) {
+      return (
+      <ProfileGroups
+      groups={this.state.profileData.groups}
+      editing={this.state.editing}
+      stageProfileEdits = {this.stageProfileEdits.bind(this)} />)
+    }
+  }
+
 
 
   //In saveUserProfile, the api accepts post requests in array format for
@@ -173,7 +184,9 @@ class Profile extends React.Component {
           <div className='section profile-main'>
             <Row>
               <Col xs={12} sm={5} md={4}>
-                <ProfileImage src={image} editing={this.state.editing} />
+                <ProfileImage
+                  src={image}
+                  editing={this.state.editing} />
               </Col>
               <Col xs={12} sm={7} md={8}>
                 <ProfileEditButton
@@ -182,7 +195,8 @@ class Profile extends React.Component {
                   profileEditButtonTapped = {this.profileEditButtonTapped.bind(this)}
                   profileSaveButtonTapped = {this.profileSaveButtonTapped.bind(this)} />
                 <h2>{name}</h2>
-                {/*<h3>Groups: <a href="#">{group}</a></h3>*/}
+                {this.renderProfileGroups()}
+
                 <ul>
                   {this.renderProfileSites()}
                 </ul>
