@@ -2,6 +2,7 @@ import React from 'react'
 import { Image, Button, ButtonInput, Modal, } from 'react-bootstrap';
 import auth from '../../../util/authHelpers.js'
 import RestHandler from '../../../util/RestHandler'
+var Dropzone = require('react-dropzone');
 
 
 class ProfileImage extends React.Component {
@@ -92,45 +93,105 @@ class SelectImageModal extends React.Component {
   }
 
   doSomething(data) {
+    // debugger;
+    var profilePic = this.refs.profilePic.getValue();
+    console.log(profilePic);
+
     // RestHandler.Post(url, data, (err, res) => {
     //   console.log(data);
     //   if (err) {return err;}
     //   callback(res);
     // });
   };
+  //
+  // handleSubmit: function(e) {
+  //   e.preventDefault();
+  // }
+
+  // handleFile: function(e) {
+  //   var self = this;
+  //   var reader = new FileReader();
+  //   var file = e.target.files[0];
+  //   debugger;
+  //   reader.onload = function(upload) {
+  //     self.setState({
+  //       data_uri: upload.target.result,
+  //     });
+  //   }
+  //
+  //   reader.readAsDataURL(file);
+  // }
+
+  onDrop(files) {
+     console.log('Received files: ', files);
+     var file = files[0];
+
+     var reader = new FileReader();
+
+     reader.onload = function(evt) {
+
+       debugger;
+        // xhr.send(evt.target.result);
+      };
+
+     reader.readAsBinaryString(file);
+
+
+     debugger;
+     var postData = {file: file, title: this.props.imageUrl}
+     RestHandler.Post('user/uploadimage', postData, (err, res) => {
+       if(err) {
+         debugger;
+         console.log(err)
+       }
+       this.clearForm();
+     });
+
+   }
 
   render() {
     console.log(this.props);
     return (
       <Modal {...this.props} aria-labelledby="contained-modal-title-md">
+
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-md">Modal heading</Modal.Title>
+          <Modal.Title id="contained-modal-title-md">aMofffffdal heading</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h4>Wrapped Text</h4>
-            <div>
+          <h4>Wraasdfpped Text</h4>
+          <div>
+
+
+            <Dropzone disablePreview onDrop={this.onDrop.bind(this)}>
+              <div>Try dropping some files here, or click to select files to upload.</div>
+            </Dropzone>
+
+
             <form
               name="secret"
               encType="multipart/form-data"
               method="POST"
+              onSubmit={this.handleSubmit}
               action="/user/uploadimage" >
-                <input
-                  type="hidden"
-                  name="title"
-                  value={this.props.imageUrl}
-                  placeholder="title"/>
-                <input
-                  type="file"
-                  id="profilePic"
-                  name="upl"/>
-                <br/>
-                <input type="submit" value="submit"/>
-                <ButtonInput
-                  type="submit"
-                  value="Submit"
-                  onClick = {this.doSomething.bind(this)} />
-              </form>
-            </div>
+              <input
+                type="hidden"
+                name="title"
+                ref="imageUrl"
+                value={this.props.imageUrl}
+                placeholder="title"/>
+              <input
+                type="file"
+                onChange={this.handleFile}
+                ref="profilePic"
+                id="profilePic"
+                name="upl"/>
+              <br/>
+              <input type="submit" value="submit"/>
+              <ButtonInput
+                value="Submit"
+                onClick = {this.doSomething.bind(this)} />
+            </form>
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.props.onHide}>Close</Button>

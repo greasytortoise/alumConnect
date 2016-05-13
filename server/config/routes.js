@@ -27,19 +27,21 @@ module.exports = function(app, express) {
   app.use('/auth', authRouter);
 
   app.post('/user/uploadimage', function(req, res) {
-    console.log(req.body);
-    console.log(req.body.title);
-    var fileName = 'client/' + req.body.title
-    var fileName1 = 'client/assets/uploads/tet.jpg'
 
-    console.log(fileName)
-    console.log(fileName1)
+    console.log('req.body', req.body);
 
-    sharp(req.file.buffer)
+    var fileName = 'client' + req.body.title;
+    console.log(fileName);
+
+    var file = req.body.file.preview;
+    console.log('file size: ', file.size);
+
+    sharp(file)
       .resize(800, 530)
       .crop(sharp.strategy.entropy)
       .jpeg()
       .toFile(fileName, function(err) {
+        console.log("ERR", err);
         // output.jpg is a 300 pixels wide and 200 pixels high image
         // containing a scaled and cropped version of input.jpg
         res.status(204).end();

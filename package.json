@@ -33,6 +33,7 @@
     "react": "^0.14.8",
     "react-bootstrap": "^0.28.5",
     "react-dom": "^0.14.8",
+    "react-dropzone": "^3.4.0",
     "react-router": "^2.0.1",
     "react-select": "^1.0.0-beta13",
     "redis": "^2.6.0-2",
