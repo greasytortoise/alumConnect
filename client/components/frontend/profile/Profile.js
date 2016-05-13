@@ -112,11 +112,13 @@ class Profile extends React.Component {
   }
 
   renderProfileGroups() {
-    return (
-    <ProfileGroups
-    siteDetails="asdf"
-    editing={this.state.editing}
-    stageProfileEdits = {this.stageProfileEdits.bind(this)} />)
+    if(this.state.profileData.groups) {
+      return (
+      <ProfileGroups
+      groups={this.state.profileData.groups}
+      editing={this.state.editing}
+      stageProfileEdits = {this.stageProfileEdits.bind(this)} />)
+    }
   }
 
 

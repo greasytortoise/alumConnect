@@ -34,6 +34,7 @@ class ProfileGroups extends React.Component {
   }
 
   render() {
+    console.log(this.props.groups);
     return (
       this.renderProfileSite()
     )
