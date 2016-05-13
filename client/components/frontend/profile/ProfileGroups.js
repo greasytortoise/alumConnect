@@ -2,6 +2,7 @@ import React from 'react'
 import { Input, Button } from 'react-bootstrap';
 import Select from 'react-select';
 import RestHandler from '../../../util/RestHandler'
+var _map = require('lodash/map');
 
 
 class ProfileGroups extends React.Component {
@@ -15,8 +16,9 @@ class ProfileGroups extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({selectedGroups: this.props.selectedGroups})
-    this.handleGroupSelect(this.props.selectedGroups);
+    var selectedGroups  = _map(this.props.selectedGroups, (key, val) => val).join(',');
+    this.setState({selectedGroups: selectedGroups})
+    this.handleGroupSelect(selectedGroups);
     this.getAvailableGroups();
   }
 
@@ -30,17 +32,24 @@ class ProfileGroups extends React.Component {
   }
 
   handleGroupSelect (selectedGroups) {
-    debugger;
 		this.setState({ selectedGroups });
 	}
 
+  displayUsersGroups() {
+    return _map(this.props.selectedGroups, (key, value) => {
+      return(<div>{key}, {value}</div>)
+    });
+  }
+
   renderGroups() {
+    console.log('groups state: ', this.state.selectedGroups, typeof this.state.selectedGroups );
     var editing = this.props.editing;
     var selectedGroups = this.state.selectedGroups;
 
     if(!editing && selectedGroups) {
       return (
-        <div>not editing</div>
+        <div>{this.displayUsersGroups()}</div>
+
       );
     }
     else if(editing) {

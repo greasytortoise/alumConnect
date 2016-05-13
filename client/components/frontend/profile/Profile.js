@@ -115,7 +115,7 @@ class Profile extends React.Component {
     if(this.state.profileData.groups) {
       return (
       <ProfileGroups
-      groups={this.state.profileData.groups}
+      selectedGroups={this.state.profileData.groups}
       editing={this.state.editing}
       stageProfileEdits = {this.stageProfileEdits.bind(this)} />)
     }
