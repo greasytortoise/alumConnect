@@ -46,7 +46,7 @@ authRouter.route('/sessionreload')
 authRouter.route('/refreshcookies')
   .get((req, res) => {
     console.log(req.user);
-    // User.where({ githubid: req.user.userData.githubid }).fetch()
+    // User.where({ githubid: req.user.attributes.githubid }).fetch()
     //   .then((user) => {
     //     const store = user.attributes.permission === 1 ? 1 : 0;
     //     res.cookie('ac', store, { httpOnly: false });
@@ -56,8 +56,10 @@ authRouter.route('/refreshcookies')
     //     // } else {
     //     //   res.redirect('/');
     //     // }
-    //     res.send();
     //   });
+    const store = req.user.attributes.permission === 1 ? 1 : 0;
+    res.cookie('ac', store, { httpOnly: false });
+    res.cookie('cu', req.user.attributes.id, { httpOnly: false });
     res.send();
   });
 
