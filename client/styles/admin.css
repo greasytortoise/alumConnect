@@ -140,10 +140,10 @@
 }
 
 .deleteLink {
-  background-image: url('../assets/delete.png');
+  background-image: url('../assets/delete2.png');
   background-size: contain;
-  height: 18px;
-  width: 18px;
+  height: 15px;
+  width: 15px;
   margin: 0 auto;
 }
 
