@@ -38,7 +38,15 @@ class ProfileGroups extends React.Component {
 
   displayUsersGroups() {
     return _map(this.props.selectedGroups, (groupName, groupId) => {
-      return(<Link to={`/`} key={groupId}>{groupName} </Link>)
+      var groupObj = {id: groupId, group_name: groupName};
+      return(
+        <Link to={`/`}
+        key={groupId}
+        onClick={function() {
+          localStorage.setItem('selectedGroup', JSON.stringify(groupObj));
+        }}>
+        {groupName}
+      </Link>)
     });
   }
 
