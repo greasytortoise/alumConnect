@@ -63,6 +63,7 @@
     "http-server": "^0.8.5",
     "mocha": "^2.4.5",
     "mock-local-storage": "^1.0.2",
+    "morgan": "^1.7.0",
     "session-file-store": "^0.2.0",
     "style-loader": "^0.13.1",
     "supertest": "^1.2.0",

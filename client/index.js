@@ -64,7 +64,6 @@ const doRender = () => {
 
 restoreSession()
   .then((status) => {
-    console.log(status);
     if (status === 'true' && !auth.getCookie('cu')) {
       restoreCookies()
         .then(() => {

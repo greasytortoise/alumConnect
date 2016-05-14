@@ -324,8 +324,8 @@ module.exports = {
         email: data.user.email,
         image: data.user.image,
         // url_hash: data.user.url,
-        public: 1,
-        permission: 0
+        public: data.user.public || 1,
+        permission: data.user.admin || 0,
       })
       .then(function(user) {
         // console.log(groups_users);

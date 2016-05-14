@@ -1,5 +1,5 @@
 import React from 'react'
-import {Input, ButtonInput, DropdownButton, MenuItem} from 'react-bootstrap'
+import { FormGroup, Col, Row, Checkbox, Input, ButtonInput, DropdownButton, MenuItem} from 'react-bootstrap'
 import Select from 'react-select';
 import RestHandler from '../../../util/RestHandler'
 var _debounce = require('lodash/debounce');
@@ -31,7 +31,8 @@ class DashboardNewUser extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
+    console.log(this.refs);
+    console.log(this.refs.ispublic.refs.input.checked);
     var name = this.refs.name.getValue();
     var githubUsername = this.refs.githubUsername.getValue();
     var group = this.state.group.id;
@@ -39,7 +40,9 @@ class DashboardNewUser extends React.Component {
       user: {
         githubid: this.state.githubInfo.id,
         handle: githubUsername,
-        name: name
+        name: name,
+        admin: this.refs.isadmin.refs.input.checked === true ? 1 : 0,
+        public: this.refs.ispublic.refs.input.checked === true ? 1 : 0
       },
       groups: this.state.selectedGroups.split(',')
     };
@@ -100,6 +103,7 @@ class DashboardNewUser extends React.Component {
       <div>
         <h3 className="dashboard-title">Add new user</h3>
         <form onSubmit={this.handleSubmit.bind(this)}>
+
           <Input type="text" label="Full Name" placeholder="Enter name"
             ref="name" />
           <Input
@@ -121,7 +125,29 @@ class DashboardNewUser extends React.Component {
             valueKey="idString"
             options={this.state.groups}
             onChange={this.handleGroupSelect.bind(this)} />
-            <br />
+            <div className="checkboxGroup">
+              <Input
+                id="ispubliccheck"
+                className="checkbox"
+                type="checkbox"
+                ref="ispublic"
+              />
+              <label htmlFor="ispubliccheck" className="ispublictext">
+              Make this user publicly visible?
+
+              </label>
+              <Input
+                id="isadmincheck"
+                className="checkbox"
+                type="checkbox"
+                ref="isadmin"
+              />
+              <label htmlFor="isadmincheck" className="isadmintext">
+              Make this user an admin?
+
+              </label>
+            </div>
+          <br />
           <ButtonInput
             className="float-left add-new-user-button"
             bsStyle="primary"
