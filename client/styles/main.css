@@ -322,8 +322,18 @@ textarea.form-control {
 
 
 
+/*
+  Components
+*/
+/* keep react-select menu on top */
+.Select
+.Select-menu-outer {
+  z-index: 10;
+}
 
-
+.profile-groups {
+  margin-top: 10px;
+}
 
 
 

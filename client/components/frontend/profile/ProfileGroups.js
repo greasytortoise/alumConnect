@@ -1,7 +1,8 @@
 import React from 'react'
+import {Link} from 'react-router';
 import { Input, Button } from 'react-bootstrap';
 import Select from 'react-select';
-import RestHandler from '../../../util/RestHandler'
+import RestHandler from '../../../util/RestHandler';
 var _map = require('lodash/map');
 
 
@@ -36,8 +37,8 @@ class ProfileGroups extends React.Component {
 	}
 
   displayUsersGroups() {
-    return _map(this.props.selectedGroups, (key, value) => {
-      return(<div>{key}, {value}</div>)
+    return _map(this.props.selectedGroups, (groupName, groupId) => {
+      return(<Link to={`/`} key={groupId}>{groupName} </Link>)
     });
   }
 
@@ -48,8 +49,7 @@ class ProfileGroups extends React.Component {
 
     if(!editing && selectedGroups) {
       return (
-        <div>{this.displayUsersGroups()}</div>
-
+        <h3>Groups: {this.displayUsersGroups()}</h3>
       );
     }
     else if(editing) {
@@ -71,7 +71,7 @@ class ProfileGroups extends React.Component {
   render() {
     console.log(this.props.groups);
     return (
-      this.renderGroups()
+      <div className="profile-groups">{this.renderGroups()}</div>
     )
   }
 }
