@@ -34,6 +34,9 @@ class ProfileGroups extends React.Component {
 
   handleGroupSelect (selectedGroups) {
 		this.setState({ selectedGroups });
+    this.props.stageProfileEdits((editedObject) => {
+      editedObject.groups = selectedGroups.split(',');
+    });
 	}
 
   displayUsersGroups() {
@@ -51,7 +54,6 @@ class ProfileGroups extends React.Component {
   }
 
   renderGroups() {
-    console.log('groups state: ', this.state.selectedGroups, typeof this.state.selectedGroups );
     var editing = this.props.editing;
     var selectedGroups = this.state.selectedGroups;
 
@@ -77,7 +79,6 @@ class ProfileGroups extends React.Component {
   }
 
   render() {
-    console.log(this.props.groups);
     return (
       <div className="profile-groups">{this.renderGroups()}</div>
     )
