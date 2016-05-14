@@ -123,9 +123,9 @@ class SelectImageModal extends React.Component {
   // }
 
   onDrop(files) {
-     console.log('Received files: ', files);
-     var imageUrl = this.props.imageUrl;
-     var file = files[0];
+    console.log('Received files: ', files);
+    var imageUrl = this.props.imageUrl;
+    var file = files[0];
 
     //  var reader = new FileReader();
     //  reader.onload = function(evt) {
@@ -151,8 +151,6 @@ class SelectImageModal extends React.Component {
       }
       this.clearForm();
     });
-
-
    }
 
   render() {

@@ -1,5 +1,9 @@
 import React from 'react'
+import {Link} from 'react-router';
 import { Input, Button } from 'react-bootstrap';
+import Select from 'react-select';
+import RestHandler from '../../../util/RestHandler';
+var _map = require('lodash/map');
 
 
 class ProfileGroups extends React.Component {
@@ -8,25 +12,66 @@ class ProfileGroups extends React.Component {
     super(props);
     this.state = {
       groups: [],
+      selectedGroups: [],
     };
   }
 
   componentDidMount() {
-    this.setState({groups: this.props.groups})
+    var selectedGroups  = _map(this.props.selectedGroups, (key, val) => val).join(',');
+    this.setState({selectedGroups: selectedGroups})
+    this.handleGroupSelect(selectedGroups);
+    this.getAvailableGroups();
   }
 
-  renderProfileSite() {
-    var editing = this.props.editing;
-    var groups = this.state.groups;
+  getAvailableGroups() {
+    RestHandler.Get('/db/groups', (err, res) => {
+      //res.body.map is a Workaround to get the Select valueKey working.
+      //it ads a property with a stringified id to res.body.
+      res.body.map(obj => obj['idString'] = obj['id'].toString())
+      this.setState({groups: res.body});
+    });
+  }
 
-    if(!editing && groups) {
+  handleGroupSelect (selectedGroups) {
+		this.setState({ selectedGroups });
+    this.props.stageProfileEdits((editedObject) => {
+      editedObject.groups = selectedGroups.split(',');
+    });
+	}
+
+  displayUsersGroups() {
+    return _map(this.props.selectedGroups, (groupName, groupId) => {
+      var groupObj = {id: groupId, group_name: groupName};
+      return(
+        <Link to={`/`}
+        key={groupId}
+        onClick={function() {
+          localStorage.setItem('selectedGroup', JSON.stringify(groupObj));
+        }}>
+        {groupName}
+      </Link>)
+    });
+  }
+
+  renderGroups() {
+    var editing = this.props.editing;
+    var selectedGroups = this.state.selectedGroups;
+
+    if(!editing && selectedGroups) {
       return (
-        <div>not editing</div>
+        <h3>Groups: {this.displayUsersGroups()}</h3>
       );
     }
     else if(editing) {
       return (
-        <div>editing</div>
+        <Select
+          multi
+          simpleValue
+          disabled={this.state.disabled} value={this.state.selectedGroups} placeholder="Select groups"
+          labelKey="group_name"
+          valueKey="idString"
+          options={this.state.groups}
+          onChange={this.handleGroupSelect.bind(this)} />
       );
     } else {
       return(<div>else</div>)
@@ -34,9 +79,8 @@ class ProfileGroups extends React.Component {
   }
 
   render() {
-    console.log(this.props.groups);
     return (
-      this.renderProfileSite()
+      <div className="profile-groups">{this.renderGroups()}</div>
     )
   }
 }
