@@ -8,7 +8,8 @@ class Groups extends React.Component {
     super(props);
     this.state = {
       groups: [],
-      error: false
+      error: false,
+      isSaving: false
     }
   }
 
@@ -29,20 +30,34 @@ class Groups extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    this.setState({isSaving: true});
     var group = this.refs.group.getValue();
     var groupInfo = {
       group_name: group
     };
 
     if(group === '') {
-      this.setState({error: true});
+      this.setState({
+        error: true,
+        isSaving: false
+      });
     } else {
       RestHandler.Post('/db/groups', groupInfo, (err, res) => {
-        if (err) {return err;}
-        this.setState({groups: this.state.groups.concat(res.body)})
+        if (err) {
+          console.error(err);
+          this.setState({
+            error: true,
+            isSaving: false
+          });
+        } else if(res.status === 201) {
+          console.log('RESponse: ', res);
+          setTimeout(() => {
+            this.setState({isSaving: false});
+            this.setState({groups: this.state.groups.concat(res.body)});
+            this.clearForm();
+          }, 200);
+        }
       });
-
-      this.clearForm();
     }
   }
 
@@ -54,6 +69,8 @@ class Groups extends React.Component {
   }
 
   render() {
+    var isSaving = this.state.isSaving;
+
     return (
       <div>
         <h3 className="dashboard-title">Groups</h3>
@@ -64,8 +81,12 @@ class Groups extends React.Component {
           <Input type="text" label="Add Group"
             placeholder="Enter group name" ref="group" />
 
-          <ButtonInput bsStyle="primary" type="submit" value="Submit"/>
-        </form>
+            <ButtonInput
+              bsStyle="primary"
+              disabled={isSaving}
+              type="submit"
+              value={isSaving ? `Saving...` : 'Submit'} />
+          </form>
         {this.state.error && (
           <p>Enter a Group Name.</p>
         )}

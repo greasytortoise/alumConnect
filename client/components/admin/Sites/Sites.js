@@ -43,7 +43,7 @@ class Sites extends React.Component {
       this.setState({
         error: true,
         isSaving: false
-      })
+      });
 
     } else {
       RestHandler.Post('/db/sites', siteInfo, (err, res) => {
@@ -52,7 +52,7 @@ class Sites extends React.Component {
           this.setState({
             error: true,
             isSaving: false
-          })
+          });
         } else if(res.status === 201) {
           console.log('RESponse: ', res);
           setTimeout(() => {
@@ -60,7 +60,6 @@ class Sites extends React.Component {
             this.setState({sites: this.state.sites.concat(res.body)});
             this.clearForm();
           }, 200);
-
         }
       });
 
