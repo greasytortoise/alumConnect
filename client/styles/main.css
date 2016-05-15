@@ -335,7 +335,27 @@ textarea.form-control {
   margin-top: 10px;
 }
 
+.dropzone {
+  margin: 15px 0px;
+  width: 100%;
+  height: 100%;
+  border: 2px dashed #666;
+  text-align: center;
+  padding:50px;
+  color:#777;
+  font-size: 18px;
+  cursor: pointer;
+}
 
+.dropzone-active {
+  border-style: solid;
+  background-color: #eee;
+}
+/*
+rejectStyle = {
+  borderStyle: 'solid',
+  backgroundColor: '#ffdddd'
+};*/
 
 
 

@@ -35,7 +35,7 @@ module.exports = function(app, express) {
       .jpeg()
       .toFile(fileName, function(err) {
         if(err) {
-          console.log("ERR", err);
+          console.log("ERR", err);          
         }
         res.status(204).end();
       });

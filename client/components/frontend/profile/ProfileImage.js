@@ -102,6 +102,9 @@ class SelectImageModal extends React.Component {
     RestHandler.Post('user/uploadimage', data, (err, res) => {
       if(err) {
         console.log(err)
+      } else {
+        console.log(res);
+        this.props.onHide()
       }
     });
    }
@@ -112,47 +115,20 @@ class SelectImageModal extends React.Component {
       <Modal {...this.props} aria-labelledby="contained-modal-title-md">
 
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-md">aMofffffdal heading</Modal.Title>
+          <Modal.Title id="contained-modal-title-md">Change profile image</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h4>Wraasdfpped Text</h4>
           <div>
-
-
-            <Dropzone disablePreview onDrop={this.onDrop.bind(this)}>
-              <div>Try dropping some files here, or click to select files to upload.</div>
+            <Dropzone
+              disablePreview
+              onDrop={this.onDrop.bind(this)}
+              className="dropzone"
+              activeClassName="dropzone-active"
+              >
+              <div>Drop an image file here or click to select one</div>
             </Dropzone>
-
-
-            <form
-              name="secret"
-              encType="multipart/form-data"
-              method="POST"
-              onSubmit={this.handleSubmit}
-              action="/user/uploadimage" >
-              <input
-                type="hidden"
-                name="title"
-                ref="imageUrl"
-                value={this.props.imageUrl}
-                placeholder="title"/>
-              <input
-                type="file"
-                onChange={this.handleFile}
-                ref="profilePic"
-                id="profilePic"
-                name="upl"/>
-              <br/>
-              <input type="submit" value="submit"/>
-              <ButtonInput
-                value="Submit"
-                onClick = {this.doSomething.bind(this)} />
-            </form>
           </div>
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={this.props.onHide}>Close</Button>
-        </Modal.Footer>
       </Modal>
     );
   }
