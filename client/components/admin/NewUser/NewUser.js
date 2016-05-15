@@ -11,7 +11,8 @@ class DashboardNewUser extends React.Component {
       groups: [],
       group: {},
       selectedGroups: [],
-      githubInfo: undefined
+      githubInfo: undefined,
+      isSaving: false
     };
     this.delayGithubTillTypingEnds = _debounce(this.handleCheckGithub,500);
   }
@@ -31,6 +32,7 @@ class DashboardNewUser extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    this.setState({isSaving: true});
     var name = this.refs.name.getValue();
     var githubUsername = this.refs.githubUsername.getValue();
     var group = this.state.group.id;
@@ -47,9 +49,17 @@ class DashboardNewUser extends React.Component {
     console.log(data);
     RestHandler.Post('db/users', data, (err, res) => {
       if(err) {
-        console.log(err)
+        console.error(err);
+        this.setState({
+          isSaving: false
+        });
+      } else if(res.status === 201) {
+        console.log('RESponse: ', res);
+        setTimeout(() => {
+          this.setState({isSaving: false});
+          this.clearForm();
+        }, 200);
       }
-      this.clearForm();
     });
   }
 
@@ -79,6 +89,8 @@ class DashboardNewUser extends React.Component {
 	}
 
   render() {
+    var isSaving = this.state.isSaving;
+
     var groupName = this.state.group.group_name || 'Select Group';
     var foundGithubUserMessage
     if(this.state.githubInfo === undefined) {
@@ -150,9 +162,9 @@ class DashboardNewUser extends React.Component {
           <ButtonInput
             className="float-left add-new-user-button"
             bsStyle="primary"
+            disabled={disableButton === true || isSaving}
             type="submit"
-            value="Submit"
-            disabled={disableButton}/>
+            value={isSaving ? `Saving...` : 'Submit'} />
           {foundGithubUserMessage}
         </form>
       </div>
