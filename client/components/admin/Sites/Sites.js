@@ -8,7 +8,8 @@ class Sites extends React.Component {
     super(props);
     this.state = {
       sites: [],
-      error: false
+      error: false,
+      isSaving: false
     }
   }
 
@@ -29,6 +30,7 @@ class Sites extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    this.setState({isSaving: true});
     var site = this.refs.site.getValue();
     var url = this.refs.url.getValue();
 
@@ -38,18 +40,30 @@ class Sites extends React.Component {
     };
 
     if (site === '' || url === '') {
-      this.setState({error: true})
+      this.setState({
+        error: true,
+        isSaving: false
+      })
+
     } else {
       RestHandler.Post('/db/sites', siteInfo, (err, res) => {
         if (err) {
           console.error(err);
-          this.setState({error: true});
+          this.setState({
+            error: true,
+            isSaving: false
+          })
         } else if(res.status === 201) {
-          this.setState({sites: this.state.sites.concat(res.body)});
+          console.log('RESponse: ', res);
+          setTimeout(() => {
+            this.setState({isSaving: false});
+            this.setState({sites: this.state.sites.concat(res.body)});
+            this.clearForm();
+          }, 200);
+
         }
       });
 
-      this.clearForm();
     }
 
 
@@ -63,6 +77,8 @@ class Sites extends React.Component {
   }
 
   render() {
+    var isSaving = this.state.isSaving;
+
     return (
       <div>
         <h3 className="dashboard-title">Sites</h3>
@@ -76,11 +92,15 @@ class Sites extends React.Component {
           <Input type="text"  ref="url"
             placeholder="Enter site url  example: https://www.github.com/" />
 
-          <ButtonInput bsStyle="primary" type="submit" value="Submit"/>
+          <ButtonInput
+            bsStyle="primary"
+            disabled={isSaving}
+            type="submit"
+            value={isSaving ? `Saving...` : 'Submit'} />
         </form>
 
         {this.state.error && (
-          <p>Enter a Site Name and URL.</p>
+          <span>Enter a unique Site Name and URL.</span>
         )}
 
       </div>
