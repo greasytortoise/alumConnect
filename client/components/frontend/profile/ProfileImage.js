@@ -80,9 +80,6 @@ class ProfileImage extends React.Component {
 }
 
 
-
-
-
 class SelectImageModal extends React.Component {
 
   constructor(props) {
@@ -93,63 +90,19 @@ class SelectImageModal extends React.Component {
   }
 
   doSomething(data) {
-    // debugger;
     var profilePic = this.refs.profilePic.getValue();
-    console.log(profilePic);
-
-    // RestHandler.Post(url, data, (err, res) => {
-    //   console.log(data);
-    //   if (err) {return err;}
-    //   callback(res);
-    // });
   };
-  //
-  // handleSubmit: function(e) {
-  //   e.preventDefault();
-  // }
-
-  // handleFile: function(e) {
-  //   var self = this;
-  //   var reader = new FileReader();
-  //   var file = e.target.files[0];
-  //   debugger;
-  //   reader.onload = function(upload) {
-  //     self.setState({
-  //       data_uri: upload.target.result,
-  //     });
-  //   }
-  //
-  //   reader.readAsDataURL(file);
-  // }
 
   onDrop(files) {
-    console.log('Received files: ', files);
-    var imageUrl = this.props.imageUrl;
-    var file = files[0];
-
-    //  var reader = new FileReader();
-    //  reader.onload = function(evt) {
-    //   //  evt.target.result
-    //    debugger;
-     //
-    //    var postData = {file: evt.target.result, title: imageUrl}
-    //    RestHandler.Post('user/uploadimage', postData, (err, res) => {
-    //      if(err) {
-    //        debugger;
-    //        console.log(err)
-    //      }
-    //      this.clearForm();
-    //    });
-    //   };
-     //
-    //  reader.readAsArrayBuffer(file);
-
-    var postData = {file: file, title: this.props.imageUrl}
-    RestHandler.Post('user/uploadimage', postData, (err, res) => {
+    const fileName = this.props.imageUrl;
+    const file = files[0];
+    const data = new FormData()
+    data.append('fileName', fileName);
+    data.append('photo', file);
+    RestHandler.Post('user/uploadimage', data, (err, res) => {
       if(err) {
         console.log(err)
       }
-      this.clearForm();
     });
    }
 
