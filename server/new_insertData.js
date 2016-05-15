@@ -50,7 +50,7 @@ Promise.each(groups, function(group) {
             email: student.email,
             image: student.image,
             url_hash: 'n/a',
-            public: 0,
+            public: 1,
             permission: 0
           })
           .then(function(user) {

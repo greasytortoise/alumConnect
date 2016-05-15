@@ -454,7 +454,10 @@ module.exports = {
                     name: user.get('name'),
                     email: data.user.email,
                     image: data.user.image,
-                    url_hash: data.user.url
+                    url_hash: data.user.url,
+                    Group_id: group.id,
+                    permission: data.user.permission === 0 ? 0 : user.get('permission'),
+                    public: data.user.public === 0 ? 0 : user.get('public'),
                   })
                   .then(function(user) {
                     // for each site in the array

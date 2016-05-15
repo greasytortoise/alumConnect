@@ -158,20 +158,20 @@ class Profile extends React.Component {
     });
   }
 
-  getVisibleAndDeleteLink(id) {
+  getAdminEdits() {
     return (
       <div>
         <InputGroup ref="permissionselect" controlId="formControlsSelect">
           <ControlLabel>User Permissions?</ControlLabel>
-          <FormControl ref="permgroup" componentClass="select" placeholder="select"  >
+          <FormControl onChange={this.setVisibilityChange.bind(this)} ref="permgroup" componentClass="select" placeholder="select"  >
             <option ref="notselected" value="...">...</option>
-            <option ref="selectAdmin" value="Yes">Admin</option>
-            <option ref="selectuser" value="No">Standard</option>
+            <option ref="selectAdmin" value="admin">Admin</option>
+            <option ref="selectuser" value="user">Standard</option>
           </FormControl>
         </InputGroup>
         <InputGroup ref="visselect" controlId="formControlsSelect">
           <ControlLabel>User publicly visible?</ControlLabel>
-          <FormControl ref="visgroup" componentClass="select" placeholder="select"  >
+          <FormControl onChange={this.setPermChange.bind(this)} ref="visgroup" componentClass="select" placeholder="select"  >
             <option ref="notselected" value="...">...</option>
             <option ref="selectyes" value="Yes">Yes</option>
             <option ref="selectno" value="No">No</option>
@@ -187,13 +187,25 @@ class Profile extends React.Component {
   }
   
   setVisibilityChange(e) {
-    console.log('We gonna party like it\'s 1999!');
-    console.log(this.refs);
-    console.log(this.state);
-    console.log(e.target);
+    if (e.target.value === 'Yes') {
+      this.profileEdits.public = 1;
+    } else if (e.target.value === 'No') {
+      this.profileEdits.public = 0;
+    }
+  }
+
+  setPermChange(e) {
+    if (e.target.value === 'admin') {
+      this.profileEdits.permission = 1;
+    } else if (e.target.value === 'user') {
+      this.profileEdits.permission = 0;
+    }
   }
 
   setDeleteState(e) {
+    console.log('state', this.state)
+    console.log('refs', this.refs)
+    console.log('props', this.props)
     e.preventDefault();
     this.setState({
       showDelete: true,
@@ -238,8 +250,8 @@ class Profile extends React.Component {
 
   render() {
     var adminView;
-    if (auth.getCookie('ac') === '1') {
-      adminView = this.getVisibleAndDeleteLink();
+    if (auth.getCookie('ac') === '1' && this.state.editing === 1) {
+      adminView = this.getAdminEdits();
     }
     var name, image, groups, id = ''
     if (this.state.profileData.user) {
@@ -251,66 +263,75 @@ class Profile extends React.Component {
       profileSidebar = <ProfileSidebar groups={groups} />;
     }
 
-    return (
-      <Row>
-        <Col xs={12} sm={9} xl={10} className='float-right'>
-          <div className='section profile-main'>
-            <Modal
-              show={this.state.showDelete}
-              onHide={this.closePopup.bind(this)}
-              container={this}
-              aria-labelledby="contained-modal-title"
-            >
-              <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title">Delete User</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                Are you sure you want to delete this user?
-              </Modal.Body>
-              <Modal.Footer>
-                <Button onClick={this.closePopup.bind(this)}>Cancel</Button>
-                <Button bsStyle="danger" onClick={this.deleteUser.bind(this)}>Delete</Button>
-              </Modal.Footer>
-            </Modal>
-            <Row>
-              <Col xs={12} sm={5} md={4}>
-                <ProfileImage
-                  src={image}
-                  editing={this.state.editing} />
-              </Col>
-              <Col xs={12} sm={7} md={8}>
-                <ProfileEditButton
-                  profilesUserId = {id}
-                  editing = {this.state.editing}
-                  profileEditButtonTapped = {this.profileEditButtonTapped.bind(this)}
-                  profileSaveButtonTapped = {this.profileSaveButtonTapped.bind(this)} />
-                <h2>{name}</h2>
-                {this.renderProfileGroups()}
+    if (auth.getCookie('ac') === '1' || this.state.profileData.user.public === 1) {
 
-                <ul>
-                  {this.renderProfileSites()}
-                  {adminView}
-                </ul>
-              </Col>
-            </Row>
-          </div>
-          <div className = 'section profile-bio'>
-            {this.renderProfileFields()}
-            <ProfileEditButton
-              profilesUserId = {id}
-              editing = {this.state.editing}
-              hideEditButton = {true}
-              profileEditButtonTapped = {this.profileEditButtonTapped.bind(this)}
-              profileSaveButtonTapped = {this.profileSaveButtonTapped.bind(this)} />
-          </div>
-        </Col>
+      return (
+        <Row>
+          <Col xs={12} sm={9} xl={10} className='float-right'>
+            <div className='section profile-main'>
+              <Modal
+                show={this.state.showDelete}
+                onHide={this.closePopup.bind(this)}
+                container={this}
+                aria-labelledby="contained-modal-title"
+              >
+                <Modal.Header closeButton>
+                  <Modal.Title id="contained-modal-title">Delete User</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  Are you sure you want to delete this user?
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button onClick={this.closePopup.bind(this)}>Cancel</Button>
+                  <Button bsStyle="danger" onClick={this.deleteUser.bind(this)}>Delete</Button>
+                </Modal.Footer>
+              </Modal>
+              <Row>
+                <Col xs={12} sm={5} md={4}>
+                  <ProfileImage
+                    src={image}
+                    editing={this.state.editing} />
+                </Col>
+                <Col xs={12} sm={7} md={8}>
+                  <ProfileEditButton
+                    profilesUserId = {id}
+                    editing = {this.state.editing}
+                    profileEditButtonTapped = {this.profileEditButtonTapped.bind(this)}
+                    profileSaveButtonTapped = {this.profileSaveButtonTapped.bind(this)} />
+                  <h2>{name}</h2>
+                  {this.renderProfileGroups()}
 
-        <Col xs={12} sm={3} xl={2}>
-          {profileSidebar}
-        </Col>
-      </Row>
+                  <ul>
+                    {this.renderProfileSites()}
+                    {adminView}
+                  </ul>
+                </Col>
+              </Row>
+            </div>
+            <div className = 'section profile-bio'>
+              {this.renderProfileFields()}
+              <ProfileEditButton
+                profilesUserId = {id}
+                editing = {this.state.editing}
+                hideEditButton = {true}
+                profileEditButtonTapped = {this.profileEditButtonTapped.bind(this)}
+                profileSaveButtonTapped = {this.profileSaveButtonTapped.bind(this)} />
+            </div>
+          </Col>
 
-    );
+          <Col xs={12} sm={3} xl={2}>
+            {profileSidebar}
+          </Col>
+        </Row>
+
+      );
+    } else {
+      return (
+        <div>
+        Sorry, this user's profile is not publicly visible
+        </div>
+      )
+    }
   }
 }
 
