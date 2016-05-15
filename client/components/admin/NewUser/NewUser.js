@@ -129,6 +129,7 @@ class DashboardNewUser extends React.Component {
                 className="checkbox"
                 type="checkbox"
                 ref="ispublic"
+                defaultChecked
               />
               <label htmlFor="ispubliccheck" className="ispublictext">
               Make this user publicly visible?

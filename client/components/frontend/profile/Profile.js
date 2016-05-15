@@ -3,11 +3,13 @@ import ProfileSidebar from './ProfileSidebar'
 import ProfileImage from './ProfileImage'
 import ProfileField from './ProfileField'
 import ProfileSite from './ProfileSite'
+import request from 'superagent'
 import ProfileGroups from './ProfileGroups'
 import ProfileEditButton from './ProfileEditButton'
-
+import auth from '../../../util/authHelpers.js'
 import RestHandler from '../../../util/RestHandler'
-import { Button, Row, Col, Image} from 'react-bootstrap';
+import {findDOMNode} from 'react-dom'
+import { InputGroup, ControlLabel, FormControl, Radio, Select, Button, Row, Col, Image, Modal} from 'react-bootstrap';
 var _map = require('lodash/map');
 var _find = require('lodash/find');
 var _clone = require('lodash/clone')
@@ -18,7 +20,8 @@ class Profile extends React.Component {
     super (props);
     this.state = {
       profileData: {},
-      editing: 0
+      editing: 0,
+      showDelete: false,
     };
 
     //if profile is edited / saved. sites and userInfo into will
@@ -42,7 +45,7 @@ class Profile extends React.Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.getUserProfile(this.props.params.user);
   }
 
@@ -121,7 +124,7 @@ class Profile extends React.Component {
     }
   }
 
-
+  
 
   //In saveUserProfile, the api accepts post requests in array format for
   //data.userInfo and data.sites. I set them up as an object initially because
@@ -150,12 +153,78 @@ class Profile extends React.Component {
       this.profileEdits = {
         user: this.profileEdits.user,
         sites: {},
-        userInfo:{}
-      }
+        userInfo: {},
+      };
     });
   }
 
+  getVisibleAndDeleteLink(id) {
+    return (
+      <div>
+        <InputGroup ref="permissionselect" controlId="formControlsSelect">
+          <ControlLabel>User Permissions?</ControlLabel>
+          <FormControl ref="permgroup" componentClass="select" placeholder="select"  >
+            <option ref="notselected" value="...">...</option>
+            <option ref="selectAdmin" value="Yes">Admin</option>
+            <option ref="selectuser" value="No">Standard</option>
+          </FormControl>
+        </InputGroup>
+        <InputGroup ref="visselect" controlId="formControlsSelect">
+          <ControlLabel>User publicly visible?</ControlLabel>
+          <FormControl ref="visgroup" componentClass="select" placeholder="select"  >
+            <option ref="notselected" value="...">...</option>
+            <option ref="selectyes" value="Yes">Yes</option>
+            <option ref="selectno" value="No">No</option>
+          </FormControl>
+        </InputGroup>
+        <Row>
+          <ControlLabel>Delete user</ControlLabel>
+        </Row>
+        <Button onClick={this.setDeleteState.bind(this)} bsStyle="danger">Delete</Button>
 
+      </div>
+    );
+  }
+  
+  setVisibilityChange(e) {
+    console.log('We gonna party like it\'s 1999!');
+    console.log(this.refs);
+    console.log(this.state);
+    console.log(e.target);
+  }
+
+  setDeleteState(e) {
+    e.preventDefault();
+    this.setState({
+      showDelete: true,
+    });
+  }
+
+  resetDeleteState() {
+    this.setState({
+      showDelete: false,
+    });
+  }
+
+  deleteUser(e) {
+    var that = this;
+    e.preventDefault();
+    request
+      .delete('/dashboard/db/users/user/' + that.state.profileData.user.id)
+      .end(function(err, res) {
+        if(err) {
+          console.log(err);
+        } else {
+          console.log('User deleted');
+          that.resetDeleteState();
+          window.location.href = '/dashboard';
+        }
+      });
+  }
+
+  closePopup() {
+    this.setState({ showDelete: false });
+  }
 
   // stageProfileEdits is passed into child components where the value can be
   // edited and saved. It updateds the profileEdits property, which will be
@@ -168,6 +237,10 @@ class Profile extends React.Component {
   }
 
   render() {
+    var adminView;
+    if (auth.getCookie('ac') === '1') {
+      adminView = this.getVisibleAndDeleteLink();
+    }
     var name, image, groups, id = ''
     if (this.state.profileData.user) {
       var {name, image, id} = this.state.profileData.user
@@ -182,6 +255,23 @@ class Profile extends React.Component {
       <Row>
         <Col xs={12} sm={9} xl={10} className='float-right'>
           <div className='section profile-main'>
+            <Modal
+              show={this.state.showDelete}
+              onHide={this.closePopup.bind(this)}
+              container={this}
+              aria-labelledby="contained-modal-title"
+            >
+              <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title">Delete User</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                Are you sure you want to delete this user?
+              </Modal.Body>
+              <Modal.Footer>
+                <Button onClick={this.closePopup.bind(this)}>Cancel</Button>
+                <Button bsStyle="danger" onClick={this.deleteUser.bind(this)}>Delete</Button>
+              </Modal.Footer>
+            </Modal>
             <Row>
               <Col xs={12} sm={5} md={4}>
                 <ProfileImage
@@ -199,6 +289,7 @@ class Profile extends React.Component {
 
                 <ul>
                   {this.renderProfileSites()}
+                  {adminView}
                 </ul>
               </Col>
             </Row>

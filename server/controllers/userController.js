@@ -379,7 +379,8 @@ module.exports = {
                     email: user.get('email'),
                     group_id: groups.id,
                     group: groups.get('group_name'),
-                    image: user.get('image')
+                    image: user.get('image'),
+                    public: user.get('public'),
                   },
                   sites: userSites.map(function(userSite) {
                     var site = userSite.related('sites');

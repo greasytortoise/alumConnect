@@ -40,7 +40,6 @@ class DashboardUsers extends React.Component {
       for (var i = 0; i < users.length; i++) {
         users[i].Delete = this.getDeleteLink(users[i].id, users[i].name);
         users[i].Profile = this.getProfileLink(users[i].id);
-        users[i].Public = this.getVisibleLink(users[i].id, users[i].public);
       }
       this.setState({ users: users });
 
@@ -67,20 +66,6 @@ class DashboardUsers extends React.Component {
     );
   }
   
-  getVisibleLink(id, state) {
-    console.log(state);
-    const isVis = state === 1 ? 'Yes' : 'No';
-    return (
-    <div className="toggleVis" data={id}>
-      askdasj
-    </div> 
-    );
-  }
-  
-  submitVisibilityChange(id) {
-    console.log('We gonna party like it\'s 1999!');
-
-  };
   setDeleteState(e) {
     var data = JSON.parse($(e.target).attr('data'));
     e.preventDefault();
@@ -157,7 +142,7 @@ class DashboardUsers extends React.Component {
           tableClassName='table'
           useGriddleStyles={false}
           resultsPerPage={25}
-          columns={["id", "name", "email", "Profile", "Public", "Delete"]}/>
+          columns={["id", "name", "email", "Profile", "Delete"]}/>
       </div>
     );
   }
