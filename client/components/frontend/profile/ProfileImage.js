@@ -129,9 +129,6 @@ class SelectImageModal extends React.Component {
             </Dropzone>
           </div>
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={this.props.onHide}>Close</Button>
-        </Modal.Footer>
       </Modal>
     );
   }

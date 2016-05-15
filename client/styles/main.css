@@ -336,6 +336,7 @@ textarea.form-control {
 }
 
 .dropzone {
+  margin: 15px 0px;
   width: 100%;
   height: 100%;
   border: 2px dashed #666;
