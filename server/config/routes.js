@@ -28,27 +28,17 @@ module.exports = function(app, express) {
 
   app.post('/user/uploadimage', function(req, res) {
 
-    console.log('req.body', req.body);
-
-    var fileName = 'client' + req.body.title;
-    console.log(fileName);
-
-    var file = req.body.file.preview;
-    var buffer = new Buffer(file, "binary");
-    console.log('Buffer: ', buffer);
-
-    sharp(buffer)
+    var fileName = 'client' + req.body.fileName;
+    sharp(req.file.buffer)
       .resize(800, 530)
       .crop(sharp.strategy.entropy)
       .jpeg()
       .toFile(fileName, function(err) {
-        console.log("ERR", err);
-        // output.jpg is a 300 pixels wide and 200 pixels high image
-        // containing a scaled and cropped version of input.jpg
+        if(err) {
+          console.log("ERR", err);
+        }
         res.status(204).end();
-
       });
-
   });
 
   app.get('*', function (request, response) {

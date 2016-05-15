@@ -9,16 +9,6 @@ const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'client/assets');
-  },
-  filename: function (req, file, cb) {
-    console.dir(file);
-    // console.dir(file);
-    cb(null, file.originalname);
-  },
-});
 var memstorage = multer.memoryStorage();
 var upload = multer({
   storage: memstorage,
@@ -59,8 +49,10 @@ module.exports = function(app, express) {
 
   app.use(express.static(__dirname + '/../../client/'));
 
-  app.use(upload.single('upl'));
+  // app.use(upload.single('upl'));
+  app.use(upload.single('photo'));
   app.use(function(err, req, res, next) {
+    console.log('content length: ', req.headers['content-length']);
     if (err.code = 'LIMIT_FILE_SIZE') {
       console.log('image upload limited to 500kb');
     }
@@ -113,7 +105,7 @@ module.exports = function(app, express) {
         } else {
           done(null, user);
         }
-      });    
+      });
   });
 
 };
