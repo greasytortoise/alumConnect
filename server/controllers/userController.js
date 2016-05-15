@@ -276,6 +276,7 @@ module.exports = {
             handle: user.get('handle'),
             githubid: user.get('githubid'),
             name: user.get('name'),
+            public: user.get('public'),
             url: user.get('url_hash'),
             image: user.get('image'),
             email: user.get('email'),
@@ -325,7 +326,7 @@ module.exports = {
         email: data.user.email,
         image: data.user.image,
         // url_hash: data.user.url,
-        public: data.user.public || 1,
+        public: 1,
         permission: data.user.admin || 0,
       })
       .then(function(user) {
@@ -542,4 +543,16 @@ module.exports = {
         res.status(201).send('deleted!');
       });
   },
-}
+
+  toggleVisible: (req, res) => {
+    const id = req.body.id;
+    User
+      .where({ id: id })
+      .then((user) => {
+        const newVis = user.get('public') === 1 ? 0 : 1;
+        user.set('public', newVis);
+        user.save();
+        res.status(200).send('Updated');
+      });
+  },
+};

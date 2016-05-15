@@ -3,7 +3,7 @@ import Griddle from 'griddle-react';
 import RestHandler from '../../util/RestHandler';
 import $ from 'jquery';
 import request from 'superagent';
-import { Modal, Button } from 'react-bootstrap';
+import { Select, Input, Modal, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 
 var rowMetadata = {
@@ -23,6 +23,7 @@ class DashboardUsers extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
+      visOpts: ['Yes', 'No'],
       users: [],
       key: 666,
       showDelete: false,
@@ -39,6 +40,7 @@ class DashboardUsers extends React.Component {
       for (var i = 0; i < users.length; i++) {
         users[i].Delete = this.getDeleteLink(users[i].id, users[i].name);
         users[i].Profile = this.getProfileLink(users[i].id);
+        users[i].Public = this.getVisibleLink(users[i].id, users[i].public);
       }
       this.setState({ users: users });
 
@@ -49,7 +51,7 @@ class DashboardUsers extends React.Component {
       <div className="userLink"
       >
         <Link to={{ pathname: `/users/${id}` }}>
-          View Profile
+          View/Edit
         </Link>
       </div>
    );
@@ -64,7 +66,21 @@ class DashboardUsers extends React.Component {
       </div>
     );
   }
+  
+  getVisibleLink(id, state) {
+    console.log(state);
+    const isVis = state === 1 ? 'Yes' : 'No';
+    return (
+    <div className="toggleVis" data={id}>
+      askdasj
+    </div> 
+    );
+  }
+  
+  submitVisibilityChange(id) {
+    console.log('We gonna party like it\'s 1999!');
 
+  };
   setDeleteState(e) {
     var data = JSON.parse($(e.target).attr('data'));
     e.preventDefault();
@@ -104,6 +120,7 @@ class DashboardUsers extends React.Component {
         }
       });
   }
+  
 
   closePopup() {
     this.setState({ showDelete: false });
@@ -140,7 +157,7 @@ class DashboardUsers extends React.Component {
           tableClassName='table'
           useGriddleStyles={false}
           resultsPerPage={25}
-          columns={["id", "name", "email", "Profile", "Delete"]}/>
+          columns={["id", "name", "email", "Profile", "Public", "Delete"]}/>
       </div>
     );
   }

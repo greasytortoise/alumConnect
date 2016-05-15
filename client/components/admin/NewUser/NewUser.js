@@ -31,8 +31,6 @@ class DashboardNewUser extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.refs);
-    console.log(this.refs.ispublic.refs.input.checked);
     var name = this.refs.name.getValue();
     var githubUsername = this.refs.githubUsername.getValue();
     var group = this.state.group.id;
