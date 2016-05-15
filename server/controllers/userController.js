@@ -1,3 +1,4 @@
+var db = require('../dbConfig');
 var User = require('../models/user');
 var Users = require('../collections/users');
 
@@ -416,7 +417,7 @@ module.exports = {
   modifyUser2: function(req, res) {
     var id = req.params.id;
     var data = req.body;
-    console.log('from user: ', data);
+    // console.log('from user: ', data);
     // grab user and join groups + userSites + bios
     User
       .where({id: id})
@@ -434,7 +435,7 @@ module.exports = {
               .related('bios')
               .fetch({withRelated: ['bioFields']})
               .then(function(bios) {
-                var group = user.related('groups');
+                var groups = user.related('groups');
 
                 // modify user info
 
@@ -451,8 +452,7 @@ module.exports = {
                     name: user.get('name'),
                     email: data.user.email,
                     image: data.user.image,
-                    url_hash: data.user.url,
-                    Group_id: group.id
+                    url_hash: data.user.url
                   })
                   .then(function(user) {
                     // for each site in the array
@@ -506,6 +506,22 @@ module.exports = {
                             });
                           }
                         });
+                    });
+                  })
+                  .then(function() {
+                    return Promise.each(groups.models, function(group) {
+                      return db.knex('Groups_Users')
+                        .where({
+                          Group_id: group.id,
+                          User_id: id
+                        })
+                        .del()
+                        console.log('aaaaa');
+                    })
+                    .then(function() {
+                      return Promise.each(data.groups, function(group) {
+                        user.groups().attach(group);
+                      });
                     });
                   })
                   .then(function() {
