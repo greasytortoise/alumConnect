@@ -39,19 +39,30 @@ class DashboardUsers extends React.Component {
       var users = res.body;
       for (var i = 0; i < users.length; i++) {
         users[i].Delete = this.getDeleteLink(users[i].id, users[i].name);
-        users[i].Profile = this.getProfileLink(users[i].id);
+        users[i].Name = this.getProfileLink(users[i].id, users[i].name);
+        users[i].Github = this.getGithubLink(users[i].handle);
       }
       this.setState({ users: users });
 
     });
   }
-  getProfileLink(id) {
+  getProfileLink(id, name) {
     return (
       <div className="userLink"
       >
         <Link to={{ pathname: `/users/${id}` }}>
-          View/Edit
+          {name}
         </Link>
+      </div>
+   );
+  }
+  getGithubLink(github) {
+    return (
+      <div className="ghLink"
+      >
+        <a href={`https://www.github.com/${github}`}>
+          {github}
+        </a>
       </div>
    );
   }
@@ -100,7 +111,7 @@ class DashboardUsers extends React.Component {
               break;
             }
           }
-          // that.setState({ key: Math.random() });
+          that.setState({ key: Math.random() });
           that.resetDeleteState();
         }
       });
@@ -142,7 +153,7 @@ class DashboardUsers extends React.Component {
           tableClassName='table'
           useGriddleStyles={false}
           resultsPerPage={25}
-          columns={["id", "name", "email", "Profile", "Delete"]}/>
+          columns={["id", "Name", "email", "Github", "Delete"]}/>
       </div>
     );
   }
