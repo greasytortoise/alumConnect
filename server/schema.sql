@@ -41,6 +41,15 @@ create table Groups_Users ( -- NEW MANY-MANY TABLE
   foreign key(User_id) references Users(id) ON DELETE CASCADE
 );
 
+create table Visible_Groups (
+  id int not null auto_increment,
+  Group_id int not null,
+  Visible_id int not null,
+  primary key(id),
+  foreign key(Group_id) references Groups(id) ON DELETE CASCADE,
+  foreign key(Visible_id) references Groups(id) ON DELETE CASCADE
+);
+
 create table Sites (
   id int not null auto_increment,
   site_name varchar(255),
@@ -86,7 +95,7 @@ values
 insert into Users
   (handle, githubid, name, email, image, url_hash, public, permission)
 values
-  ('mbresnan1701', 15022604, 'DONALD TRUMP', 'admin@admin.com', '/assets/photos/trump.jpg', 'ndas2q', 0, 1);
+  ('your_handle', 'your_id', 'DONALD TRUMP', 'admin@admin.com', '/assets/photos/trump.jpg', 'ndas2q', 0, 1);
 
 insert into Groups_Users -- new addition
   (user_id, group_id)
