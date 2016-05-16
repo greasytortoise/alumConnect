@@ -8,7 +8,7 @@ class ProfileEditButton extends React.Component {
     super(props);
     this.state = {
       loggedInUserId: -1,
-      permission: 1
+      permission: auth.getCookie('ac'),
     }
   }
 
@@ -31,7 +31,7 @@ class ProfileEditButton extends React.Component {
 
 
   generateButtons() {
-    if(this.state.permission === 1 || this.props.profilesUserId === this.state.loggedInUserId) {
+    if(this.state.permission === '1' || this.props.profilesUserId === this.state.loggedInUserId) {
       if(this.props.editing) {
         return (
           <ButtonToolbar>

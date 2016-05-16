@@ -3,7 +3,7 @@ import Griddle from 'griddle-react';
 import RestHandler from '../../util/RestHandler';
 import $ from 'jquery';
 import request from 'superagent';
-import { Modal, Button } from 'react-bootstrap';
+import { Select, Input, Modal, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 
 var rowMetadata = {
@@ -23,6 +23,7 @@ class DashboardUsers extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
+      visOpts: ['Yes', 'No'],
       users: [],
       key: 666,
       showDelete: false,
@@ -49,7 +50,7 @@ class DashboardUsers extends React.Component {
       <div className="userLink"
       >
         <Link to={{ pathname: `/users/${id}` }}>
-          View Profile
+          View/Edit
         </Link>
       </div>
    );
@@ -64,7 +65,7 @@ class DashboardUsers extends React.Component {
       </div>
     );
   }
-
+  
   setDeleteState(e) {
     var data = JSON.parse($(e.target).attr('data'));
     e.preventDefault();
@@ -104,6 +105,7 @@ class DashboardUsers extends React.Component {
         }
       });
   }
+  
 
   closePopup() {
     this.setState({ showDelete: false });

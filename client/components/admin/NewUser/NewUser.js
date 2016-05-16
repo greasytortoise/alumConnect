@@ -31,8 +31,6 @@ class DashboardNewUser extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.refs);
-    console.log(this.refs.ispublic.refs.input.checked);
     var name = this.refs.name.getValue();
     var githubUsername = this.refs.githubUsername.getValue();
     var group = this.state.group.id;
@@ -131,6 +129,7 @@ class DashboardNewUser extends React.Component {
                 className="checkbox"
                 type="checkbox"
                 ref="ispublic"
+                defaultChecked
               />
               <label htmlFor="ispubliccheck" className="ispublictext">
               Make this user publicly visible?

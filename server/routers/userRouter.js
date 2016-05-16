@@ -16,4 +16,7 @@ userRouter.route('/user/:id')
   .post(util.isLoggedIn, userController.modifyUser2)
   .delete(util.isAdmin, userController.deleteUser2);
 
+userRouter.route('/user/visibility')
+  .post(util.isAdmin, userController.toggleVisible);
+
 module.exports = userRouter;
