@@ -13,6 +13,10 @@ var config = require('../config/githubAPIConfig.js');
 var Promise = require('bluebird');
 var filter = require('lodash/filter');
 var uniq = require('lodash/uniq');
+var request = require('superagent');
+// IDs of admin priveledged groups
+var adminGroups = ['1', '2'];
+
 
 exports.isLoggedIn = function(req, res, next) {
   if (req.isAuthenticated()) {
@@ -40,11 +44,10 @@ exports.isAdmin = function(req, res, next) {
 
 exports.filterUsers = function(usersArr, userId) {
   return new Promise(function(resolve, reject) {
-    var adminGroups = ['1', '2'];
     var allowedGroups = [];
     var selectedGroup;
     var filteredUsers = [];
-
+    
     for (var i = 0; i < usersArr.length; i++) {
       if (userId === usersArr[i].id) {
         for (var group in usersArr[i].groups) {
@@ -77,7 +80,7 @@ exports.filterUsers = function(usersArr, userId) {
         //       }
         //     });
         // }
-        return filter(usersArr, function(item) {
+        var filtered = filter(usersArr, function(item) {
           for (var group in item.groups) {
             if (adminGroups.indexOf(group) !== -1) {
               return true;
@@ -88,6 +91,7 @@ exports.filterUsers = function(usersArr, userId) {
             }
           }
         });
+        resolve(filtered);
       })
       .catch(function(err) {
         reject(err);
@@ -95,16 +99,40 @@ exports.filterUsers = function(usersArr, userId) {
   });
 };
 
+exports.filterGroups = function(groupsArr, userid) {
+  return new Promise(function(resolve, reject) {
+    var allowedGroups = [];
+    var selectedGroup;
+    var filteredUsers = [];
+    
+    request
+      .get('/db/users/user/' + userid)
+      .send()
+      .end(function(err, res) {
+        var data = res.body;
+        for (var group in data.group) {
+          if (adminGroups.indexOf(group)) {
+            resolve(groupsArr);
+          } else {
+            selectedGroup = group;
+          }
+        }
 
-
-
-
-
-
-
-
-
-
+        visGroups.models.where({ Group_id: selectedGroup }).fetch()
+          .then(function(visGroups) {
+            for (var l = 0; l < visGroups.length; l++) {
+              allowedGroups.push(visGroups[l].Visible_id);
+            }
+            var filtered = filter(groupsArr, function(item) {
+              return allowedGroups.indexOf(item.id) !== -1;
+            });
+          })
+          .catch(function(err) {
+            reject(err);
+          });
+      });
+  });
+};
 
 
 
