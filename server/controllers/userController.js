@@ -447,6 +447,7 @@ module.exports = {
 
 
                 */
+
                 user
                   .save({
                     handle: data.user.handle,
@@ -455,9 +456,8 @@ module.exports = {
                     email: data.user.email,
                     image: data.user.image,
                     url_hash: data.user.url,
-                    Group_id: group.id,
-                    permission: data.user.permission === 0 ? 0 : user.get('permission'),
-                    public: data.user.public === 0 ? 0 : user.get('public'),
+                    permission: data.user.permission === 0 ? 0 : 1,
+                    public: data.user.public === 0 ? 0 : 1,
                   })
                   .then(function(user) {
                     // for each site in the array

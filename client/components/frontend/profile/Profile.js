@@ -216,9 +216,6 @@ class Profile extends React.Component {
   }
 
   setDeleteState(e) {
-    console.log('state', this.state)
-    console.log('refs', this.refs)
-    console.log('props', this.props)
     e.preventDefault();
     this.setState({
       showDelete: true,
