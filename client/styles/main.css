@@ -84,8 +84,6 @@ textarea.form-control {
 }
 .input-with-dropdown .btn {
   border: 0;
-  border-top-right-radius: 0;
-  border-top-left-radius: 0;
   background: #f5f5f5;
 }
 

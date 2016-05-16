@@ -40,11 +40,11 @@ class ProfileSite extends React.Component {
       return (
         <div key={id}>
           <InputGroup>
-          <InputGroup.Addon>{base_url}</InputGroup.Addon>
-          <FormControl type="text"
-            value={value}
-            ref="input"
-            onChange={this.handleFormChange.bind(this)}/>
+            <InputGroup.Addon>{base_url}</InputGroup.Addon>
+            <FormControl type="text"
+              value={value}
+              ref="input"
+              onChange={this.handleFormChange.bind(this)}/>
           </InputGroup>
         </div>
       );
