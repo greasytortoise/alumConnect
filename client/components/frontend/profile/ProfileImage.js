@@ -12,22 +12,29 @@ class ProfileImage extends React.Component {
       loggedInUserId: -1,
       permission: 1,
       editModal: false,
-      uniquePhotoString: ''
+      src: undefined
     }
   }
 
   showEditModal() {
     this.setState({ editModal: true });
   };
-  hideEditModal(saved) {
+  hideEditModal(newImageSrc) {
     this.setState({ editModal: false });
-    if(saved) {
-      this.setState({ uniquePhotoString: '?' + new Date().getTime()});
+    if(newImageSrc) {
+      this.setState({src: newImageSrc});
     }
   };
 
   componentDidMount() {
     this.getLoggedInUserData();
+  }
+  componentWillReceiveProps(nextProps) {
+    if(this.props.src) {
+      this.setState({
+        src: nextProps.src
+      });
+    }
   }
 
   getLoggedInUserData() {
@@ -45,7 +52,6 @@ class ProfileImage extends React.Component {
 
 
   renderImage() {
-    var uniquePhotoString = this.state.uniquePhotoString || '';
     if(this.state.permission === 1 || this.props.profilesUserId === this.state.loggedInUserId) {
       if(this.props.editing) {
         return (
@@ -54,22 +60,20 @@ class ProfileImage extends React.Component {
               bsStyle="link"
               className="change-image-button"
               onClick={this.showEditModal.bind(this)}>
-              <Image src={`${this.props.src}${uniquePhotoString}`} responsive />
+              <Image src={this.state.src} responsive />
               <div className="label-overlay">Change image ✎</div>
             </Button>
            </div>
         )
       } else {
         return(
-          <div>
-            <Image src={`${this.props.src}${uniquePhotoString}`} responsive />
-          </div>
+          <Image src={this.props.src} responsive />
         )
       }
     }
     else {
       return (
-        <Image src={`${this.props.src}${uniquePhotoString}`} responsive />
+        <Image src={this.props.src} responsive />
       )
     }
   }
@@ -77,7 +81,7 @@ class ProfileImage extends React.Component {
   render() {
     return (
       <div>
-        <SelectImageModal imageUrl={this.props.src}  show={this.state.editModal} onHide={this.hideEditModal.bind(this, true)} />
+        <SelectImageModal fileName={this.props.src}  show={this.state.editModal} onHide={this.hideEditModal.bind(this)} />
         {this.renderImage()}
       </div>
     );
@@ -95,17 +99,18 @@ class SelectImageModal extends React.Component {
   }
 
   onDrop(files) {
-    const fileName = this.props.imageUrl;
+    const fileName = this.props.fileName;
     const file = files[0];
     const data = new FormData()
     data.append('fileName', fileName);
     data.append('photo', file);
+    // data.append('userId', file);
     RestHandler.Post('user/uploadimage', data, (err, res) => {
       if(err) {
         console.log(err)
       } else {
-        console.log(res);
-        this.props.onHide()
+        console.log('res.body: ', res.body);
+        this.props.onHide(res.body.fileName);
       }
     });
    }
