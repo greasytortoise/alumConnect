@@ -22,6 +22,8 @@ class Profile extends React.Component {
       profileData: {},
       editing: 0,
       showDelete: false,
+      hasAdminAccess: false,
+      userIsHidden: false
 
     };
 
@@ -165,17 +167,26 @@ class Profile extends React.Component {
       };
     });
   }
-
   getAdminEdits() {
     const that = this;
     return (
       <div>
         <Row className="show-grid">
           <Col xs={5}>
-            <Checkbox onChange={this.setPermChange.bind(this)}>Admin Access</Checkbox>
+            <Checkbox
+              checked={this.state.hasAdminAccess}
+              onChange= {() => {
+                this.setState({hasAdminAccess: !this.state.hasAdminAccess});
+              }}>
+              Admin Access</Checkbox>
           </Col>
           <Col xs={4}>
-            <Checkbox>Hidden</Checkbox>
+            <Checkbox
+              checked={this.state.userIsHidden}
+              onChange= {() => {
+                this.setState({userIsHidden: !this.state.userIsHidden});
+              }}>
+              Hidden</Checkbox>
           </Col>
           <Col xs={3}>
             <Button
@@ -207,6 +218,7 @@ class Profile extends React.Component {
 
   setVisibilityChange(e) {
     const data = e.target.value;
+    console.log(data);
 
     if (data === 'Yes') {
       this.profileEdits.user.public = 1;
@@ -216,14 +228,16 @@ class Profile extends React.Component {
   }
 
   setPermChange(e) {
-    const data = e.target.value;
+    this.refs.permissionselect
+
+    const data = e.target.checked;
+    console.log(data);
     if (data === 'admin') {
       this.profileEdits.user.permission = 1;
     } else if (data === 'user') {
       this.profileEdits.user.permission = 0;
     }
 
-    console.log(e.target.value)
   }
 
   setDeleteState(e) {
