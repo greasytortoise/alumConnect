@@ -4,7 +4,7 @@ var util = require('../lib/utility.js');
 var bcrypt = require('bcrypt');
 var handler = require('../lib/handler');
 var sharp = require('sharp');
-
+var User = require('../models/user');
 
 var passport = require('passport');
 var GithubStrategy = require('passport-github2').Strategy;
@@ -27,17 +27,31 @@ module.exports = function(app, express) {
   app.use('/auth', authRouter);
 
   app.post('/user/uploadimage', function(req, res) {
-
-    var fileName = 'client' + req.body.fileName;
+    var originFile = req.body.fileName;
+    var userId = '1';
+    var fileName = 'assets/photos/' + new Date().getTime() + '.jpg';
     sharp(req.file.buffer)
       .resize(800, 530)
       .crop(sharp.strategy.entropy)
       .jpeg()
-      .toFile(fileName, function(err) {
+      .toFile('client/' + fileName, function(err) {
         if(err) {
-          console.log("ERR", err);          
+          console.log("ERR", err);
         }
-        res.status(204).end();
+        User.where({id: userId})
+          .fetch()
+          .then(function(user) {
+            user.save({
+              image: fileName
+            })
+            .then(function() {
+              // Delete old image
+              res.json({'fileName': fileName});
+            })
+            .catch(function() {
+              console.log('image did not save');
+            });
+          })
       });
   });
 
