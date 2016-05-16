@@ -13,9 +13,9 @@ class ProfileField extends React.Component {
     this.setState({value: this.props.fieldDetails.value})
   }
 
-  handleFormChange () {
+  handleFormChange (e) {
     var {id} = this.props.fieldDetails
-    var formValue = this.refs.input.refs.input.value;
+    var formValue = e.target.value || '';
 
     this.setState({value: formValue});
     this.props.stageProfileEdits((editedObject) => {
