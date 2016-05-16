@@ -9,7 +9,7 @@ import ProfileEditButton from './ProfileEditButton'
 import auth from '../../../util/authHelpers.js'
 import RestHandler from '../../../util/RestHandler'
 import {findDOMNode} from 'react-dom'
-import { InputGroup, ControlLabel, FormControl, Select, Button, Row, Col, Image, Modal, Checkbox} from 'react-bootstrap';
+import { InputGroup, ControlLabel, FormControl, Select, Button, Grid,  Row, Col, Image, Modal, Checkbox} from 'react-bootstrap';
 var _map = require('lodash/map');
 var _find = require('lodash/find');
 var _clone = require('lodash/clone')
@@ -170,8 +170,22 @@ class Profile extends React.Component {
     const that = this;
     return (
       <div>
-        <InputGroup ref="permissionselect" controlId="formControlsSelect">
-          <Checkbox checked >Website Administrator</Checkbox>
+        <Row className="show-grid">
+          <Col xs={5}>
+            <Checkbox onChange={this.setPermChange.bind(this)}>Admin Access</Checkbox>
+          </Col>
+          <Col xs={4}>
+            <Checkbox>Hidden</Checkbox>
+          </Col>
+          <Col xs={3}>
+            <Button
+              onClick={this.setDeleteState.bind(this)}
+              className="delete-user"
+              bsStyle="link">✖ Delete</Button>
+          </Col>
+        </Row>
+
+        {/*<InputGroup ref="permissionselect" controlId="formControlsSelect">
           <ControlLabel></ControlLabel>
           <FormControl onChange={this.setPermChange.bind(that)} ref="permgroup" componentClass="select" placeholder="select"  >
             <option ref="notselected" value="...">...</option>
@@ -186,12 +200,7 @@ class Profile extends React.Component {
             <option ref="selectyes" value="Yes">Yes</option>
             <option ref="selectno" value="No">No</option>
           </FormControl>
-        </InputGroup>
-        <Row>
-          <ControlLabel>Delete user</ControlLabel>
-        </Row>
-        <Button onClick={this.setDeleteState.bind(this)} bsStyle="danger">Delete</Button>
-
+        </InputGroup>*/}
       </div>
     );
   }
@@ -208,12 +217,13 @@ class Profile extends React.Component {
 
   setPermChange(e) {
     const data = e.target.value;
-
     if (data === 'admin') {
       this.profileEdits.user.permission = 1;
     } else if (data === 'user') {
       this.profileEdits.user.permission = 0;
     }
+
+    console.log(e.target.value)
   }
 
   setDeleteState(e) {
@@ -280,23 +290,6 @@ class Profile extends React.Component {
         <Row>
           <Col xs={12} sm={9} xl={10} className='float-right'>
             <div className='section profile-main'>
-              <Modal
-                show={this.state.showDelete}
-                onHide={this.closePopup.bind(this)}
-                container={this}
-                aria-labelledby="contained-modal-title"
-              >
-                <Modal.Header closeButton>
-                  <Modal.Title id="contained-modal-title">Delete User</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  Are you sure you want to delete this user?
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button onClick={this.closePopup.bind(this)}>Cancel</Button>
-                  <Button bsStyle="danger" onClick={this.deleteUser.bind(this)}>Delete</Button>
-                </Modal.Footer>
-              </Modal>
               <Row>
                 <Col xs={12} sm={5} md={4}>
                   <ProfileImage
@@ -314,8 +307,8 @@ class Profile extends React.Component {
 
                   <ul>
                     {this.renderProfileSites()}
-                    {adminView}
                   </ul>
+                  {adminView}
                 </Col>
               </Row>
             </div>
@@ -333,6 +326,29 @@ class Profile extends React.Component {
           <Col xs={12} sm={3} xl={2}>
             {profileSidebar}
           </Col>
+
+
+
+
+          <Modal
+            show={this.state.showDelete}
+            onHide={this.closePopup.bind(this)}
+            container={this}
+            aria-labelledby="contained-modal-title"
+          >
+            <Modal.Header closeButton>
+              <Modal.Title id="contained-modal-title">Delete User</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              Are you sure you want to delete this user?
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={this.closePopup.bind(this)}>Cancel</Button>
+              <Button bsStyle="danger" onClick={this.deleteUser.bind(this)}>Delete</Button>
+            </Modal.Footer>
+          </Modal>
+
+
         </Row>
 
       );

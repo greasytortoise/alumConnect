@@ -48,7 +48,7 @@ class ProfileGroups extends React.Component {
         onClick={function() {
           localStorage.setItem('selectedGroup', JSON.stringify(groupObj));
         }}>
-        {groupName}
+        {` ${groupName} `}
       </Link>)
     });
   }

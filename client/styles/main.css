@@ -353,9 +353,18 @@ rejectStyle = {
 
 .input-group {
   margin-bottom: 15px;
+  width: 100%;
 }
 
+.delete-user {
+  color: #D81D1D;
+  padding:0;
+  text-align: right;
+}
 
+.checkbox {
+  margin:0;
+}
 
 
 
