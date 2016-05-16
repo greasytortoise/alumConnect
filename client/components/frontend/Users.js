@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
-import { Row, Col, DropdownButton, MenuItem, Input, Image } from 'react-bootstrap';
+import { Row, Col, DropdownButton, MenuItem, Input, Image, FormControl, InputGroup } from 'react-bootstrap';
 import auth from '../../util/authHelpers.js'
 
 import RestHandler from '../../util/RestHandler';
@@ -97,14 +97,15 @@ class Users extends React.Component {
       <div>
         <Row className="search-for-users">
           <Col xs={12}>
-            <Input
-              type='text'
-              ref='searchusers'
-              onChange={this.handleFilterUsersInput.bind(this)}
-              wrapperClassName='input-with-dropdown'
-              placeholder="Search users"
-              addonBefore = {innerDropdown}
-              bsSize='large'/>
+            <InputGroup className="input-with-dropdown">
+              <InputGroup.Addon>{innerDropdown}</InputGroup.Addon>
+              <FormControl
+                type='text'
+                ref='searchusers'
+                onChange={this.handleFilterUsersInput.bind(this)}
+                placeholder="Search users"
+                bsSize='large'/>
+            </InputGroup>
           </Col>
         </Row>
         <Row>
