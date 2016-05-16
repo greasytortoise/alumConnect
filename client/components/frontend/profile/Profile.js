@@ -9,7 +9,7 @@ import ProfileEditButton from './ProfileEditButton'
 import auth from '../../../util/authHelpers.js'
 import RestHandler from '../../../util/RestHandler'
 import {findDOMNode} from 'react-dom'
-import { InputGroup, ControlLabel, FormControl, Radio, Select, Button, Row, Col, Image, Modal} from 'react-bootstrap';
+import { InputGroup, ControlLabel, FormControl, Select, Button, Row, Col, Image, Modal, Checkbox} from 'react-bootstrap';
 var _map = require('lodash/map');
 var _find = require('lodash/find');
 var _clone = require('lodash/clone')
@@ -127,7 +127,7 @@ class Profile extends React.Component {
     }
   }
 
-  
+
 
   //In saveUserProfile, the api accepts post requests in array format for
   //data.userInfo and data.sites. I set them up as an object initially because
@@ -171,7 +171,8 @@ class Profile extends React.Component {
     return (
       <div>
         <InputGroup ref="permissionselect" controlId="formControlsSelect">
-          <ControlLabel>User Permissions?</ControlLabel>
+          <Checkbox checked >Website Administrator</Checkbox>
+          <ControlLabel></ControlLabel>
           <FormControl onChange={this.setPermChange.bind(that)} ref="permgroup" componentClass="select" placeholder="select"  >
             <option ref="notselected" value="...">...</option>
             <option ref="selectAdmin" value="admin">Admin</option>
@@ -194,7 +195,7 @@ class Profile extends React.Component {
       </div>
     );
   }
-  
+
   setVisibilityChange(e) {
     const data = e.target.value;
 
