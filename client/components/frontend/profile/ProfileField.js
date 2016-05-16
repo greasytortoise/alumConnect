@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input } from 'react-bootstrap';
+import { FormControl } from 'react-bootstrap';
 
 
 class ProfileField extends React.Component {
@@ -50,7 +50,8 @@ class ProfileField extends React.Component {
       return (
         <div key={id}>
           <h3>{title}</h3>
-          <Input type="textarea"
+          <FormControl
+            componentClass="textarea"
             value={value}
             ref='input'
             onChange={this.handleFormChange.bind(this)} />

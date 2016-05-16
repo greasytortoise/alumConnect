@@ -3,7 +3,7 @@ import Griddle from 'griddle-react';
 import RestHandler from '../../util/RestHandler';
 import $ from 'jquery';
 import request from 'superagent';
-import { Select, Input, Modal, Button } from 'react-bootstrap';
+import { Select, Modal, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 
 var rowMetadata = {
@@ -76,7 +76,7 @@ class DashboardUsers extends React.Component {
       </div>
     );
   }
-  
+
   setDeleteState(e) {
     var data = JSON.parse($(e.target).attr('data'));
     e.preventDefault();
@@ -116,7 +116,7 @@ class DashboardUsers extends React.Component {
         }
       });
   }
-  
+
 
   closePopup() {
     this.setState({ showDelete: false });

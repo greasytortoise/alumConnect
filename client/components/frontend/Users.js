@@ -64,7 +64,7 @@ class Users extends React.Component {
     });
   }
 
-  handleGroupSelect(evt, key) {
+  handleGroupSelect(key, evt) {
     this.setState({'selectedGroup': key});
     localStorage.setItem('selectedGroup', JSON.stringify(key));
     this.getUsers(key.id);

@@ -5,6 +5,7 @@ body {
 textarea.form-control {
   height:120px;
   font-size: 16px;
+  margin-bottom: 20px
 }
 .navbar-default {
   background-color: #fff;
@@ -351,6 +352,10 @@ rejectStyle = {
   borderStyle: 'solid',
   backgroundColor: '#ffdddd'
 };*/
+
+.input-group {
+  margin-bottom: 15px;
+}
 
 
 

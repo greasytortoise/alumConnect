@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router';
-import { Input, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import Select from 'react-select';
 import RestHandler from '../../../util/RestHandler';
 var _map = require('lodash/map');

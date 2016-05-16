@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, Button } from 'react-bootstrap';
+import { FormControl, Button, InputGroup } from 'react-bootstrap';
 
 
 class ProfileSite extends React.Component {
@@ -39,11 +39,13 @@ class ProfileSite extends React.Component {
     else if(editing) {
       return (
         <div key={id}>
-          <Input type="text"
-            addonBefore={base_url}
+          <InputGroup>
+          <InputGroup.Addon>{base_url}</InputGroup.Addon>
+          <FormControl type="text"
             value={value}
             ref="input"
             onChange={this.handleFormChange.bind(this)}/>
+          </InputGroup>
         </div>
       );
     } else {
