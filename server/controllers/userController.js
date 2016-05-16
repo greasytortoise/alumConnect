@@ -521,10 +521,10 @@ module.exports = {
                           User_id: id
                         })
                         .del()
-                        console.log('aaaaa');
                     })
                     .then(function() {
                       return Promise.each(data.groups, function(group) {
+                        console.log('group is: ', group);
                         user.groups().attach(group);
                       });
                     });
