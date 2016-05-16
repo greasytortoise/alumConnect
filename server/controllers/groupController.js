@@ -109,7 +109,7 @@ module.exports = {
             group
               .save({
                 // maybe get rid of 'OR'
-                group_name: data.group_name || group.get('group_name');
+                group_name: data.group_name || group.get('group_name')
               })
               .then(function() {
                 return Promise.each(visibleGroups.models, function(visibleGroup) {
