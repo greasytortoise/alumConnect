@@ -95,7 +95,9 @@ values
 insert into Users
   (handle, githubid, name, email, image, url_hash, public, permission)
 values
-  ('mbresnan1701', 15022604, 'DONALD TRUMP', 'admin@admin.com', '/assets/photos/trump.jpg', 'ndas2q', 1, 1);
+
+  -- ('your_handle', 'your_id', 'DONALD TRUMP', 'admin@admin.com', '/assets/photos/trump.jpg', 'ndas2q', 0, 1);
+  ('alamuv', 8962181, 'Alamu', 'admin@admin.com', '/assets/photos/trump.jpg', 'ndas2q', 0, 1);
 
 insert into Groups_Users -- new addition
   (user_id, group_id)
