@@ -3,7 +3,7 @@ var Group = require('../models/group');
 var Groups = require('../collections/groups');
 var VisibleGroup = require('../models/visibleGroup');
 var VisibleGroups = require('../collections/visibleGroups');
-
+var util = require('../lib/utility.js');
 var Promise = require('bluebird');
 
 module.exports = {
@@ -26,6 +26,30 @@ module.exports = {
         }));
       })
   },
+
+  //FOR FILTERING
+  
+  // fetchGroups2: function(req, res) {
+  //   Groups
+  //     .fetch({withRelated: ['visibleGroups']})
+  //     .then(function(groups) {
+  //       util.filterGroups(groups.map(function(group) {
+  //         var visibleGroups = group.related('visibleGroups');
+  //         return {
+  //           id: group.id,
+  //           group_name: group.get('group_name'),
+  //           visibleGroups: visibleGroups.reduce(function(prev, visibleGroup) {
+  //             var visible_id = visibleGroup.get('Visible_id');
+  //             prev[visible_id] = groups.get(visible_id).get('group_name');
+  //             return prev;
+  //           }, {})
+  //         };
+  //       }), req.user.id)
+  //       .then((filtered) => {
+  //         res.json(filtered);
+  //       })
+  //     })
+  // },
   // http://localhost:3000/db/groups/group/:id
   fetchGroupInfo: function(req, res) {
     var id = req.params.id;

@@ -52,19 +52,23 @@ exports.filterUsers = function(usersArr, userId) {
       if (userId === usersArr[i].id) {
         for (var group in usersArr[i].groups) {
           if (adminGroups.indexOf(group) !== -1) {
+            console.log('is admin, return all')
             resolve(usersArr);
           } else {
+            console.log('GROUP SELECTED')
             selectedGroup = parseInt(group);
+
           }
         }
         break;
       }
     }
 
-    visGroups.models.where({ Group_id: selectedGroup }).fetch()
+    visGroups.model.where({ Group_id: selectedGroup }).fetchAll()
       .then(function(visGroups) {
-        for (var l = 0; l < visGroups.length; l++) {
-          allowedGroups.push(visGroups[l].Visible_id);
+        console.log(visGroups)
+        for (var l = 0; l < visGroups.models.length; l++) {
+          allowedGroups.push(visGroups.models[l].attributes.Visible_id);
         }
         // for (var j = 0; j < allowedGroups.length; j++) {
         //   Groups_users.models.where({ Group_id: allowedGroups[j] }).fetch()
@@ -91,6 +95,7 @@ exports.filterUsers = function(usersArr, userId) {
             }
           }
         });
+        console.log(filtered);
         resolve(filtered);
       })
       .catch(function(err) {
@@ -106,26 +111,37 @@ exports.filterGroups = function(groupsArr, userid) {
     var filteredUsers = [];
     
     request
-      .get('/db/users/user/' + userid)
+      .get('localhost:3000/db/users/user/' + userid)
       .send()
       .end(function(err, res) {
         var data = res.body;
-        for (var group in data.group) {
-          if (adminGroups.indexOf(group)) {
+        console.log(data);
+        for (var group in data.groups) {
+          console.log('doing group ', group)
+          if (adminGroups.indexOf(group) !== -1) {
+            console.log('user is admin, giving all')
             resolve(groupsArr);
           } else {
+            console.log('Not admin, assigning group');
             selectedGroup = group;
           }
         }
-
-        visGroups.models.where({ Group_id: selectedGroup }).fetch()
+        console.log(selectedGroup);
+        visGroups.model.where({ Group_id: selectedGroup }).fetchAll()
           .then(function(visGroups) {
-            for (var l = 0; l < visGroups.length; l++) {
-              allowedGroups.push(visGroups[l].Visible_id);
+            console.log(visGroups)
+            for (var l = 0; l < visGroups.models.length; l++) {
+              console.log(visGroups.models[l]);
+              allowedGroups.push(visGroups.models[l].attributes.Visible_id);
             }
             var filtered = filter(groupsArr, function(item) {
+              console.log(allowedGroups);
+              console.log(item.id);
+              console.log(allowedGroups.indexOf(item.id));
               return allowedGroups.indexOf(item.id) !== -1;
             });
+            console.log(filtered);
+            resolve(filtered);
           })
           .catch(function(err) {
             reject(err);

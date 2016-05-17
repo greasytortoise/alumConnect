@@ -1,7 +1,7 @@
 var db = require('../dbConfig');
 var User = require('../models/user');
 var Users = require('../collections/users');
-
+var util = require('../lib/utility.js');
 var Promise = require('bluebird');
 
 module.exports = {
@@ -29,6 +29,36 @@ module.exports = {
         res.status(200).send(retObj);
     });
   },
+
+  //for filtering
+  
+  // fetchUsers3: function(req, res) {
+  //   Users
+  //     .fetch({withRelated: ['groups']})
+  //     .then(function(users) {
+  //       util.filterUsers(users.map(function(user) {
+  //         var groups = user.related('groups');
+  //         return {
+  //           id: user.id,
+  //           handle: user.get('handle'),
+  //           githubid: user.get('githubid'),
+  //           name: user.get('name'),
+  //           public: user.get('public'),
+  //           url: user.get('url_hash'),
+  //           image: user.get('image'),
+  //           email: user.get('email'),
+  //           groups: groups.reduce(function(prev, group) {
+  //             prev[group.id] = group.get('group_name');
+  //             return prev;
+  //           }, {})
+  //         };
+  //       }), req.user.id)
+  //       .then((results) => {
+  //         res.status(200).send(results);
+  //       })
+  //   })
+
+  // },
 
   fetchUsersByGroup2: function(req, res) {
     var groupId = req.params.id;
