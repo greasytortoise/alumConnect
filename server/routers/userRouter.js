@@ -12,7 +12,7 @@ userRouter.route('/group/:id')
   .get(util.isLoggedIn, userController.fetchUsersByGroup2);
 
 userRouter.route('/user/:id')
-  .get(userController.fetchUserInfo2)
+  .get(util.isLoggedIn, userController.fetchUserInfo2)
   .post(util.isLoggedIn, userController.modifyUser2)
   .delete(util.isAdmin, userController.deleteUser2);
 
