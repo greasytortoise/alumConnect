@@ -3,6 +3,7 @@ var User = require('../models/user');
 var Users = require('../collections/users');
 var util = require('../lib/utility.js');
 var Promise = require('bluebird');
+var Groups_Vis = require('../collections/groups_users.js');
 
 module.exports = {
   fetchUsers2: function(req, res) {
@@ -52,7 +53,7 @@ module.exports = {
   //             return prev;
   //           }, {})
   //         };
-  //       }), req.user.id)
+  //       }), req.user.attributes.id)
   //       .then((results) => {
   //         res.status(200).send(results);
   //       })
@@ -62,6 +63,7 @@ module.exports = {
 
   fetchUsersByGroup2: function(req, res) {
     var groupId = req.params.id;
+    console.log(req.user);
     Users
       .fetch({withRelated: ['groups']})
       .then(function(users) {

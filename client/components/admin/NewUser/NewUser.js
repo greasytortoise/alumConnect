@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormGroup, Col, Row, Checkbox, Input, ButtonInput, DropdownButton, MenuItem} from 'react-bootstrap'
+import { FormGroup, Col, Row, Checkbox, Input, Button, DropdownButton, MenuItem} from 'react-bootstrap'
 import Select from 'react-select';
 import RestHandler from '../../../util/RestHandler'
 var _debounce = require('lodash/debounce');
@@ -159,12 +159,13 @@ class DashboardNewUser extends React.Component {
               </label>
             </div>
           <br />
-          <ButtonInput
+          <Button
             className="float-left add-new-user-button"
             bsStyle="primary"
             disabled={disableButton === true || isSaving}
             type="submit"
-            value={isSaving ? `Saving...` : 'Submit'} />
+            value={isSaving ? `Saving...` : 'Submit'}
+          />
           {foundGithubUserMessage}
         </form>
       </div>

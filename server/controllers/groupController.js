@@ -44,7 +44,7 @@ module.exports = {
   //             return prev;
   //           }, {})
   //         };
-  //       }), req.user.id)
+  //       }), req.user.attributes.id)
   //       .then((filtered) => {
   //         res.json(filtered);
   //       })

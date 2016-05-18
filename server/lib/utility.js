@@ -70,20 +70,6 @@ exports.filterUsers = function(usersArr, userId) {
         for (var l = 0; l < visGroups.models.length; l++) {
           allowedGroups.push(visGroups.models[l].attributes.Visible_id);
         }
-        // for (var j = 0; j < allowedGroups.length; j++) {
-        //   Groups_users.models.where({ Group_id: allowedGroups[j] }).fetch()
-        //     .then(function(gusers) {
-        //       for (var m = 0; m < gusers.length; m++) {
-        //         filteredUsers.push(gusers[m].User_id);
-        //         if (m === gusers.length - 1) {
-        //           var uniqUsers = uniq(filteredUsers);
-        //           return filter(usersArr, function(item) {
-        //             return uniqUsers.indexOf(item.id) !== -1;
-        //           });
-        //         }
-        //       }
-        //     });
-        // }
         var filtered = filter(usersArr, function(item) {
           for (var group in item.groups) {
             if (adminGroups.indexOf(group) !== -1) {
