@@ -195,23 +195,6 @@ class Profile extends React.Component {
               bsStyle="link">✖ Delete</Button>
           </Col>
         </Row>
-
-        {/*<InputGroup ref="permissionselect" controlId="formControlsSelect">
-          <ControlLabel></ControlLabel>
-          <FormControl onChange={this.setPermChange.bind(that)} ref="permgroup" componentClass="select" placeholder="select"  >
-            <option ref="notselected" value="...">...</option>
-            <option ref="selectAdmin" value="admin">Admin</option>
-            <option ref="selectuser" value="user">Standard</option>
-          </FormControl>
-        </InputGroup>
-        <InputGroup ref="visselect" controlId="formControlsSelect">
-          <ControlLabel>User publicly visible?</ControlLabel>
-          <FormControl onChange={this.setVisibilityChange.bind(that)} ref="visgroup" componentClass="select" placeholder="select"  >
-            <option ref="notselected" value="...">...</option>
-            <option ref="selectyes" value="Yes">Yes</option>
-            <option ref="selectno" value="No">No</option>
-          </FormControl>
-        </InputGroup>*/}
       </div>
     );
   }
