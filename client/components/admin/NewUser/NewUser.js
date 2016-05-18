@@ -37,8 +37,8 @@ class DashboardNewUser extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.setState({isSaving: true});
-    var name = this.refs.name.getValue();
-    var githubUsername = this.refs.githubUsername.getValue();
+    var name = reactDOM.findDOMNode(this.refs.name).value;
+    var githubUsername = reactDOM.findDOMNode(this.refs.githubUsername).value;
     var group = this.state.group.id;
     var data = {
       user: {
@@ -70,7 +70,8 @@ class DashboardNewUser extends React.Component {
   clearForm() {
     const fields = ['name', 'githubUsername'];
     fields.map(field => {
-      this.refs[field].refs['input'].value = '';
+      // this.refs[field].refs['input'].value = '';
+      reactDOM.findDOMNode(this.refs[field]).value = '';
     });
     this.setState({
       selectedGroups: [],

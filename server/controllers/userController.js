@@ -149,6 +149,7 @@ module.exports = {
                     group: groups.get('group_name'),
                     image: user.get('image'),
                     public: user.get('public'),
+                    permission: user.get('permission'),
                   },
                   sites: userSites.map(function(userSite) {
                     var site = userSite.related('sites');
@@ -177,6 +178,78 @@ module.exports = {
         });
     });
   },
+  
+  //NEW VERSION FILTERING
+  
+  // fetchUserInfo3: function(req, res) {
+  //   var id = req.params.id;
+  //   User
+  //     .where({id: id})
+  //     .fetch({withRelated: ['groups', 'bios', 'userSites']})
+  //     .then(function(user) {
+  //       if (!user) {
+  //         return res.status(404).send('user does not exist!');
+  //       }
+  //       user
+  //         .related('userSites')
+  //         .fetch({withRelated: ['sites']})
+  //         .then(function(userSites) {
+
+  //           // bios join with bioFields
+  //           user
+  //             .related('bios')
+  //             .fetch({withRelated: ['bioFields']})
+  //             .then(function(bios) {
+
+  //       // userSites join with sites
+  //               var groups = user.related('groups');
+  //               util.canISeeThisUser({
+  //                 user: {
+  //                   id: user.id,
+  //                   handle: user.get('handle'),
+  //                   githubid: user.get('githubid'),
+  //                   name: user.get('name'),
+  //                   url: user.get('url_hash'),
+  //                   email: user.get('email'),
+  //                   group_id: groups.id,
+  //                   group: groups.get('group_name'),
+  //                   image: user.get('image'),
+  //                   public: user.get('public'),
+  //                   permission: user.get('permission'),
+  //                 },
+  //                 sites: userSites.map(function(userSite) {
+  //                   var site = userSite.related('sites');
+  //                   return {
+  //                     id: site.id,
+  //                     site_name: site.get('site_name'),
+  //                     base_url: site.get('base_url'),
+  //                     value: userSite.get('rest_url')
+  //                   };
+  //                 }),
+  //                 userInfo: bios.map(function(bio) {
+  //                   var bioField = bio.related('bioFields');
+  //                   return {
+  //                     id: bioField.id,
+  //                     title: bioField.get('title'),
+  //                     value: bio.get('bio'),
+  //                   };
+  //                 }),
+  //                 groups: groups.reduce(function(prev, group) {
+  //                   prev[group.id] = group.get('group_name');
+  //                   return prev;
+  //                 }, {}),
+  //               }, req)
+  //               .then(function(returned) {
+  //                res.json(returned);
+  //               })
+  //               .catch(function(err) {
+  //                 console.log(err);
+  //                res.json(err);
+  //               });
+  //             });
+  //         });
+  //     });
+  // },
 
   // http://localhost:3000/db/users/user/:id
   modifyUser2: function(req, res) {

@@ -29,7 +29,7 @@ exports.isLoggedIn = function(req, res, next) {
 exports.isAdmin = function(req, res, next) {
   
   if (req.isAuthenticated()) {
-    User.where({githubid: req.user.attributes.githubid}).fetch()
+    User.where({ githubid: req.user.githubid }).fetch()
       .then(function(user) {
         if(user.attributes.permission === 1) {
           next();
@@ -40,6 +40,44 @@ exports.isAdmin = function(req, res, next) {
   } else {
     res.redirect('/login');
   }
+};
+
+exports.canISeeThisUser = function(userObj, req) {
+  
+  return new Promise(function(resolve, reject) {
+    var mygroups = [];
+    var selectedGroup;
+    var targetGroup;
+    
+    console.log(req.user)
+    for (var group in req.user.groups) {
+      console.log(group);
+      if (adminGroups.indexOf(group) !== -1) {
+        resolve(userObj);
+      } else {
+        selectedGroup = group;
+      }
+    }
+
+    for (var group in userObj.groups) {
+      console.log('2', group)
+      if (adminGroups.indexOf(group) !== -1 && userObj.user.public === 1) {
+        resolve(userObj);
+      } else {
+        targetGroup = group;
+      }
+    }
+    
+    visGroup.where({ Group_id: selectedGroup, Visible_id: targetGroup }).fetch()
+      .then(function(results) {
+        console.log(typeof results);
+        if (results) {
+          resolve(userObj);
+        } else {
+          reject('YOU... SHALL NOT .... PASS!!!');
+        }
+      });
+  });
 };
 
 exports.filterUsers = function(usersArr, userId) {

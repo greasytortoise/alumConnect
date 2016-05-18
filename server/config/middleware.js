@@ -67,7 +67,7 @@ module.exports = function(app, express) {
       db: 0,
       client: redisClient,
     }),
-    cookie: { maxAge: (24 * 3600 * 1000 * 30) }, // 30 Days in ms
+    cookie: { maxAge: (24 * 3600 * 1000 * 7) }, // 7 Days in ms
     secret: config.sessionSecret,
   }));
 
@@ -98,13 +98,31 @@ module.exports = function(app, express) {
   });
 
   passport.deserializeUser(function(userObj, done) {
-    User.where({githubid: userObj.userData.githubid }).fetch()
+    User.where({githubid: userObj.userData.githubid }).fetch({ withRelated: ['groups'] })
       .then(function(user) {
         if (!user) {
           done(null, null);
-        } else {
-          done(null, user);
         }
+        var groups = user.related('groups');
+        console.log(groups);
+        var userObj = {
+            id: user.id,
+            handle: user.get('handle'),
+            githubid: user.get('githubid'),
+            name: user.get('name'),
+            url: user.get('url_hash'),
+            email: user.get('email'),
+            image: user.get('image'),
+            public: user.get('public'),
+            group_id: groups.id,
+            group: groups.get('group_name'),
+            permission: user.get('permission'),
+            groups: groups.reduce(function(prev, group) {
+              prev[group.id] = group.get('group_name');
+              return prev;
+            }, {}),
+        };
+        done(null, userObj);
       });
   });
 
