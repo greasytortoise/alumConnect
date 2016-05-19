@@ -121,7 +121,7 @@ module.exports = {
   // http://localhost:3000/db/groups
   createGroup: function(req, res) {
     var data = req.body;
-
+    var created;
     // hack since for now the object is null!
     data.visibleGroups = data.visibleGroups || [];
 
@@ -135,6 +135,7 @@ module.exports = {
         Groups
           .create({group_name: data.group_name})
           .then(function(newGroup) {
+            created = newGroup;
             return Promise.each(data.visibleGroups, function(groupId) {
               return VisibleGroups.create({
                 Group_id: newGroup.id,
@@ -143,7 +144,7 @@ module.exports = {
             });
           })
           .then(function() {
-            res.status(201).json('group is created!');
+            res.status(200).json(created);
           });
       });
   },
