@@ -49,18 +49,18 @@ class ProfileSidebar extends React.Component {
 
   renderGroupMembers(members) {
     return members.map(function(user) {
-      return(
+      return (
         <li key={user.id}>
           <Link to={`/users/${user.id}`}  activeClassName="active">{user.name}</Link>
         </li>
-      )
+      );
     });
   }
 
   render() {
-    return(
-      <div>{this.renderSidebar()}</div>
-    )
+    return (
+      <div className="profileSidebarGroups">{this.renderSidebar()}</div>
+    );
   }
 }
 
