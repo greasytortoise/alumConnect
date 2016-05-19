@@ -29,7 +29,7 @@ exports.isLoggedIn = function(req, res, next) {
 exports.isAdmin = function(req, res, next) {
   
   if (req.isAuthenticated()) {
-    User.where({githubid: req.user.attributes.githubid}).fetch()
+    User.where({ githubid: req.user.githubid }).fetch()
       .then(function(user) {
         if(user.attributes.permission === 1) {
           next();
@@ -42,6 +42,42 @@ exports.isAdmin = function(req, res, next) {
   }
 };
 
+exports.canISeeThisUser = function(userObj, req) {
+  
+  return new Promise(function(resolve, reject) {
+    var mygroups = [];
+    var selectedGroup;
+    var targetGroup;
+    
+    console.log(req.user)
+    for (var group in req.user.groups) {
+      if (adminGroups.indexOf(group) !== -1) {
+        resolve(userObj);
+      } else {
+        selectedGroup = group;
+      }
+    }
+
+    for (var group in userObj.groups) {
+      console.log('2', group)
+      if (adminGroups.indexOf(group) !== -1 && userObj.user.public === 1) {
+        resolve(userObj);
+      } else {
+        targetGroup = group;
+      }
+    }
+    
+    visGroup.where({ Group_id: selectedGroup, Visible_id: targetGroup }).fetch()
+      .then(function(results) {
+        if (results) {
+          resolve(userObj);
+        } else {
+          resolve('YOU... SHALL NOT .... PASS!!!');
+        }
+      });
+  });
+};
+
 exports.filterUsers = function(usersArr, userId) {
   return new Promise(function(resolve, reject) {
     var allowedGroups = [];
@@ -52,10 +88,8 @@ exports.filterUsers = function(usersArr, userId) {
       if (userId === usersArr[i].id) {
         for (var group in usersArr[i].groups) {
           if (adminGroups.indexOf(group) !== -1) {
-            console.log('is admin, return all')
             resolve(usersArr);
           } else {
-            console.log('GROUP SELECTED')
             selectedGroup = parseInt(group);
 
           }
@@ -66,24 +100,9 @@ exports.filterUsers = function(usersArr, userId) {
 
     visGroups.model.where({ Group_id: selectedGroup }).fetchAll()
       .then(function(visGroups) {
-        console.log(visGroups)
         for (var l = 0; l < visGroups.models.length; l++) {
           allowedGroups.push(visGroups.models[l].attributes.Visible_id);
         }
-        // for (var j = 0; j < allowedGroups.length; j++) {
-        //   Groups_users.models.where({ Group_id: allowedGroups[j] }).fetch()
-        //     .then(function(gusers) {
-        //       for (var m = 0; m < gusers.length; m++) {
-        //         filteredUsers.push(gusers[m].User_id);
-        //         if (m === gusers.length - 1) {
-        //           var uniqUsers = uniq(filteredUsers);
-        //           return filter(usersArr, function(item) {
-        //             return uniqUsers.indexOf(item.id) !== -1;
-        //           });
-        //         }
-        //       }
-        //     });
-        // }
         var filtered = filter(usersArr, function(item) {
           for (var group in item.groups) {
             if (adminGroups.indexOf(group) !== -1) {
@@ -95,7 +114,6 @@ exports.filterUsers = function(usersArr, userId) {
             }
           }
         });
-        console.log(filtered);
         resolve(filtered);
       })
       .catch(function(err) {
@@ -103,6 +121,38 @@ exports.filterUsers = function(usersArr, userId) {
       });
   });
 };
+
+exports.canISeeThisGroup = function(groupObj, req) {
+  return new Promise(function(resolve, reject) {
+    var mygroups = [];
+    var selectedGroup;
+    var targetGroup = req.params.id;
+
+    if (adminGroups.indexOf((JSON.stringify(targetGroup)))) {
+      resolve(groupObj);
+    }
+
+    for (var group in req.user.groups) {
+      if (adminGroups.indexOf(group) !== -1) {
+        resolve(groupObj);
+      } else {
+        selectedGroup = group;
+      }
+    }
+    visGroup.where({ Group_id: selectedGroup, Visible_id: targetGroup }).fetch()
+      .then(function(results) {
+        if (results) {
+          resolve(groupObj);
+        } else {
+          resolve('YOU... SHALL NOT .... PASS!!!');
+        }
+      })
+      .catch(function(err) {
+        reject(err);
+      });
+  });
+};
+
 
 exports.filterGroups = function(groupsArr, userid) {
   return new Promise(function(resolve, reject) {
@@ -115,32 +165,21 @@ exports.filterGroups = function(groupsArr, userid) {
       .send()
       .end(function(err, res) {
         var data = res.body;
-        console.log(data);
         for (var group in data.groups) {
-          console.log('doing group ', group)
           if (adminGroups.indexOf(group) !== -1) {
-            console.log('user is admin, giving all')
             resolve(groupsArr);
           } else {
-            console.log('Not admin, assigning group');
             selectedGroup = group;
           }
         }
-        console.log(selectedGroup);
         visGroups.model.where({ Group_id: selectedGroup }).fetchAll()
           .then(function(visGroups) {
-            console.log(visGroups)
             for (var l = 0; l < visGroups.models.length; l++) {
-              console.log(visGroups.models[l]);
               allowedGroups.push(visGroups.models[l].attributes.Visible_id);
             }
             var filtered = filter(groupsArr, function(item) {
-              console.log(allowedGroups);
-              console.log(item.id);
-              console.log(allowedGroups.indexOf(item.id));
               return allowedGroups.indexOf(item.id) !== -1;
             });
-            console.log(filtered);
             resolve(filtered);
           })
           .catch(function(err) {
@@ -149,8 +188,4 @@ exports.filterGroups = function(groupsArr, userid) {
       });
   });
 };
-
-
-
-
 

@@ -22,8 +22,6 @@ class Profile extends React.Component {
       profileData: {},
       editing: 0,
       showDelete: false,
-      hasAdminAccess: false,
-      userIsHidden: false
 
     };
 
@@ -71,6 +69,8 @@ class Profile extends React.Component {
           console.log(profileData);
           this.setState({
             profileData: profileData,
+            public: profileData.user.public,
+            permission: profileData.user.permission,
           });
         });
       });
@@ -135,10 +135,10 @@ class Profile extends React.Component {
   //data.userInfo and data.sites. I set them up as an object initially because
   //it's easier to work worth and then convert it to an array before saving.
   saveUserProfile(callback) {
-    console.log(this.profileEdits)
-    // this.profileEdits.user.public = this.state.newpublic;
-    // this.profileEdits.user.permission = this.state.newpermission;
     var url = '/db/users/user/' + this.props.params.user;
+    console.log(this.profileEdits)
+    this.profileEdits.user.public = this.state.public === true ? 1 : 0;
+    this.profileEdits.user.permission = this.state.permission === true ? 1 : 0;
     var data = this.profileEdits;
     data.userInfo = _map(data.userInfo, function(val){return val});
     data.sites = _map(data.sites, function(val){return val});
@@ -162,8 +162,6 @@ class Profile extends React.Component {
         user: this.profileEdits.user,
         sites: {},
         userInfo: {},
-        public: null,
-        permission: null,
       };
     });
   }
@@ -174,17 +172,17 @@ class Profile extends React.Component {
         <Row className="show-grid">
           <Col xs={5}>
             <Checkbox
-              checked={this.state.hasAdminAccess}
+              checked={this.state.permission}
               onChange= {() => {
-                this.setState({hasAdminAccess: !this.state.hasAdminAccess});
+                this.setState({permission: !this.state.permission});
               }}>
               Admin Access</Checkbox>
           </Col>
           <Col xs={4}>
             <Checkbox
-              checked={this.state.userIsHidden}
+              checked={this.state.public}
               onChange= {() => {
-                this.setState({userIsHidden: !this.state.userIsHidden});
+                this.setState({public: !this.state.public});
               }}>
               Hidden</Checkbox>
           </Col>
@@ -195,23 +193,6 @@ class Profile extends React.Component {
               bsStyle="link">✖ Delete</Button>
           </Col>
         </Row>
-
-        {/*<InputGroup ref="permissionselect" controlId="formControlsSelect">
-          <ControlLabel></ControlLabel>
-          <FormControl onChange={this.setPermChange.bind(that)} ref="permgroup" componentClass="select" placeholder="select"  >
-            <option ref="notselected" value="...">...</option>
-            <option ref="selectAdmin" value="admin">Admin</option>
-            <option ref="selectuser" value="user">Standard</option>
-          </FormControl>
-        </InputGroup>
-        <InputGroup ref="visselect" controlId="formControlsSelect">
-          <ControlLabel>User publicly visible?</ControlLabel>
-          <FormControl onChange={this.setVisibilityChange.bind(that)} ref="visgroup" componentClass="select" placeholder="select"  >
-            <option ref="notselected" value="...">...</option>
-            <option ref="selectyes" value="Yes">Yes</option>
-            <option ref="selectno" value="No">No</option>
-          </FormControl>
-        </InputGroup>*/}
       </div>
     );
   }

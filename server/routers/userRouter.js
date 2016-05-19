@@ -8,13 +8,14 @@ userRouter.route('/')
   .get(util.isLoggedIn, userController.fetchUsers2)
   .post(util.isAdmin, userController.createUser2);
 
-userRouter.route('/group/:id')
-  .get(util.isLoggedIn, userController.fetchUsersByGroup2);
+// userRouter.route('/group/:id')
+//   .get(util.isLoggedIn, userController.fetchUsersByGroup4);
 
 userRouter.route('/user/:id')
   .get(util.isLoggedIn, userController.fetchUserInfo2)
   .post(util.isLoggedIn, userController.modifyUser2)
   .delete(util.isAdmin, userController.deleteUser2);
+
 
 userRouter.route('/user/visibility')
   .post(util.isAdmin, userController.toggleVisible);

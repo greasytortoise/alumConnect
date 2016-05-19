@@ -7,7 +7,7 @@ groupRouter.route('/')
   .post(util.isAdmin, groupController.createGroup);
 
 groupRouter.route('/group/:id')
-  .get(util.isLoggedIn, groupController.fetchGroupInfo)
+  .get(util.isLoggedIn, groupController.fetchGroupInfo2)
   .post(util.isAdmin, groupController.modifyGroup)
   .delete(util.isAdmin, groupController.deleteGroup);
 

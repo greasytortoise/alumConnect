@@ -154,3 +154,18 @@
 .modal-container .modal, .modal-container .modal-backdrop {
   position: absolute;
 }
+
+.ghUsernameInput {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.checkboxGroup {
+  margin-top: 10px;
+  margin-top: 10px;
+}
+
+.publicCheckbox {
+  margin-bottom: 10px;
+}
+

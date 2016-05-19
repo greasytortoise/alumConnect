@@ -1,7 +1,9 @@
 import React from 'react'
-import { FormGroup, Col, Row, Checkbox, Input, ButtonInput, DropdownButton, MenuItem} from 'react-bootstrap'
+import { FormControl, Col, Row, Checkbox, InputGroup, Button, DropdownButton, MenuItem} from 'react-bootstrap'
 import Select from 'react-select';
-import RestHandler from '../../../util/RestHandler'
+import RestHandler from '../../../util/RestHandler';
+import reactDOM from 'react-dom';
+
 var _debounce = require('lodash/debounce');
 
 class DashboardNewUser extends React.Component {
@@ -12,7 +14,9 @@ class DashboardNewUser extends React.Component {
       group: {},
       selectedGroups: [],
       githubInfo: undefined,
-      isSaving: false
+      isSaving: false,
+      newUserPublic: true,
+      newUserAdmin: false,
     };
     this.delayGithubTillTypingEnds = _debounce(this.handleCheckGithub,500);
   }
@@ -33,18 +37,18 @@ class DashboardNewUser extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.setState({isSaving: true});
-    var name = this.refs.name.getValue();
-    var githubUsername = this.refs.githubUsername.getValue();
+    var name = reactDOM.findDOMNode(this.refs.name).value;
+    var githubUsername = reactDOM.findDOMNode(this.refs.githubUsername).value;
     var group = this.state.group.id;
     var data = {
       user: {
         githubid: this.state.githubInfo.id,
         handle: githubUsername,
         name: name,
-        admin: this.refs.isadmin.refs.input.checked === true ? 1 : 0,
-        public: this.refs.ispublic.refs.input.checked === true ? 1 : 0
+        admin: this.state.newUserAdmin === true ? 1 : 0,
+        public: this.state.newUserPublic === true ? 1 : 0,
       },
-      groups: this.state.selectedGroups.split(',')
+      groups: this.state.selectedGroups.split(','),
     };
     console.log(data);
     RestHandler.Post('db/users', data, (err, res) => {
@@ -56,7 +60,7 @@ class DashboardNewUser extends React.Component {
       } else if(res.status === 201) {
         console.log('RESponse: ', res);
         setTimeout(() => {
-          this.setState({isSaving: false});
+          this.setState({isSaving: false, githubInfo: undefined });
           this.clearForm();
         }, 200);
       }
@@ -66,13 +70,16 @@ class DashboardNewUser extends React.Component {
   clearForm() {
     const fields = ['name', 'githubUsername'];
     fields.map(field => {
-      this.refs[field].refs['input'].value = '';
+      // this.refs[field].refs['input'].value = '';
+      reactDOM.findDOMNode(this.refs[field]).value = '';
     });
-    this.setState({selectedGroups: []});
+    this.setState({
+      selectedGroups: [],
+    });
   }
 
 	handleCheckGithub () {
-    var githubUsername = this.refs.githubUsername.getValue();
+    var githubUsername = reactDOM.findDOMNode(this.refs.githubUsername).value;
     var url = 'https://api.github.com/users/' + githubUsername;
 
     RestHandler.Get(url, (err, res) => {
@@ -94,7 +101,7 @@ class DashboardNewUser extends React.Component {
     var groupName = this.state.group.group_name || 'Select Group';
     var foundGithubUserMessage
     if(this.state.githubInfo === undefined) {
-      foundGithubUserMessage = <span className="findingGithubInfo">Enter a valid github username</span>
+      foundGithubUserMessage = <span className="findingGithubInfoI">Enter a valid github username</span>
     } else if (this.state.githubInfo === 'loading'){
       foundGithubUserMessage = <span className="findingGithubInfo">Loading...</span>
     } else {
@@ -113,19 +120,22 @@ class DashboardNewUser extends React.Component {
       <div>
         <h3 className="dashboard-title">Add new user</h3>
         <form onSubmit={this.handleSubmit.bind(this)}>
-
-          <Input type="text" label="Full Name" placeholder="Enter name"
-            ref="name" />
-          <Input
-            type="text"
-            label="Github Username"
-            placeholder="Enter Github Username"
-            ref="githubUsername"
-            onChange={function() {
-              this.setState({githubInfo: 'loading'});
-              this.delayGithubTillTypingEnds()
-            }.bind(this)}/>
-
+          <InputGroup
+          controlId="newuserform"
+          >
+            <FormControl type="text" label="Full Name" placeholder="Enter name"
+              ref="name" />
+            <FormControl
+              className="ghUsernameInput"
+              type="text"
+              label="Github Username"
+              placeholder="Enter Github Username"
+              ref="githubUsername"
+              onChange={function() {
+                this.setState({githubInfo: 'loading'});
+                this.delayGithubTillTypingEnds();
+              }.bind(this)}/>
+          </InputGroup>
           <label>Group(s)</label>
           <Select
             multi
@@ -136,36 +146,42 @@ class DashboardNewUser extends React.Component {
             options={this.state.groups}
             onChange={this.handleGroupSelect.bind(this)} />
             <div className="checkboxGroup">
-              <Input
-                id="ispubliccheck"
-                className="checkbox"
-                type="checkbox"
-                ref="ispublic"
-                defaultChecked
-              />
-              <label htmlFor="ispubliccheck" className="ispublictext">
-              Make this user publicly visible?
 
-              </label>
-              <Input
-                id="isadmincheck"
-                className="checkbox"
-                type="checkbox"
-                ref="isadmin"
-              />
-              <label htmlFor="isadmincheck" className="isadmintext">
-              Make this user an admin?
+              <Checkbox
+                className="publicCheckbox"
+                checked={this.state.hasAdminAccess}
+                onChange= {() => {
+                  this.setState({newUserPublic: !this.state.newUserPublic});
+                }}
+              >
+                Make this user publicly visible?
+              </Checkbox>
 
-              </label>
+              <Checkbox
+                checked={this.state.newUserAdmin}
+                onChange= {() => {
+                  this.setState({newUserAdmin: !this.state.newUserAdmin});
+                }}
+              >
+                Make this user an admin?
+              </Checkbox>
+
             </div>
           <br />
-          <ButtonInput
-            className="float-left add-new-user-button"
-            bsStyle="primary"
-            disabled={disableButton === true || isSaving}
-            type="submit"
-            value={isSaving ? `Saving...` : 'Submit'} />
-          {foundGithubUserMessage}
+          <Row>
+            <Col xs={12}>
+            <Button
+              bsSize="lg"
+              className="float-left add-new-user-button"
+              bsStyle="primary"
+              disabled={disableButton === true || isSaving}
+              type="submit"
+            >
+            {isSaving ? 'Saving...' : 'Submit'}
+            </Button>
+            </Col>
+            {foundGithubUserMessage}
+          </Row>
         </form>
       </div>
     );
