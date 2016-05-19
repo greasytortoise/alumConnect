@@ -22,9 +22,7 @@ userRouter.route('/user/visibility')
 
 userRouter.route('/name')
   .get(function(req, res) {
-    console.log('REPENT!!!!')
-    console.log(req.user);
-    res.send(req.user.name);
+    res.send({ name: req.user.name, id: req.user.id });
   });
 
 module.exports = userRouter;

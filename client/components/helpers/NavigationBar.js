@@ -29,7 +29,7 @@ class NavigationBar extends React.Component {
     super (props);
     this.state = {
       loggedInName: 'The User',
-      permission: 0
+      id: null,
     };
   }
 
@@ -39,9 +39,9 @@ class NavigationBar extends React.Component {
     //it in the navigationbar
     var url = '/db/users/name';
     RestHandler.Get(url, (err, res) => {
-      console.log(res.text);
       this.setState({
-        loggedInName: res.text,
+        loggedInName: res.body.name,
+        id: res.body.id,
       });
     });
   }
@@ -59,7 +59,7 @@ class NavigationBar extends React.Component {
   }
 
   navbarToggleDisplay() {
-    var id = auth.getCookie('cu');
+    var id = this.state.id;
     if(this.props.isAdminBar) {
       return(
         <Nav pullRight></Nav>
