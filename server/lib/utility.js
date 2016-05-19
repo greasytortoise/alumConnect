@@ -51,7 +51,6 @@ exports.canISeeThisUser = function(userObj, req) {
     
     console.log(req.user)
     for (var group in req.user.groups) {
-      console.log(group);
       if (adminGroups.indexOf(group) !== -1) {
         resolve(userObj);
       } else {
@@ -70,11 +69,10 @@ exports.canISeeThisUser = function(userObj, req) {
     
     visGroup.where({ Group_id: selectedGroup, Visible_id: targetGroup }).fetch()
       .then(function(results) {
-        console.log(typeof results);
         if (results) {
           resolve(userObj);
         } else {
-          reject('YOU... SHALL NOT .... PASS!!!');
+          resolve('YOU... SHALL NOT .... PASS!!!');
         }
       });
   });
@@ -90,10 +88,8 @@ exports.filterUsers = function(usersArr, userId) {
       if (userId === usersArr[i].id) {
         for (var group in usersArr[i].groups) {
           if (adminGroups.indexOf(group) !== -1) {
-            console.log('is admin, return all')
             resolve(usersArr);
           } else {
-            console.log('GROUP SELECTED')
             selectedGroup = parseInt(group);
 
           }
@@ -104,7 +100,6 @@ exports.filterUsers = function(usersArr, userId) {
 
     visGroups.model.where({ Group_id: selectedGroup }).fetchAll()
       .then(function(visGroups) {
-        console.log(visGroups)
         for (var l = 0; l < visGroups.models.length; l++) {
           allowedGroups.push(visGroups.models[l].attributes.Visible_id);
         }
@@ -119,7 +114,6 @@ exports.filterUsers = function(usersArr, userId) {
             }
           }
         });
-        console.log(filtered);
         resolve(filtered);
       })
       .catch(function(err) {
@@ -127,6 +121,38 @@ exports.filterUsers = function(usersArr, userId) {
       });
   });
 };
+
+exports.canISeeThisGroup = function(groupObj, req) {
+  return new Promise(function(resolve, reject) {
+    var mygroups = [];
+    var selectedGroup;
+    var targetGroup = req.params.id;
+
+    if (adminGroups.indexOf((JSON.stringify(targetGroup)))) {
+      resolve(groupObj);
+    }
+
+    for (var group in req.user.groups) {
+      if (adminGroups.indexOf(group) !== -1) {
+        resolve(groupObj);
+      } else {
+        selectedGroup = group;
+      }
+    }
+    visGroup.where({ Group_id: selectedGroup, Visible_id: targetGroup }).fetch()
+      .then(function(results) {
+        if (results) {
+          resolve(groupObj);
+        } else {
+          resolve('YOU... SHALL NOT .... PASS!!!');
+        }
+      })
+      .catch(function(err) {
+        reject(err);
+      });
+  });
+};
+
 
 exports.filterGroups = function(groupsArr, userid) {
   return new Promise(function(resolve, reject) {
@@ -139,32 +165,21 @@ exports.filterGroups = function(groupsArr, userid) {
       .send()
       .end(function(err, res) {
         var data = res.body;
-        console.log(data);
         for (var group in data.groups) {
-          console.log('doing group ', group)
           if (adminGroups.indexOf(group) !== -1) {
-            console.log('user is admin, giving all')
             resolve(groupsArr);
           } else {
-            console.log('Not admin, assigning group');
             selectedGroup = group;
           }
         }
-        console.log(selectedGroup);
         visGroups.model.where({ Group_id: selectedGroup }).fetchAll()
           .then(function(visGroups) {
-            console.log(visGroups)
             for (var l = 0; l < visGroups.models.length; l++) {
-              console.log(visGroups.models[l]);
               allowedGroups.push(visGroups.models[l].attributes.Visible_id);
             }
             var filtered = filter(groupsArr, function(item) {
-              console.log(allowedGroups);
-              console.log(item.id);
-              console.log(allowedGroups.indexOf(item.id));
               return allowedGroups.indexOf(item.id) !== -1;
             });
-            console.log(filtered);
             resolve(filtered);
           })
           .catch(function(err) {
@@ -173,8 +188,4 @@ exports.filterGroups = function(groupsArr, userid) {
       });
   });
 };
-
-
-
-
 

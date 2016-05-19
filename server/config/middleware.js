@@ -101,10 +101,9 @@ module.exports = function(app, express) {
     User.where({githubid: userObj.userData.githubid }).fetch({ withRelated: ['groups'] })
       .then(function(user) {
         if (!user) {
-          done(null, null);
+          done(null, false);
         }
         var groups = user.related('groups');
-        console.log(groups);
         var userObj = {
             id: user.id,
             handle: user.get('handle'),

@@ -51,7 +51,38 @@ module.exports = {
   //     })
   // },
   // http://localhost:3000/db/groups/group/:id
-  fetchGroupInfo: function(req, res) {
+  // fetchGroupInfo: function(req, res) {
+  //   var id = req.params.id;
+  //   Group
+  //     .where({id: id})
+  //     .fetch({withRelated: ['users', 'visibleGroups']})
+  //     .then(function(group) {
+  //       if (!group) {
+  //         return res.status(404).send('There is no such group!');
+  //       }
+  //       var users = group.related('users');
+  //       var visibleGroups = group.related('visibleGroups');
+  //       var retObj = {
+  //         group_id: group.id,
+  //         group_name: group.get('group_name'),
+  //         users: users.map(function(user) {
+  //           return {
+  //             id: user.id,
+  //             name: user.get('name'),
+  //             image: user.get('image')
+  //           };
+  //         }),
+  //         visibleGroups: visibleGroups.reduce(function(prev, visibleGroup) {
+  //           var visible_id = visibleGroup.get('Visible_id');
+  //           prev[visible_id] = group.get('group_name');
+  //           return prev;
+  //         }, {})
+  //       }
+  //       res.json(retObj);
+  //   });
+  // },
+
+  fetchGroupInfo2: function(req, res) {
     var id = req.params.id;
     Group
       .where({id: id})
@@ -62,7 +93,7 @@ module.exports = {
         }
         var users = group.related('users');
         var visibleGroups = group.related('visibleGroups');
-        var retObj = {
+        util.canISeeThisGroup({
           group_id: group.id,
           group_name: group.get('group_name'),
           users: users.map(function(user) {
@@ -76,11 +107,17 @@ module.exports = {
             var visible_id = visibleGroup.get('Visible_id');
             prev[visible_id] = group.get('group_name');
             return prev;
-          }, {})
-        }
-        res.json(retObj);
+          }, {}),
+        }, req)
+        .then(function(result) {
+          res.json(result);
+        })
+        .catch(function(err) {
+          res.json(err);
+        });
     });
   },
+
   // http://localhost:3000/db/groups
   createGroup: function(req, res) {
     var data = req.body;
