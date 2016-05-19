@@ -1,7 +1,7 @@
-import React from 'react'
-import { Link } from 'react-router'
+import React from 'react';
+import { Link } from 'react-router';
 import { Row, Col, DropdownButton, MenuItem, Input, Image, FormControl, InputGroup } from 'react-bootstrap';
-import auth from '../../util/authHelpers.js'
+import auth from '../../util/authHelpers.js';
 
 import RestHandler from '../../util/RestHandler';
 
@@ -92,7 +92,6 @@ class Users extends React.Component {
       </DropdownButton>
     );
 
-    var title = 'Cohort38'
     return (
       <div>
         <Row className="search-for-users">

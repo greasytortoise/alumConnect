@@ -1,5 +1,5 @@
 import React from 'react'
-import {Input, ButtonInput, ListGroup, ListGroupItem} from 'react-bootstrap'
+import {Input, Button, ListGroup, ListGroupItem} from 'react-bootstrap'
 import RestHandler from '../../../util/RestHandler'
 import EditProfileField from './EditProfileField.js'
 
@@ -66,7 +66,10 @@ class ProfileFields extends React.Component {
           <Input type="text" label="Add Profile field"
             placeholder="Enter field name" ref="field" />
 
-          <ButtonInput bsStyle="primary" type="submit" value="Submit"/>
+          <Button bsStyle="primary" type="submit" 
+          >
+          Submit
+          </Button>
         </form>
         {this.state.error && (
           <p>Enter a Profile Field.</p>
