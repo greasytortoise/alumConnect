@@ -149,7 +149,7 @@ class DashboardNewUser extends React.Component {
 
               <Checkbox
                 className="publicCheckbox"
-                checked={this.state.hasAdminAccess}
+                checked={this.state.newUserPublic}
                 onChange= {() => {
                   this.setState({newUserPublic: !this.state.newUserPublic});
                 }}

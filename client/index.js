@@ -16,6 +16,7 @@ import Groups from './components/admin/Groups/Groups'
 import Sites from './components/admin/Sites/Sites'
 import ProfileFields from './components/admin/ProfileFields/ProfileFields'
 
+
 const restoreSession = () => {
   return new Promise((resolve, reject) => {
     RestHandler.Get('/auth/sessionreload', (err, res) => {

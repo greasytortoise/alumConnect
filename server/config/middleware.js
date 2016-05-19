@@ -78,7 +78,7 @@ module.exports = function(app, express) {
   passport.use(new GithubStrategy({
     clientID: config.githubClientId,
     clientSecret: config.githubClientSecret,
-    callbackURL: config.githubCallbackUrl
+    callbackURL: config.githubCallbackUrl,
   }, function(accessToken, refreshToken, profile, done){
     process.nextTick(function() {
 
