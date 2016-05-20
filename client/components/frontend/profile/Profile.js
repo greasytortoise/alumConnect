@@ -69,8 +69,8 @@ class Profile extends React.Component {
           console.log(profileData);
           this.setState({
             profileData: profileData,
-            public: profileData.user.public,
-            permission: profileData.user.permission,
+            public: profileData.user.public === 1 ? false : true,
+            permission: profileData.user.permission === 1 ? true : false,
           });
         });
       });
@@ -136,9 +136,9 @@ class Profile extends React.Component {
   //it's easier to work worth and then convert it to an array before saving.
   saveUserProfile(callback) {
     var url = '/db/users/user/' + this.props.params.user;
-    console.log(this.profileEdits)
-    this.profileEdits.user.public = this.state.public === true ? 1 : 0;
+    this.profileEdits.user.public = this.state.public === true ? 0 : 1;
     this.profileEdits.user.permission = this.state.permission === true ? 1 : 0;
+    console.log(this.profileEdits)
     var data = this.profileEdits;
     data.userInfo = _map(data.userInfo, function(val){return val});
     data.sites = _map(data.sites, function(val){return val});
@@ -150,14 +150,15 @@ class Profile extends React.Component {
   }
 
   profileEditButtonTapped() {
+    console.log(this.state);
     this.state.editing
-      ? this.setState({ editing: 0})
-      : this.setState({ editing: 1})
+      ? this.setState({ editing: 0 })
+      : this.setState({ editing: 1 });
   }
 
   profileSaveButtonTapped() {
     this.saveUserProfile( () => {
-      this.setState({ editing: 0})
+      this.setState({ editing: 0 });
       this.profileEdits = {
         user: this.profileEdits.user,
         sites: {},

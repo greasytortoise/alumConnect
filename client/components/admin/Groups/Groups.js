@@ -1,5 +1,5 @@
 import React from 'react'
-import {Input, ButtonInput, ListGroup, ListGroupItem} from 'react-bootstrap'
+import {Input, Button, ListGroup, ListGroupItem} from 'react-bootstrap'
 import RestHandler from '../../../util/RestHandler'
 import EditGroup from './EditGroup.js'
 
@@ -13,7 +13,7 @@ class Groups extends React.Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     RestHandler.Get('/db/groups', (err, res) => {
       this.setState({groups: res.body})
     });
@@ -36,7 +36,7 @@ class Groups extends React.Component {
       group_name: group
     };
 
-    if(group === '') {
+    if (group === '') {
       this.setState({
         error: true,
         isSaving: false
@@ -49,11 +49,11 @@ class Groups extends React.Component {
             error: true,
             isSaving: false
           });
-        } else if(res.status === 201) {
+        } else if(res.status === 200) {
           console.log('RESponse: ', res);
           setTimeout(() => {
-            this.setState({isSaving: false});
-            this.setState({groups: this.state.groups.concat(res.body)});
+            this.setState({ isSaving: false});
+            this.setState({ groups: this.state.groups.concat([res.body]) });
             this.clearForm();
           }, 200);
         }
@@ -81,11 +81,13 @@ class Groups extends React.Component {
           <Input type="text" label="Add Group"
             placeholder="Enter group name" ref="group" />
 
-            <ButtonInput
+            <Button
               bsStyle="primary"
               disabled={isSaving}
               type="submit"
-              value={isSaving ? `Saving...` : 'Submit'} />
+            >
+              {isSaving ? 'Saving...' : 'Submit'}
+            </Button>
           </form>
         {this.state.error && (
           <p>Enter a Group Name.</p>

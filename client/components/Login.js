@@ -4,7 +4,7 @@ import auth from '../util/authHelpers.js';
 import request from 'superagent';
 import RestHandler from '../util/RestHandler.js';
 
-import { Grid, Input, ButtonInput } from 'react-bootstrap';
+import { Grid, Button } from 'react-bootstrap';
 
 var Promise = require('bluebird');
 
@@ -40,7 +40,7 @@ const Login = React.createClass({
           <img className="image" src='../assets/logo.png' />
 
           <h3>Student Network</h3>
-          <ButtonInput bsStyle="primary" bsSize="large" type="submit" block>Log in with Github</ButtonInput>
+          <Button bsStyle="primary" bsSize="large" type="submit" block>Log in with Github</Button>
 
         </form>
 

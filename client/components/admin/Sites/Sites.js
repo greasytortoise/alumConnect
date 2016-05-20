@@ -1,5 +1,5 @@
 import React from 'react'
-import {Input, ButtonInput, ListGroup, ListGroupItem} from 'react-bootstrap'
+import {Input, Button, ListGroup, ListGroupItem} from 'react-bootstrap'
 import RestHandler from '../../../util/RestHandler'
 import EditSite from './EditSite.js'
 
@@ -91,11 +91,13 @@ class Sites extends React.Component {
           <Input type="text"  ref="url"
             placeholder="Enter site url  example: https://www.github.com/" />
 
-          <ButtonInput
+          <Button
             bsStyle="primary"
             disabled={isSaving}
             type="submit"
-            value={isSaving ? `Saving...` : 'Submit'} />
+          >
+          {isSaving ? 'Saving...' : 'Submit'}
+          </Button>
         </form>
 
         {this.state.error && (

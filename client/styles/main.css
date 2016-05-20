@@ -367,7 +367,9 @@ rejectStyle = {
 }
 
 
-
+.profileSidebarGroups {
+  margin-bottom: 20px;
+}
 
 
 /* TEMPORARY UNTIL I CAN FIGURE OUT SCSS!!*/

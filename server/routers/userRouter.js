@@ -20,4 +20,9 @@ userRouter.route('/user/:id')
 userRouter.route('/user/visibility')
   .post(util.isAdmin, userController.toggleVisible);
 
+userRouter.route('/name')
+  .get(function(req, res) {
+    res.send({ name: req.user.name, id: req.user.id });
+  });
+
 module.exports = userRouter;
