@@ -13,28 +13,23 @@ class DashboardEditGroup extends React.Component {
       id: group.id,
       group_name: group.group_name,
       visibleGroups: group.visibleGroups,
+      selectedGroups: [],
       allGroups: this.props.groups
     }
-    // console.log(this.state.group_name, this.state.visibleGroups, this.state.allGroups);
   }
 
   handleEditState(e) {
     var visibleGroups = [];
     var groups = this.state.visibleGroups;
-    // var allGroups = this.state.allGroups.slice();
     for (var id in groups) {
       var idString = id.toString();
       visibleGroups.push(idString);
       console.log(id, visibleGroups);
-      // visibleGroups.push({id: id, group_name:groups[id]})
-      // var index = allGroups.indexOf(visibleGroups[visibleGroups.length-1].id);
-      // allGroups.splice(index, 1)
     }
     e.preventDefault();
     this.setState({
       editing: true,
-      visibleGroups: visibleGroups,
-      // allGroups: allGroups
+      selectedGroups: visibleGroups,
     });
   }
 
@@ -45,9 +40,18 @@ class DashboardEditGroup extends React.Component {
   }
 
   handleVisibleGroupSelect (selectedGroups) {
-    console.log(selectedGroups)
+    var that = this
     this.setState({ 
-      visibleGroups:selectedGroups.split(',')
+      selectedGroups:selectedGroups.split(',')
+    });
+    var visibleGroups = {}; 
+    this.state.selectedGroups.forEach(function(id) {
+      visibleGroups[id] = that.state.allGroups[id].group_name;
+    })
+    console.log(this.state.selectedGroups, visibleGroups)
+    this.setState({ 
+      selectedGroups:selectedGroups.split(','),
+      visibleGroups: visibleGroups
     });
   }
 
@@ -59,7 +63,7 @@ class DashboardEditGroup extends React.Component {
       visibleGroups: this.state.visibleGroups
     };
 
-    if(group === '') {
+    if(this.state.group_name === '') {
       this.setState({error: true, editing: false});
     } else {
       RestHandler.Post('/db/groups/group/' + this.state.editGroup.id, data, (err, res) => {
@@ -93,7 +97,7 @@ class DashboardEditGroup extends React.Component {
             multi
             simpleValue
             autoBlur="true"
-            disabled={this.state.disabled} value={this.state.visibleGroups} 
+            disabled={this.state.disabled} value={this.state.selectedGroups} 
             placeholder="Select visible groups"
             labelKey="group_name"
             valueKey="idString"
