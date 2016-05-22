@@ -22,7 +22,8 @@ class Profile extends React.Component {
       profileData: {},
       editing: 0,
       showDelete: false,
-
+      hasAdminAccess: false,
+      userIsHidden: false
     };
 
     //if profile is edited / saved. sites and userInfo into will
@@ -31,7 +32,6 @@ class Profile extends React.Component {
       user: {},
       sites: {},
       userInfo:{},
-
     };
 
   }
@@ -66,7 +66,6 @@ class Profile extends React.Component {
       this.spliceFilledOutFieldsIntoAvailableFields(res.body, 'userInfo', '/db/fields', (profileData) => {
         this.spliceFilledOutFieldsIntoAvailableFields(profileData, 'sites', '/db/sites', (profileData) => {
           this.profileEdits.user = res.body.user
-          console.log(profileData);
           this.setState({
             profileData: profileData,
             public: profileData.user.public === 1 ? false : true,
@@ -279,7 +278,6 @@ class Profile extends React.Component {
     if(groups) {
       profileSidebar = <ProfileSidebar groups={groups} />;
     }
-
     if (auth.getCookie('ac') === '1' || this.state.profileData.user.public === 1) {
 
       return (
@@ -290,6 +288,7 @@ class Profile extends React.Component {
                 <Col xs={12} sm={5} md={4}>
                   <ProfileImage
                     src={image}
+                    profileUserId={id}
                     editing={this.state.editing} />
                 </Col>
                 <Col xs={12} sm={7} md={8}>

@@ -28,7 +28,7 @@ module.exports = function(app, express) {
 
   app.post('/user/uploadimage', function(req, res) {
     var originFile = req.body.fileName;
-    var userId = '1';
+    var userId = req.body.userId;
     var fileName = 'assets/photos/' + new Date().getTime() + '.jpg';
     sharp(req.file.buffer)
       .resize(800, 530)

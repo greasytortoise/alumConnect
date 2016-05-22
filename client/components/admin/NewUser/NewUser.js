@@ -45,6 +45,7 @@ class DashboardNewUser extends React.Component {
         githubid: this.state.githubInfo.id,
         handle: githubUsername,
         name: name,
+        image: '/assets/default.png',
         admin: this.state.newUserAdmin === true ? 1 : 0,
         public: this.state.newUserPublic === true ? 1 : 0,
       },
