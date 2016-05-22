@@ -12,19 +12,21 @@ class DashboardEditGroup extends React.Component {
       editing: false,
       id: group.id,
       group_name: group.group_name,
-      visibleGroups: [],
+      visibleGroups: group.visibleGroups,
       allGroups: this.props.groups
     }
     // console.log(this.state.group_name, this.state.visibleGroups, this.state.allGroups);
   }
 
   handleEditState(e) {
-    // debugger;
     var visibleGroups = [];
-    var groups = this.props.value.visibleGroups;
+    // var groups = this.props.value.visibleGroups;
     // var allGroups = this.state.allGroups.slice();
     for (var id in groups) {
-      visibleGroups.push({id: id, group_name:groups[id]})
+      var idString = id.toString();
+      visibleGroups.push(idString);
+      console.log(id, visibleGroups);
+      // visibleGroups.push({id: id, group_name:groups[id]})
       // var index = allGroups.indexOf(visibleGroups[visibleGroups.length-1].id);
       // allGroups.splice(index, 1)
     }
@@ -90,7 +92,9 @@ class DashboardEditGroup extends React.Component {
             <Select
             multi
             simpleValue
+            autoBlur="true"
             disabled={this.state.disabled} value={this.state.visibleGroups} 
+            placeholder="Select visible groups"
             labelKey="group_name"
             valueKey="idString"
             options={this.state.allGroups}
