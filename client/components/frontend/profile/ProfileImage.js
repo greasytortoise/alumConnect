@@ -30,10 +30,8 @@ class ProfileImage extends React.Component {
     this.getLoggedInUserData();
   }
   componentWillReceiveProps(nextProps) {
-    if(this.props.src) {
-      this.setState({
-        src: nextProps.src
-      });
+    if(nextProps.profileUserId !== this.props.profileUserId) {
+      this.setState({src: nextProps.src});
     }
   }
 
@@ -60,20 +58,20 @@ class ProfileImage extends React.Component {
               bsStyle="link"
               className="change-image-button"
               onClick={this.showEditModal.bind(this)}>
-              <Image src={this.state.src} responsive />
+              <Image src={this.state.src || this.props.src} responsive />
               <div className="label-overlay">Change image ✎</div>
             </Button>
            </div>
         )
       } else {
         return(
-          <Image src={this.props.src} responsive />
+          <Image src={this.state.src || this.props.src} responsive />
         )
       }
     }
     else {
       return (
-        <Image src={this.props.src} responsive />
+        <Image src={this.state.src || this.props.src} responsive />
       )
     }
   }
@@ -81,7 +79,11 @@ class ProfileImage extends React.Component {
   render() {
     return (
       <div>
-        <SelectImageModal fileName={this.props.src}  show={this.state.editModal} onHide={this.hideEditModal.bind(this)} />
+        <SelectImageModal
+          fileName={this.state.src || this.props.src}
+          show={this.state.editModal}
+          onHide={this.hideEditModal.bind(this)}
+          userId= {this.props.profileUserId}/>
         {this.renderImage()}
       </div>
     );
@@ -104,6 +106,7 @@ class SelectImageModal extends React.Component {
     const data = new FormData()
     data.append('fileName', fileName);
     data.append('photo', file);
+    data.append('userId', this.props.userId);
     // data.append('userId', file);
     RestHandler.Post('user/uploadimage', data, (err, res) => {
       if(err) {
@@ -116,7 +119,6 @@ class SelectImageModal extends React.Component {
    }
 
   render() {
-    console.log(this.props);
     return (
       <Modal {...this.props} aria-labelledby="contained-modal-title-md">
 
