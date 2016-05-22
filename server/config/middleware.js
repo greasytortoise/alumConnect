@@ -2,7 +2,7 @@ var bodyParser = require('body-parser');
 var redisClient = require('redis').createClient();
 var path = require('path');
 var util = require('../lib/utility.js');
-var multer  = require('multer');
+var multer = require('multer');
 var sharp = require('sharp');
 const configWP = require('../../webpack.config.js');
 const webpack = require('webpack');
@@ -17,7 +17,6 @@ var upload = multer({
 
 var passport = require('passport');
 var GithubStrategy = require('passport-github2').Strategy;
-var config = require('./githubAPIConfig.js');
 var Promise = require('bluebird');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
@@ -58,7 +57,7 @@ module.exports = function(app, express) {
     }
   });
   app.use(require('morgan')('dev'));
-  app.use(cookieParser(config.sessionSecret));
+  app.use(cookieParser(process.env.sessionSecret));
 
   app.use(session({
     store: new RedisStore({
@@ -68,7 +67,7 @@ module.exports = function(app, express) {
       client: redisClient,
     }),
     cookie: { maxAge: (24 * 3600 * 1000 * 7) }, // 7 Days in ms
-    secret: config.sessionSecret,
+    secret: process.env.sessionSecret,
   }));
 
   app.use(methodOverride());
@@ -76,9 +75,9 @@ module.exports = function(app, express) {
   app.use(passport.session());
 
   passport.use(new GithubStrategy({
-    clientID: config.githubClientId,
-    clientSecret: config.githubClientSecret,
-    callbackURL: config.githubCallbackUrl,
+    clientID: process.env.githubID,
+    clientSecret: process.env.githubSecret,
+    callbackURL: process.env.githubCallbackUrl,
   }, function(accessToken, refreshToken, profile, done){
     process.nextTick(function() {
 
