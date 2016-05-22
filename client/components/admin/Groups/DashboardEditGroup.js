@@ -20,7 +20,7 @@ class DashboardEditGroup extends React.Component {
 
   handleEditState(e) {
     var visibleGroups = [];
-    // var groups = this.props.value.visibleGroups;
+    var groups = this.state.visibleGroups;
     // var allGroups = this.state.allGroups.slice();
     for (var id in groups) {
       var idString = id.toString();
