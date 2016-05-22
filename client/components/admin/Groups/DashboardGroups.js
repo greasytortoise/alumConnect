@@ -186,7 +186,7 @@ class Groups extends React.Component {
         </form>
 
         {this.state.error && (
-          <p>Enter a Group Name & selest groups that are visible.</p>
+          <p>Enter a Group Name and select groups that are visible.</p>
         )}
       </div>
     );
