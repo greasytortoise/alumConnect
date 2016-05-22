@@ -20,7 +20,7 @@ var lex = LEX.create({
   configDir: '/etc/letsencrypt',
   approveRegistration: function (hostname, cb) {
     cb(null, {
-      domains: ['donkit.com'],
+      domains: ['hackreactorconnect.com'],
       email: 'bresnan.mw@gmail.com',
       agreeTos: true,
     });
@@ -29,8 +29,8 @@ var lex = LEX.create({
 
 lex.onRequest = app;
 
-lex.listen([3000], [1337, 5001], function () {
-  var protocol = ('requestCert' in this) ? 'https': 'http';
+lex.listen([3000], [80, 5001], function () {
+  var protocol = ('requestCert' in this) ? 'https' : 'http';
   console.log("Listening at " + protocol + '://localhost:' + this.address().port);
 });
 

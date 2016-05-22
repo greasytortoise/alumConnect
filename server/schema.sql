@@ -8,8 +8,8 @@
  *  populate the table.
 **/
 
-drop database if exists alumConnectTest;
-create database alumConnectTest;
+drop database if exists alumConnect;
+create database alumConnect;
 
 use alumConnectTest;
 
