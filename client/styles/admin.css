@@ -81,16 +81,17 @@
 /* form styles */
 
 .findingGithubInfo {
-  margin: -10px 0 0 10px;
-  float: left;
-  color: #666;
+  color: #777;
+  font-weight: normal;
+  font-size: 15px;
+  margin-left: 10px;
 }
 .add-new-user-button {
   margin-bottom: 20px;
 }
 
 .checkboxGroup {
-  margin-left: 4%;
+  /*margin-left: 4%;*/
 }
 /* Sidebar Styles */
 
@@ -155,11 +156,6 @@
   position: absolute;
 }
 
-.ghUsernameInput {
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
 .checkboxGroup {
   margin-top: 10px;
   margin-top: 10px;
@@ -168,4 +164,3 @@
 .publicCheckbox {
   margin-bottom: 10px;
 }
-
