@@ -18,7 +18,7 @@ class ProfileSidebar extends React.Component {
   componentDidMount() {
     this.getGroupMates(this.props.groups);
   }
-
+  
   getGroupMates(groups) {
     for(var key in groups) {
       var url = '/db/groups/group/' + key;
