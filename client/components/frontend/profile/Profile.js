@@ -28,12 +28,7 @@ class Profile extends React.Component {
 
     //if profile is edited / saved. sites and userInfo into will
     // be converted to an arr of objects -- see saveUserProfile()
-    this.profileEdits = {
-      user: {},
-      groups: {},
-      sites: {},
-      userInfo:{},
-    };
+    this.profileEdits = {user: {}, sites: {}, userInfo:{}};
 
   }
 
@@ -61,12 +56,12 @@ class Profile extends React.Component {
   // 3. sets the state to profileData, which renders the page!
   // 4. initializes this.profileEdits.user to currently viewing user
   getUserProfile(userId) {
-    console.log('Inside getUserProfile');
     var url = '/db/users/user/' + userId;
     RestHandler.Get(url, (err, res) => {
       this.spliceFilledOutFieldsIntoAvailableFields(res.body, 'userInfo', '/db/fields', (profileData) => {
         this.spliceFilledOutFieldsIntoAvailableFields(profileData, 'sites', '/db/sites', (profileData) => {
-          this.profileEdits.user = res.body.user
+          this.profileEdits.user = profileData.user;
+          this.profileEdits.groups = _map(profileData, (key, val) => val).join(',')
           this.setState({
             profileData: profileData,
             public: profileData.user.public === 1 ? false : true,
@@ -133,30 +128,26 @@ class Profile extends React.Component {
 
 
   //In saveUserProfile, the api accepts post requests in array format for
-  //data.userInfo and data.sites. I set them up as an object initially because
+  //data.userInfo and data.sites.
   //it's easier to work worth and then convert it to an array before saving.
   saveUserProfile(callback) {
     var url = '/db/users/user/' + this.props.params.user;
     this.profileEdits.user.public = this.state.public === true ? 0 : 1;
     this.profileEdits.user.permission = this.state.permission === true ? 1 : 0;
-    console.log(this.profileEdits)
     var data = this.profileEdits;
     data.userInfo = _map(data.userInfo, function(val){return val});
     data.sites = _map(data.sites, function(val){return val});
     RestHandler.Post(url, data, (err, res) => {
-      console.log(data);
       if (err) {return err;}
       callback(res);
     });
   }
 
   profileEditButtonTapped() {
-    console.log(this.state);
     if(this.state.editing) {
       this.setState({
         editing: 0,
       });
-      console.log('cancelled');
     } else {
       this.setState({ editing: 1 });
     }
@@ -164,12 +155,10 @@ class Profile extends React.Component {
 
   profileSaveButtonTapped() {
     this.saveUserProfile( () => {
+      this.profileEdits.sites = {};
+      this.profileEdits.userInfo = {};
       this.setState({ editing: 0 });
-      this.profileEdits = {
-        user: this.profileEdits.user,
-        sites: {},
-        userInfo: {},
-      };
+      this.getUserProfile(this.props.params.user);
     });
   }
   getAdminEdits() {
@@ -206,8 +195,6 @@ class Profile extends React.Component {
 
   setVisibilityChange(e) {
     const data = e.target.value;
-    console.log(data);
-
     if (data === 'Yes') {
       this.profileEdits.user.public = 1;
     } else if (data === 'No') {
@@ -219,7 +206,6 @@ class Profile extends React.Component {
     this.refs.permissionselect
 
     const data = e.target.checked;
-    console.log(data);
     if (data === 'admin') {
       this.profileEdits.user.permission = 1;
     } else if (data === 'user') {
@@ -266,7 +252,7 @@ class Profile extends React.Component {
   // saved when you call saveUserProfile()
   stageProfileEdits(callback) {
     callback(this.profileEdits);
-    console.log(this.profileEdits);
+    // console.log(this.profileEdits);
   }
 
   render() {
