@@ -3,13 +3,14 @@ import ProfileSidebar from './ProfileSidebar'
 import ProfileImage from './ProfileImage'
 import ProfileField from './ProfileField'
 import ProfileSite from './ProfileSite'
-import request from 'superagent'
 import ProfileGroups from './ProfileGroups'
+import ProfileAdminOptions from './ProfileAdminOptions'
 import ProfileEditButton from './ProfileEditButton'
+import request from 'superagent'
 import auth from '../../../util/authHelpers.js'
 import RestHandler from '../../../util/RestHandler'
 import {findDOMNode} from 'react-dom'
-import { InputGroup, ControlLabel, FormControl, Select, Button, Grid,  Row, Col, Image, Modal, Checkbox} from 'react-bootstrap';
+import { InputGroup, ControlLabel, FormControl, Select, Button, Grid,  Row, Col, Image, Modal} from 'react-bootstrap';
 var _map = require('lodash/map');
 var _find = require('lodash/find');
 var _clone = require('lodash/clone')
@@ -21,7 +22,6 @@ class Profile extends React.Component {
     this.state = {
       profileData: {},
       editing: 0,
-      showDelete: false,
       hasAdminAccess: false,
       userIsHidden: false
     };
@@ -161,36 +161,6 @@ class Profile extends React.Component {
       this.getUserProfile(this.props.params.user);
     });
   }
-  getAdminEdits() {
-    const that = this;
-    return (
-      <div>
-        <Row className="show-grid">
-          <Col xs={5}>
-            <Checkbox
-              checked={this.state.permission}
-              onChange= {() => {
-                this.setState({permission: !this.state.permission});
-              }}>Admin Access</Checkbox>
-          </Col>
-          <Col xs={4}>
-            <Checkbox
-              checked={this.state.public}
-              onChange= {() => {
-                this.setState({public: !this.state.public});
-              }}>
-              Hidden</Checkbox>
-          </Col>
-          <Col xs={3}>
-            <Button
-              onClick={this.setDeleteState.bind(this)}
-              className="delete-user"
-              bsStyle="link">✖ Delete</Button>
-          </Col>
-        </Row>
-      </div>
-    );
-  }
 
   setDeleteState(e) {
     e.preventDefault();
@@ -236,7 +206,7 @@ class Profile extends React.Component {
   render() {
     var adminView;
     if (auth.getCookie('ac') === '1' && this.state.editing === 1) {
-      adminView = this.getAdminEdits();
+      adminView = <ProfileAdminOptions />;
     }
     var {name, image, id} = (this.state.profileData.user) ? this.state.profileData.user : ''
     var groups = this.state.profileData.groups;
