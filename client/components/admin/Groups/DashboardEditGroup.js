@@ -21,6 +21,7 @@ class DashboardEditGroup extends React.Component {
   handleEditState(e) {
     var visibleGroups = [];
     var groups = this.state.visibleGroups;
+    console.log(groups);
     for (var id in groups) {
       var idString = id.toString();
       visibleGroups.push(idString);
@@ -52,7 +53,7 @@ class DashboardEditGroup extends React.Component {
     // console.log(this.state.allGroups, visibleGroups)
     this.setState({ 
       selectedGroups:groups,
-      visibleGroups: visibleGroups
+      visibleGroups: groups
     });
   }
 
@@ -63,13 +64,14 @@ class DashboardEditGroup extends React.Component {
       group_name: this.state.group_name,
       visibleGroups: this.state.visibleGroups
     };
-    console.log(data);
+    console.log('data',data);
     if(this.state.group_name === '') {
+      console.log(data);
       this.setState({error: true, editing: false});
     } else {
       RestHandler.Post('/db/groups/group/' + this.state.id, data, (err, res) => {
         if (err) {console.log(err);}
-        console.log(res.body)
+        console.log('hi there', res.body)
         this.setState({ editing: false });
       });
     }
