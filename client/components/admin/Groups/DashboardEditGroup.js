@@ -24,7 +24,7 @@ class DashboardEditGroup extends React.Component {
     for (var id in groups) {
       var idString = id.toString();
       visibleGroups.push(idString);
-      console.log(id, visibleGroups);
+      // console.log(id, visibleGroups);
     }
     e.preventDefault();
     this.setState({
@@ -40,17 +40,18 @@ class DashboardEditGroup extends React.Component {
   }
 
   handleVisibleGroupSelect (selectedGroups) {
-    var that = this
-    this.setState({ 
-      selectedGroups:selectedGroups.split(',')
-    });
+    var groups  = selectedGroups.split(',');
     var visibleGroups = {}; 
-    this.state.selectedGroups.forEach(function(id) {
-      visibleGroups[id] = that.state.allGroups[id].group_name;
+    this.state.allGroups.forEach(function(group){
+      for (var i = 0; i < groups.length; i++) {
+        if(groups[i] == group.idString){
+          visibleGroups[group.id] = group.group_name;
+        }
+      }
     })
-    console.log(this.state.selectedGroups, visibleGroups)
+    // console.log(this.state.allGroups, visibleGroups)
     this.setState({ 
-      selectedGroups:selectedGroups.split(','),
+      selectedGroups:groups,
       visibleGroups: visibleGroups
     });
   }
@@ -62,15 +63,14 @@ class DashboardEditGroup extends React.Component {
       group_name: this.state.group_name,
       visibleGroups: this.state.visibleGroups
     };
-
+    console.log(data);
     if(this.state.group_name === '') {
       this.setState({error: true, editing: false});
     } else {
-      RestHandler.Post('/db/groups/group/' + this.state.editGroup.id, data, (err, res) => {
-        if (err) {return err;}
+      RestHandler.Post('/db/groups/group/' + this.state.id, data, (err, res) => {
+        if (err) {console.log(err);}
         console.log(res.body)
         this.setState({ editing: false });
-        // this.setState({groups: this.state.groups.concat(res.body)})
       });
     }
   }
