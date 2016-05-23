@@ -171,8 +171,7 @@ class Profile extends React.Component {
               checked={this.state.permission}
               onChange= {() => {
                 this.setState({permission: !this.state.permission});
-              }}>
-              Admin Access</Checkbox>
+              }}>Admin Access</Checkbox>
           </Col>
           <Col xs={4}>
             <Checkbox
@@ -191,27 +190,6 @@ class Profile extends React.Component {
         </Row>
       </div>
     );
-  }
-
-  setVisibilityChange(e) {
-    const data = e.target.value;
-    if (data === 'Yes') {
-      this.stagedProfileEdits.user.public = 1;
-    } else if (data === 'No') {
-      this.stagedProfileEdits.user.public = 0;
-    }
-  }
-
-  setPermChange(e) {
-    this.refs.permissionselect
-
-    const data = e.target.checked;
-    if (data === 'admin') {
-      this.stagedProfileEdits.user.permission = 1;
-    } else if (data === 'user') {
-      this.stagedProfileEdits.user.permission = 0;
-    }
-
   }
 
   setDeleteState(e) {
@@ -238,7 +216,7 @@ class Profile extends React.Component {
         } else {
           console.log('User deleted');
           that.resetDeleteState();
-          window.location.href = '/dashboard';
+          window.location.href = '/';
         }
       });
   }
@@ -260,17 +238,11 @@ class Profile extends React.Component {
     if (auth.getCookie('ac') === '1' && this.state.editing === 1) {
       adminView = this.getAdminEdits();
     }
-    var name, image, groups, id = ''
-    if (this.state.profileData.user) {
-      var {name, image, id} = this.state.profileData.user
-    }
+    var {name, image, id} = (this.state.profileData.user) ? this.state.profileData.user : ''
     var groups = this.state.profileData.groups;
-    var profileSidebar;
-    if(groups) {
-      profileSidebar = <ProfileSidebar groups={groups} />;
-    }
-    if (auth.getCookie('ac') === '1' || this.state.profileData.user.public === 1) {
+    var profileSidebar = groups ? <ProfileSidebar groups={groups} /> : <div></div>;
 
+    if (auth.getCookie('ac') === '1' || this.state.profileData.user.public === 1) {
       return (
         <Row>
           <Col xs={12} sm={9} xl={10} className='float-right'>
