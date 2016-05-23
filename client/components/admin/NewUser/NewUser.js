@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormControl, Col, Row, Checkbox, InputGroup, Button, DropdownButton, MenuItem} from 'react-bootstrap'
+import { FormControl, Col, Row, Checkbox, InputGroup, Button, DropdownButton, MenuItem, ControlLabel} from 'react-bootstrap'
 import Select from 'react-select';
 import RestHandler from '../../../util/RestHandler';
 import reactDOM from 'react-dom';
@@ -102,7 +102,7 @@ class DashboardNewUser extends React.Component {
     var groupName = this.state.group.group_name || 'Select Group';
     var foundGithubUserMessage
     if(this.state.githubInfo === undefined) {
-      foundGithubUserMessage = <span className="findingGithubInfoI">Enter a valid github username</span>
+      foundGithubUserMessage = <span className="findingGithubInfo">Enter a valid github username</span>
     } else if (this.state.githubInfo === 'loading'){
       foundGithubUserMessage = <span className="findingGithubInfo">Loading...</span>
     } else {
@@ -121,13 +121,15 @@ class DashboardNewUser extends React.Component {
       <div>
         <h3 className="dashboard-title">Add new user</h3>
         <form onSubmit={this.handleSubmit.bind(this)}>
-          <InputGroup
-          controlId="newuserform"
-          >
+          <InputGroup>
+            <ControlLabel>Name</ControlLabel>
             <FormControl type="text" label="Full Name" placeholder="Enter name"
               ref="name" />
+          </InputGroup>
+
+          <InputGroup>
+            <ControlLabel>Github Account {foundGithubUserMessage}</ControlLabel>
             <FormControl
-              className="ghUsernameInput"
               type="text"
               label="Github Username"
               placeholder="Enter Github Username"
@@ -137,6 +139,7 @@ class DashboardNewUser extends React.Component {
                 this.delayGithubTillTypingEnds();
               }.bind(this)}/>
           </InputGroup>
+
           <label>Group(s)</label>
           <Select
             multi
@@ -164,7 +167,7 @@ class DashboardNewUser extends React.Component {
                   this.setState({newUserAdmin: !this.state.newUserAdmin});
                 }}
               >
-                Make this user an admin?
+                Give user admin access
               </Checkbox>
 
             </div>
@@ -172,7 +175,6 @@ class DashboardNewUser extends React.Component {
           <Row>
             <Col xs={12}>
             <Button
-              bsSize="lg"
               className="float-left add-new-user-button"
               bsStyle="primary"
               disabled={disableButton === true || isSaving}
@@ -181,7 +183,6 @@ class DashboardNewUser extends React.Component {
             {isSaving ? 'Saving...' : 'Submit'}
             </Button>
             </Col>
-            {foundGithubUserMessage}
           </Row>
         </form>
       </div>
