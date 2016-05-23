@@ -79,8 +79,8 @@ class Users extends React.Component {
     });
   }
 
-  handleFilterUsersInput() {
-    var filterText = this.refs.searchusers.refs.input.value.toLowerCase();
+  handleFilterUsersInput(e) {
+    var filterText = e.target.value.toLowerCase();
     this.setState({searchUsersText: filterText});
   }
 
