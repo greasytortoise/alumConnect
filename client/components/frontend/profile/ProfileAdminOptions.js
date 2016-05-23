@@ -1,5 +1,6 @@
 import React from 'react'
 import { FormControl, Row, Col, Checkbox, Button, InputGroup, Modal } from 'react-bootstrap';
+import RestHandler from '../../../util/RestHandler'
 
 
 class ProfileAdminOptions extends React.Component {
@@ -7,20 +8,25 @@ class ProfileAdminOptions extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
       showDelete: false,
       hasAdminAccess: false,
-      userIsHidden: false
+      userIsPublic: false
     };
   }
 
   componentDidMount() {
-    this.setState({value: this.props.siteDetails.value})
+    this.setState({
+      hasAdminAccess: this.props.permission,
+      userIsPublic: this.props.public,
+    });
   }
 
   componentWillReceiveProps(nextProps) {
     if(nextProps) {
-      this.setState({value: nextProps.siteDetails.value})
+      this.setState({
+        hasAdminAccess: nextProps.permission,
+        userIsPublic: nextProps.public,
+      });
     }
   }
   setDeleteState(e) {
@@ -36,77 +42,72 @@ class ProfileAdminOptions extends React.Component {
     });
   }
   deleteUser(e) {
-    var that = this;
     e.preventDefault();
-    request
-      .delete('/dashboard/db/users/user/' + that.state.profileData.user.id)
-      .end(function(err, res) {
-        if(err) {
-          console.log(err);
-        } else {
-          console.log('User deleted');
-          that.resetDeleteState();
-          window.location.href = '/';
-        }
-      });
+    var url = '/dashboard/db/users/user/' + this.props.userid;
+    RestHandler.Delete(url, (err, res) => {
+      if(!err) {
+        console.log('User deleted');
+        this.resetDeleteState();
+        window.location.href = '/';
+      }
+    });
   }
 
   closePopup() {
     this.setState({ showDelete: false });
   }
 
-  renderProfileAdminOptions() {
-    return (
-      <div>
-        <Row className="show-grid">
-          <Col xs={5}>
-            <Checkbox
-              checked={this.state.permission}
-              onChange= {() => {
-                this.setState({permission: !this.state.permission});
-              }}>Admin Access</Checkbox>
-          </Col>
-          <Col xs={4}>
-            <Checkbox
-              checked={this.state.public}
-              onChange= {() => {
-                this.setState({public: !this.state.public});
-              }}>
-              Hide User</Checkbox>
-          </Col>
-          <Col xs={3}>
-            <Button
-              onClick={this.setDeleteState.bind(this)}
-              className="delete-user"
-              bsStyle="link">✖ Delete User</Button>
-          </Col>
-        </Row>
-      </div>
-    );
-  }
 
   render() {
+    this.props.stageProfileEdits((editedObject) => {
+      editedObject.user.permission = this.state.hasAdminAccess ? 1 : 0;
+      editedObject.user.public = this.state.userIsPublic ? 1 : 0;
+    });
     return (
       <div>
-      {this.renderProfileAdminOptions()}
-      <Modal
-        show={this.state.showDelete}
-        onHide={this.closePopup.bind(this)}
-        container={this}
-        aria-labelledby="contained-modal-title"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title">Delete User</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          Are you sure you want to delete this user?
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={this.closePopup.bind(this)}>Cancel</Button>
-          <Button bsStyle="danger" onClick={this.deleteUser.bind(this)}>Delete</Button>
-        </Modal.Footer>
-      </Modal>
-    </div>
+        <div>
+          <Row className="show-grid">
+            <Col xs={5}>
+              <Checkbox
+                checked={this.state.hasAdminAccess}
+                onChange= {() => {this.setState({hasAdminAccess: !this.state.hasAdminAccess});
+                }}>Admin Access</Checkbox>
+            </Col>
+            <Col xs={4}>
+              <Checkbox
+                checked={!this.state.userIsPublic}
+                onChange= {() => {
+                  this.setState({userIsPublic: !this.state.userIsPublic});
+                }}>
+                Hide User</Checkbox>
+            </Col>
+            <Col xs={3}>
+              <Button
+                onClick={this.setDeleteState.bind(this)}
+                className="delete-user"
+                bsStyle="link">✖ Delete User</Button>
+            </Col>
+          </Row>
+        </div>
+
+        <Modal
+          show={this.state.showDelete}
+          onHide={this.closePopup.bind(this)}
+          container={this}
+          aria-labelledby="contained-modal-title"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title">Delete User</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Are you sure you want to delete this user?
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.closePopup.bind(this)}>Cancel</Button>
+            <Button bsStyle="danger" onClick={this.deleteUser.bind(this)}>Delete</Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
     );
   }
 }

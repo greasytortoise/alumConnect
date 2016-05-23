@@ -6,11 +6,10 @@ import ProfileSite from './ProfileSite'
 import ProfileGroups from './ProfileGroups'
 import ProfileAdminOptions from './ProfileAdminOptions'
 import ProfileEditButton from './ProfileEditButton'
-import request from 'superagent'
 import auth from '../../../util/authHelpers.js'
 import RestHandler from '../../../util/RestHandler'
 import {findDOMNode} from 'react-dom'
-import { InputGroup, ControlLabel, FormControl, Select, Button, Grid,  Row, Col, Image, Modal} from 'react-bootstrap';
+import { InputGroup, ControlLabel, FormControl, Select, Button, Grid, Row, Col, Image} from 'react-bootstrap';
 var _map = require('lodash/map');
 var _find = require('lodash/find');
 var _clone = require('lodash/clone')
@@ -22,8 +21,6 @@ class Profile extends React.Component {
     this.state = {
       profileData: {},
       editing: 0,
-      hasAdminAccess: false,
-      userIsHidden: false
     };
 
     //if profile is edited / saved. sites and userInfo into will
@@ -64,8 +61,6 @@ class Profile extends React.Component {
           this.stagedProfileEdits.groups = _map(profileData.groups, (key, val) => val).join(',')
           this.setState({
             profileData: profileData,
-            public: profileData.user.public === 1 ? false : true,
-            permission: profileData.user.permission === 1 ? true : false,
           });
         });
       });
@@ -125,6 +120,18 @@ class Profile extends React.Component {
     }
   }
 
+  renderProfileAdminOptions() {
+    if (auth.getCookie('ac') === '1' && this.state.editing === 1 && this.state.profileData.user) {
+      return(
+        <ProfileAdminOptions
+          stageProfileEdits = {this.stageProfileEdits.bind(this)}
+          permission = {this.state.profileData.user.permission}
+          public = {this.state.profileData.user.public}
+          userid = {this.state.profileData.user.id}
+          />
+      )
+    }
+  }
 
 
   //In saveUserProfile, the api accepts post requests in array format for
@@ -132,8 +139,6 @@ class Profile extends React.Component {
   //it's easier to work worth and then convert it to an array before saving.
   saveUserProfile(callback) {
     var url = '/db/users/user/' + this.props.params.user;
-    this.stagedProfileEdits.user.public = this.state.public === true ? 0 : 1;
-    this.stagedProfileEdits.user.permission = this.state.permission === true ? 1 : 0;
     var data = this.stagedProfileEdits;
     data.userInfo = _map(data.userInfo, function(val){return val});
     data.sites = _map(data.sites, function(val){return val});
@@ -162,52 +167,16 @@ class Profile extends React.Component {
     });
   }
 
-  setDeleteState(e) {
-    e.preventDefault();
-    this.setState({
-      showDelete: true,
-    });
-  }
-
-  resetDeleteState() {
-    this.setState({
-      showDelete: false,
-    });
-  }
-
-  deleteUser(e) {
-    var that = this;
-    e.preventDefault();
-    request
-      .delete('/dashboard/db/users/user/' + that.state.profileData.user.id)
-      .end(function(err, res) {
-        if(err) {
-          console.log(err);
-        } else {
-          console.log('User deleted');
-          that.resetDeleteState();
-          window.location.href = '/';
-        }
-      });
-  }
-
-  closePopup() {
-    this.setState({ showDelete: false });
-  }
-
   // stageProfileEdits is passed into child components where the value can be
   // edited and saved. It updates the stagedProfileEdits property, which will be
   // saved when you call saveUserProfile()
   stageProfileEdits(callback) {
     callback(this.stagedProfileEdits);
-    // console.log(this.stagedProfileEdits);
+    console.log("permission: ", this.stagedProfileEdits.user.permission);
+    console.log("public: ", this.stagedProfileEdits.user.public);
   }
 
   render() {
-    var adminView;
-    if (auth.getCookie('ac') === '1' && this.state.editing === 1) {
-      adminView = <ProfileAdminOptions />;
-    }
     var {name, image, id} = (this.state.profileData.user) ? this.state.profileData.user : ''
     var groups = this.state.profileData.groups;
     var profileSidebar = groups ? <ProfileSidebar groups={groups} /> : <div></div>;
@@ -236,7 +205,7 @@ class Profile extends React.Component {
                   <ul>
                     {this.renderProfileSites()}
                   </ul>
-                  {adminView}
+                  {this.renderProfileAdminOptions()}
                 </Col>
               </Row>
             </div>
@@ -250,33 +219,9 @@ class Profile extends React.Component {
                 profileSaveButtonTapped = {this.profileSaveButtonTapped.bind(this)} />
             </div>
           </Col>
-
           <Col xs={12} sm={3} xl={2}>
             {profileSidebar}
           </Col>
-
-
-
-
-          <Modal
-            show={this.state.showDelete}
-            onHide={this.closePopup.bind(this)}
-            container={this}
-            aria-labelledby="contained-modal-title"
-          >
-            <Modal.Header closeButton>
-              <Modal.Title id="contained-modal-title">Delete User</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              Are you sure you want to delete this user?
-            </Modal.Body>
-            <Modal.Footer>
-              <Button onClick={this.closePopup.bind(this)}>Cancel</Button>
-              <Button bsStyle="danger" onClick={this.deleteUser.bind(this)}>Delete</Button>
-            </Modal.Footer>
-          </Modal>
-
-
         </Row>
 
       );
