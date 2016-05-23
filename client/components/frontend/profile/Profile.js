@@ -20,7 +20,6 @@ class Profile extends React.Component {
     super (props);
     this.state = {
       profileData: {},
-      stagedProfileChanges: {},
       editing: 0,
       showDelete: false,
       hasAdminAccess: false,
@@ -31,6 +30,7 @@ class Profile extends React.Component {
     // be converted to an arr of objects -- see saveUserProfile()
     this.profileEdits = {
       user: {},
+      groups: {},
       sites: {},
       userInfo:{},
     };
@@ -58,8 +58,8 @@ class Profile extends React.Component {
   // 1. Gets the users profile (but doesn't update the state yet)
   // 2. Run functions to get all the available fields on the site and splice in
   //    the filled out fields to a profileData object
-  // 3. sets the state to profileData, which renders most of the page!
-  // 4. initializes this.profileEdits.user to currently vieweing user
+  // 3. sets the state to profileData, which renders the page!
+  // 4. initializes this.profileEdits.user to currently viewing user
   getUserProfile(userId) {
     console.log('Inside getUserProfile');
     var url = '/db/users/user/' + userId;
@@ -76,13 +76,14 @@ class Profile extends React.Component {
       });
     });
   }
+
   spliceFilledOutFieldsIntoAvailableFields(profileData, objectToUpdate, url, callback) {
     RestHandler.Get(url, (err, res) => {
       var filledOutFields = profileData[objectToUpdate];
       var availableFields = res.body;
       availableFields.forEach(function(field, i) {
-        if (!filledOutFields[i]) {
-          filledOutFields[i] = field;
+        if (!filledOutFields[field.id]) {
+          filledOutFields[field.id] = field;
         }
       });
       profileData[objectToUpdate] = filledOutFields
@@ -90,11 +91,10 @@ class Profile extends React.Component {
     });
   }
 
-
-
   renderProfileFields() {
     if(this.state.profileData.userInfo) {
       return _map(this.state.profileData.userInfo, (detail, index) => {
+        detail.id = index;
         return (<ProfileField
           fieldDetails={detail}
           editing={this.state.editing}
@@ -107,6 +107,7 @@ class Profile extends React.Component {
   renderProfileSites() {
     if(this.state.profileData.sites) {
       return _map(this.state.profileData.sites, (site, index) => {
+        site.id = index;
         return (
           <li key={index}>
             <ProfileSite
@@ -153,7 +154,7 @@ class Profile extends React.Component {
     console.log(this.state);
     if(this.state.editing) {
       this.setState({
-        editing: 0
+        editing: 0,
       });
       console.log('cancelled');
     } else {
@@ -261,12 +262,11 @@ class Profile extends React.Component {
   }
 
   // stageProfileEdits is passed into child components where the value can be
-  // edited and saved. It updateds the profileEdits property, which will be
+  // edited and saved. It updates the profileEdits property, which will be
   // saved when you call saveUserProfile()
-
   stageProfileEdits(callback) {
     callback(this.profileEdits);
-    // console.log(this.profileEdits);
+    console.log(this.profileEdits);
   }
 
   render() {
