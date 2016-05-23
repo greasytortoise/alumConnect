@@ -29,6 +29,15 @@ class Groups extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(nextProps) {
+      this.setState({
+        groups: []
+      });
+      this.getGroups();
+    }
+  }
+
   componentWillMount() {
     this.getGroups();
   }
