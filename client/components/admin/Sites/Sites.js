@@ -1,5 +1,5 @@
 import React from 'react'
-import {Input, Button, ListGroup, ListGroupItem} from 'react-bootstrap'
+import {FormGroup, FormControl, Button, ListGroup, ListGroupItem, ControlLabel} from 'react-bootstrap'
 import RestHandler from '../../../util/RestHandler'
 import EditSite from './EditSite.js'
 
@@ -9,7 +9,9 @@ class Sites extends React.Component {
     this.state = {
       sites: [],
       error: false,
-      isSaving: false
+      isSaving: false,
+      newSiteName: '',
+      newSiteUrl: '',
     }
   }
 
@@ -31,8 +33,8 @@ class Sites extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.setState({isSaving: true});
-    var site = this.refs.site.getValue();
-    var url = this.refs.url.getValue();
+    var site = this.state.newSiteName;
+    var url = this.state.newSiteUrl;
 
     var siteInfo = {
       site_name: site,
@@ -56,9 +58,12 @@ class Sites extends React.Component {
         } else if(res.status === 201) {
           console.log('RESponse: ', res);
           setTimeout(() => {
-            this.setState({isSaving: false});
-            this.setState({sites: this.state.sites.concat(res.body)});
-            this.clearForm();
+            this.setState({
+              isSaving: false,
+              sites: this.state.sites.concat(res.body),
+              newSiteName: '',
+              newSiteUrl: '',
+            });
           }, 200);
         }
       });
@@ -69,10 +74,9 @@ class Sites extends React.Component {
   }
 
   clearForm() {
-    const fields = ['site', 'url'];
-    fields.map(field => {
-      this.refs[field].refs['input'].value = '';
-    });
+    this.setState({
+      is
+    })
   }
 
   render() {
@@ -84,21 +88,28 @@ class Sites extends React.Component {
         <ListGroup>
           {this.renderSites()}
         </ListGroup>
-        <form onSubmit={this.handleSubmit.bind(this)}>
+        <FormGroup>
+          <ControlLabel>Add a new site</ControlLabel>
 
-          <Input type="text" label="Add Site"
-            placeholder="Enter site name" ref="site" />
-          <Input type="text"  ref="url"
-            placeholder="Enter site url  example: https://www.github.com/" />
+          <FormControl
+            type="text"
+            placeholder="Enter site name"
+            value={this.state.newSiteName}
+            onChange={(e) =>{this.setState({newSiteName: e.target.value})}} />
+          <FormControl
+            type="text"
+            placeholder="Enter site url example: https://www.github.com/"
+            value={this.state.newSiteUrl}
+            onChange={(e) =>{this.setState({newSiteUrl: e.target.value})}} />
 
           <Button
+            type="submit"
             bsStyle="primary"
             disabled={isSaving}
-            type="submit"
-          >
+            onClick={this.handleSubmit.bind(this)}>
           {isSaving ? 'Saving...' : 'Submit'}
           </Button>
-        </form>
+        </FormGroup>
 
         {this.state.error && (
           <span>Enter a unique Site Name and URL.</span>

@@ -352,8 +352,12 @@ rejectStyle = {
 };*/
 
 .input-group {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   width: 100%;
+}
+
+.form-group input {
+  margin-bottom: 10px;
 }
 
 .delete-user {
