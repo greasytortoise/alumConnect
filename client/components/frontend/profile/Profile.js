@@ -28,7 +28,7 @@ class Profile extends React.Component {
 
     //if profile is edited / saved. sites and userInfo into will
     // be converted to an arr of objects -- see saveUserProfile()
-    this.profileEdits = {user: {}, sites: {}, userInfo:{}};
+    this.stagedProfileEdits = {user: {}, sites: {}, userInfo:{}};
 
   }
 
@@ -54,14 +54,14 @@ class Profile extends React.Component {
   // 2. Run functions to get all the available fields on the site and splice in
   //    the filled out fields to a profileData object
   // 3. sets the state to profileData, which renders the page!
-  // 4. initializes this.profileEdits.user to currently viewing user
+  // 4. initializes this.stagedProfileEdits.user to currently viewing user
   getUserProfile(userId) {
     var url = '/db/users/user/' + userId;
     RestHandler.Get(url, (err, res) => {
       this.spliceFilledOutFieldsIntoAvailableFields(res.body, 'userInfo', '/db/fields', (profileData) => {
         this.spliceFilledOutFieldsIntoAvailableFields(profileData, 'sites', '/db/sites', (profileData) => {
-          this.profileEdits.user = profileData.user;
-          this.profileEdits.groups = _map(profileData, (key, val) => val).join(',')
+          this.stagedProfileEdits.user = profileData.user;
+          this.stagedProfileEdits.groups = _map(profileData.groups, (key, val) => val).join(',')
           this.setState({
             profileData: profileData,
             public: profileData.user.public === 1 ? false : true,
@@ -132,9 +132,9 @@ class Profile extends React.Component {
   //it's easier to work worth and then convert it to an array before saving.
   saveUserProfile(callback) {
     var url = '/db/users/user/' + this.props.params.user;
-    this.profileEdits.user.public = this.state.public === true ? 0 : 1;
-    this.profileEdits.user.permission = this.state.permission === true ? 1 : 0;
-    var data = this.profileEdits;
+    this.stagedProfileEdits.user.public = this.state.public === true ? 0 : 1;
+    this.stagedProfileEdits.user.permission = this.state.permission === true ? 1 : 0;
+    var data = this.stagedProfileEdits;
     data.userInfo = _map(data.userInfo, function(val){return val});
     data.sites = _map(data.sites, function(val){return val});
     RestHandler.Post(url, data, (err, res) => {
@@ -155,8 +155,8 @@ class Profile extends React.Component {
 
   profileSaveButtonTapped() {
     this.saveUserProfile( () => {
-      this.profileEdits.sites = {};
-      this.profileEdits.userInfo = {};
+      this.stagedProfileEdits.sites = {};
+      this.stagedProfileEdits.userInfo = {};
       this.setState({ editing: 0 });
       this.getUserProfile(this.props.params.user);
     });
@@ -196,9 +196,9 @@ class Profile extends React.Component {
   setVisibilityChange(e) {
     const data = e.target.value;
     if (data === 'Yes') {
-      this.profileEdits.user.public = 1;
+      this.stagedProfileEdits.user.public = 1;
     } else if (data === 'No') {
-      this.profileEdits.user.public = 0;
+      this.stagedProfileEdits.user.public = 0;
     }
   }
 
@@ -207,9 +207,9 @@ class Profile extends React.Component {
 
     const data = e.target.checked;
     if (data === 'admin') {
-      this.profileEdits.user.permission = 1;
+      this.stagedProfileEdits.user.permission = 1;
     } else if (data === 'user') {
-      this.profileEdits.user.permission = 0;
+      this.stagedProfileEdits.user.permission = 0;
     }
 
   }
@@ -248,11 +248,11 @@ class Profile extends React.Component {
   }
 
   // stageProfileEdits is passed into child components where the value can be
-  // edited and saved. It updates the profileEdits property, which will be
+  // edited and saved. It updates the stagedProfileEdits property, which will be
   // saved when you call saveUserProfile()
   stageProfileEdits(callback) {
-    callback(this.profileEdits);
-    // console.log(this.profileEdits);
+    callback(this.stagedProfileEdits);
+    // console.log(this.stagedProfileEdits);
   }
 
   render() {
