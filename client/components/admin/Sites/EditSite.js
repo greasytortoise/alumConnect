@@ -1,5 +1,5 @@
 import React from 'react'
-import { InputGroup, FormControl, ControlLabel, Button, ListGroupItem } from 'react-bootstrap'
+import { InputGroup, FormControl, ControlLabel, Button } from 'react-bootstrap'
 import RestHandler from '../../../util/RestHandler'
 
 class EditSite extends React.Component {
