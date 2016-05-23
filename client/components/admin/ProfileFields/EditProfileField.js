@@ -1,19 +1,19 @@
 import React from 'react'
-import { Input, Button } from 'react-bootstrap'
+import { InputGroup, FormControl, ControlLabel, Button } from 'react-bootstrap'
 import RestHandler from '../../../util/RestHandler'
 
 class EditProfileField extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: this.props.value.title,
+      fieldName: this.props.field.title,
       disabled: true
     }
   }
 
-  handleInputChange () {
+  handleInputChange (e) {
     this.setState({
-      value: this.refs.input.getValue(),
+      fieldName: e.target.value,
       disabled: false
     });
   }
@@ -24,29 +24,35 @@ class EditProfileField extends React.Component {
         disabled: false
       });
     } else {
-      var url = '/db/fields/field/' + this.props.value.id;
+      var url = '/db/fields/field/' + this.props.field.id;
       var data = {
-        title: this.state.value
+        title: this.state.fieldName
       };
 
       RestHandler.Post(url, data, (err, res) => {
         if (err) {return err;}
-      });
-
-      this.setState({
-        disabled: true
+        this.setState({
+          disabled: true
+        });
       });
     }
   }
 
   render() {
-    var button = '';
-    this.state.disabled ? button = 'edit' : button = 'save';
-    const innerButton = <Button onClick={this.handleClick.bind(this)}>{button}</Button>;
+    var buttonText = this.state.disabled ? 'edit' : 'save';
     return (
-      <div key={this.props.value.id}>
-        <Input type="text" disabled={this.state.disabled} buttonAfter={innerButton} value={this.state.value} 
-          ref="input" onChange={this.handleInputChange.bind(this)} />
+      <div key={this.props.field.id}>
+        <InputGroup className="input-with-dropdown">
+          <InputGroup.Addon>
+            <Button onClick={this.handleClick.bind(this)}>{buttonText}</Button>
+          </InputGroup.Addon>
+        <FormControl
+          type="text"
+          disabled={this.state.disabled}
+          value={this.state.fieldName}
+          ref="input"
+          onChange={this.handleInputChange.bind(this)} />
+        </InputGroup>
       </div>
     );
   }

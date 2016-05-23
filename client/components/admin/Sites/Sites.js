@@ -25,13 +25,13 @@ class Sites extends React.Component {
     return this.state.sites.map(function(site) {
       var {id, site_name, base_url} = site;
       return (
-        <EditSite key={id} value={site} />
+        <EditSite key={id} site={site} />
       );
     });
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
+  handleSubmit(e) {
+    e.preventDefault();
     this.setState({isSaving: true});
     var site = this.state.newSiteName;
     var url = this.state.newSiteUrl;
@@ -80,7 +80,6 @@ class Sites extends React.Component {
   }
 
   render() {
-    var isSaving = this.state.isSaving;
 
     return (
       <div>
@@ -99,15 +98,15 @@ class Sites extends React.Component {
           <FormControl
             type="text"
             placeholder="Enter site url example: https://www.github.com/"
-            value={this.state.newSiteUrl}
+            value={this.state.newSiteName}
             onChange={(e) =>{this.setState({newSiteUrl: e.target.value})}} />
 
           <Button
             type="submit"
             bsStyle="primary"
-            disabled={isSaving}
+            disabled={this.state.isSaving}
             onClick={this.handleSubmit.bind(this)}>
-          {isSaving ? 'Saving...' : 'Submit'}
+          {this.state.isSaving ? 'Saving...' : 'Submit'}
           </Button>
         </FormGroup>
 
