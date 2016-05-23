@@ -32,7 +32,7 @@ module.exports = {
   },
 
   //for filtering
-  
+
   // fetchUsers3: function(req, res) {
   //   Users
   //     .fetch({withRelated: ['groups']})
@@ -151,26 +151,26 @@ module.exports = {
                     public: user.get('public'),
                     permission: user.get('permission'),
                   },
-                  sites: userSites.map(function(userSite) {
+                  sites: userSites.reduce(function(pre, userSite) {
                     var site = userSite.related('sites');
-                    return {
-                      id: site.id,
+                    pre[site.id] = {
                       site_name: site.get('site_name'),
                       base_url: site.get('base_url'),
                       value: userSite.get('rest_url')
                     };
-                  }),
-                  userInfo: bios.map(function(bio) {
+                    return pre;
+                  }, {}),
+                  userInfo: bios.reduce(function(pre, bio) {
                     var bioField = bio.related('bioFields');
-                    return {
-                      id: bioField.id,
+                    pre[bioField.id] = {
                       title: bioField.get('title'),
                       value: bio.get('bio')
-                    };
-                  }),
-                  groups: groups.reduce(function(prev, group) {
-                    prev[group.id] = group.get('group_name');
-                    return prev;
+                    }
+                    return pre;
+                  }, {}),
+                  groups: groups.reduce(function(pre, group) {
+                    pre[group.id] = group.get('group_name');
+                    return pre;
                   }, {})
                 };
                 res.json(retObj);
@@ -178,9 +178,9 @@ module.exports = {
         });
     });
   },
-  
+
   //NEW VERSION FILTERING
-  
+
   // fetchUserInfo3: function(req, res) {
   //   var id = req.params.id;
   //   User
