@@ -30,6 +30,7 @@ class DashboardEditGroup extends React.Component {
     this.setState({
       editing: true,
       selectedGroups: visibleGroups,
+      visibleGroups: visibleGroups
     });
   }
 
@@ -78,6 +79,7 @@ class DashboardEditGroup extends React.Component {
 
   closePopup() {
     this.setState({ editing: false });
+    this.props.getGroups();
   }
 
   render() {
