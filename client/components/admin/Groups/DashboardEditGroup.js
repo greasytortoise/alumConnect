@@ -61,9 +61,10 @@ class DashboardEditGroup extends React.Component {
       visibleGroups: this.state.visibleGroups
     };
     console.log('data',data);
-    if(this.state.group_name === '' || this.state.visibleGroups.length === 0) {
+    if(this.state.group_name === '' || data.visibleGroups.length === 0) {
       console.log(data);
       this.setState({error: true, editing: false});
+      this.props.getGroups();
     } else {
       RestHandler.Post('/db/groups/group/' + this.state.id, data, (err, res) => {
         if (err) {console.log(err);}
@@ -109,8 +110,8 @@ class DashboardEditGroup extends React.Component {
           </Modal.Footer>
         </Modal>
 
-        <Button bsStyle="link" onClick={this.handleEditState.bind(this)}>
-        Edit</Button>
+        <a onClick={this.handleEditState.bind(this)}>
+        Edit</a>
       </div>
     );
   }
