@@ -157,8 +157,7 @@ class DashboardNewUser extends React.Component {
                 checked={this.state.newUserPublic}
                 onChange= {() => {
                   this.setState({newUserPublic: !this.state.newUserPublic});
-                }}
-              >
+                }}>
                 Make this user publicly visible?
               </Checkbox>
 
@@ -166,8 +165,7 @@ class DashboardNewUser extends React.Component {
                 checked={this.state.newUserAdmin}
                 onChange= {() => {
                   this.setState({newUserAdmin: !this.state.newUserAdmin});
-                }}
-              >
+                }}>
                 Give user admin access
               </Checkbox>
 
