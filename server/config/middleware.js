@@ -69,6 +69,7 @@ module.exports = function(app, express) {
     }),
     cookie: { maxAge: (24 * 3600 * 1000 * 7) }, // 7 Days in ms
     secret: config.sessionSecret,
+    saveUninitialized: false,
   }));
 
   app.use(methodOverride());
