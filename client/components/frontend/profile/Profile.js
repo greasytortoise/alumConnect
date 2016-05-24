@@ -185,7 +185,7 @@ class Profile extends React.Component {
     var {name, image, id} = (this.state.profileData.user) ? this.state.profileData.user : ''
     var groups = this.state.profileData.groups;
     var profileSidebar = groups ? <ProfileSidebar groups={groups} /> : <div></div>;
-    if (auth.getCookie('ac') === '1' || this.state.profileData.user.public === 1) {
+    if (this.state.profileData.user && (auth.getCookie('ac') === '1' || this.state.profileData.user.public === 1)) {
       return (
         <Row>
           <Col xs={12} sm={9} xl={10} className='float-right'>
