@@ -77,7 +77,7 @@ module.exports = function(app, express) {
   passport.use(new GithubStrategy({
     clientID: process.env.githubID,
     clientSecret: process.env.githubSecret,
-    callbackURL: process.env.githubCallbackUrl,
+    callbackURL: 'https://hackreactorconnect.com/auth/callback',
   }, function(accessToken, refreshToken, profile, done){
     process.nextTick(function() {
 
