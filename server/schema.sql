@@ -1,7 +1,7 @@
 /** Make sure to create (or re-create) the database
  *  before running this code. To do this, run:
  *
- *  $ mysql -u root < server/schema.sql
+ *  $ mysql -u root -p < server/schema.sql
  *
  *  Note: Change password if necessary.
  *  Also at the bottom are dummy variables to
@@ -89,24 +89,19 @@ create table Bios (
 insert into Groups
   (group_name)
 values
-  ('staff'),
-  ('president');
+  ('staff');
 
 insert into Users
   (handle, githubid, name, email, image, url_hash, public, permission)
 values
-<<<<<<< 39379a73eacae6204b73c679e1dde318c54ff33e
 
-=======
->>>>>>> groups modified
   -- ('your_handle', 'your_id', 'DONALD TRUMP', 'admin@admin.com', '/assets/photos/trump.jpg', 'ndas2q', 0, 1);
-  ('alamuv', 8962181, 'Alamu', 'admin@admin.com', '/assets/photos/trump.jpg', 'ndas2q', 0, 1);
+  ('mbresnan1701', 15022604, 'DONALD TRUMP', 'admin@admin.com', '/assets/photos/trump.jpg', 'ndas2q', 1, 1);
 
 insert into Groups_Users -- new addition
   (user_id, group_id)
 values
-  (1, 1),
-  (1, 2);
+  (1, 1);
 
 insert into Sites
   (site_name, base_url, active)
