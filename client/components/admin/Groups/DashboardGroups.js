@@ -65,10 +65,9 @@ class Groups extends React.Component {
     var groups = this.state.groups.slice();
     var index = groups.indexOf(group);
     groups.splice(index, 1)
-    // console.log(group, groups);
     var data = JSON.parse(JSON.stringify(group));
     return (
-      <EditGroup onClick={() => {console.log('Edit group')}} value={data} groups={groups}/>
+      <EditGroup getGroups={this.getGroups.bind(this)} value={data} groups={groups}/>
     );
   }
 
@@ -116,7 +115,7 @@ class Groups extends React.Component {
           ref='groupstable'
           tableClassName='table'
           useGriddleStyles={false}
-          resultsPerPage={5}
+          resultsPerPage={40}
           columns={["group_name","Visible_Groups","Edit"]}/>
 
         <form onSubmit={this.handleSubmit.bind(this)}>
