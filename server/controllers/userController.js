@@ -280,7 +280,6 @@ module.exports = {
                     githubid: data.user.githubid,
                     name: user.get('name'),
                     email: data.user.email,
-                    image: data.user.image,
                     url_hash: data.user.url,
                     permission: data.user.permission === 0 ? 0 : 1,
                     public: data.user.public === 0 ? 0 : 1,
