@@ -32,7 +32,7 @@ class Profile extends React.Component {
   componentWillReceiveProps(nextProps) {
     //For when the route changes from something like /users/3 to /users/6
     //When clicking on the sidebar url
-    if(nextProps) {
+    if (nextProps) {
       this.state = {
         profileData: {},
         editing: 0
@@ -55,6 +55,9 @@ class Profile extends React.Component {
   getUserProfile(userId) {
     var url = '/db/users/user/' + userId;
     RestHandler.Get(url, (err, res) => {
+      if (res.body === 'Permission Denied') {
+        window.location.href = '/';
+      }
       this.spliceFilledOutFieldsIntoAvailableFields(res.body, 'userInfo', '/db/fields', (profileData) => {
         this.spliceFilledOutFieldsIntoAvailableFields(profileData, 'sites', '/db/sites', (profileData) => {
           this.stagedProfileEdits.user = profileData.user;
@@ -97,15 +100,17 @@ class Profile extends React.Component {
   renderProfileSites() {
     if(this.state.profileData.sites) {
       return _map(this.state.profileData.sites, (site, index) => {
-        site.id = index;
-        return (
-          <li key={index}>
-            <ProfileSite
-            siteDetails={site}
-            editing={this.state.editing}
-            stageProfileEdits = {this.stageProfileEdits.bind(this)} />
-          </li>
-        );
+        if (site !== undefined) {
+          // site.id = index;
+          return (
+            <li key={index}>
+              <ProfileSite
+              siteDetails={site}
+              editing={this.state.editing}
+              stageProfileEdits = {this.stageProfileEdits.bind(this)} />
+            </li>
+          );
+        }
       });
     }
   }
@@ -172,15 +177,14 @@ class Profile extends React.Component {
   // saved when you call saveUserProfile()
   stageProfileEdits(callback) {
     callback(this.stagedProfileEdits);
-    console.log("permission: ", this.stagedProfileEdits.user.permission);
-    console.log("public: ", this.stagedProfileEdits.user.public);
+    // console.log("permission: ", this.stagedProfileEdits.user.permission);
+    // console.log("public: ", this.stagedProfileEdits.user.public);
   }
 
   render() {
     var {name, image, id} = (this.state.profileData.user) ? this.state.profileData.user : ''
     var groups = this.state.profileData.groups;
     var profileSidebar = groups ? <ProfileSidebar groups={groups} /> : <div></div>;
-
     if (auth.getCookie('ac') === '1' || this.state.profileData.user.public === 1) {
       return (
         <Row>

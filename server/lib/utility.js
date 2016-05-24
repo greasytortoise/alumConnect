@@ -48,7 +48,6 @@ exports.canISeeThisUser = function(userObj, req) {
     var selectedGroup;
     var targetGroup;
     
-    console.log(req.user)
     for (var group in req.user.groups) {
       if (adminGroups.indexOf(group) !== -1) {
         resolve(userObj);
@@ -71,7 +70,7 @@ exports.canISeeThisUser = function(userObj, req) {
         if (results) {
           resolve(userObj);
         } else {
-          resolve('YOU... SHALL NOT .... PASS!!!');
+          resolve('Permission Denied');
         }
       });
   });
@@ -138,12 +137,14 @@ exports.canISeeThisGroup = function(groupObj, req) {
         selectedGroup = group;
       }
     }
+    
     visGroup.where({ Group_id: selectedGroup, Visible_id: targetGroup }).fetch()
       .then(function(results) {
-        if (results) {
+        console.log(results);
+        if (results !== null) {
           resolve(groupObj);
         } else {
-          resolve('YOU... SHALL NOT .... PASS!!!');
+          resolve('Permission Denied');
         }
       })
       .catch(function(err) {
@@ -153,37 +154,31 @@ exports.canISeeThisGroup = function(groupObj, req) {
 };
 
 
-exports.filterGroups = function(groupsArr, userid) {
+exports.filterGroups = function(groupsArr, user) {
   return new Promise(function(resolve, reject) {
     var allowedGroups = [];
     var selectedGroup;
     var filteredUsers = [];
-    
-    request
-      .get('localhost:3000/db/users/user/' + userid)
-      .send()
-      .end(function(err, res) {
-        var data = res.body;
-        for (var group in data.groups) {
-          if (adminGroups.indexOf(group) !== -1) {
-            resolve(groupsArr);
-          } else {
-            selectedGroup = group;
-          }
+
+    for (var group in user.groups) {
+      if (adminGroups.indexOf(group) !== -1) {
+        resolve(groupsArr);
+      } else {
+        selectedGroup = group;
+      }
+    }
+    visGroups.model.where({ Group_id: selectedGroup }).fetchAll()
+      .then(function(visGroups) {
+        for (var l = 0; l < visGroups.models.length; l++) {
+          allowedGroups.push(visGroups.models[l].attributes.Visible_id);
         }
-        visGroups.model.where({ Group_id: selectedGroup }).fetchAll()
-          .then(function(visGroups) {
-            for (var l = 0; l < visGroups.models.length; l++) {
-              allowedGroups.push(visGroups.models[l].attributes.Visible_id);
-            }
-            var filtered = filter(groupsArr, function(item) {
-              return allowedGroups.indexOf(item.id) !== -1;
-            });
-            resolve(filtered);
-          })
-          .catch(function(err) {
-            reject(err);
-          });
+        var filtered = filter(groupsArr, function(item) {
+          return allowedGroups.indexOf(item.id) !== -1;
+        });
+        resolve(filtered);
+      })
+      .catch(function(err) {
+        reject(err);
       });
   });
 };

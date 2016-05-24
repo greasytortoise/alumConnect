@@ -29,58 +29,58 @@ module.exports = {
 
   //FOR FILTERING
   
-  // fetchGroups2: function(req, res) {
-  //   Groups
-  //     .fetch({withRelated: ['visibleGroups']})
-  //     .then(function(groups) {
-  //       util.filterGroups(groups.map(function(group) {
-  //         var visibleGroups = group.related('visibleGroups');
-  //         return {
-  //           id: group.id,
-  //           group_name: group.get('group_name'),
-  //           visibleGroups: visibleGroups.reduce(function(prev, visibleGroup) {
-  //             var visible_id = visibleGroup.get('Visible_id');
-  //             prev[visible_id] = groups.get(visible_id).get('group_name');
-  //             return prev;
-  //           }, {})
-  //         };
-  //       }), req.user.attributes.id)
-  //       .then((filtered) => {
-  //         res.json(filtered);
-  //       })
-  //     })
-  // },
+  fetchGroups2: function(req, res) {
+    Groups
+      .fetch({withRelated: ['visibleGroups']})
+      .then(function(groups) {
+        util.filterGroups(groups.map(function(group) {
+          var visibleGroups = group.related('visibleGroups');
+          return {
+            id: group.id,
+            group_name: group.get('group_name'),
+            visibleGroups: visibleGroups.reduce(function(prev, visibleGroup) {
+              var visible_id = visibleGroup.get('Visible_id');
+              prev[visible_id] = groups.get(visible_id).get('group_name');
+              return prev;
+            }, {})
+          };
+        }), req.user)
+        .then((filtered) => {
+          res.json(filtered);
+        })
+      })
+  },
   // http://localhost:3000/db/groups/group/:id
-  // fetchGroupInfo: function(req, res) {
-  //   var id = req.params.id;
-  //   Group
-  //     .where({id: id})
-  //     .fetch({withRelated: ['users', 'visibleGroups']})
-  //     .then(function(group) {
-  //       if (!group) {
-  //         return res.status(404).send('There is no such group!');
-  //       }
-  //       var users = group.related('users');
-  //       var visibleGroups = group.related('visibleGroups');
-  //       var retObj = {
-  //         group_id: group.id,
-  //         group_name: group.get('group_name'),
-  //         users: users.map(function(user) {
-  //           return {
-  //             id: user.id,
-  //             name: user.get('name'),
-  //             image: user.get('image')
-  //           };
-  //         }),
-  //         visibleGroups: visibleGroups.reduce(function(prev, visibleGroup) {
-  //           var visible_id = visibleGroup.get('Visible_id');
-  //           prev[visible_id] = group.get('group_name');
-  //           return prev;
-  //         }, {})
-  //       }
-  //       res.json(retObj);
-  //   });
-  // },
+  fetchGroupInfo: function(req, res) {
+    var id = req.params.id;
+    Group
+      .where({id: id})
+      .fetch({withRelated: ['users', 'visibleGroups']})
+      .then(function(group) {
+        if (!group) {
+          return res.status(404).send('There is no such group!');
+        }
+        var users = group.related('users');
+        var visibleGroups = group.related('visibleGroups');
+        var retObj = {
+          group_id: group.id,
+          group_name: group.get('group_name'),
+          users: users.map(function(user) {
+            return {
+              id: user.id,
+              name: user.get('name'),
+              image: user.get('image')
+            };
+          }),
+          visibleGroups: visibleGroups.reduce(function(prev, visibleGroup) {
+            var visible_id = visibleGroup.get('Visible_id');
+            prev[visible_id] = group.get('group_name');
+            return prev;
+          }, {})
+        }
+        res.json(retObj);
+    });
+  },
 
   fetchGroupInfo2: function(req, res) {
     var id = req.params.id;
