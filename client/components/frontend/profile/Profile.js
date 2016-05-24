@@ -55,7 +55,7 @@ class Profile extends React.Component {
   getUserProfile(userId) {
     var url = '/db/users/user/' + userId;
     RestHandler.Get(url, (err, res) => {
-      if (res.body === 'Permission Denied') {
+      if (res.body === 'Permission Denied' || !res.body) {
         window.location.href = '/';
       }
       this.spliceFilledOutFieldsIntoAvailableFields(res.body, 'userInfo', '/db/fields', (profileData) => {
