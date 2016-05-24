@@ -81,7 +81,6 @@ module.exports = function(app, express) {
     callbackURL: process.env.githubCallbackUrl,
   }, function(accessToken, refreshToken, profile, done){
     process.nextTick(function() {
-
       var profileObj = {
         githubid: profile.id,
         handle: profile.username
@@ -97,29 +96,30 @@ module.exports = function(app, express) {
     done(null, user);
   });
 
-  passport.deserializeUser(function(userObj, done) {
-    User.where({githubid: userObj.userData.githubid }).fetch({ withRelated: ['groups'] })
+  passport.deserializeUser(function(initUserObj, done) {
+    User.where({githubid: initUserObj.userData.githubid }).fetch({ withRelated: ['groups'] })
       .then(function(user) {
         if (!user) {
           done(null, false);
         }
         var groups = user.related('groups');
         var userObj = {
-            id: user.id,
-            handle: user.get('handle'),
-            githubid: user.get('githubid'),
-            name: user.get('name'),
-            url: user.get('url_hash'),
-            email: user.get('email'),
-            image: user.get('image'),
-            public: user.get('public'),
-            group_id: groups.id,
-            group: groups.get('group_name'),
-            permission: user.get('permission'),
-            groups: groups.reduce(function(prev, group) {
-              prev[group.id] = group.get('group_name');
-              return prev;
-            }, {}),
+          token: initUserObj.accessToken,
+          id: user.id,
+          handle: user.get('handle'),
+          githubid: user.get('githubid'),
+          name: user.get('name'),
+          url: user.get('url_hash'),
+          email: user.get('email'),
+          image: user.get('image'),
+          public: user.get('public'),
+          group_id: groups.id,
+          group: groups.get('group_name'),
+          permission: user.get('permission'),
+          groups: groups.reduce(function(prev, group) {
+            prev[group.id] = group.get('group_name');
+            return prev;
+          }, {}),
         };
         done(null, userObj);
       });
