@@ -3,7 +3,6 @@ var Promise = require('bluebird');
 var os = require('os');
 var passport = require('passport');
 var GithubStrategy = require('passport-github2').Strategy;
-var config = require('./config/githubAPIConfig.js');
 
 var app = express();
 
