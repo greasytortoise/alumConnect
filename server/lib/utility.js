@@ -125,8 +125,8 @@ exports.canISeeThisGroup = function(groupObj, req) {
     var mygroups = [];
     var selectedGroup;
     var targetGroup = req.params.id;
-
-    if (adminGroups.indexOf((JSON.stringify(targetGroup)))) {
+  
+    if (adminGroups.indexOf(targetGroup.toString()) !== -1) {
       resolve(groupObj);
     }
 
@@ -137,7 +137,7 @@ exports.canISeeThisGroup = function(groupObj, req) {
         selectedGroup = group;
       }
     }
-    
+
     visGroup.where({ Group_id: selectedGroup, Visible_id: targetGroup }).fetch()
       .then(function(results) {
         console.log(results);
