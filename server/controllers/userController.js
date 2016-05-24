@@ -53,7 +53,7 @@ module.exports = {
               return prev;
             }, {}),
           };
-        }), req.user.attributes.id)
+        }), req.user.id)
         .then((results) => {
           res.status(200).send(results);
         });
@@ -217,26 +217,26 @@ module.exports = {
                     public: user.get('public'),
                     permission: user.get('permission'),
                   },
-                  sites: userSites.map(function(userSite) {
+                  sites: userSites.reduce(function(pre, userSite) {
                     var site = userSite.related('sites');
-                    return {
-                      id: site.id,
+                    pre[site.id] = {
                       site_name: site.get('site_name'),
                       base_url: site.get('base_url'),
                       value: userSite.get('rest_url')
                     };
-                  }),
-                  userInfo: bios.map(function(bio) {
+                    return pre;
+                  }, {}),
+                  userInfo: bios.reduce(function(pre, bio) {
                     var bioField = bio.related('bioFields');
-                    return {
-                      id: bioField.id,
+                    pre[bioField.id] = {
                       title: bioField.get('title'),
-                      value: bio.get('bio'),
-                    };
-                  }),
-                  groups: groups.reduce(function(prev, group) {
-                    prev[group.id] = group.get('group_name');
-                    return prev;
+                      value: bio.get('bio')
+                    }
+                    return pre;
+                  }, {}),
+                  groups: groups.reduce(function(pre, group) {
+                    pre[group.id] = group.get('group_name');
+                    return pre;
                   }, {}),
                 }, req)
                 .then(function(returned) {
@@ -280,7 +280,6 @@ module.exports = {
                     githubid: data.user.githubid,
                     name: user.get('name'),
                     email: data.user.email,
-                    image: data.user.image,
                     url_hash: data.user.url,
                     permission: data.user.permission === 0 ? 0 : 1,
                     public: data.user.public === 0 ? 0 : 1,
