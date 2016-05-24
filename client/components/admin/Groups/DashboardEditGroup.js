@@ -14,7 +14,8 @@ class DashboardEditGroup extends React.Component {
       group_name: group.group_name,
       visibleGroups: group.visibleGroups,
       selectedGroups: [],
-      allGroups: this.props.groups
+      allGroups: this.props.groups,
+      error: false
     }
   }
 
@@ -65,7 +66,7 @@ class DashboardEditGroup extends React.Component {
       visibleGroups: this.state.visibleGroups
     };
     console.log('data',data);
-    if(this.state.group_name === '') {
+    if(this.state.group_name === '' || this.state.visibleGroups.length === 0) {
       console.log(data);
       this.setState({error: true, editing: false});
     } else {
