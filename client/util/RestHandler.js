@@ -12,9 +12,9 @@ var Get = function(url, callback) {
 }
 
 var Post = function (url, data, callback) {
-  if(localStorage.getItem('jwtAlum')){
-    data.token = JSON.parse(localStorage.getItem('jwtAlum')).token;
-  }
+  // if(localStorage.getItem('jwtAlum')){
+  //   data.token = JSON.parse(localStorage.getItem('jwtAlum')).token;
+  // }
   request
     .post(url)
     .send(data)
@@ -26,7 +26,22 @@ var Post = function (url, data, callback) {
   });
 }
 
+var Delete = function (url, callback) {
+  // if(localStorage.getItem('jwtAlum')){
+  //   data.token = JSON.parse(localStorage.getItem('jwtAlum')).token;
+  // }
+  request
+    .delete(url)
+    .end((err, res) => {
+      if(err) {
+        console.error('Err in util/restHander ', err);
+      }
+      callback(err, res);
+  });
+}
+
 module.exports = {
   Get: Get,
-  Post: Post
+  Post: Post,
+  Delete: Delete
 };

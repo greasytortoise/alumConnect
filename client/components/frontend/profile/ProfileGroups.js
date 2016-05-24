@@ -19,8 +19,13 @@ class ProfileGroups extends React.Component {
   componentDidMount() {
     var selectedGroups  = _map(this.props.selectedGroups, (key, val) => val).join(',');
     this.setState({selectedGroups: selectedGroups})
-    this.handleGroupSelect(selectedGroups);
     this.getAvailableGroups();
+  }
+  componentWillReceiveProps(nextProps) {
+    if(nextProps) {
+      var selectedGroups  = _map(this.props.selectedGroups, (key, val) => val).join(',');
+      this.setState({selectedGroups: selectedGroups})
+    }
   }
 
   getAvailableGroups() {
@@ -74,7 +79,7 @@ class ProfileGroups extends React.Component {
           onChange={this.handleGroupSelect.bind(this)} />
       );
     } else {
-      return(<div>else</div>)
+      return(<div>No groups selected</div>)
     }
   }
 
