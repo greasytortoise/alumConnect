@@ -53,7 +53,7 @@ module.exports = {
               return prev;
             }, {}),
           };
-        }), req.user.attributes.id)
+        }), req.user.id)
         .then((results) => {
           res.status(200).send(results);
         });
