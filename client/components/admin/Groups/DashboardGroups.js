@@ -30,6 +30,7 @@ class Groups extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log('nextProps', nextProps);
     if(nextProps) {
       this.setState({
         groups: []
@@ -67,7 +68,7 @@ class Groups extends React.Component {
     // console.log(group, groups);
     var data = JSON.parse(JSON.stringify(group));
     return (
-      <EditGroup value={data} groups={groups}/>
+      <EditGroup onClick={() => {console.log('Edit group')}} value={data} groups={groups}/>
     );
   }
 

@@ -98,7 +98,6 @@ class DashboardEditGroup extends React.Component {
             <Select
             multi
             simpleValue
-            autoBlur="true"
             disabled={this.state.disabled} value={this.state.selectedGroups} 
             placeholder="Select visible groups"
             labelKey="group_name"
