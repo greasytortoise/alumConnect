@@ -13,7 +13,6 @@ class DashboardEditGroup extends React.Component {
       id: group.id,
       group_name: group.group_name,
       visibleGroups: group.visibleGroups,
-      selectedGroups: [],
       allGroups: this.props.groups
     }
   }
@@ -29,7 +28,7 @@ class DashboardEditGroup extends React.Component {
     e.preventDefault();
     this.setState({
       editing: true,
-      selectedGroups: visibleGroups,
+      visibleGroups: visibleGroups
     });
   }
 
@@ -50,7 +49,6 @@ class DashboardEditGroup extends React.Component {
       }
     })
     this.setState({ 
-      selectedGroups:groups,
       visibleGroups: groups
     });
   }
@@ -78,6 +76,7 @@ class DashboardEditGroup extends React.Component {
 
   closePopup() {
     this.setState({ editing: false });
+    this.props.getGroups();
   }
 
   render() {
@@ -97,7 +96,7 @@ class DashboardEditGroup extends React.Component {
             <Select
             multi
             simpleValue
-            disabled={this.state.disabled} value={this.state.selectedGroups} 
+            disabled={this.state.disabled} value={this.state.visibleGroups} 
             placeholder="Select visible groups"
             labelKey="group_name"
             valueKey="idString"
