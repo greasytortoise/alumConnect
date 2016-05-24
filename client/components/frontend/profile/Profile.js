@@ -87,7 +87,7 @@ class Profile extends React.Component {
   renderProfileFields() {
     if(this.state.profileData.userInfo) {
       return _map(this.state.profileData.userInfo, (detail, index) => {
-        detail.id = index;
+        // detail.id = index;
         return (<ProfileField
           fieldDetails={detail}
           editing={this.state.editing}
