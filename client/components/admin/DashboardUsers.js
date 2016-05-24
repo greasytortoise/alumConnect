@@ -136,7 +136,6 @@ class DashboardUsers extends React.Component {
 
   render() {
     return (
-
       <div>
         <Modal
           show={this.state.showDelete}
@@ -164,7 +163,7 @@ class DashboardUsers extends React.Component {
           ref='usertable'
           tableClassName='table'
           useGriddleStyles={false}
-          resultsPerPage={25}
+          resultsPerPage={40}
           columns={["id", "Name", "Github", "Groups", "Delete"]}/>
       </div>
     );

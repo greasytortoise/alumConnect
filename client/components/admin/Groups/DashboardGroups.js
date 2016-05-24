@@ -17,7 +17,7 @@ var rowMetadata = {
         }
         return "default-row";
     },
-}; 
+};
 
 class Groups extends React.Component {
   constructor(props) {
@@ -75,7 +75,7 @@ class Groups extends React.Component {
     var selectGroups = selectedGroups.split(',');
     this.setState({ selectedGroups: selectGroups});
   }
-    
+
   handleSubmit(event) {
     event.preventDefault();
     var group = this.refs.group.getValue();
@@ -141,4 +141,3 @@ class Groups extends React.Component {
 }
 
 module.exports = Groups;
-  
