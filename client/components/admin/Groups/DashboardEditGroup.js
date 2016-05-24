@@ -14,8 +14,7 @@ class DashboardEditGroup extends React.Component {
       group_name: group.group_name,
       visibleGroups: group.visibleGroups,
       selectedGroups: [],
-      allGroups: this.props.groups,
-      error: false
+      allGroups: this.props.groups
     }
   }
 
@@ -26,7 +25,6 @@ class DashboardEditGroup extends React.Component {
     for (var id in groups) {
       var idString = id.toString();
       visibleGroups.push(idString);
-      // console.log(id, visibleGroups);
     }
     e.preventDefault();
     this.setState({
@@ -51,7 +49,6 @@ class DashboardEditGroup extends React.Component {
         }
       }
     })
-    // console.log(this.state.allGroups, visibleGroups)
     this.setState({ 
       selectedGroups:groups,
       visibleGroups: groups
@@ -74,6 +71,7 @@ class DashboardEditGroup extends React.Component {
         if (err) {console.log(err);}
         console.log('hi there', res.body)
         this.setState({ editing: false });
+        this.props.getGroups();
       });
     }
   }
