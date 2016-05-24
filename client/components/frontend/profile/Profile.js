@@ -55,7 +55,7 @@ class Profile extends React.Component {
   getUserProfile(userId) {
     var url = '/db/users/user/' + userId;
     RestHandler.Get(url, (err, res) => {
-      if (res.body === 'Permission Denied') {
+      if (res.body === 'Permission Denied' || !res.body) {
         window.location.href = '/';
       }
       this.spliceFilledOutFieldsIntoAvailableFields(res.body, 'userInfo', '/db/fields', (profileData) => {
@@ -185,7 +185,7 @@ class Profile extends React.Component {
     var {name, image, id} = (this.state.profileData.user) ? this.state.profileData.user : ''
     var groups = this.state.profileData.groups;
     var profileSidebar = groups ? <ProfileSidebar groups={groups} /> : <div></div>;
-    if (auth.getCookie('ac') === '1' || this.state.profileData.user.public === 1) {
+    if (this.state.profileData.user && (auth.getCookie('ac') === '1' || this.state.profileData.user.public === 1)) {
       return (
         <Row>
           <Col xs={12} sm={9} xl={10} className='float-right'>
