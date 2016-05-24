@@ -81,7 +81,8 @@ class DashboardNewUser extends React.Component {
 
 	handleCheckGithub () {
     var githubUsername = reactDOM.findDOMNode(this.refs.githubUsername).value;
-    var url = 'https://api.github.com/users/' + githubUsername;
+    // var url = 'https://api.github.com/users/' + githubUsername + '?access_token=';
+    var url = '/auth/checkgithub?handle=' + githubUsername;
 
     RestHandler.Get(url, (err, res) => {
       if(err) {

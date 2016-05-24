@@ -70,6 +70,19 @@ authRouter.route('/callback')
         });
     });
 
+authRouter.route('/checkgithub')
+  .get(function(req, res) {
+   request
+     .get('https://api.github.com/users/' + req.query.handle + '?access_token=' + req.user.token)
+     .end(function(err, resp) {
+       if (err) {
+        console.log(err);
+       }
+       res.send(resp.body);
+     });
+  });
+
+
 authRouter.route('/islogged')
   .get(util.isLoggedIn, function(req, res){
     res.status(200).send('true');
