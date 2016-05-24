@@ -101,7 +101,7 @@ class Profile extends React.Component {
     if(this.state.profileData.sites) {
       return _map(this.state.profileData.sites, (site, index) => {
         if (site !== undefined) {
-          // site.id = index;
+          site.id = index;
           return (
             <li key={index}>
               <ProfileSite
@@ -232,7 +232,7 @@ class Profile extends React.Component {
     } else {
       return (
         <div>
-        Sorry, this user's profile is not publicly visible
+        {/*Sorry, this user's profile is not publicly visible*/}
         </div>
       );
     }
