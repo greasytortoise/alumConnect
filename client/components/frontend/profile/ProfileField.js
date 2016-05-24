@@ -13,6 +13,12 @@ class ProfileField extends React.Component {
     this.setState({value: this.props.fieldDetails.value})
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(nextProps) {
+      this.setState({value: nextProps.fieldDetails.value})
+    }
+  }
+
   handleFormChange (e) {
     var {id} = this.props.fieldDetails
     var formValue = e.target.value || '';

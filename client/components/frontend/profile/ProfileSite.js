@@ -13,6 +13,12 @@ class ProfileSite extends React.Component {
     this.setState({value: this.props.siteDetails.value})
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(nextProps) {
+      this.setState({value: nextProps.siteDetails.value})
+    }
+  }
+  
   handleFormChange (e) {
     var {id} = this.props.siteDetails
     var formValue = e.target.value || '';
