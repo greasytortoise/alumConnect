@@ -11,7 +11,7 @@
 drop database if exists alumConnect;
 create database alumConnect;
 
-use alumConnectTest;
+use alumConnect;
 
 create table Groups (
   id int not null auto_increment,
