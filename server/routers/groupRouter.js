@@ -3,7 +3,7 @@ var groupController = require('../controllers/groupController');
 var util = require('../lib/utility.js');
 
 groupRouter.route('/')
-  .get(util.isLoggedIn, groupController.fetchGroups)
+  .get(util.isLoggedIn, groupController.fetchGroups2)
   .post(util.isAdmin, groupController.createGroup);
 
 groupRouter.route('/group/:id')
