@@ -30,51 +30,6 @@ A React CMS. Currently manages authentication, user profiles, and an admin dashb
 
 5. ...
 
-## File Structure
-
-```
-alumConnect
-  |
-  + client
-  | |
-  | + assets
-  | |
-  | + components
-  | | |
-  | | -- [page].html
-  | | |
-  | | -- [page]_controller.js
-  | | |
-  | | -- [page]_service.js
-  | |
-  | + styles
-  | | |
-  | | -- styles.css
-  | |
-  | -- app.js
-  | |
-  | -- index.ejs
-  |
-  + server
-  | |
-  | + routes
-  | | |
-  | | -- [route].js
-  | |
-  | + controllers
-  | | |
-  | | -- [route].js
-  | |
-  | + test
-  | | |
-  | | -- [route].js
-  | |
-  | -- server.js
-  |
-  -- serverconfig.js
-
-```
-
 ## Api Endpoints
 
 ### Donor Profiles
