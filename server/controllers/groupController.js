@@ -84,38 +84,43 @@ module.exports = {
 
   fetchGroupInfo2: function(req, res) {
     var id = req.params.id;
-    Group
-      .where({id: id})
+
+    Groups
       .fetch({withRelated: ['users', 'visibleGroups']})
-      .then(function(group) {
-        if (!group) {
-          return res.status(404).send('There is no such group!');
-        }
-        var users = group.related('users');
-        var visibleGroups = group.related('visibleGroups');
-        util.canISeeThisGroup({
-          group_id: group.id,
-          group_name: group.get('group_name'),
-          users: users.map(function(user) {
-            return {
-              id: user.id,
-              name: user.get('name'),
-              image: user.get('image')
-            };
-          }),
-          visibleGroups: visibleGroups.reduce(function(prev, visibleGroup) {
-            var visible_id = visibleGroup.get('Visible_id');
-            prev[visible_id] = group.get('group_name');
-            return prev;
-          }, {}),
-        }, req)
-        .then(function(result) {
-          res.json(result);
-        })
-        .catch(function(err) {
-          res.json(err);
+      .then(function(groups) {
+        Group
+          .where({id: id})
+          .fetch({withRelated: ['users', 'visibleGroups']})
+          .then(function(group) {
+            if (!group) {
+              return res.status(404).send('There is no such group!');
+            }
+            var users = group.related('users');
+            var visibleGroups = group.related('visibleGroups');
+            util.canISeeThisGroup({
+              group_id: group.id,
+              group_name: group.get('group_name'),
+              users: users.map(function(user) {
+                return {
+                  id: user.id,
+                  name: user.get('name'),
+                  image: user.get('image')
+                };
+              }),
+              visibleGroups: visibleGroups.reduce(function(prev, visibleGroup) {
+                var visible_id = visibleGroup.get('Visible_id');
+                prev[visible_id] = groups.get(visible_id).get('group_name');
+                return prev;
+              }, {}),
+            }, req)
+            .then(function(result) {
+              res.json(result);
+            })
+            .catch(function(err) {
+              res.json(err);
+            });
         });
-    });
+      });
   },
 
   // http://localhost:3000/db/groups
