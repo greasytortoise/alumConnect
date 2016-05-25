@@ -58,7 +58,7 @@ class DashboardNewUser extends React.Component {
         this.setState({
           isSaving: false
         });
-      } else if(res.status === 201) {
+      } else if (res.status === 201) {
         console.log('RESponse: ', res);
         setTimeout(() => {
           this.setState({isSaving: false, githubInfo: undefined });
