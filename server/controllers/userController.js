@@ -4,6 +4,7 @@ var Users = require('../collections/users');
 var util = require('../lib/utility.js');
 var Promise = require('bluebird');
 var Groups_Vis = require('../collections/groups_users.js');
+var defaultPhotoPath = '../../client/assets/default.png';
 
 module.exports = {
   fetchUsers2: function(req, res) {
@@ -97,7 +98,7 @@ module.exports = {
         githubid: data.user.githubid,
         name: data.user.name,
         email: data.user.email,
-        image: data.user.image,
+        image: defaultPhotoPath,
         public: 1,
         permission: data.user.admin || 0,
       })
@@ -113,7 +114,7 @@ module.exports = {
         throw err;
         res.status(500).send('error creating user');
       });
-    },
+  },
 
   fetchUserInfo2: function(req, res) {
     var id = req.params.id;

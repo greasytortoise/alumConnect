@@ -129,7 +129,7 @@ class Groups extends React.Component {
             valueKey="idString"
             options={this.state.groups}
             onChange={this.handleGroupSelect.bind(this)} />
-          <ButtonInput bsStyle="primary" type="submit" value="Submit"/>
+          <ButtonInput className="newGroupSubmitButton" bsStyle="primary" type="submit" value="Submit"/>
         </form>
 
         {this.state.error && (
