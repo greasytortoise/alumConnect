@@ -38,7 +38,7 @@ module.exports = {
       .fetch({withRelated: ['groups']})
       .then(function(users) {
         util.filterUsers(users.map(function(user) {
-          if (user.get('public') === 1) {  
+          // if (user.get('public') === 1) {  
             var groups = user.related('groups');
             return {
               id: user.id,
@@ -54,7 +54,7 @@ module.exports = {
                 return prev;
               }, {}),
             };
-          }
+          // }
         }), req.user.id)
         .then((results) => {
           res.status(200).send(results);
@@ -192,9 +192,9 @@ module.exports = {
         if (!user) {
           return res.status(404).send('user does not exist!');
         }
-        if (user.get('public') === 0) {
-          return res.status(401).send('User profile is hidden');
-        }
+        // if (user.get('public') === 0) {
+        //   return res.status(401).send('User profile is hidden');
+        // }
         user
           .related('userSites')
           .fetch({ withRelated: ['sites'] })

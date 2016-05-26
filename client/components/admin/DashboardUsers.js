@@ -3,7 +3,7 @@ import Griddle from 'griddle-react';
 import RestHandler from '../../util/RestHandler';
 import $ from 'jquery';
 import request from 'superagent';
-import { Select, Modal, Button } from 'react-bootstrap';
+import { Select, Modal, Button, Row, Col} from 'react-bootstrap';
 import { Link } from 'react-router';
 
 var rowMetadata = {
@@ -70,10 +70,12 @@ class DashboardUsers extends React.Component {
   getDeleteLink(id, name) {
     var data = JSON.stringify({ id: id, name: name });
     return (
-      <div className="deleteLink" data={data}
-        onClick={this.setDeleteState.bind(this)}
-      >
-      </div>
+        <Col xs={4} >
+          <div className="deleteLink" data={data}
+            onClick={this.setDeleteState.bind(this)}
+          >
+          </div>
+        </Col>
     );
   }
 
@@ -153,7 +155,7 @@ class DashboardUsers extends React.Component {
           tableClassName='table'
           useGriddleStyles={false}
           resultsPerPage={25}
-          columns={["id", "Name", "email", "Github", "Delete"]}/>
+          columns={["id", "Name", "Github", "Delete"]}/>
       </div>
     );
   }
