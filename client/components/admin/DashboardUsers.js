@@ -5,6 +5,7 @@ import $ from 'jquery';
 import request from 'superagent';
 import { Select, Modal, Button, Row, Col} from 'react-bootstrap';
 import { Link } from 'react-router';
+import GroupsView from './UsersGroupsView.js';
 
 var rowMetadata = {
     "bodyCssClassName": function(rowData) {
@@ -41,6 +42,7 @@ class DashboardUsers extends React.Component {
         users[i].Delete = this.getDeleteLink(users[i].id, users[i].name);
         users[i].Name = this.getProfileLink(users[i].id, users[i].name);
         users[i].Github = this.getGithubLink(users[i].handle);
+        users[i].Groups = this.renderProfileGroups(users[i]);
       }
       this.setState({ users: users });
 
@@ -124,6 +126,14 @@ class DashboardUsers extends React.Component {
     this.setState({ showDelete: false });
   }
 
+  renderProfileGroups(user) {
+    return (
+      <GroupsView
+      selectedGroups={user.groups}
+      />
+    );
+  }
+
   render() {
     return (
 
@@ -155,7 +165,7 @@ class DashboardUsers extends React.Component {
           tableClassName='table'
           useGriddleStyles={false}
           resultsPerPage={25}
-          columns={["id", "Name", "Github", "Delete"]}/>
+          columns={["id", "Name", "Github", "Groups", "Delete"]}/>
       </div>
     );
   }
