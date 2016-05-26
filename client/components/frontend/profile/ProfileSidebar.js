@@ -41,7 +41,7 @@ class ProfileSidebar extends React.Component {
   renderSidebarGroup(groupTitle, members) {
     return (
       <ul className="sidebar-users" key={groupTitle}>
-        <li><h4>{groupTitle} ClassMates</h4></li>
+        <li><h4>{groupTitle}</h4></li>
         {this.renderGroupMembers(members)}
       </ul>
     );
