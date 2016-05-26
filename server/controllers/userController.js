@@ -5,6 +5,7 @@ var util = require('../lib/utility.js');
 var Promise = require('bluebird');
 var Groups_Vis = require('../collections/groups_users.js');
 var defaultPhotoPath = '../../client/assets/default.png';
+var User_Sites = require('../collections/userSites.js');
 
 module.exports = {
   fetchUsers2: function(req, res) {
@@ -92,6 +93,7 @@ module.exports = {
 
   createUser2: function(req, res) {
     var data = req.body;
+    var theuser;
     Users
       .create({
         handle: data.user.handle,
@@ -103,12 +105,26 @@ module.exports = {
         permission: data.user.admin || 0,
       })
       .then(function(user) {
+        theuser = user;
         return Promise.each(data.groups, function(group) {
           user.groups().attach(group);
         });
       })
       .then(function() {
-        res.status(201).send('user is created!');
+        console.log(theuser);
+        User_Sites
+          .create({
+            User_id: theuser.attributes.id,
+            Site_id: 4,
+            rest_url: data.user.handle,
+          })
+          .then(() => {
+            res.status(201).send('user is created!');
+          })
+          .catch(function(err) {
+            throw err;
+            res.status(500).send('error creating user');
+          });
       })
       .catch(function(err) {
         throw err;
