@@ -73,7 +73,7 @@ class ProfileGroups extends React.Component {
 
   render() {
     return (
-      <div className="profile-groups">{this.renderGroups()}</div>
+      <div>{this.renderGroups()}</div>
     )
   }
 }

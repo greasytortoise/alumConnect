@@ -92,8 +92,11 @@ class DashboardEditGroup extends React.Component {
             <Modal.Title id="contained-modal-title">Edit Group</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <div> Group Name: </div>
+
             <Input type="text" value={this.state.group_name}
             onChange={this.handleGroupNameEdit.bind(this)} ref="group" />
+            <div> Which groups are this group allowed to see? </div>
             <Select
             multi
             simpleValue
