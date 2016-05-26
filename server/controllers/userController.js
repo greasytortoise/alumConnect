@@ -38,54 +38,56 @@ module.exports = {
       .fetch({withRelated: ['groups']})
       .then(function(users) {
         util.filterUsers(users.map(function(user) {
-          var groups = user.related('groups');
-          return {
-            id: user.id,
-            handle: user.get('handle'),
-            githubid: user.get('githubid'),
-            name: user.get('name'),
-            public: user.get('public'),
-            url: user.get('url_hash'),
-            image: user.get('image'),
-            email: user.get('email'),
-            groups: groups.reduce(function(prev, group) {
-              prev[group.id] = group.get('group_name');
-              return prev;
-            }, {}),
-          };
+          if (user.get('public') === 1) {  
+            var groups = user.related('groups');
+            return {
+              id: user.id,
+              handle: user.get('handle'),
+              githubid: user.get('githubid'),
+              name: user.get('name'),
+              public: user.get('public'),
+              url: user.get('url_hash'),
+              image: user.get('image'),
+              email: user.get('email'),
+              groups: groups.reduce(function(prev, group) {
+                prev[group.id] = group.get('group_name');
+                return prev;
+              }, {}),
+            };
+          }
         }), req.user.id)
         .then((results) => {
           res.status(200).send(results);
         });
-    });
-
+      });
   },
 
-  fetchUsersByGroup2: function(req, res) {
-    var groupId = req.params.id;
-    console.log(req.user);
-    Users
-      .fetch({withRelated: ['groups']})
-      .then(function(users) {
-        var retObj = users.map(function(user) {
-          var groups = user.related('groups');
-          return {
-            id: user.id,
-            handle: user.get('handle'),
-            githubid: user.get('githubid'),
-            name: user.get('name'),
-            url: user.get('url_hash'),
-            image: user.get('image'),
-            email: user.get('email'),
-            groups: groups.reduce(function(prev, group) {
-              prev[group.id] = group.get('group_name');
-              return prev;
-            }, {})
-          };
-        });
-        res.json(retObj);
-    });
-  },
+  // fetchUsersByGroup2: function(req, res) {
+  //   var groupId = req.params.id;
+  //   Users
+  //     .fetch({withRelated: ['groups']})
+  //     .then(function(users) {
+  //       var retObj = users.map(function(user) {
+  //         if (user.get('public') === 1) {  
+  //           var groups = user.related('groups');
+  //           return {
+  //             id: user.id,
+  //             handle: user.get('handle'),
+  //             githubid: user.get('githubid'),
+  //             name: user.get('name'),
+  //             url: user.get('url_hash'),
+  //             image: user.get('image'),
+  //             email: user.get('email'),
+  //             groups: groups.reduce(function(prev, group) {
+  //               prev[group.id] = group.get('group_name');
+  //               return prev;
+  //             }, {}),
+  //           };
+  //         }
+  //       });
+  //       res.json(retObj);
+  //   });
+  // },
 
   createUser2: function(req, res) {
     var data = req.body;
@@ -184,21 +186,24 @@ module.exports = {
   fetchUserInfo3: function(req, res) {
     var id = req.params.id;
     User
-      .where({id: id})
-      .fetch({withRelated: ['groups', 'bios', 'userSites']})
+      .where({ id: id })
+      .fetch({ withRelated: ['groups', 'bios', 'userSites']})
       .then(function(user) {
         if (!user) {
           return res.status(404).send('user does not exist!');
         }
+        if (user.get('public') === 0) {
+          return res.status(401).send('User profile is hidden');
+        }
         user
           .related('userSites')
-          .fetch({withRelated: ['sites']})
+          .fetch({ withRelated: ['sites'] })
           .then(function(userSites) {
 
             // bios join with bioFields
             user
               .related('bios')
-              .fetch({withRelated: ['bioFields']})
+              .fetch({ withRelated: ['bioFields'] })
               .then(function(bios) {
 
         // userSites join with sites
