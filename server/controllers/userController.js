@@ -4,7 +4,6 @@ var Users = require('../collections/users');
 var util = require('../lib/utility.js');
 var Promise = require('bluebird');
 var Groups_Vis = require('../collections/groups_users.js');
-var defaultPhotoPath = '../../client/assets/default.png';
 var User_Sites = require('../collections/userSites.js');
 
 module.exports = {
@@ -100,7 +99,7 @@ module.exports = {
         githubid: data.user.githubid,
         name: data.user.name,
         email: data.user.email,
-        image: defaultPhotoPath,
+        image: 'assets/default.png',
         public: 1,
         permission: data.user.admin || 0,
       })
@@ -111,7 +110,6 @@ module.exports = {
         });
       })
       .then(function() {
-        console.log(theuser);
         User_Sites
           .create({
             User_id: theuser.attributes.id,
