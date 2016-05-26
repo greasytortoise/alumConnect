@@ -30,91 +30,85 @@ A React CMS. Currently manages authentication, user profiles, and an admin dashb
 
 5. ...
 
+## Database Schema
+
+<img src="schema.png" alt="database shema" />
+
 ## Api Endpoints
 
-### Donor Profiles
+### Authorization
 
-| Endpoint        | Action | Returns                             | Side Effect                                | Parameters/Req Body                  |
-|-----------------|--------|-------------------------------------|--------------------------------------------|--------------------------------------|
-|/api/profile     | GET    | Currently logged in donor's profile | -                                          | -                                    |
-|/api/profile     | PUT    | Currently logged in donor's profile | Update currently logged in donor's profile | Profile fields to change             |
-|/api/profile/:id | GET    | Donor profile by id                 | -                                          | -                                    |
-|/api/geo         | GET    | Donors who live in a certain area   | -                                          | minLat: Minimum latitude to search   |
-|                 |        |                                     |                                            | minLong: Minimum longitude to search |
-|                 |        |                                     |                                            | maxLat: Maximum latitude to search   |
-|                 |        |                                     |                                            | maxLong: Maximum longitude to search |
+| Endpoint            | Action | Returns                             | Side Effect                                | Parameters/Req Body                  |
+|---------------------|--------|-------------------------------------|--------------------------------------------|--------------------------------------|
+|/auth                | GET    | ?                                   | ?                                          | ?                                    |
+|/auth/logout         | GET    | ?                                   | ?                                          | ?                                    |
+|/auth/sessionreload  | GET    | ?                                   | ?                                          | ?                                    |
+|/auth/refreshcookies | GET    | ?                                   | ?                                          | ?                                    |
+|/auth/error          | GET    | ?                                   | ?                                          | ?                                    |
+|/auth/callback       | GET    | ?                                   | ?                                          | ?                                    |
+|/auth/islogged       | GET    | ?                                   | ?                                          | ?                                    |
+|/auth/isadmin        | GET    | ?                                   | ?                                          | ?                                    |
 
-### Hospital Profiles
+### Groups
 
-| Endpoint                 | Action | Returns                                | Side Effect                                   | Parameters/Req Body                  |
-|--------------------------|--------|----------------------------------------|-----------------------------------------------|--------------------------------------|
-|/api/hospital/profile     | GET    | Currently logged in hospital's profile | -                                             | -                                    |
-|/api/hospital/profile     | PUT    | Currently logged in hospital's profile | Update currently logged in hospital's profile | Profile fields to change             |
-|/api/hospital/profile/:id | GET    | Hospital profile by id                 | -                                             | -                                    |
-|/api/hospital/geo         | GET    | Hospitals in a certain area            | -                                             | minLat: Minimum latitude to search   |
-|                          |        |                                        |                                               | minLong: Minimum longitude to search |
-|                          |        |                                        |                                               | maxLat: Maximum latitude to search   |
-|                          |        |                                        |                                               | maxLong: Maximum longitude to search |
-|/api/hospital/:id/reviews | GET    | Hospital reviews by id                 | -                                             | -                                    |
-|/api/hospital/:id/reviews | POST   | Created review                         | Creates review for hospital by id             | Content: Review text                 |
-|                          |        |                                        |                                               | Stars: Number of stars for review    |
+| Endpoint            | Action | Returns                                    | Side Effect                            | Parameters/Req Body                          |
+|---------------------|--------|--------------------------------------------|----------------------------------------|----------------------------------------------|
+|/db/groups           | GET    | All groups and their visible groups        | -                                      | -                                            |
+|/db/groups           | POST   | Newly created group and its visible groups | -                                      | group_name: new group name                   |
+|                     |        |                                            |                                        | visibleGroups: array of visible groups by id |
+|/db/groups/group/:id | GET    | A group and its visible groups             | -                                      | id: group id                                 |
+|/db/groups/group/:id | POST   | Modified group and its visible groups      | -                                      | id: group id                                 |
+|                     |        |                                            |                                        | group_name: modifed group name               |
+|                     |        |                                            |                                        | visibleGroups: array of visible groups by id |
+|/db/groups/group/:id | DELETE | -                                          | Deletes all associated relational data | id: group id                                 |
 
-### Events
+### Users
 
-| Endpoint      | Action | Returns                                | Side Effect                                   | Parameters/Req Body                  |
-|---------------|--------|----------------------------------------|-----------------------------------------------|--------------------------------------|
-|/api/event     | GET    | Currently logged in hospital's events  | -                                             | -                                    |
-|/api/event     | POST   | Created event                          | Adds event to hospital                        | time: event time                     |
-|               |        |                                        |                                               | hospitalId: id of hosting hospital   |
-|/api/event/:id | GET    | Event by id and participants           |                                               |                                      |
-|/api/event/:id | POST   | Event by id and participants           | Logged in donor joins event                   | -                                    |
-|/api/event/geo | GET    | Events in a certain area               | -                                             | minLat: Minimum latitude to search   |
-|               |        |                                        |                                               | minLong: Minimum longitude to search |
-|               |        |                                        |                                               | maxLat: Maximum latitude to search   |
-|               |        |                                        |                                               | maxLong: Maximum longitude to search |
+| Endpoint                 | Action | Returns                           | Side Effect                                   | Parameters/Req Body                  |
+|--------------------------|--------|-----------------------------------|-----------------------------------------------|--------------------------------------|
+|/db/users                 | GET    | Userinfo and groups               | -                                             | -                                    |
+|/db/users                 | POST   | -                                 | -                                             | handle: user handle                  |
+|                          |        |                                   |                                               | githubid: user github account        |
+|                          |        |                                   |                                               | name: user full name                 |
+|                          |        |                                   |                                               | email: user email address            |
+|                          |        |                                   |                                               | image: user image url                |
+|                          |        |                                   |                                               | public: user visibility (0 or 1)     |
+|                          |        |                                   |                                               | permission: admin privilege (o or 1) |
+|/db/users/user/:id        | GET    | User info, sites, bio, and groups | -                                             | id: user id                          |
+|/db/users/user/:id        | POST   | -                                 | -                                             | id: user id                          |
+|                          |        |                                   |                                               | handle: user handle                  |
+|                          |        |                                   |                                               | githubid: user github account        |
+|                          |        |                                   |                                               | name: user full name                 |
+|                          |        |                                   |                                               | email: user email address            |
+|                          |        |                                   |                                               | url: user url link                   |
+|                          |        |                                   |                                               | public: user visibility              |
+|                          |        |                                   |                                               | permission: user admin privilege     |
+|/db/users/user/:id        | DELETE | -                                 | Deletes all associated relational data        | id: user id                          |
+|/db/users/name            | GET    | ?                                 | ?                                             | ?                                    |
+|/db/users/user/visibility | POST   | ?                                 | ?                                             | ?                                    |
+|/user/uploadimage         | POST   | ?                                 | ?                                             | ?                                    |
 
-### Appointments
+### Sites
 
-| Endpoint        | Action | Returns                                      | Side Effect                             | Parameters/Req Body                    |
-|-----------------|--------|----------------------------------------------|-----------------------------------------|----------------------------------------|
-|/api/appointment | GET    | Currently logged in hospital's appointments  | -                                       | -                                      |
-|/api/appointment | POST   | Created appointment                          | Creates appointment for logged in donor | time: Appointment time                 |
-|                 |        |                                              |                                         | hospitalId: Id of appointment hospital |
-|                 |        |                                              |                                         | type: Appointment type <ul><li>1: Regular Appointment</li><li>2: Appointent with event</li><li>Appointment with bloodbuddy</li></ul> |
+| Endpoint          | Action | Returns                                      | Side Effect                             | Parameters/Req Body                    |
+|-------------------|--------|----------------------------------------------|-----------------------------------------|----------------------------------------|
+|/db/sites          | GET    | All sites a user can have                    | -                                       | -                                      |
+|/db/sites          | POST   | Newly created site                           | -                                       | site_name: site name                   |
+|                   |        |                                              |                                         | base_url: site url                     |
+|                   |        |                                              |                                         | hospitalId: Id of appointment hospital |
+|/db/sites/site/:id | POST   | Modified site                                |                                         | site_name: site name                   |
+|                   |        |                                              |                                         | base_url: site url                     |
+|                   |        |                                              |                                         | active: 0 or 1                         |
+|/db/sites/site/:id | DELETE | -                                            | Deletes all associated relational data  | id: site id                            |
 
-### Feed Posts
+### Fields
 
-| Endpoint | Action | Returns                             | Side Effect                              | Parameters/Req Body                       |
-|----------|--------|-------------------------------------|------------------------------------------|-------------------------------------------|
-|/api/post | GET    | Currently logged in donor's profile | -                                        | minLat: Minimum latitude to search        |
-|          |        |                                     |                                          | minLong: Minimum longitude to search      |
-|          |        |                                     |                                          | maxLat: Maximum latitude to search        |
-|          |        |                                     |                                          | maxLong: Maximum longitude to search      |
-|/api/post | POST   | Currently logged in donor's profile | Post to feed as currently logged in user | content: Post Text                        |
-|          |        |                                     |                                          | latitude: latitude associated with post   |
-|          |        |                                     |                                          | longitude: longitude associated with post |
-
-### Calendar
-
-| Endpoint     | Action | Returns                   | Side Effect                                   | Parameters/Req Body                  |
-|--------------|--------|---------------------------|-----------------------------------------------|--------------------------------------|
-|/api/calendar | GET    | Google Appointments       | Updates calendar with google appointments     | title: appointment title             |
-|              |        |                           |                                               | id: appointment id                   |
-|              |        |                           |                                               | start: start date                    |
-|              |        |                           |                                               | url: link to google appointment      |
-|              |        |                           |                                               |                                      |
-|/api/calendar | POST   | -                         | Create google appointment                     | summary: appointment title           |
-|              |        |                           |                                               | start: start time                    |
-|              |        |                           |                                               | end: end time                        |
-
-### Blood Buddy Requests
-
-| Endpoint           | Action | Returns                             | Side Effect                                            | Parameters/Req Body                    |
-|--------------------|--------|-------------------------------------|--------------------------------------------------------|----------------------------------------|
-|/api/bloodbuddy     | POST   | Blood buddy request info            | Creates new blood buddy request for logged in donor    | time: Desired appointment time         |
-|                    |        |                                     |                                                        | hospitalId: id of appointment hospital |
-|/api/bloodbuddy/:id | GET    | Blood buddy request info by id      | -                                                      | -                                      |
-|/api/bloodbuddy/:id | PUT    | Blood buddy request info by id      | Creates appointments for requester and logged in donor | -                                      |
+| Endpoint            | Action | Returns                                      | Side Effect                             | Parameters/Req Body                    |
+|---------------------|--------|----------------------------------------------|-----------------------------------------|----------------------------------------|
+|/db/fields           | GET    | All bio field titles                         | -                                       | -                                      |
+|/db/fields           | POST   | Newly created bio field title                | -                                       | title: bio field title                 |
+|/db/fields/field/:id | POST   | Modified bio field title                     | -                                       | title: bio field title                 |
+|/db/fields/field/:id | DELETE | -                                            | Deletes all associated relational data  | id: bio field title id                 |
 
 ## License:
 
