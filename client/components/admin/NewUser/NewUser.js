@@ -173,18 +173,14 @@ class DashboardNewUser extends React.Component {
 
             </div>
           <br />
-          <Row>
-            <Col xs={12}>
-            <Button
-              className="float-left add-new-user-button"
-              bsStyle="primary"
-              disabled={disableButton === true || isSaving}
-              type="submit"
-            >
-            {isSaving ? 'Saving...' : 'Submit'}
-            </Button>
-            </Col>
-          </Row>
+          <Button
+            className="float-left add-new-user-button"
+            bsStyle="primary"
+            disabled={disableButton === true || isSaving}
+            type="submit"
+          >
+          {isSaving ? 'Saving...' : 'Submit'}
+          </Button>
         </form>
       </div>
     );
