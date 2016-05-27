@@ -43,12 +43,25 @@ Once this repo is cloned,
     $ mysql -u root < schema.sql
     ```
 
-8. Insert data to alumConnect table
+8. Enter admin permissions on line 98 of schema.sql (contact Matt for details)
+
+9. Obtain github OAuth credentials (see wiki)
+
+10. Replace githubAPIConfig.example.js in /server/config/ to githubAPIConfig.js. Fill up the keys as follows:
+    ```
+    exports.sessionSecret = '<any 2 letter combination of your choice>';
+    exports.githubClientId = 'GITHUB CLIENT ID HERE';
+    exports.githubClientSecret = 'GITHUB CLIENT SECRET HERE';
+    exports.githubCallbackUrl = 'http://127.0.0.1:3000/auth/callback';
+
+    ```
+
+11. Insert data to alumConnect table
     ```
     $ node new_insertData.js
     ```
 
-8. Launch the server
+12. Launch the server
     ```
     $ npm start
     ```
