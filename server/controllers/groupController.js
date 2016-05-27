@@ -151,10 +151,20 @@ module.exports = {
           .then(function() {
             VisibleGroups.create({
               Group_id: created.attributes.id,
-              Visible_id: created.attributes.id
+              Visible_id: created.attributes.id,
             })
             .then(function() {
-              res.status(200).json(created); 
+              VisibleGroups.create({
+                Group_id: created.attributes.id,
+                Visible_id: 1,
+              })
+              .then(function() {
+                res.status(200).json(created);
+              })
+              .catch(function(err) {
+                console.log(err);
+                res.status(500).json('Err creating user');
+              });
             })
             .catch(function(err) {
               console.log(err);
