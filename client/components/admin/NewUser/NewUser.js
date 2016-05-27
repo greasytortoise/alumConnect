@@ -58,7 +58,7 @@ class DashboardNewUser extends React.Component {
         this.setState({
           isSaving: false
         });
-      } else if(res.status === 201) {
+      } else if (res.status === 201) {
         console.log('RESponse: ', res);
         setTimeout(() => {
           this.setState({isSaving: false, githubInfo: undefined });
@@ -81,7 +81,8 @@ class DashboardNewUser extends React.Component {
 
 	handleCheckGithub () {
     var githubUsername = reactDOM.findDOMNode(this.refs.githubUsername).value;
-    var url = 'https://api.github.com/users/' + githubUsername;
+    // var url = 'https://api.github.com/users/' + githubUsername + '?access_token=';
+    var url = '/auth/checkgithub?handle=' + githubUsername;
 
     RestHandler.Get(url, (err, res) => {
       if(err) {
@@ -172,18 +173,14 @@ class DashboardNewUser extends React.Component {
 
             </div>
           <br />
-          <Row>
-            <Col xs={12}>
-            <Button
-              className="float-left add-new-user-button"
-              bsStyle="primary"
-              disabled={disableButton === true || isSaving}
-              type="submit"
-            >
-            {isSaving ? 'Saving...' : 'Submit'}
-            </Button>
-            </Col>
-          </Row>
+          <Button
+            className="float-left add-new-user-button"
+            bsStyle="primary"
+            disabled={disableButton === true || isSaving}
+            type="submit"
+          >
+          {isSaving ? 'Saving...' : 'Submit'}
+          </Button>
         </form>
       </div>
     );

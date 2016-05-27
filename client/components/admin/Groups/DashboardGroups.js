@@ -49,12 +49,12 @@ class Groups extends React.Component {
       this.setState({ groups: res.body });
       for (var i = 0; i < groups.length; i++) {
         groups[i].idString = groups[i].id.toString();
-        groups[i].Visible_Groups = ''
+        groups[i]['Can See'] = ''
         var visibleGroups = groups[i].visibleGroups;
         for (var id in visibleGroups) {
-          groups[i].Visible_Groups += visibleGroups[id] + ', ';
+          groups[i]['Can See'] += visibleGroups[id] + ', ';
         }
-        groups[i].Visible_Groups = groups[i].Visible_Groups.replace(/,\s*$/, "");
+        groups[i]['Can See'] = groups[i]['Can See'].replace(/,\s*$/, "");
         groups[i].Edit = this.getEditGroupLink(groups[i]);
       }
       this.setState({ groups: groups });
@@ -116,7 +116,7 @@ class Groups extends React.Component {
           tableClassName='table'
           useGriddleStyles={false}
           resultsPerPage={40}
-          columns={["group_name","Visible_Groups","Edit"]}/>
+          columns={["group_name", "Can See", "Edit"]}/>
 
         <form onSubmit={this.handleSubmit.bind(this)}>
           <Input type="text" label="Add Group"
@@ -129,7 +129,7 @@ class Groups extends React.Component {
             valueKey="idString"
             options={this.state.groups}
             onChange={this.handleGroupSelect.bind(this)} />
-          <ButtonInput bsStyle="primary" type="submit" value="Submit"/>
+          <ButtonInput className="newGroupSubmitButton" bsStyle="primary" type="submit" value="Submit"/>
         </form>
 
         {this.state.error && (

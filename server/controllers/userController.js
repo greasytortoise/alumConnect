@@ -4,6 +4,7 @@ var Users = require('../collections/users');
 var util = require('../lib/utility.js');
 var Promise = require('bluebird');
 var Groups_Vis = require('../collections/groups_users.js');
+var User_Sites = require('../collections/userSites.js');
 
 module.exports = {
   fetchUsers2: function(req, res) {
@@ -38,80 +39,96 @@ module.exports = {
       .fetch({withRelated: ['groups']})
       .then(function(users) {
         util.filterUsers(users.map(function(user) {
-          var groups = user.related('groups');
-          return {
-            id: user.id,
-            handle: user.get('handle'),
-            githubid: user.get('githubid'),
-            name: user.get('name'),
-            public: user.get('public'),
-            url: user.get('url_hash'),
-            image: user.get('image'),
-            email: user.get('email'),
-            groups: groups.reduce(function(prev, group) {
-              prev[group.id] = group.get('group_name');
-              return prev;
-            }, {}),
-          };
+          // if (user.get('public') === 1) {  
+            var groups = user.related('groups');
+            return {
+              id: user.id,
+              handle: user.get('handle'),
+              githubid: user.get('githubid'),
+              name: user.get('name'),
+              public: user.get('public'),
+              url: user.get('url_hash'),
+              image: user.get('image'),
+              email: user.get('email'),
+              groups: groups.reduce(function(prev, group) {
+                prev[group.id] = group.get('group_name');
+                return prev;
+              }, {}),
+            };
+          // }
         }), req.user.id)
         .then((results) => {
           res.status(200).send(results);
         });
-    });
-
+      });
   },
 
-  fetchUsersByGroup2: function(req, res) {
-    var groupId = req.params.id;
-    console.log(req.user);
-    Users
-      .fetch({withRelated: ['groups']})
-      .then(function(users) {
-        var retObj = users.map(function(user) {
-          var groups = user.related('groups');
-          return {
-            id: user.id,
-            handle: user.get('handle'),
-            githubid: user.get('githubid'),
-            name: user.get('name'),
-            url: user.get('url_hash'),
-            image: user.get('image'),
-            email: user.get('email'),
-            groups: groups.reduce(function(prev, group) {
-              prev[group.id] = group.get('group_name');
-              return prev;
-            }, {})
-          };
-        });
-        res.json(retObj);
-    });
-  },
+  // fetchUsersByGroup2: function(req, res) {
+  //   var groupId = req.params.id;
+  //   Users
+  //     .fetch({withRelated: ['groups']})
+  //     .then(function(users) {
+  //       var retObj = users.map(function(user) {
+  //         if (user.get('public') === 1) {  
+  //           var groups = user.related('groups');
+  //           return {
+  //             id: user.id,
+  //             handle: user.get('handle'),
+  //             githubid: user.get('githubid'),
+  //             name: user.get('name'),
+  //             url: user.get('url_hash'),
+  //             image: user.get('image'),
+  //             email: user.get('email'),
+  //             groups: groups.reduce(function(prev, group) {
+  //               prev[group.id] = group.get('group_name');
+  //               return prev;
+  //             }, {}),
+  //           };
+  //         }
+  //       });
+  //       res.json(retObj);
+  //   });
+  // },
 
   createUser2: function(req, res) {
     var data = req.body;
+    var theuser;
     Users
       .create({
         handle: data.user.handle,
         githubid: data.user.githubid,
         name: data.user.name,
         email: data.user.email,
-        image: data.user.image,
+        image: 'assets/default.png',
         public: 1,
         permission: data.user.admin || 0,
       })
       .then(function(user) {
+        theuser = user;
         return Promise.each(data.groups, function(group) {
           user.groups().attach(group);
         });
       })
       .then(function() {
-        res.status(201).send('user is created!');
+        User_Sites
+          .create({
+            User_id: theuser.attributes.id,
+            Site_id: 4,
+            rest_url: data.user.handle,
+          })
+          .then(() => {
+            res.status(201).send('user is created!');
+          })
+          .catch(function(err) {
+            throw err;
+            res.status(500).send('error creating user');
+          });
       })
       .catch(function(err) {
         throw err;
         res.status(500).send('error creating user');
       });
-    },
+  },
 
   fetchUserInfo2: function(req, res) {
     var id = req.params.id;
@@ -184,21 +201,24 @@ module.exports = {
   fetchUserInfo3: function(req, res) {
     var id = req.params.id;
     User
-      .where({id: id})
-      .fetch({withRelated: ['groups', 'bios', 'userSites']})
+      .where({ id: id })
+      .fetch({ withRelated: ['groups', 'bios', 'userSites']})
       .then(function(user) {
         if (!user) {
           return res.status(404).send('user does not exist!');
         }
+        // if (user.get('public') === 0) {
+        //   return res.status(401).send('User profile is hidden');
+        // }
         user
           .related('userSites')
-          .fetch({withRelated: ['sites']})
+          .fetch({ withRelated: ['sites'] })
           .then(function(userSites) {
 
             // bios join with bioFields
             user
               .related('bios')
-              .fetch({withRelated: ['bioFields']})
+              .fetch({ withRelated: ['bioFields'] })
               .then(function(bios) {
 
         // userSites join with sites
