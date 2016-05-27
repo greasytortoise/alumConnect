@@ -141,7 +141,6 @@ exports.canISeeThisGroup = function(groupObj, req) {
 
     visGroup.where({ Group_id: selectedGroup, Visible_id: targetGroup }).fetch()
       .then(function(results) {
-        console.log(results);
         if (results !== null) {
           resolve(groupObj);
         } else {

@@ -16,6 +16,7 @@ const Login = React.createClass({
   },
   componentWillMount(){
     document.body.classList.add('page-login');
+    localStorage.removeItem('selectedGroup');
   },
   componentWillUnmount(){
     document.body.classList.remove('page-login');
