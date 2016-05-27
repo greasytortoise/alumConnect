@@ -131,7 +131,7 @@ class DashboardUsers extends React.Component {
             <Modal.Title id="contained-modal-title">Delete User</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            Are you sure you want to delete user {this.state.toBeDeleted.name}?
+            Are you sure you want to delete user: {this.state.toBeDeleted.name}?
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.closePopup.bind(this)}>Cancel</Button>
