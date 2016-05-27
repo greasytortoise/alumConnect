@@ -4,6 +4,7 @@
 var Promise = require('bluebird');
 var studentFile = require('./data/studentData');
 var bioFile = require('./parseBio');
+var userFile = require('./parseUser');
 
 var request = require('request');
 var db = require('./dbConfig');
@@ -13,10 +14,13 @@ var Group = require('./models/group');
 var Groups = require('./collections/groups');
 var Bio = require('./models/bio');
 var Bios = require('./collections/bios');
+var User_Site = require('./models/userSite');
+var User_Sites = require('./collections/userSites');
 
-var groups = ['hr36', 'hr37', 'hr38', 'hr39', 'hr40', 'hr41'];
+var groups = ['HR41', 'HR40', 'HR39', 'HR38', 'HR37', 'HR36', ];
 var students = [];
 var biographies = bioFile.bioArray;
+var userInfos = userFile.userArray;
 
 for (var group in studentFile.students) {
   var people = studentFile.students[group];
@@ -28,11 +32,30 @@ for (var group in studentFile.students) {
     }
     var dashName = lower.split(' ');
     person.image = '/assets/photos/' + dashName.join('-') + '.jpg';
-    person.email = dashName.join('_') + '@hr.com'
+    // person.email = dashName.join('_') + '@hr.com'
 
     students.push(person);
   });
 }
+
+userInfos.forEach(function(userInfo, index) {
+  // userInfo[0] is first name
+  // userInfo[1] is first name
+  // userInfo[2] is last name
+  // userInfo[3] is github
+  // userInfo[4] is email
+
+  var firstname = userInfo[1];
+  var lastName = userInfo[2];
+
+  var lower = userInfo[1].toLowerCase() + ' ' + userInfo[2].toLowerCase();
+
+  var github = userInfo[3];
+  var email = userInfo[4];
+
+  students[index].github = github;
+  students[index].email = email;
+});
 
 Promise.each(groups, function(group) {
   return Groups
@@ -41,7 +64,7 @@ Promise.each(groups, function(group) {
 .then(function() {
   return Promise.each(students, function(student) {
     return Group
-      .where({group_name: 'hr' + student.cohort})
+      .where({group_name: 'HR' + student.cohort})
       .fetch()
       .then(function(group) {
         return Users
@@ -51,10 +74,20 @@ Promise.each(groups, function(group) {
             image: student.image,
             url_hash: 'n/a',
             public: 1,
-            permission: 0
+            permission: 0,
+            handle: student.github
           })
           .then(function(user) {
-            user.groups().attach(group);
+            user
+              .groups()
+              .attach(group)
+                .then(function(group) {
+                  User_Sites.create({
+                    User_id: user.id,
+                    Site_id: 4,
+                    rest_url: user.get('handle')
+                  });
+                })
           });
 
       });

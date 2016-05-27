@@ -4,7 +4,7 @@ var hr39str = fs.readFileSync(__dirname + '/data/hr39.txt', 'utf8');
 var hr40str = fs.readFileSync(__dirname + '/data/hr40.txt', 'utf8');
 var hr41str = fs.readFileSync(__dirname + '/data/hr41.txt', 'utf8');
 
-var groups = [hr38str, hr39str, hr40str, hr41str];
+var groups = [hr41str, hr40str, hr39str, hr38str];
 var bioArray = [];
 
 groups.forEach(function(giantStr) {
