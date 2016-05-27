@@ -15,7 +15,6 @@ class ProfileAdminOptions extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.public)
     this.setState({
       hasAdminAccess: this.props.permission,
       userIsPublic: this.props.public,

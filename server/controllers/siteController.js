@@ -38,7 +38,7 @@ module.exports = {
     var data = req.body;
     console.log('from site: ', data);
     Site
-      .where({site_name: data.site_name})
+      .where({ site_name: data.site_name })
       .fetch()
       .then(function(siteExist) {
         if (siteExist && (siteExist.id !== parseInt(id))) {
@@ -58,13 +58,13 @@ module.exports = {
                 res.status(201).send(site);
               });
           });
-    });    
+    });
   },
   // http://localhost:3000/db/sites/site/:id
   deleteSite: function(req, res) {
     var id = req.params.id;
     Site
-      .where({id: id})
+      .where({ id: id })
       .destroy()
       .then(function() {
         res.status(201).send('deleted!');

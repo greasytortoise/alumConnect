@@ -147,6 +147,29 @@
   height: 15px;
   width: 15px;
   margin: 0 auto;
+  position: relative;
+  top: 4px;
+  left: 10px;
+}
+
+.deleteLink2 {
+  background-image: url('../assets/delete2.png');
+  background-size: contain;
+  height: 15px;
+  width: 15px;
+  margin: 0 auto;
+  position: relative;
+  top: 8px;
+}
+
+.deleteLink3 {
+  background-image: url('../assets/delete2.png');
+  background-size: contain;
+  height: 15px;
+  width: 15px;
+  margin: 0 auto;
+  position: relative;
+  top: 35px;
 }
 
 .modal-container {

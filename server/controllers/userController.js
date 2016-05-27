@@ -25,11 +25,11 @@ module.exports = {
             groups: groups.reduce(function(prev, group) {
               prev[group.id] = group.get('group_name');
               return prev;
-            }, {})
+            }, {}),
           };
         });
         res.status(200).send(retObj);
-    });
+      });
   },
 
   //for filtering

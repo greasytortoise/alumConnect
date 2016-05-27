@@ -98,7 +98,7 @@ module.exports = function(app, express) {
   });
 
   passport.deserializeUser(function(initUserObj, done) {
-    User.where({githubid: initUserObj.userData.githubid }).fetch({ withRelated: ['groups'] })
+    User.where({handle: initUserObj.userData.handle }).fetch({ withRelated: ['groups'] })
       .then(function(user) {
         if (!user) {
           done(null, false);

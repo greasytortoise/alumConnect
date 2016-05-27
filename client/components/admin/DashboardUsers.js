@@ -31,7 +31,7 @@ class DashboardUsers extends React.Component {
         users[i].Github = this.getGithubLink(users[i].handle);
         users[i].Groups = this.renderProfileGroups(users[i]);
       }
-      this.setState({ users: users });
+      this.setState({ users: users.reverse() });
     });
   }
   getProfileLink(id, name) {

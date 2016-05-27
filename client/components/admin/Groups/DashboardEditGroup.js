@@ -20,7 +20,6 @@ class DashboardEditGroup extends React.Component {
   handleEditState(e) {
     var visibleGroups = [];
     var groups = this.state.visibleGroups;
-    console.log(groups);
     for (var id in groups) {
       var idString = id.toString();
       visibleGroups.push(idString);
@@ -60,15 +59,12 @@ class DashboardEditGroup extends React.Component {
       group_name: this.state.group_name,
       visibleGroups: this.state.visibleGroups
     };
-    console.log('data',data);
     if(this.state.group_name === '' || data.visibleGroups.length === 0) {
-      console.log(data);
       this.setState({error: true, editing: false});
       this.props.getGroups();
     } else {
       RestHandler.Post('/db/groups/group/' + this.state.id, data, (err, res) => {
         if (err) {console.log(err);}
-        console.log('hi there', res.body)
         this.setState({ editing: false });
         this.props.getGroups();
       });
@@ -96,7 +92,7 @@ class DashboardEditGroup extends React.Component {
 
             <Input type="text" value={this.state.group_name}
             onChange={this.handleGroupNameEdit.bind(this)} ref="group" />
-            <div> Which groups are this group allowed to see? </div>
+            <div> Which groups is this group allowed to see? </div>
             <Select
             multi
             simpleValue
