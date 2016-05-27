@@ -43,7 +43,7 @@ class ProfileAdminOptions extends React.Component {
   }
   deleteUser(e) {
     e.preventDefault();
-    var url = '/dashboard/db/users/user/' + this.props.userid;
+    var url = '/db/users/user/' + this.props.userid;
     RestHandler.Delete(url, (err, res) => {
       if(!err) {
         console.log('User deleted');

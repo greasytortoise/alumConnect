@@ -87,7 +87,7 @@ class DashboardUsers extends React.Component {
     var that = this;
     e.preventDefault();
     request
-      .delete('/dashboard/db/users/user/' + that.state.toBeDeleted.id)
+      .delete('/db/users/user/' + that.state.toBeDeleted.id)
       .end(function(err, res) {
         if(err) {
           console.log(err);
