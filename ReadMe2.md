@@ -6,7 +6,7 @@ A React CMS. Currently manages authentication, user profiles, and an admin dashb
 
   [Matthew W. Bresnan](https://github.com/mbresnan1701)
 
-  [Alam Palaniappan](https://github.com/alamuv)
+  [Alamu Palaniappan](https://github.com/alamuv)
 
   [Mike Jonas](https://github.com/mikejonas)
 
