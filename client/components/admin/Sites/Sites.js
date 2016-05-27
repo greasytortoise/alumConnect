@@ -98,7 +98,7 @@ class Sites extends React.Component {
           <FormControl
             type="text"
             placeholder="Enter site url example: https://www.github.com/"
-            value={this.state.newSiteName}
+            value={this.state.newSiteUrl}
             onChange={(e) =>{this.setState({newSiteUrl: e.target.value})}} />
 
           <Button
