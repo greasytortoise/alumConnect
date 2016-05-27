@@ -7,19 +7,6 @@ import { Select, Modal, Button, Row, Col} from 'react-bootstrap';
 import { Link } from 'react-router';
 import GroupsView from './UsersGroupsView.js';
 
-var rowMetadata = {
-    "bodyCssClassName": function(rowData) {
-        if (rowData.action === "added") {
-            return "green-row";
-        } else if (rowData.action === "removed") {
-            return "red-row";
-        } else if (rowData.action === "transfer") {
-            return "blue-row";
-        }
-        return "default-row";
-    },
-};
-
 class DashboardUsers extends React.Component {
   constructor (props) {
     super(props);
@@ -37,7 +24,7 @@ class DashboardUsers extends React.Component {
 
   componentWillMount() {
     RestHandler.Get('/db/users', (err, res) => {
-      var users = res.body;
+      var users = res.body.reverse();
       for (var i = 0; i < users.length; i++) {
         users[i].Delete = this.getDeleteLink(users[i].id, users[i].name);
         users[i].Name = this.getProfileLink(users[i].id, users[i].name);
@@ -45,13 +32,11 @@ class DashboardUsers extends React.Component {
         users[i].Groups = this.renderProfileGroups(users[i]);
       }
       this.setState({ users: users });
-
     });
   }
   getProfileLink(id, name) {
     return (
-      <div className="userLink"
-      >
+      <div className="userLink">
         <Link to={{ pathname: `/users/${id}` }}>
           {name}
         </Link>
@@ -60,8 +45,7 @@ class DashboardUsers extends React.Component {
   }
   getGithubLink(github) {
     return (
-      <div className="ghLink"
-      >
+      <div className="ghLink">
         <a href={`https://www.github.com/${github}`}>
           {github}
         </a>
@@ -157,7 +141,6 @@ class DashboardUsers extends React.Component {
         <h3 className="dashboard-title">Users</h3>
         <Griddle
           results={this.state.users}
-          rowMetadata={rowMetadata}
           showFilter={true}
           key={this.state.key}
           ref='usertable'
