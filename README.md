@@ -1,62 +1,151 @@
 # alumConnect
+
 A React CMS. Currently manages authentication, user profiles, and an admin dashboard with configurable options.
 
+## Contributors:
 
-### To create database and populate with sample data: ###
- **note from drake: database is still in test mode**
-  * $ mysql -u root < server/schema.sql
-  * $ node server/insertData.js
-  * client side admin password: u: admin@admin.com p: admin  
+  [Matthew W. Bresnan](https://github.com/mbresnan1701)
 
+  [Alamu Palaniappan](https://github.com/alamuv)
 
+  [Mike Jonas](https://github.com/mikejonas)
 
-### Make sure you use webpack to generate a client/bundle.js: ###
+  [Drake Wang](https://github.com/yochess/)
 
-  * (make sure you npm install your dependencies)
-  * Install webpack globally (npm install -g webpack)
-  * run: webpack --watch
-  * Start the server visit http://localhost:3000/
-  * For production: 'npm run deploy' creates the minified production bundle.  
-  * client/index.html Developtment: script src="/build/bundle.js" Production: src="/dist/bundle.js"
-  * TESTING: npm test
-  * Default Admin login information: email: admin@admin.com password: admin
-  * Default user login information: email: firstname_lastname@hr.com password: user 
+## Getting Started
 
-### Frontend:
-* client/index.js: We're using react router! You can see the routes in this file. If you open it up you'll see a bunch of imports. The router needs to know about these compoents to direct the user to them when they go to a url. In render, you can see the router in action! If you're unsure what component is being rendered on a certain url, just check the router.
-* client/components/admin: this is where all the components that controll the admin dashboard. You can manage and add new users, edit profile fields, add sites that users can be a part of and hopefully more!
-* client/components/frontend: this is where the actual site that users view lives. It's pretty simple, we essentially have users and profiles. Hopefully this will be extended out more!
-* client/components/frontend/profile handles a lot! It's responsible for getting all the user profile info from our /db/users/user/:id api and nicely displaying it. Additionally, users or admins can edit profile fields, based on their permissions. Hopefully this is built out enough to where you won't need to touch it much, and continue expanding or using the frameowrk in other ways!
+Once this repo is cloned,
 
+1. Install [MySQL](https://dev.mysql.com/downloads/installer/)
+2. Install [Node and NPM](https://nodejs.org/en/)
+3. Install [Sharp](http://sharp.dimens.io/en/stable/install/#mac-os)
+4. Install webpack and redis globally
 
-### API: 
-(These have been upated,)
-* get: <http://localhost:3000/db/groups>
-* get: <http://localhost:3000/db/groups/group:id>
-* post: <http://localhost:3000/db/groups>
-* ---
-* get:  <http://localhost:3000/db/users>
-* get:  <http://localhost:3000/db/users/user/:id>
-* post: <http://localhost:3000/db/users/>
-* ---
-* get:  <http://localhost:3000/db/sites>
-* post: <http://localhost:3000/db/sites>
-* ---
-* get:  <http://localhost:3000/db/fields>
-* post: <http://localhost:3000/db/fields>
-### Challenges:
+    ```
+    $ npm install -g webpack
+    $ npm install -g redis
+    ```
 
-* We're gathering so much data about the users -- their likes, interests, github, linkedin accounts, and more can easily be added. Use this data to create new features! Eg: blog feed, linkedin api to populate additional fields in the user profile, ect, 
-* Currently, a clever user of the site can spoof the JWT of an admin and do bad things. Prevent this from happening.
-* Refactor to use Flux
-* Refactor to use server side rendering
-* Add more features to admin dashboard(change user password, group, etc)
-* alumConnect is by invite only. Set up a way to generate a unique default password for the user, which can be changed on first login, and send an email to the supplied address with their password. 
-* Allow users to change their own password
-* Create blogging features into the site.
-* Add more social features like commenting, likes, etc.
-* Modularize site, so that admin can add modules to extend site functionality
-* Set up more generic site, but allow more options through a configuration file
-* Allow users to upload their own images
+5. Install dependencies
 
+    ```
+    $ npm install
+    ```
 
+6. Start necessary servers
+    ```
+    $ mysql.server start
+    $ redis-server
+    ```
+
+7. Import alumConnect schema to mySQL database
+    ```
+    $ mysql -u root < schema.sql
+    ```
+
+8. Enter admin permissions on line 98 of schema.sql (contact Matt for details)
+
+9. Obtain github OAuth credentials (see wiki)
+
+10. Replace githubAPIConfig.example.js in /server/config/ to githubAPIConfig.js. Fill up the keys as follows:
+    ```
+    exports.sessionSecret = '<any 2 letter combination of your choice>';
+    exports.githubClientId = 'GITHUB CLIENT ID HERE';
+    exports.githubClientSecret = 'GITHUB CLIENT SECRET HERE';
+    exports.githubCallbackUrl = 'http://127.0.0.1:3000/auth/callback';
+
+    ```
+
+11. Insert data to alumConnect table
+    ```
+    $ node new_insertData.js
+    ```
+
+12. Launch the server
+    ```
+    $ npm start
+    ```
+
+## Database Schema
+
+<img src="schema.png" alt="database shema" />
+
+## Api Endpoints
+
+### Authorization
+
+| Endpoint            | Action | Returns                             | Side Effect                                | Parameters/Req Body                  |
+|---------------------|--------|-------------------------------------|--------------------------------------------|--------------------------------------|
+|/auth                | GET    | ?                                   | ?                                          | ?                                    |
+|/auth/logout         | GET    | ?                                   | ?                                          | ?                                    |
+|/auth/sessionreload  | GET    | ?                                   | ?                                          | ?                                    |
+|/auth/refreshcookies | GET    | ?                                   | ?                                          | ?                                    |
+|/auth/error          | GET    | ?                                   | ?                                          | ?                                    |
+|/auth/callback       | GET    | ?                                   | ?                                          | ?                                    |
+|/auth/islogged       | GET    | ?                                   | ?                                          | ?                                    |
+|/auth/isadmin        | GET    | ?                                   | ?                                          | ?                                    |
+
+### Groups
+
+| Endpoint            | Action | Returns                                    | Side Effect                            | Parameters/Req Body                          |
+|---------------------|--------|--------------------------------------------|----------------------------------------|----------------------------------------------|
+|/db/groups           | GET    | All groups and their visible groups        | -                                      | -                                            |
+|/db/groups           | POST   | Newly created group and its visible groups | -                                      | group_name: new group name                   |
+|                     |        |                                            |                                        | visibleGroups: array of visible groups by id |
+|/db/groups/group/:id | GET    | A group and its visible groups             | -                                      | id: group id                                 |
+|/db/groups/group/:id | POST   | Modified group and its visible groups      | -                                      | id: group id                                 |
+|                     |        |                                            |                                        | group_name: modifed group name               |
+|                     |        |                                            |                                        | visibleGroups: array of visible groups by id |
+|/db/groups/group/:id | DELETE | -                                          | Deletes all associated relational data | id: group id                                 |
+
+### Users
+
+| Endpoint                 | Action | Returns                           | Side Effect                                   | Parameters/Req Body                  |
+|--------------------------|--------|-----------------------------------|-----------------------------------------------|--------------------------------------|
+|/db/users                 | GET    | Userinfo and groups               | -                                             | -                                    |
+|/db/users                 | POST   | -                                 | -                                             | handle: user handle                  |
+|                          |        |                                   |                                               | githubid: user github account        |
+|                          |        |                                   |                                               | name: user full name                 |
+|                          |        |                                   |                                               | email: user email address            |
+|                          |        |                                   |                                               | image: user image url                |
+|                          |        |                                   |                                               | public: user visibility (0 or 1)     |
+|                          |        |                                   |                                               | permission: admin privilege (o or 1) |
+|/db/users/user/:id        | GET    | User info, sites, bio, and groups | -                                             | id: user id                          |
+|/db/users/user/:id        | POST   | -                                 | -                                             | id: user id                          |
+|                          |        |                                   |                                               | handle: user handle                  |
+|                          |        |                                   |                                               | githubid: user github account        |
+|                          |        |                                   |                                               | name: user full name                 |
+|                          |        |                                   |                                               | email: user email address            |
+|                          |        |                                   |                                               | url: user url link                   |
+|                          |        |                                   |                                               | public: user visibility              |
+|                          |        |                                   |                                               | permission: user admin privilege     |
+|/db/users/user/:id        | DELETE | -                                 | Deletes all associated relational data        | id: user id                          |
+|/db/users/name            | GET    | ?                                 | ?                                             | ?                                    |
+|/db/users/user/visibility | POST   | ?                                 | ?                                             | ?                                    |
+|/user/uploadimage         | POST   | ?                                 | ?                                             | ?                                    |
+
+### Sites
+
+| Endpoint          | Action | Returns                                      | Side Effect                             | Parameters/Req Body                    |
+|-------------------|--------|----------------------------------------------|-----------------------------------------|----------------------------------------|
+|/db/sites          | GET    | All sites a user can have                    | -                                       | -                                      |
+|/db/sites          | POST   | Newly created site                           | -                                       | site_name: site name                   |
+|                   |        |                                              |                                         | base_url: site url                     |
+|                   |        |                                              |                                         | hospitalId: Id of appointment hospital |
+|/db/sites/site/:id | POST   | Modified site                                |                                         | site_name: site name                   |
+|                   |        |                                              |                                         | base_url: site url                     |
+|                   |        |                                              |                                         | active: 0 or 1                         |
+|/db/sites/site/:id | DELETE | -                                            | Deletes all associated relational data  | id: site id                            |
+
+### Fields
+
+| Endpoint            | Action | Returns                                      | Side Effect                             | Parameters/Req Body                    |
+|---------------------|--------|----------------------------------------------|-----------------------------------------|----------------------------------------|
+|/db/fields           | GET    | All bio field titles                         | -                                       | -                                      |
+|/db/fields           | POST   | Newly created bio field title                | -                                       | title: bio field title                 |
+|/db/fields/field/:id | POST   | Modified bio field title                     | -                                       | title: bio field title                 |
+|/db/fields/field/:id | DELETE | -                                            | Deletes all associated relational data  | id: bio field title id                 |
+
+## License:
+
+MIT

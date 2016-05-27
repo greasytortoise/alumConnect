@@ -56,7 +56,7 @@ authRouter.route('/callback')
     function(req, res) {
       //Fetch user from DB, store their permission status and user id in cookies, redirect to root or dashboard
       //depending on whether user is admin or not
-      User.where({ githubid: req.user.userData.githubid }).fetch()
+      User.where({ handle: req.user.userData.handle }).fetch()
         .then(function(user) {
           var store = user.attributes.permission === 1 ? 1 : 0;
           res.cookie('ac', store, { httpOnly: false });

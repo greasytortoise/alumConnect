@@ -11,6 +11,7 @@ class ProfileSite extends React.Component {
 
   componentDidMount() {
     this.setState({value: this.props.siteDetails.value})
+
   }
 
   componentWillReceiveProps(nextProps) {

@@ -199,10 +199,10 @@ class Profile extends React.Component {
                 </Col>
                 <Col xs={12} sm={7} md={8}>
                   <ProfileEditButton
-                    profilesUserId = {id}
-                    editing = {this.state.editing}
-                    profileEditButtonTapped = {this.profileEditButtonTapped.bind(this)}
-                    profileSaveButtonTapped = {this.profileSaveButtonTapped.bind(this)} />
+                    profilesUserId={id}
+                    editing={this.state.editing}
+                    profileEditButtonTapped={this.profileEditButtonTapped.bind(this)}
+                    profileSaveButtonTapped={this.profileSaveButtonTapped.bind(this)} />
                   <h2>{name}</h2>
                   {this.renderProfileGroups()}
 
@@ -213,7 +213,7 @@ class Profile extends React.Component {
                 </Col>
               </Row>
             </div>
-            <div className = 'section profile-bio'>
+            <div className='section profile-bio'>
               {this.renderProfileFields()}
               <ProfileEditButton
                 profilesUserId = {id}

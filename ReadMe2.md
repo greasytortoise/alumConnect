@@ -1,121 +1,60 @@
 # alumConnect
-
 A React CMS. Currently manages authentication, user profiles, and an admin dashboard with configurable options.
 
-## Contributors:
 
-  [Matthew W. Bresnan](https://github.com/mbresnan1701)
+### To create database and populate with sample data: ###
+ **note from drake: database is still in test mode**
+  * $ mysql -u root < server/schema.sql
+  * $ node server/insertData.js
+  * client side admin password: u: admin@admin.com p: admin
 
-  [Alam Palaniappan](https://github.com/alamuv)
 
-  [Mike Jonas](https://github.com/mikejonas)
 
-  [Drake Wang](https://github.com/yochess/)
+### Make sure you use webpack to generate a client/bundle.js: ###
 
-## Getting Started
+  * (make sure you npm install your dependencies)
+  * Install webpack globally (npm install -g webpack)
+  * run: webpack --watch
+  * Start the server visit http://localhost:3000/
+  * For production: 'npm run deploy' creates the minified production bundle.
+  * client/index.html Developtment: script src="/build/bundle.js" Production: src="/dist/bundle.js"
+  * TESTING: npm test
+  * Default Admin login information: email: admin@admin.com password: admin
+  * Default user login information: email: firstname_lastname@hr.com password: user
 
-1. Install [MySQL](https://dev.mysql.com/downloads/installer/)
-2. Install [Node and NPM](https://nodejs.org/en/)
-3. Install webpack globally
+### Frontend:
+* client/index.js: We're using react router! You can see the routes in this file. If you open it up you'll see a bunch of imports. The router needs to know about these compoents to direct the user to them when they go to a url. In render, you can see the router in action! If you're unsure what component is being rendered on a certain url, just check the router.
+* client/components/admin: this is where all the components that controll the admin dashboard. You can manage and add new users, edit profile fields, add sites that users can be a part of and hopefully more!
+* client/components/frontend: this is where the actual site that users view lives. It's pretty simple, we essentially have users and profiles. Hopefully this will be extended out more!
+* client/components/frontend/profile handles a lot! It's responsible for getting all the user profile info from our /db/users/user/:id api and nicely displaying it. Additionally, users or admins can edit profile fields, based on their permissions. Hopefully this is built out enough to where you won't need to touch it much, and continue expanding or using the frameowrk in other ways!
 
-    ```
-    $ npm install -g webpack
-    ```
 
-4. Install dependencies
+### API:
+(These have been upated,)
+* get: <http://localhost:3000/db/groups>
+* get: <http://localhost:3000/db/groups/group:id>
+* post: <http://localhost:3000/db/groups>
+* ---
+* get:  <http://localhost:3000/db/users>
+* get:  <http://localhost:3000/db/users/user/:id>
+* post: <http://localhost:3000/db/users/>
+* ---
+* get:  <http://localhost:3000/db/sites>
+* post: <http://localhost:3000/db/sites>
+* ---
+* get:  <http://localhost:3000/db/fields>
+* post: <http://localhost:3000/db/fields>
+### Challenges:
 
-    ```
-    $ npm install
-    ```
-
-5. ...
-
-## Api Endpoints
-
-### Donor Profiles
-
-| Endpoint        | Action | Returns                             | Side Effect                                | Parameters/Req Body                  |
-|-----------------|--------|-------------------------------------|--------------------------------------------|--------------------------------------|
-|/api/profile     | GET    | Currently logged in donor's profile | -                                          | -                                    |
-|/api/profile     | PUT    | Currently logged in donor's profile | Update currently logged in donor's profile | Profile fields to change             |
-|/api/profile/:id | GET    | Donor profile by id                 | -                                          | -                                    |
-|/api/geo         | GET    | Donors who live in a certain area   | -                                          | minLat: Minimum latitude to search   |
-|                 |        |                                     |                                            | minLong: Minimum longitude to search |
-|                 |        |                                     |                                            | maxLat: Maximum latitude to search   |
-|                 |        |                                     |                                            | maxLong: Maximum longitude to search |
-
-### Hospital Profiles
-
-| Endpoint                 | Action | Returns                                | Side Effect                                   | Parameters/Req Body                  |
-|--------------------------|--------|----------------------------------------|-----------------------------------------------|--------------------------------------|
-|/api/hospital/profile     | GET    | Currently logged in hospital's profile | -                                             | -                                    |
-|/api/hospital/profile     | PUT    | Currently logged in hospital's profile | Update currently logged in hospital's profile | Profile fields to change             |
-|/api/hospital/profile/:id | GET    | Hospital profile by id                 | -                                             | -                                    |
-|/api/hospital/geo         | GET    | Hospitals in a certain area            | -                                             | minLat: Minimum latitude to search   |
-|                          |        |                                        |                                               | minLong: Minimum longitude to search |
-|                          |        |                                        |                                               | maxLat: Maximum latitude to search   |
-|                          |        |                                        |                                               | maxLong: Maximum longitude to search |
-|/api/hospital/:id/reviews | GET    | Hospital reviews by id                 | -                                             | -                                    |
-|/api/hospital/:id/reviews | POST   | Created review                         | Creates review for hospital by id             | Content: Review text                 |
-|                          |        |                                        |                                               | Stars: Number of stars for review    |
-
-### Events
-
-| Endpoint      | Action | Returns                                | Side Effect                                   | Parameters/Req Body                  |
-|---------------|--------|----------------------------------------|-----------------------------------------------|--------------------------------------|
-|/api/event     | GET    | Currently logged in hospital's events  | -                                             | -                                    |
-|/api/event     | POST   | Created event                          | Adds event to hospital                        | time: event time                     |
-|               |        |                                        |                                               | hospitalId: id of hosting hospital   |
-|/api/event/:id | GET    | Event by id and participants           |                                               |                                      |
-|/api/event/:id | POST   | Event by id and participants           | Logged in donor joins event                   | -                                    |
-|/api/event/geo | GET    | Events in a certain area               | -                                             | minLat: Minimum latitude to search   |
-|               |        |                                        |                                               | minLong: Minimum longitude to search |
-|               |        |                                        |                                               | maxLat: Maximum latitude to search   |
-|               |        |                                        |                                               | maxLong: Maximum longitude to search |
-
-### Appointments
-
-| Endpoint        | Action | Returns                                      | Side Effect                             | Parameters/Req Body                    |
-|-----------------|--------|----------------------------------------------|-----------------------------------------|----------------------------------------|
-|/api/appointment | GET    | Currently logged in hospital's appointments  | -                                       | -                                      |
-|/api/appointment | POST   | Created appointment                          | Creates appointment for logged in donor | time: Appointment time                 |
-|                 |        |                                              |                                         | hospitalId: Id of appointment hospital |
-|                 |        |                                              |                                         | type: Appointment type <ul><li>1: Regular Appointment</li><li>2: Appointent with event</li><li>Appointment with bloodbuddy</li></ul> |
-
-### Feed Posts
-
-| Endpoint | Action | Returns                             | Side Effect                              | Parameters/Req Body                       |
-|----------|--------|-------------------------------------|------------------------------------------|-------------------------------------------|
-|/api/post | GET    | Currently logged in donor's profile | -                                        | minLat: Minimum latitude to search        |
-|          |        |                                     |                                          | minLong: Minimum longitude to search      |
-|          |        |                                     |                                          | maxLat: Maximum latitude to search        |
-|          |        |                                     |                                          | maxLong: Maximum longitude to search      |
-|/api/post | POST   | Currently logged in donor's profile | Post to feed as currently logged in user | content: Post Text                        |
-|          |        |                                     |                                          | latitude: latitude associated with post   |
-|          |        |                                     |                                          | longitude: longitude associated with post |
-
-### Calendar
-
-| Endpoint     | Action | Returns                   | Side Effect                                   | Parameters/Req Body                  |
-|--------------|--------|---------------------------|-----------------------------------------------|--------------------------------------|
-|/api/calendar | GET    | Google Appointments       | Updates calendar with google appointments     | title: appointment title             |
-|              |        |                           |                                               | id: appointment id                   |
-|              |        |                           |                                               | start: start date                    |
-|              |        |                           |                                               | url: link to google appointment      |
-|              |        |                           |                                               |                                      |
-|/api/calendar | POST   | -                         | Create google appointment                     | summary: appointment title           |
-|              |        |                           |                                               | start: start time                    |
-|              |        |                           |                                               | end: end time                        |
-
-### Blood Buddy Requests
-
-| Endpoint           | Action | Returns                             | Side Effect                                            | Parameters/Req Body                    |
-|--------------------|--------|-------------------------------------|--------------------------------------------------------|----------------------------------------|
-|/api/bloodbuddy     | POST   | Blood buddy request info            | Creates new blood buddy request for logged in donor    | time: Desired appointment time         |
-|                    |        |                                     |                                                        | hospitalId: id of appointment hospital |
-|/api/bloodbuddy/:id | GET    | Blood buddy request info by id      | -                                                      | -                                      |
-|/api/bloodbuddy/:id | PUT    | Blood buddy request info by id      | Creates appointments for requester and logged in donor | -                                      |
-
-## License:
-
-MIT
+* We're gathering so much data about the users -- their likes, interests, github, linkedin accounts, and more can easily be added. Use this data to create new features! Eg: blog feed, linkedin api to populate additional fields in the user profile, ect,
+* Currently, a clever user of the site can spoof the JWT of an admin and do bad things. Prevent this from happening.
+* Refactor to use Flux
+* Refactor to use server side rendering
+* Add more features to admin dashboard(change user password, group, etc)
+* alumConnect is by invite only. Set up a way to generate a unique default password for the user, which can be changed on first login, and send an email to the supplied address with their password.
+* Allow users to change their own password
+* Create blogging features into the site.
+* Add more social features like commenting, likes, etc.
+* Modularize site, so that admin can add modules to extend site functionality
+* Set up more generic site, but allow more options through a configuration file
+* Allow users to upload their own images

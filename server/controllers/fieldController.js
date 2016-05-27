@@ -37,7 +37,7 @@ module.exports = {
   deleteField: function(req, res) {
     var id = req.params.id;
     BioField
-      .where({id: id})
+      .where({ id: id })
       .destroy()
       .then(function() {
         res.status(201).send('deleted!');

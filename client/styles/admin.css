@@ -147,6 +147,29 @@
   height: 15px;
   width: 15px;
   margin: 0 auto;
+  position: relative;
+  top: 4px;
+  left: 10px;
+}
+
+.deleteLink2 {
+  background-image: url('../assets/delete2.png');
+  background-size: contain;
+  height: 15px;
+  width: 15px;
+  margin: 0 auto;
+  position: relative;
+  top: 8px;
+}
+
+.deleteLink3 {
+  background-image: url('../assets/delete2.png');
+  background-size: contain;
+  height: 15px;
+  width: 15px;
+  margin: 0 auto;
+  position: relative;
+  top: 35px;
 }
 
 .modal-container {
@@ -163,4 +186,30 @@
 
 .publicCheckbox {
   margin-bottom: 10px;
+}
+
+.adminGroupUsersText {
+}
+
+.newGroupSubmitButton {
+  padding-top: 10px;
+}
+
+
+/* Griddle */
+.griddle-previous,
+.griddle-next,
+.griddle-page {
+  display: block;
+  float:left;
+  width:33%;
+  min-height: 1px;
+}
+
+.griddle-next {
+  text-align: right;
+}
+
+.griddle-page {
+  text-align: center;
 }
