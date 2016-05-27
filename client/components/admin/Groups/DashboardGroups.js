@@ -99,7 +99,7 @@ class Groups extends React.Component {
     };
     console.log(data)
 
-    if(group === '' || data.visibleGroups.length === 0) {
+    if(group === '') {
       this.setState({error: true});
     } else {
       RestHandler.Post('/db/groups', data, (err, res) => {
@@ -222,7 +222,7 @@ class Groups extends React.Component {
         </form>
 
         {this.state.error && (
-          <p>Enter a Group Name and select groups that are visible.</p>
+          <p>Enter a Group Name</p>
         )}
       </div>
     );
