@@ -14,21 +14,30 @@ A React CMS. Currently manages authentication, user profiles, and an admin dashb
 
 ## Getting Started
 
+Once this repo is cloned,
+
 1. Install [MySQL](https://dev.mysql.com/downloads/installer/)
 2. Install [Node and NPM](https://nodejs.org/en/)
-3. Install webpack globally
+3. Install [Sharp](http://sharp.dimens.io/en/stable/install/#mac-os)
+4. Install webpack and redis globally
 
     ```
     $ npm install -g webpack
     ```
 
-4. Install dependencies
+5. Install dependencies
 
     ```
     $ npm install
     ```
 
-5. ...
+6. Start necessary servers
+    ...
+    $ mysql.server start
+    $ redis-server
+    ...
+
+7. Launch the server with npm start
 
 ## Database Schema
 
