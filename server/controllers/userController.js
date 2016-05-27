@@ -117,7 +117,7 @@ module.exports = {
             rest_url: data.user.handle,
           })
           .then(() => {
-            res.status(201).send('user is created!');
+            res.status(201).send(theuser);
           })
           .catch(function(err) {
             throw err;
