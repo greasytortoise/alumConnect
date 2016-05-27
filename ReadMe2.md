@@ -23,6 +23,7 @@ Once this repo is cloned,
 
     ```
     $ npm install -g webpack
+    $ npm install -g redis
     ```
 
 5. Install dependencies
@@ -37,7 +38,20 @@ Once this repo is cloned,
     $ redis-server
     ```
 
-7. Launch the server with npm start
+7. Import alumConnect schema to mySQL database
+    ```
+    $ mysql -u root < schema.sql
+    ```
+
+8. Insert data to alumConnect table
+    ```
+    $ node new_insertData.js
+    ```
+
+8. Launch the server
+    ```
+    $ npm start
+    ```
 
 ## Database Schema
 
