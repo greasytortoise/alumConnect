@@ -32,10 +32,10 @@ Once this repo is cloned,
     ```
 
 6. Start necessary servers
-    ...
+    ```
     $ mysql.server start
     $ redis-server
-    ...
+    ```
 
 7. Launch the server with npm start
 
