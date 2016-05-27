@@ -3,21 +3,9 @@ import Griddle from 'griddle-react';
 import RestHandler from '../../util/RestHandler';
 import $ from 'jquery';
 import request from 'superagent';
-import { Select, Modal, Button } from 'react-bootstrap';
+import { Select, Modal, Button, Row, Col} from 'react-bootstrap';
 import { Link } from 'react-router';
-
-var rowMetadata = {
-    "bodyCssClassName": function(rowData) {
-        if (rowData.action === "added") {
-            return "green-row";
-        } else if (rowData.action === "removed") {
-            return "red-row";
-        } else if (rowData.action === "transfer") {
-            return "blue-row";
-        }
-        return "default-row";
-    },
-};
+import GroupsView from './UsersGroupsView.js';
 
 class DashboardUsers extends React.Component {
   constructor (props) {
@@ -36,20 +24,19 @@ class DashboardUsers extends React.Component {
 
   componentWillMount() {
     RestHandler.Get('/db/users', (err, res) => {
-      var users = res.body;
+      var users = res.body.reverse();
       for (var i = 0; i < users.length; i++) {
         users[i].Delete = this.getDeleteLink(users[i].id, users[i].name);
         users[i].Name = this.getProfileLink(users[i].id, users[i].name);
         users[i].Github = this.getGithubLink(users[i].handle);
+        users[i].Groups = this.renderProfileGroups(users[i]);
       }
-      this.setState({ users: users });
-
+      this.setState({ users: users});
     });
   }
   getProfileLink(id, name) {
     return (
-      <div className="userLink"
-      >
+      <div className="userLink">
         <Link to={{ pathname: `/users/${id}` }}>
           {name}
         </Link>
@@ -58,8 +45,7 @@ class DashboardUsers extends React.Component {
   }
   getGithubLink(github) {
     return (
-      <div className="ghLink"
-      >
+      <div className="ghLink">
         <a href={`https://www.github.com/${github}`}>
           {github}
         </a>
@@ -70,10 +56,12 @@ class DashboardUsers extends React.Component {
   getDeleteLink(id, name) {
     var data = JSON.stringify({ id: id, name: name });
     return (
-      <div className="deleteLink" data={data}
-        onClick={this.setDeleteState.bind(this)}
-      >
-      </div>
+        <Col xs={4} >
+          <div className="deleteLink" data={data}
+            onClick={this.setDeleteState.bind(this)}
+          >
+          </div>
+        </Col>
     );
   }
 
@@ -99,7 +87,7 @@ class DashboardUsers extends React.Component {
     var that = this;
     e.preventDefault();
     request
-      .delete('/dashboard/db/users/user/' + that.state.toBeDeleted.id)
+      .delete('/db/users/user/' + that.state.toBeDeleted.id)
       .end(function(err, res) {
         if(err) {
           console.log(err);
@@ -122,9 +110,16 @@ class DashboardUsers extends React.Component {
     this.setState({ showDelete: false });
   }
 
+  renderProfileGroups(user) {
+    return (
+      <GroupsView
+      selectedGroups={user.groups}
+      />
+    );
+  }
+
   render() {
     return (
-
       <div>
         <Modal
           show={this.state.showDelete}
@@ -136,7 +131,7 @@ class DashboardUsers extends React.Component {
             <Modal.Title id="contained-modal-title">Delete User</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            Are you sure you want to delete user {this.state.toBeDeleted.name}?
+            Are you sure you want to delete user: {this.state.toBeDeleted.name}?
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.closePopup.bind(this)}>Cancel</Button>
@@ -146,14 +141,13 @@ class DashboardUsers extends React.Component {
         <h3 className="dashboard-title">Users</h3>
         <Griddle
           results={this.state.users}
-          rowMetadata={rowMetadata}
           showFilter={true}
           key={this.state.key}
           ref='usertable'
           tableClassName='table'
           useGriddleStyles={false}
-          resultsPerPage={25}
-          columns={["id", "Name", "email", "Github", "Delete"]}/>
+          resultsPerPage={40}
+          columns={["id", "Name", "Github", "Groups", "Delete"]}/>
       </div>
     );
   }

@@ -21,7 +21,7 @@ userRouter.route('/user/visibility')
   .post(util.isAdmin, userController.toggleVisible);
 
 userRouter.route('/name')
-  .get((req, res) => {
+  .get(util.isLoggedIn, (req, res) => {
     res.send({ name: req.user.name, id: req.user.id });
   });
 

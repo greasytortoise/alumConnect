@@ -23,7 +23,6 @@ module.exports = function(app, express) {
   app.use('/db/users', userRouter);
   app.use('/db/sites', siteRouter);
   app.use('/db/fields', fieldRouter);
-  app.use('/dashboard/db/users', userRouter);
   app.use('/auth', authRouter);
 
   app.post('/user/uploadimage', function(req, res) {

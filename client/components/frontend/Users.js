@@ -17,7 +17,7 @@ class Users extends React.Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     RestHandler.Get('/db/groups', (err, res) => {
       var groups = res.body.reverse();
       var initialGroup = res.body[0];

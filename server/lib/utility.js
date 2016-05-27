@@ -28,7 +28,7 @@ exports.isLoggedIn = function(req, res, next) {
 exports.isAdmin = function(req, res, next) {
   
   if (req.isAuthenticated()) {
-    User.where({ githubid: req.user.githubid }).fetch()
+    User.where({ handle: req.user.handle }).fetch()
       .then(function(user) {
         if(user.attributes.permission === 1) {
           next();
@@ -140,7 +140,6 @@ exports.canISeeThisGroup = function(groupObj, req) {
 
     visGroup.where({ Group_id: selectedGroup, Visible_id: targetGroup }).fetch()
       .then(function(results) {
-        console.log(results);
         if (results !== null) {
           resolve(groupObj);
         } else {
