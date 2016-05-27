@@ -14,7 +14,7 @@ var filter = require('lodash/filter');
 var uniq = require('lodash/uniq');
 var request = require('superagent');
 // IDs of admin priveledged groups
-var adminGroups = ['1', '2'];
+var adminGroups = ['1'];
 
 
 exports.isLoggedIn = function(req, res, next) {
