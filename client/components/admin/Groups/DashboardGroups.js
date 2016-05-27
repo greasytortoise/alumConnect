@@ -59,10 +59,15 @@ class Groups extends React.Component {
         groups[i].idString = groups[i].id.toString();
         groups[i]['Can See'] = ''
         var visibleGroups = groups[i].visibleGroups;
-        for (var id in visibleGroups) {
-          groups[i]['Can See'] += visibleGroups[id] + ', ';
+        if (groups[i].group_name === 'staff') {
+          groups[i]['Can See'] = 'All Groups';
+        } else {
+          for (var id in visibleGroups) {
+            groups[i]['Can See'] += visibleGroups[id] + ', ';
+          }
+          groups[i]['Can See'] = groups[i]['Can See'].replace(/,\s*$/, "");
         }
-        groups[i]['Can See'] = groups[i]['Can See'].replace(/,\s*$/, "");
+
         groups[i].Edit = this.getEditGroupLink(groups[i]);
         groups[i].Delete = this.getDeleteLink(groups[i].id, groups[i].group_name);
       }
