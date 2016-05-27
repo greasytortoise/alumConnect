@@ -22,13 +22,13 @@ class DashboardNewUser extends React.Component {
       isSaving: false,
       newUserPublic: true,
       newUserAdmin: false,
-      users: [],
+      newusers: [],
     };
     this.delayGithubTillTypingEnds = _debounce(this.handleCheckGithub,500);
   }
   componentDidMount () {
     this.getGroups();
-    this.getRecentUsers();
+    // this.getRecentUsers();
   }
 
   getGroups() {
@@ -64,9 +64,10 @@ class DashboardNewUser extends React.Component {
         this.setState({ isSaving: false });
       } else if (res.status === 201) {
         console.log('response: ', res);
+        this.state.newusers.unshift(res.body);
         setTimeout(() => {
           this.setState({isSaving: false, githubInfo: undefined });
-          this.getRecentUsers()
+          // this.getRecentUsers()
           this.clearForm();
         }, 200);
       }
@@ -111,17 +112,17 @@ class DashboardNewUser extends React.Component {
   //GRIDDLE*********
   //****************
 
-  getRecentUsers() {
-    RestHandler.Get('/db/users', (err, res) => {
-      var users = res.body.reverse();
-      for (var i = 0; i < users.length; i++) {
-        users[i].Name = this.getProfileLink(users[i].id, users[i].name);
-        users[i].Github = this.getGithubLink(users[i].handle);
-        users[i].Groups = this.renderProfileGroups(users[i]);
-      }
-      this.setState({ users: users });
-    });
-  }
+  // getRecentUsers() {
+  //   RestHandler.Get('/db/users', (err, res) => {
+  //     var users = res.body.reverse();
+  //     for (var i = 0; i < users.length; i++) {
+  //       users[i].Name = this.getProfileLink(users[i].id, users[i].name);
+  //       users[i].Github = this.getGithubLink(users[i].handle);
+  //       users[i].Groups = this.renderProfileGroups(users[i]);
+  //     }
+  //     this.setState({ users: users });
+  //   });
+  // }
 
   getProfileLink(id, name) {
     return (
@@ -241,14 +242,14 @@ class DashboardNewUser extends React.Component {
         <br /><br /><br />
         <h3>Recently added</h3>
           <Griddle
-            results={this.state.users}
+            results={this.state.newusers}
             showFilter={false}
             key={this.state.key}
             ref='usertable'
             tableClassName='table'
             useGriddleStyles={false}
             resultsPerPage={10}
-            columns={["id", "Name", "Github", "Groups"]}/>
+            columns={["id", "name", "handle"]}/>
       </div>
     );
   }

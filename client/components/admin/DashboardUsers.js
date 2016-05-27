@@ -31,7 +31,7 @@ class DashboardUsers extends React.Component {
         users[i].Github = this.getGithubLink(users[i].handle);
         users[i].Groups = this.renderProfileGroups(users[i]);
       }
-      this.setState({ users: users });
+      this.setState({ users: users});
     });
   }
   getProfileLink(id, name) {
@@ -87,7 +87,7 @@ class DashboardUsers extends React.Component {
     var that = this;
     e.preventDefault();
     request
-      .delete('/dashboard/db/users/user/' + that.state.toBeDeleted.id)
+      .delete('/db/users/user/' + that.state.toBeDeleted.id)
       .end(function(err, res) {
         if(err) {
           console.log(err);
@@ -131,7 +131,7 @@ class DashboardUsers extends React.Component {
             <Modal.Title id="contained-modal-title">Delete User</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            Are you sure you want to delete user {this.state.toBeDeleted.name}?
+            Are you sure you want to delete user: {this.state.toBeDeleted.name}?
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.closePopup.bind(this)}>Cancel</Button>

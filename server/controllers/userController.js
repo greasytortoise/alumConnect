@@ -25,11 +25,11 @@ module.exports = {
             groups: groups.reduce(function(prev, group) {
               prev[group.id] = group.get('group_name');
               return prev;
-            }, {})
+            }, {}),
           };
         });
         res.status(200).send(retObj);
-    });
+      });
   },
 
   //for filtering
@@ -117,7 +117,7 @@ module.exports = {
             rest_url: data.user.handle,
           })
           .then(() => {
-            res.status(201).send('user is created!');
+            res.status(201).send(theuser);
           })
           .catch(function(err) {
             throw err;

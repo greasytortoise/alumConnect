@@ -1,19 +1,25 @@
-import React from 'react'
+import React from 'react';
 import { Button, ButtonToolbar } from 'react-bootstrap';
-import auth from '../../../util/authHelpers.js'
-
+import auth from '../../../util/authHelpers.js';
+import RestHandler from '../../../util/RestHandler.js';
 
 class ProfileEditButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedInUserId: -1,
+      loggedInUserId: -666,
       permission: auth.getCookie('ac'),
-    }
+    };
   }
-
-  componentDidMount() {
-    this.getLoggedInUserData();
+  
+  componentWillMount() {
+    RestHandler.Get('/db/users/name', (err, res) => {
+      if (err) {
+        console.log(err);
+      } else {
+        this.setState({ loggedInUserId: res.body.id });
+      }
+    });
   }
 
   getLoggedInUserData() {

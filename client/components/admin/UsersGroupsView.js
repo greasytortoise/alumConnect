@@ -16,15 +16,15 @@ class ProfileGroups extends React.Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     var selectedGroups  = _map(this.props.selectedGroups, (key, val) => val).join(',');
-    this.setState({selectedGroups: selectedGroups})
+    // this.setState({selectedGroups: selectedGroups})
     this.getAvailableGroups();
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps) {
       var selectedGroups  = _map(this.props.selectedGroups, (key, val) => val).join(',');
-      this.setState({selectedGroups: selectedGroups})
+      // this.setState({selectedGroups: selectedGroups})
     }
   }
 
@@ -33,16 +33,9 @@ class ProfileGroups extends React.Component {
       //res.body.map is a Workaround to get the Select valueKey working.
       //it ads a property with a stringified id to res.body.
       res.body.map(obj => obj['idString'] = obj['id'].toString())
-      this.setState({groups: res.body});
+      this.setState({ groups: res.body });
     });
   }
-
-  handleGroupSelect (selectedGroups) {
-		this.setState({ selectedGroups });
-    this.props.stageProfileEdits((editedObject) => {
-      editedObject.groups = selectedGroups.split(',');
-    });
-	}
 
   displayUsersGroups() {
     return _map(this.props.selectedGroups, (groupName, groupId) => {
@@ -59,22 +52,16 @@ class ProfileGroups extends React.Component {
   }
 
   renderGroups() {
-    var selectedGroups = this.state.selectedGroups;
-    if (selectedGroups) {
-      return (
-        <div className="adminGroupUsersText">{this.displayUsersGroups()}</div>
-      );
-    } else {
-      return (
-        <div> No Groups Selected </div>
-      );
-    }
+    // var selectedGroups = this.state.selectedGroups;
+    return (
+      <div className="adminGroupUsersText">{this.displayUsersGroups()}</div>
+    );
   }
 
   render() {
     return (
       <div>{this.renderGroups()}</div>
-    )
+    );
   }
 }
 

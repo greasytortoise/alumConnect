@@ -1,10 +1,12 @@
 import React from 'react'
 import Griddle from 'griddle-react';
-import {Input, Button, ButtonInput, Modal} from 'react-bootstrap'
+import {Input, Button, ButtonInput, Modal, Col} from 'react-bootstrap'
 import RestHandler from '../../../util/RestHandler'
 import EditGroup from './DashboardEditGroup.js'
 import Select from 'react-select'
 import $ from 'jquery';
+import request from 'superagent';
+
 
 var rowMetadata = {
     "bodyCssClassName": function(rowData) {
@@ -26,6 +28,12 @@ class Groups extends React.Component {
       groups: [],
       selectedGroups: [],
       error: false,
+      key: 666,
+      showDelete: false,
+      toBeDeleted: {
+        id: null,
+        name: null,
+      },
     }
   }
 
@@ -56,6 +64,7 @@ class Groups extends React.Component {
         }
         groups[i]['Can See'] = groups[i]['Can See'].replace(/,\s*$/, "");
         groups[i].Edit = this.getEditGroupLink(groups[i]);
+        groups[i].Delete = this.getDeleteLink(groups[i].id, groups[i].group_name);
       }
       this.setState({ groups: groups });
     });
@@ -97,6 +106,63 @@ class Groups extends React.Component {
     }
   }
 
+  getDeleteLink(id, name) {
+    var data = JSON.stringify({ id: id, name: name });
+    return (
+        <Col xs={4} >
+          <div className="deleteLink" data={data}
+            onClick={this.setDeleteState.bind(this)}
+          >
+          </div>
+        </Col>
+    );
+  }
+
+  setDeleteState(e) {
+    var data = JSON.parse($(e.target).attr('data'));
+    e.preventDefault();
+    this.setState({ toBeDeleted: {
+      id: data.id,
+      name: data.name,
+    },
+    showDelete: true });
+  }
+
+  resetDeleteState() {
+    this.setState({ toBeDeleted: {
+      id: null,
+      name: null,
+    },
+    showDelete: false });
+  }
+
+  deleteGroup(e) {
+    var that = this;
+    e.preventDefault();
+    request
+      .delete('/db/groups/group/' + that.state.toBeDeleted.id)
+      .end(function(err, res) {
+        if(err) {
+          console.log(err);
+        } else {
+          console.log('Group deleted');
+          for (var i = 0; i < that.state.groups.length; i++) {
+            if (that.state.groups[i].id === that.state.toBeDeleted.id) {
+              that.state.groups.splice(i, 1);
+              break;
+            }
+          }
+          that.setState({ key: Math.random() });
+          that.resetDeleteState();
+        }
+      });
+  }
+
+
+  closePopup() {
+    this.setState({ showDelete: false });
+  }
+
   clearForm() {
     const fields = ['group'];
     fields.map(field => {
@@ -109,14 +175,32 @@ class Groups extends React.Component {
     return (
       <div>
         <h3 className="dashboard-title">Groups</h3>
+        <Modal
+          show={this.state.showDelete}
+          onHide={this.closePopup.bind(this)}
+          container={this}
+          aria-labelledby="contained-modal-title"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title">Delete Group</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Are you sure you want to delete group: {this.state.toBeDeleted.name}?
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.closePopup.bind(this)}>Cancel</Button>
+            <Button bsStyle="danger" onClick={this.deleteGroup.bind(this)}>Delete</Button>
+          </Modal.Footer>
+        </Modal>
         <Griddle
           results={this.state.groups}
           rowMetadata={rowMetadata}
           ref='groupstable'
+          key={this.state.key}
           tableClassName='table'
           useGriddleStyles={false}
           resultsPerPage={40}
-          columns={["group_name", "Can See", "Edit"]}/>
+          columns={["group_name", "Can See", "Edit", "Delete"]}/>
 
         <form onSubmit={this.handleSubmit.bind(this)}>
           <Input type="text" label="Add Group"
