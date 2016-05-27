@@ -169,7 +169,24 @@
 }
 
 .newGroupSubmitButton {
-  padding-top: 10px;  
+  padding-top: 10px;
 }
 
 
+/* Griddle */
+.griddle-previous,
+.griddle-next,
+.griddle-page {
+  display: block;
+  float:left;
+  width:33%;
+  min-height: 1px;
+}
+
+.griddle-next {
+  text-align: right;
+}
+
+.griddle-page {
+  text-align: center;
+}

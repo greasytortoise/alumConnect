@@ -1,8 +1,13 @@
 import React from 'react'
+import Griddle from 'griddle-react';
 import { FormControl, Col, Row, Checkbox, InputGroup, Button, DropdownButton, MenuItem, ControlLabel} from 'react-bootstrap'
 import Select from 'react-select';
 import RestHandler from '../../../util/RestHandler';
 import reactDOM from 'react-dom';
+import { Link } from 'react-router';
+import GroupsView from '../UsersGroupsView.js';
+
+
 
 var _debounce = require('lodash/debounce');
 
@@ -17,11 +22,13 @@ class DashboardNewUser extends React.Component {
       isSaving: false,
       newUserPublic: true,
       newUserAdmin: false,
+      users: [],
     };
     this.delayGithubTillTypingEnds = _debounce(this.handleCheckGithub,500);
   }
   componentDidMount () {
     this.getGroups();
+    this.getRecentUsers();
   }
 
   getGroups() {
@@ -32,7 +39,6 @@ class DashboardNewUser extends React.Component {
       this.setState({groups: res.body});
     });
   }
-
 
   handleSubmit(event) {
     event.preventDefault();
@@ -55,13 +61,12 @@ class DashboardNewUser extends React.Component {
     RestHandler.Post('db/users', data, (err, res) => {
       if(err) {
         console.error(err);
-        this.setState({
-          isSaving: false
-        });
+        this.setState({ isSaving: false });
       } else if (res.status === 201) {
-        console.log('RESponse: ', res);
+        console.log('response: ', res);
         setTimeout(() => {
           this.setState({isSaving: false, githubInfo: undefined });
+          this.getRecentUsers()
           this.clearForm();
         }, 200);
       }
@@ -88,7 +93,11 @@ class DashboardNewUser extends React.Component {
       if(err) {
         this.setState({githubInfo: undefined});
       } else {
-        this.setState({githubInfo: res.body});
+        if(res.body.id) {
+          this.setState({githubInfo: res.body});
+        } else {
+          this.setState({githubInfo: undefined});
+        }
       }
     });
 	}
@@ -96,6 +105,52 @@ class DashboardNewUser extends React.Component {
   handleGroupSelect (selectedGroups) {
 		this.setState({ selectedGroups });
 	}
+
+
+  //****************
+  //GRIDDLE*********
+  //****************
+
+  getRecentUsers() {
+    RestHandler.Get('/db/users', (err, res) => {
+      var users = res.body.reverse();
+      for (var i = 0; i < users.length; i++) {
+        users[i].Name = this.getProfileLink(users[i].id, users[i].name);
+        users[i].Github = this.getGithubLink(users[i].handle);
+        users[i].Groups = this.renderProfileGroups(users[i]);
+      }
+      this.setState({ users: users });
+    });
+  }
+
+  getProfileLink(id, name) {
+    return (
+      <div className="userLink">
+        <Link to={{ pathname: `/users/${id}` }}>
+          {name}
+        </Link>
+      </div>
+   );
+  }
+
+  getGithubLink(github) {
+    return (
+      <div className="ghLink">
+        <a href={`https://www.github.com/${github}`}>
+          {github}
+        </a>
+      </div>
+   );
+  }
+
+  renderProfileGroups(user) {
+    return (
+      <GroupsView
+        selectedGroups={user.groups}
+      />
+    );
+  }
+
 
   render() {
     var isSaving = this.state.isSaving;
@@ -136,7 +191,9 @@ class DashboardNewUser extends React.Component {
               placeholder="Enter Github Username"
               ref="githubUsername"
               onChange={function() {
-                this.setState({githubInfo: 'loading'});
+                if(this.state.githubInfo !== 'loading') {
+                  this.setState({githubInfo: 'loading'});
+                }
                 this.delayGithubTillTypingEnds();
               }.bind(this)}/>
           </InputGroup>
@@ -157,8 +214,7 @@ class DashboardNewUser extends React.Component {
                 checked={this.state.newUserPublic}
                 onChange= {() => {
                   this.setState({newUserPublic: !this.state.newUserPublic});
-                }}
-              >
+                }}>
                 Make this user publicly visible?
               </Checkbox>
 
@@ -166,8 +222,7 @@ class DashboardNewUser extends React.Component {
                 checked={this.state.newUserAdmin}
                 onChange= {() => {
                   this.setState({newUserAdmin: !this.state.newUserAdmin});
-                }}
-              >
+                }}>
                 Give user admin access
               </Checkbox>
 
@@ -182,6 +237,18 @@ class DashboardNewUser extends React.Component {
           {isSaving ? 'Saving...' : 'Submit'}
           </Button>
         </form>
+
+        <br /><br /><br />
+        <h3>Recently added</h3>
+          <Griddle
+            results={this.state.users}
+            showFilter={false}
+            key={this.state.key}
+            ref='usertable'
+            tableClassName='table'
+            useGriddleStyles={false}
+            resultsPerPage={10}
+            columns={["id", "Name", "Github", "Groups"]}/>
       </div>
     );
   }
