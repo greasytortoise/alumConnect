@@ -17,7 +17,7 @@ var Bios = require('./collections/bios');
 var User_Site = require('./models/userSite');
 var User_Sites = require('./collections/userSites');
 
-var groups = ['HR36', 'HR37', 'HR38', 'HR39', 'HR40', 'HR41', ];
+var groups = ['HR36', 'HR37', 'HR38', 'HR39', 'HR40', 'HR41' ];
 var students = [];
 var biographies = bioFile.bioArray;
 var userInfos = userFile.userArray;
