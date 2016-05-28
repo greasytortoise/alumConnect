@@ -21,6 +21,7 @@ module.exports = {
             public: user.get('public'),
             url: user.get('url_hash'),
             image: user.get('image'),
+            email: user.get('email'),
             groups: groups.reduce(function(prev, group) {
               prev[group.id] = group.get('group_name');
               return prev;
@@ -48,6 +49,7 @@ module.exports = {
               public: user.get('public'),
               url: user.get('url_hash'),
               image: user.get('image'),
+              email: user.get('email'),
               groups: groups.reduce(function(prev, group) {
                 prev[group.id] = group.get('group_name');
                 return prev;
@@ -96,6 +98,7 @@ module.exports = {
         handle: data.user.handle,
         githubid: data.user.githubid,
         name: data.user.name,
+        email: data.user.email,
         image: 'assets/default.png',
         public: 1,
         permission: data.user.admin || 0,
@@ -158,6 +161,7 @@ module.exports = {
                     githubid: user.get('githubid'),
                     name: user.get('name'),
                     url: user.get('url_hash'),
+                    email: user.get('email'),
                     group_id: groups.id,
                     group: groups.get('group_name'),
                     image: user.get('image'),
@@ -226,6 +230,7 @@ module.exports = {
                     githubid: user.get('githubid'),
                     name: user.get('name'),
                     url: user.get('url_hash'),
+                    email: user.get('email'),
                     group_id: groups.id,
                     group: groups.get('group_name'),
                     image: user.get('image'),
@@ -294,6 +299,7 @@ module.exports = {
                     handle: data.user.handle,
                     githubid: data.user.githubid,
                     name: user.get('name'),
+                    email: data.user.email,
                     url_hash: data.user.url,
                     permission: data.user.permission === 0 ? 0 : 1,
                     public: data.user.public === 0 ? 0 : 1,
