@@ -375,10 +375,31 @@ rejectStyle = {
   margin-bottom: 20px;
 }
 
+#footer {
+  /* border-top: 1px solid #ccc; */
+  text-align: center;
+  margin-top:10px;
+  padding: 10px 0;
+  color: #c5c5c5;
+  font-size: 14px;
+}
 
-/* TEMPORARY UNTIL I CAN FIGURE OUT SCSS!!*/
 
+#footer a {
+  color: #b5b5b5;
+  font-weight: bold;
+  text-decoration: underline;
+}
 
+#footer a:hover {
+  color: #555;
+}
+#loginFormWrapper #footer {
+  color: #d0d0d0;
+}
+#loginFormWrapper #footer a {
+    color: #d0d0d0;
+}
 
 /**
  * React Select
