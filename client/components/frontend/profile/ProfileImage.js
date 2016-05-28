@@ -125,7 +125,7 @@ class SelectImageModal extends React.Component {
   showError() {
     if(this.state.error) {
       return(
-        <Alert bsStyle="warning">{this.state.error}</Alert>
+        <Alert bsStyle="warning"><b>Warning:</b> {this.state.error}</Alert>
       )
     }
   }
