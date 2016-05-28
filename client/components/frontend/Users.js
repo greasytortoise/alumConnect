@@ -45,7 +45,16 @@ class Users extends React.Component {
       return user.name.toLowerCase().includes(searchUsersText);
     });
 
-    return users.map(function(user, index) {
+    return users.sort(function(a, b) {
+      if (a.name.toLowerCase() > b.name.toLowerCase()) {
+        return 1;
+      }
+      if (a.name.toLowerCase() < b.name.toLowerCase()) {
+        return -1;
+      }
+      // a must be equal to b
+      return 0;
+    }).map(function(user, index) {
       var {name, id, image} = user
       return(
         <Col xs={6} sm={4} md={3} lg={3} key={id}>
