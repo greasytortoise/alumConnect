@@ -3,10 +3,10 @@
 A React CMS. Currently manages authentication, user profiles, and an admin dashboard with configurable options.
 
 ## Contributors:
-  [Matthew W. Bresnan](https://github.com/mbresnan1701)
-  [Alamu Palaniappan](https://github.com/alamuv)
-  [Mike Jonas](https://github.com/mikejonas)
-  [Drake Wang](https://github.com/yochess/)
+* [Matthew W. Bresnan](https://github.com/mbresnan1701)
+* [Alamu Palaniappan](https://github.com/alamuv)
+* [Mike Jonas](https://github.com/mikejonas)
+* [Drake Wang](https://github.com/yochess/)
 
 ## Getting Started
 
