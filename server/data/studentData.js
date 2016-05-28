@@ -238,5 +238,21 @@ exports.students = {
     {name: 'Travis Carson', cohort: 41, image: 'https://drive.google.com/uc?export=view&id=0B4ATDW9XQ5HGcVVtMkROVkdrbkU'},
     {name: 'Will Wheeler', cohort: 41, image: 'https://drive.google.com/uc?export=view&id=0B4ATDW9XQ5HGazNjaE4tanBLRk0'},
     {name: 'Wilson Yu', cohort: 41, image: 'https://drive.google.com/uc?export=view&id=0B4ATDW9XQ5HGTmRwNmk5ZldJRTg'},
-  ]
+  ],
+  // hr42: [
+  //   {name: 'AJ Grande', cohort: 42},
+  //   {name: 'Alex Lee', cohort: 42},
+  //   {name: 'Alex Wong', cohort: 42},
+  //   {name: 'Andrew Fung', cohort: 42},
+  //   {name: 'Arthur Livingston', cohort: 42},
+  //   {name: 'Ashwini Jogwar', cohort: 42},
+  //   {name: 'Ben Rachbach', cohort: 42},
+  //   {name: 'Ben Chou', cohort: 42},
+  //   {name: 'Brandon Courtney', cohort: 42, image: 'https://drive.google.com/uc?export=view&id=0B4ATDW9XQ5HGM2R0dkRXQm56Z0U'},
+  //   {name: 'Cathy Lee', cohort: 42},
+  //   {name: 'Chris Choi', cohort: 42},
+  //   {name: 'Daniel Vu', cohort: 42},
+  //   {name: 'Dan Sajjad', cohort: 42},
+  //   {name: 'Shinji Furuya', cohort: 42, image: 'https://drive.google.com/uc?export=view&id=0B4ATDW9XQ5HGQU5TdXhNdUxiX00'},
+  // ]
 };

@@ -1,0 +1,916 @@
+Shams Ali
+
+
+First: “Shams” (pronounced: shums)
+Last: “Ali”
+*I prefer to be called by my last name: “Ali”
+
+
+Before hack reactor I was serving in the reserves military with the US Marines and have been relieved of my duty in June of 2015. In addition I was working fulltime as a manager/coordinator for a global fragrance distributor, Luxury Perfumes for the past 7 years in Los Angeles, CA. Also, I was going to school fulltime. I received my BA in political science at the end of 2014. In 2015 I decided to go into Information Systems. The first semester I took courses on computer networking focusing on Cisco and getting a CCNA. The second semester I took a few programming courses and at the end of 2015 I finished with 3 various associates tech degrees and a few certificates as well.
+During my time of furthering education, I fell in love in coding and decided Hack Reactor is what I wanted to do. Quit my job, left school, decided not to re-enlist and moved in with the parents in Canada and have been studying JavaScript while helping them with their business.
+
+
+Generally I was born and raised in Los Angeles, CA. However, my parents had moved to Canada about 4 years ago. I decided to move in with them at the start of this year to prepare for my time at hack reactor.
+
+
+I aspire to build stuff on the internet and be able to scale them out to millions of people. I hope to create a few technology-driven startups once I am more experienced. As for passion, I love the health industry and a career in Health IT would be appealing.
+
+
+Besides from the basics taught to me at a community college in MySQL, Just Basic, Visual Basic, and ASP.net; the only other experience I have is the HTML/CSS/JavaScript I have been learning through codeschool and precourse materials.
+
+
+I used to be fun. Now I’m just motivated and boring. Haha jk. I like to play basketball, love music, I weight-train daily, I always look for opportunities to volunteer or help someone in need, and I love to learn new things whether its career related, spiritual, political, anything as any knowledge is important knowledge and ignorance is not bliss J.
+-I’m 26 Years old
+-I’m Muslim
+-I’m Indian, Guajarati (mother from Surat, father from Bombay)
+-I’m very excited to start at Hack Reactor and am counting down the days J
+
+
+
+
+Tj Carskadon
+
+
+Tj Carskadon - Tj should be easy enough, don’t even bother with the last name, it isn’t worth the effort.
+
+
+Making consumer products from sporting goods to electronics. Lots and lots of time in China (actually writing this from China).
+
+
+Live in Oakland, 30-40% of the time, Chang An China the rest of the time...until April 1st then back to Oakland all the time.
+
+
+Cool stuff, but I guess that is what everyone says. I think I want to work on enterprise applications to help teams communicate and work efficiently. The kinds of products I use in my current life.
+
+
+Learned basic as a kid, then did some assembly for embedded systems over 10 years ago. Some JS and PHP as well about the same time, but that was long long ago in a memory far far away.
+
+
+Bluegrass musician, oddly enough like Jade I have had lots of swing dancing in my past. Like most of you I love to learn.
+
+
+
+
+Jonas Sota
+
+
+My name is Jonas (like the weezer song) Sota. You can call me 'Jonas'.
+
+
+I finished undergrad last June, spent a few months touring the lower 48, and have been spending the past several months learning various web dev things.
+
+
+Born and raised in Berkeley, CA
+
+
+Web-annotation. There's room for some technically interesting and very impactful innovation here.
+
+
+Small projects, nothing major.
+
+
+* I'm a motorcycle adventurist who enjoys hiking and camping.
+* I'm a tea with strangers host.
+* I'm figuring out how to launch html files with chrome from sublime. . . why is this so difficult?
+
+
+
+
+David Valles
+
+
+David Valles (Dave or David is fine... no preference)
+
+
+Working as a personal trainer. Studying in my free time.
+
+
+San Jose, Ca
+
+
+Application architecture and development. Clean code.
+
+
+I have a CS degree. Worked as a programmer many years ago. I missed it and the mental gymnastics that go along. So, last two years I started playing 'catch up' through online education.
+
+
+Fun facts? Ummm... not really. Okay, I like to race bikes (road & mountain) and I like donuts. I'd love to travel more. But right now, passing a technical interview in 3-4 months is my obsession. ;-)
+
+
+
+
+AJ Grande
+
+
+first name is AJ (pronounced ayyy - jay). And my last name is GRANDE like really big.
+
+
+Ive been funemployed since last November. I would describe funemployment as attempting to learn web development through a crap ton of online resources recommended on various blogs (YAY!). Before that I worked as a Process Engineer for a chemicals company out in the central valley for a little over 3 years. I worked on continuous improvement projects on large scale granulation systems (we made intermediates for stuff like multivitamins, gummy vitamins, and whey protein). Before that i got a ChE degree from ucsb.
+
+
+San Leandro, CA...East Bay! The bart ride every day should be fun. lol no
+
+
+how data and tech are changing the world of sports and fitness
+
+
+Aside from a few engineering courses in college that taught C so we could use MATLAB, not much if any. Nothing professional, just self study.
+
+
+Thanks to funemployment, I have been able to fully utilize my Tahoe Super Pass.
+I want to travel to South America and Africa next.
+I have a dog that bears a striking resemblance to a muffin.
+I got a bunch of free unflavored whey protein from my last job that I mixed with hersheys cocoa that tastes amazing.
+I picked up Crossfit cause I got free whey protein.
+
+
+
+
+Cathy Lee
+
+
+My name is Cathy Lee.
+
+
+I finished undergrad in December 2013 and worked as a marketing and events assistant before quitting and doing some contract work while studying for Hack Reactor.
+
+
+I am currently living in Burbank, CA, but grew up in Fremont, CA.
+
+
+web development
+
+
+I took an Intro to Java Programming course at a community college. Other than that, I've been self-studying with online resources.
+
+
+I love to travel and hike.
+I have a boba addiction.
+I'm one of those people that have a corgi who has it's own Instagram and occasionally go to the corgi beach day. (I swear I'm not a crazy corgi lady)
+I like bouldering, but I suck at it.
+I get competitive with games.
+
+
+
+
+Arthur Livingston
+
+
+Arthur Livingston, sometimes people call me Artie as well, either works just fine with me.
+
+
+For the last three years I have been living in Austin TX. I have been working as a cook at a restaurant here.
+
+
+I will be coming from Austin, TX.
+
+
+Certainly Web Development. I am also interest in Internet of Things, with the incredible amount of data being gathered from Internet of Things devices, we can do some fairly amazing things with new programs and devices.
+
+
+I have always been very interested in Computers and technology but I only started learning to code in the last two years. Well, with the exception of one class in high school where we built extremely basic webpages with pure HTML and CSS (I promptly forgot everything I learned in that class). So no official coding experience in any kind of professional capacity.
+
+
+I can say to start with most of the fun random stuff I usually do has been put on hold while I am preparing for Hack Reactor. Usually though I am a fairly avid runner, specifically the knee destroying fun of marathons. I enjoy mountain climbing and quite a few other outdoor activities. I am a huge Formula 1 racing fan and am super excited the 2016 season has started.
+
+
+
+
+Ben Chou
+
+
+My name is Ben Chou - Chou pronounced like Mr. Chow from The Hangover.
+
+
+I recently finished a master's degree in CS last December and have been travelling in the meantime.
+
+
+I currently live in the east bay in Danville but will commuting with BART from Walnut Creek.
+
+
+Programming wise, I am interested in parallel and cloud computing to mitigate the limitations of local hardware. Life wise, I really enjoy finding and reading about cool gadgets or apps that make everyday activities slightly easier.
+
+
+I have experience in a variety of languages from the different programming paradigms. Mainly in school I used C++, Python and JavaScript.
+
+
+I did karate for 7 years through elementary and middle school, eventually resulting in obtaining a junior black belt. I am currently travelling through Japan indulging in my video game and secret anime addictions.
+
+
+
+
+Justin Lai
+
+
+My name is Justin Lai. Last name is pronounced "lie".
+
+
+I graduated in 2012 as a chemical engineer and have been working for a large chemical company producing and R&D'ing various goops and films that go into your cell phones, TVs, and circuit boards in general.
+
+
+I'm originally from and currently in Maryland, but I spent the past few years in upstate NY and Raleigh, NC.
+
+
+Technological literacy will be more important than ever moving forward, so developing tools to foster that growth in younger generations would be really cool. More generally, I just want to develop web/mobile applications that are user-friendly, efficient, and practical, for either business or consumer interests.
+
+
+Pretty low-level BASIC, Matlab, and C++ from high school and college.
+
+
+● I play ultimate frisbee. Competitively. For those of you who don't know what that is, it's basically soccer but with a frisbee, and endzones instead of goals. It's super fun.
+● I play some guitar but mostly mess around on the piano. I'm currently learning some songs from Undertale because game music is ear candy to me.
+● I'm thinking about getting into biking, so if I end up buying one out there it'd definitely be nice to find others to ride with.
+
+
+
+
+Nathanael Ligon
+
+
+Nathanael Ligon, call me "Nathanael”.
+
+
+Five years and two deployments in the Marines, one spectacularly failure attempt at a real estate development startup, and a brief flirtation with business development in biotech that all culminated in my eventual return to academia. I was also a pimply-faced Geek Squad agent once. Tell no one.
+
+
+Emeryville.
+
+
+I grew up helping my dad build computers, and he taught me how to write DOS shell scripts and bred in me a love of computers at a young age, but a lot of what I wound up doing in the Marines was establishing and maintaining global help desk environments, working with Active Directory, and similarly boring network administration stuff. Most of the projects that I’ve had wouldn’t look like much on a résumé. I like seeing how many ways I can break the warrantee on handheld devices.
+
+
+Very little! I made up my mind to go to code school in January and I’ve been totally immersed since then.
+
+
+My parents were missionaries and I grew up mostly in Egypt, England, and Lebanon. I came here when I was 18. I’ve spent most of my life traveling in one way or another but finally found home in the Bay. I’m a minimalist. Things I think are cool: Lego, cats, my girlfriend. I don’t believe you need much to be happy.
+
+
+
+
+Richard May
+
+
+Richard May. Take your time. Sound it out. If you have trouble pronouncing it, let me know.
+
+
+Spent the last 10 years in an IT/support role in the dental industry. I made sure oral surgeons and dentists had what they needed to post cat videos on Facebook and forward emails that would result in the collapse of civilization as we know it if not shared.
+
+
+Originally from Arkansas, but I've bounced between DC, Dallas, and Boulder. Currently in Dallas.
+
+
+I've always had sort of a tech interest playing with computers and gadgets. However, I've never much enjoyed being in a role where people constantly come at me with things that are broken. I prefer a position that encourages creativity where I can build something. I love seeing how web development and mobility has exploded over the last decade and want to be a part of it.
+
+
+Nothing really before preparing for HR. I experimented with HTML back in high school, but that doesn't count for anything at this point. I've had my nose in JS ever since I set my sights on HR.
+
+
+This is the part where I mention all the things that I think used to be interesting about me. Before refocusing my life on JS, some of my key interests were cycling, climbing, hiking, camping, and music. I'm pretty good at driving in reverse. I tend to obsess over nutrition. I have a black belt in tae kwon do..... from 1994. That still counts, right? Don't answer right away. Think about it and get back to me.
+
+
+
+
+Nam Dao
+
+
+Hello HRers. My name is Nam Dao (Nam as in Vietnam, and Dao like "Dow")
+
+
+I was traveling for 5 months (in Vietnam, Hungary, Spain and Portugal), and just returned in February. Before that I worked in the compliance group at a video game company.
+
+
+I'm in SF already, and before my trip I lived in Seattle for many rainy years. I also lived in Sacramento until I was 10, so it is nice to be back in NorCal.
+
+
+I have an electrical engineering degree, and am interested in IoT. I also like music and audio processing.
+
+
+A fair bit of Matlab for my EE degree, but that was more like using Matlab as a fancy calculator.
+For the past year I've been learning JS/web development from online sources.
+I wrote a Spotify API based app while I was in Budapest nismospotify.herokuapp.com -- I was pleasantly surprised that there are sophisticated audio processing capabilities in the native Web API.
+
+
+I'm an avid basketball player, so you can find me watching youtube videos on cross-overs, and Steph Curry dribbling drills. If there are any hoopers, it would be great to get games in on Sundays.
+I also like to cook and listen to electronic music -- my therapy is bumpin house music while making roast chicken with pan sauce.
+
+
+
+
+Chris Choi
+
+
+Chris Choi - I respond to all combinations of these two words.
+
+
+I recently left Bloomberg in Hong Kong after four years. Prior to that I had spent nine years in the UK, where I attended a boarding school and graduated from the London School of Economics - as you can see, HR is going to be the most interesting thing happened to me in years!
+
+
+Will be flying over from Hong Kong on 14th April.
+
+
+Technologies which can bring more transparency and people's knowledge closer together, so probably data analytics related areas plus machine learning and AI (bots). Failed to launch an app in early 2015, and in hindsight I wasn't ready yet.
+
+
+I completed a part-time course at General Assembly on front end web development (html, css and jQuery) while I attempted to launch my app, but I knew nothing about proper programming until I did HR Fulcrum.
+
+
+I'm a big football (soccer...) fan and I also love to grab a beer with friends! My last visit to SF was in 1998, so I am looking forward to exploring the city again after all these years.
+
+
+
+
+Ben Rachbach
+
+
+Ben Rachbach (Rock-Bach)
+
+
+Evaluated charities at GiveWell for a few years, left this past November.
+Been bouncing around since then figuring out what I wanted to do next, settling on coding, and then learning to code. I've also had a couple short gigs related to refugee aid -- currently doing research in Nakivale refugee settlement in Uganda to come up with ideas for tech that might be helpful there.
+
+
+Oakland, on a daily basis :)
+
+
+Educational technology (years ago, I did EdTech design ethnography and then worked as a tutor in a charter school)
+Tech for the global poor
+AI and machine learning
+
+
+Did Lego robotics competitions growing up, but actually that's not about programming really, it's just about adjusting the rotation sensor by one degree at a time to get the right amount of turn.
+Other than that, just a bit of Python and Ruby.
+
+
+I captained the Pyroraptors IM soccer team in college: hope I get to play pick-up with some of you!
+I also enjoy high-intensity circuit training, running, and weightlifting, and would love company for those as well!
+I drink a fair amount of Soylent, which I figure is gonna be pretty helpful when we're coding all day. LMK if you'd like to try some!
+I play jazz/metal/etc. piano, and I compose and arrange. If you're a Who fan, you might enjoy this arrangement.
+
+
+
+
+Lynn Chen
+
+
+Lynn Chen
+
+
+Working as a Sustainability Program Manager at Recology (a waste management company). My primary projects include managing a textile recovery pilot and upgrading the Recycle Central Facility at Pier 96.
+
+
+Walnut Creek
+
+
+Leverage technology to increase efficiency and productivity with less environmental impact. I hope to work in the sustainable and renewable energy sector.
+
+
+None
+
+
+I love food, traveling, and the great outdoors! Always up for hiking, kayaking, biking, and etc.
+
+
+
+
+Veena Sridhar
+
+
+Veena Sridhar (pronounced SHREE-duhr). Yes, it's okay if you don't get my last name right on the first try.
+
+
+I used to work at a biotech company in Fremont as a formulations chemist before joining Hack Reactor. I used the time outside of work at my old company to study JS. I quit my job on March 18, and have been funemployed and travelling around the US since then. I'll be back in the bay area on April 12.
+
+
+Dublin, CA. Yay, Bay Area!
+
+
+I have been particularly interested in better engineering of social media, and its effects on society as a whole. I'd love to pursue something in that sphere when I'm done with HR.
+
+
+Not much really. I built my own portfolio website as a way to study for this, but none beyond that.
+
+
+-Singing used to be a big part of my life. Key words being used to, but I'd love to get back into it soon.
+-I have an unhealthy obsession with dogs, even though I don't have one myself. I get distracted by any cute dog I see when I'm walking.
+-I am also obsessed with pro tennis, and try to watch every major slam that I can.
+
+
+
+
+Prateek Madapurmath
+
+
+My name is Prateek Madapurmath. Pronounced "Pruh - theek"...last name, you'll have to hear it in person. I go by Teek as well, whichever works :)
+
+
+I was a microbiologist at UCSF, an assistant nurse in hospitals in Ghana and Nepal, and someone who has been trying to learn how to play guitar (the sore fingers have been absolutely worth it).
+
+
+I'll be coming from SF
+
+
+For now, I want to focus on health tech. Essentially how technology can help improve the quality and personalization of healthcare, whether it be through wearable tech or through the way that healthcare information can be digitalized, and securely protected as it moves from hand to hand via cyberspace
+
+
+C++ courses in high school, and that's pretty much about it. Some python self-taught, but not for long.
+
+
+I've been chased by a wild elephant. I love music - listening to it and making it, but the making has been put on hold for some time. I've been in the bay pretty much all my life, but am yet to go check out some of its coolest hiking spots and waterfalls. So I've made a list of places to go to, and hopefully will check them all off by the end of the summer - company is always appreciated! I am also a basketball fan - so Nam I'm game for Sunday pick-up games.
+
+
+
+
+Alex Wong
+
+
+Alex Wong.
+
+
+I worked in the translation industry in Tokyo.
+
+
+Tokyo.
+
+
+Machine Translation, Industrial Internet of Things, and Wearables.
+
+
+None other than some self-study leading up to Hack Reactor.
+
+
+I like travelling, biking, hiking, onsen (hot spring) and craft beer. I follow the Premier League and the Street Fighter scene.
+
+
+
+
+Nick Lebedev
+
+
+Full name: Nikita Lebedev, but most people just call me Nick
+
+
+Last year: travelling, coding, trying to create my own startup.
+
+
+I'm coming from Moscow, Russia. I'm bringing a bear and some vodka with me. Just kidding :)
+
+
+I'm very interested in startup-related stuff: web-development, mobile-development, machine-learning, cool gadgets and other exciting things.
+
+
+I have been coding in Delphi for the last 3 years. Self-taught. Last 6 months I also have been working on my Rails project that I hope will be big one day.
+
+
+-Used to be a professional poker player and coach for 7 years
+-Totally addicted to sushi
+-Used to be a stocks trader
+-Have built robots that play poker vs. humans and robots that trade on stock exchange
+-Love extreme sports like surfing, snowboarding, kite-surfing, etc. Soccer, billiards, ping-pong and beer-pong are also cool :)
+-Travelling is probably one of my biggest hobbies - I've visited over 40 countries in the last few years.
+
+
+
+
+Kamal Mango
+
+
+Kamal Mango. Yes, Mango like the fruit. (Everyone calls me Mango).
+
+
+I graduated from Virginia Tech in 2014, after that I worked for about a year and a half as a technical support analyst at a software company in DC called Clarabridge.
+
+
+I was born and raised in Jordan. I recently had to come back to my home country of Jordan to apply for a new type of Visa
+ to attend HR. So I'll be coming from half way around the world.
+
+
+Using technology to improve education AI, Machine Learning, Data Science
+
+
+No professional experience whatsoever. I started teaching myself how to code through some Udacity courses around a year ago.
+- Fun random stuff?
+- I love biking, hiking and traveling
+- I listen to movie soundtracks, I play the guitar and compose my own music as well
+- Tennis, skiing and swimming
+- Big UFC and soccer fan. (UFC 200 will be towards the end of our HR journey, I hope some of you will join me at a local bar to watch the event :))
+
+
+
+
+Esther Cuan
+
+
+Esther !
+
+
+Been in SF for a while. But I am Mexican, from Mexico City: DF.
+
+
+I just graduated art school with a Bachelor's in Fine art - Design and Technology major !
+
+
+All things tech drive me nuts! I love Raspberry Pi's, sensors, websites, apps, laptops, walkmans, hair dryers?
+
+
+Im all self taught, but I learn fast around people who are learning too! Currently good at:
+* html
+* css
+* js
+
+
+I am always hyper. Be ware.
+
+
+
+
+Dan Sajjad
+
+
+Danial Sajjad. Last name pronounced as "sage" + "add". I go by Dan or Danial.
+
+
+Prior to Hack Reactor I worked at an investment bank and focused on mergers & acquisitions.
+
+
+Brooklyn, NY
+
+
+I follow the tech space closely (trends, funding, stock valuations etc.). Robotics is an area that I would like to explore and some day build gadgets.
+
+
+In the late '90s, when Macromedia Flash was popular and there wasn't any CSS, JavaScript, or Chrome, I dabbled in some front-end web development work using Flash & ActionScript. In college I majored in accounting and subsequently worked in finance until last year. Web development was something I wanted to pursue at one point in life but did not, so around August last year I started studying JavaScript, HTML, and CSS to see if it was still something that I would like to do and thus far it has kept me busy.
+
+
+I follow the stock market but do not invest in it. I am always down for a slice of NY style pizza. My favorite way to learn about a new city is usually by exploring it on a bicycle. I have lived and worked in 3 of the major metro area in the USA, namely SF, Chicago, and NYC. I like SF for the good weather year-round, Chicago for the rent, and NYC for the night life. Favorite quote, which I believe in wholeheartedly: "If you're lucky enough to do well, it's your responsibility to send the elevator back down".
+
+
+
+
+Rodaan Rabang
+
+
+Rodaan Rabang. It's pronounced as: "Roh-dan Ra-bang". Rodaan or Ro is fine.
+
+
+Prior to Hack Reactor I worked at a tech startup called Skillz that was focused on creating a new monetization opportunity for the mobile gaming industry. Then before that I worked at a marketing automation company called Kitewheel.
+
+
+I'm originally from Vancouver, Canada and have been in San Francisco for almost the past two years.
+
+
+I'm interested in robotics, machine learning, home automation, and wearables. I also find things like VR and AI exciting.
+
+
+In elementary school and high school, I used to dabble in html and css and a little Javascript only for things like animations for websites. I also had a high school class in Python which was used to learn game development. However, that was all very long ago. The tech companies I ended up in out of college gave me a lot of experiences on SQL databases.
+
+
+I enjoy biking, hiking and enjoy playing soccer/futbol, basketball, and tennis. I'm a big fan of the Premier League (go Spurs!), the NFL, and the NBA. I also used to be into weight lifting and am trying to get back into it so if anyone needs a gym buddy let me know!
+
+
+
+
+Shane McQuerter
+
+
+Shane McQuerter. It’s pretty close to Mc-quarter (i.e. $$$).
+
+
+I’m originally from San Diego, CA but lived up in the Bay for about five years during college. After graduating, I made my way farther up the west coast to Portland, OR (a truly wonderful place), where I started a small dog walking & pet sitting business. My girlfriend and I moved back down to San Diego a couple of years ago so she could do research at UCSD. Since then, I’ve spent my time working at a financial service company, forgetting to feel thankful for the near- constant splendor of sunshine here, running on the beach, and eating too many tacos.
+
+
+San Diego though I’ll be commuting daily from Oakland once I’m up in the Bay.
+
+
+I’m most interested in health/medical tech and apps that leverage health data to make disease management simpler and more effective. There’s also quite a bit of stuff going on in the fintech space that I can’t help but get excited about.
+
+
+Not a whole lot (shhh, don’t tell Hack Reactor); I messed around with Ruby for awhile vetting different bootcamps and then started on JS after settling on Hack Reactor.
+
+
+I’ve lived for a bit in both Delhi, India and Copenhagen, Denmark (Hindi is muuuuch easier to learn than Danish, trust me). I have an emphatic love for beer and coffee and try to spend as much time as possible climbing, backpacking, and biking. Cooking too.
+Here’s something I read recently that resonated with me: “The bad news is you’re falling through the air, nothing to hang on to, no parachute. The good news is there’s no ground.” Looking forward to meeting, and falling, with you all soon!
+
+
+
+
+John Jenson
+
+
+John Jenson
+
+
+I have been focused on learning web development since last summer, mostly using online resources and hanging out at a local coding meetup. Before that I had a few small programming contracts and worked as an engineering intern. I graduated from UC Santa Barbara with a degree in Electrical Engineering in 2014.
+
+
+ San Luis Obispo, in central California. Moving to Daly City for HR.
+
+
+On a technical level, I am interested in machine learning, robotics, Internet of Things, and graphics programming, but anything new to me is awesome. I want to be involved with applications that facilitate education, creativity, and community.
+
+
+In school I had classes with C, assembly, and MATLAB, and have used LabVIEW for work. I have also done some Arduino programming. I have been learning HTML, CSS, and JavaScript over the past year.
+
+
+I enjoy hiking around the central coast and reading a lot of books. I have fun playing around with making music and art, both digitally and traditionally. I’m obsessed with space and am always learning more about astronomy, rockets, and astrophysics.
+
+
+
+
+Peter Chim
+
+
+Peter Chim (pronounced like Chimney w/out the -ney).
+
+
+I just finished undergrad, so I’ve been in college the past few years. I started out majoring in Biomedical Engineering, but I found the focus too broad for me, so I switched to CSE and stayed a few extra years.
+
+
+Originally from SF, but will be coming back to stay from Davis.
+
+
+I still have some interests in biomedical engineering and how software and hardware can be created to aid in healthcare. Also, overall, I’d be interested in machine learning, mobile development, and cloud computing. I haven’t delved too deep into those topics yet.
+
+
+Aside from the college classes I’ve taken, I enjoy taking Coursera courses on software topics that I’m interested in. Most of the javascript I know now comes from studying for HackReactor.
+
+
+I’m always down to join for a bite, a hike, a run, a workout, and of course, a drink.
+I worked at Carl’s Jr for the past few months, so I’ve memorized how to make all of their burgers. I promise I'm not an adbot, but I really like their newMidnight Moonshine Burgers.
+
+
+
+
+Matt Vargeson
+
+
+Matthew Vargeson. I usually go by Matt but Matthew works just as well.
+
+
+I have been working at a development shop while trying to fit in as much travel as possible.
+
+
+San Francisco (Outer Sunset)
+
+
+I am interested in any technology that helps people do more of what they enjoy. I am also super interested in VR because... how cool is that, huh?
+
+
+I started programming for fun when I was in high school shortly after getting a computer in the house. It just progressively become a profession. I mainly have written code in PHP, Python and JS but dabbled in many others along the way.
+
+
+I love being outdoors although that isn't all that random. I, like Jade, am also a "travel opportunist". I usually do not need a very good reason to travel. I will go just about anywhere simply because I haven't been there before. I ended up taking a road trip with a friend to a town called Why in Arizona. Yes, this is a real place. We'd gone there to discover what was in Why. The answer was not much but the trip itself was a ton of fun and we ended up seeing a good portion of the southwestern US.
+
+
+
+
+David Doan
+
+
+David Doan
+
+
+Working at a pharmaceutical company manufacturing drugs for clinical trials.
+
+
+Emeryville in East Bay. I'll be commuting by bike to West Oakland station.
+
+
+Data, robotics, machine learning, video games
+
+
+I learned a little bit about Java in highschool, a little of Matlab in university, and some basic Javascript back in December 2015.
+
+
+Bicycling, cooking, and playing video games.
+
+
+
+
+Andrew Fung
+
+
+Hey guys, my name is Andrew Fung
+
+
+I graduated with a degree in Economics and worked as a marketing analyst for the Hong Kong Trade Development Council before moving to Boston and working as an enterprise software sales rep.
+
+
+Union City, CA
+
+
+Interested in technology making transportation smarter, safer and cheaper.
+
+
+None before I started experimenting with HTML, CSS and JS last November.
+
+
+I've been practicing martial arts (Wushu) for the last 10 years... and nearly dropped out of college to join the circus and participate in the Kung Fu Panda live tour. I also dabble in stunt choreography and photography.
+
+
+
+
+Sean Ho
+
+
+My name is Sean, but you can call me Sean.
+
+
+I've worked for a few startups, some programing though not web related.
+
+
+I live in San Mateo.
+
+
+Data science, AI, pretty UI
+
+
+I did computer science at UC Davis and used to do natural language processing at a startup.
+
+
+Picking up Rock climbing, I'm really into photography.
+
+
+
+
+Victoria Tran
+
+
+Hi everyone! My name is Victoria Tran -- Pretty straightforward
+
+
+I was majoring in psychology at a community college in Orange County, but decided to take a break from school to save up money. I moved up to the bay area about 2 years ago & heard about HR through a friend & decided to take the plunge.
+
+
+Huntington Beach to San Leandro to San Francisco! :)
+
+
+Job-wise? As of now, I would like to be making games in the possible future, but I haven't really exposed myself to all the other options. There's just so many!
+
+
+Does Xanga count? After I discovered HR, I studied from the ground up for about a year before I felt comfortable applying. Self-taught JS, HMTL, CSS, & some Ruby.
+
+
+I love reading. Mostly sci-fi or fantasy, but I'm open to suggestions! I also love singing & playing my ukulele when I have the urge to learn a new song. I started taking Brazilian Jiu-Jitsu classes last year, but ultimately took a break because of work & studies, so I'm excited to get back into it after HR!
+COFFEE.. I love coffee!! Tea is cool too
+
+
+
+
+Daniel Vu
+
+
+Hello! My name is Daniel Vu. dan-yo voo!
+
+
+I spent most of my life living in Texas. After I graduated from the University of Houston I started working at IES as a programmer. I have also been getting into cycling. I took part in the MS150, a two day fundraiser bike ride from Houston to Austin. I am ready to tackle the 45 degree hills in San Francisco!
+
+
+I will be coming in from Houston, Texas. I look forward to escaping the heat and to enjoying the California weather
+
+
+I am really interested in service based application that just makes every day life better. I have also been recently been getting more interested in VR. I really think its the next big thing in technology.
+
+
+I have a few years of experience coding with the .NET framework. But I am ready for the transition to pure Javascript!
+
+
+I enjoy watching shows and sports. I started watching Rick and Morty and its a pretty funny show. I am also the commissioner of my fantasy football league. We take things to next level and the last place person in our league has to wear a toilet seat over their head at our draft parties.
+
+
+
+
+Joann Im
+
+
+Hi everyone! My name is Joann Im.
+
+
+I was working as a private piano teacher.
+
+
+Sylmar, CA.
+
+
+There's a lot of things! I like apps and games.
+
+
+I learned HTML, CSS, and JS through codecademy and Remote Prep!
+
+
+I love to sing, play piano, dance, cook, and hike!
+
+
+
+
+Kent Lee
+
+
+Kent Lee
+
+
+I have been working in the investment management industry, managing portfolios for high net worth clients and analyzing public equities – planning on putting in my 2 week notice this upcoming Monday!
+
+
+I am based in the bay area (Alameda), so no relocation needed for me...just a BART ride away.
+
+
+FinTech has been exploding in the past recent years, so that is something I am looking to possibly venture into after Hack Reactor. I am also interested in Cyber Security and other Big Data related themes.
+
+
+None; Excel if statements/pivot tables/index-match is probably the closest thing to code that I’ve written prior to studying for Hack Reactor.
+
+
+I did competitive dragon boat last year, which was an amazing experience! I got to travel to different locations to race against some of the top teams – will get back into the sport after I complete Hack Reactor and have more time!
+
+
+
+
+Ash Jogwar
+
+
+My name is Ashwini Jogwar. You can call me Ash !! Simple, isn't it ? :)
+
+
+I am an Architect by education. After working as an Architect for some time, I shifted my career to software. I worked for 7 years before I took a break for family reasons. Now I'm back into business again !! :)
+
+
+I come from Cupertino, CA
+
+
+Artificial intelligence.
+
+
+C++, ASP, Action script (flash)
+
+
+I love photography, love writing in my mother tongue, had worked as a member of admin team for a website intended only for women, love drawing, like to drive along beautiful roads and beaches, love to go on trails in scenic places.
+
+
+
+
+Alex Lee
+
+
+Alex Lee
+
+
+I'm a recent graduate and started getting interested in web development and have been spending my off time learning from resources online.
+
+
+I'm coming from Palo Alto, but spent a majority of my childhood in Fremont.
+
+
+I'm interested in all the new virtual reality tech that's coming out soon as well as the AI used in various applications such as self driving cars.
+
+
+I've done a couple small simple projects here and there, but originally started with C++.
+
+
+I love playing basketball and try to play as often as possible. I also enjoy snowboarding and amazingly enough, chess.
+
+
+
+
+Brandon Courtney
+
+
+Brandon Courtney
+
+
+Grew up in Chico, CA (~ 3 hrs north of SF). Studied finance at Gonzaga University. Worked in Chico in healthcare ~ 2.5 years specifically on an ambulance; realized I wanted something different out of life so I decided to dedicate myself to getting into a js bootcamp. Reasoning that I could prepare anywhere and that many places were cheaper than California I left the US. Ended up living in Peru 11 months. Got back 4 days ago.
+
+
+Chico, CA or Arequipa, Peru depending...
+
+Three areas: 1.) Anywhere tech and finance overlap 2.) Some app ideas I have 3.) IOT especially Aquaponics (if you don't know what that is, youtube it)
+
+
+Some classes I took from Thinkful.com other than that none.
+
+
+I ran track in college so I love fitness in general and running in particular. I enjoy rockclimbing, traveling and anything in the mountains.
+
+
+
+Shinji Furuya
+
+
+Call me Shinji. Pronounced "Shin-Jee", but don't hold that "ji" too long. Furuya is "Foo-roo-yah". Same goes with the last name.
+
+
+I was, up until a week ago, working at Disney Consumer Products as a Sound Archivist. Sounds cool, but it's basically a glorified librarian for the audio files that needed to be managed for our Playmation Avengers toys. Before that, I was at Soundelux DMG (now defunct), a SFX/Music/Dialog house for video games, in a similar capacity.
+
+
+Glendale (Los Angeles), but grew up in Pasadena.
+
+
+I love the whole IoT (Internet of Things) area, and how machines/computers communicate with one another.
+
+
+Not much at all. I tried my hand at Actionscript back in the days (10 years ago), but only in the most basic way.
+
+
+My toes are long. Freakishly long. I once read somewhere that long toes are terribly designed for running. I love music, though I'm not a music snob. My favorite artists are those with soulful voices; Adele, Sam Smith, John Legend. I also love high-energy rock music (Muse, RATM) when I hit the gym. I love playing the guitar, violin, drums, singing karaoke. I've never been part of a band, but it would be fun to jam with some HR folks :)
+I love food, exploring new places, trying new things. I once had silkworm larvae (cooked, of course), and successfully did not vomit.
+If I could, I'd travel the world until I couldn't walk anymore. I almost ended up traveling to New Zealand before starting class, but I've got too much to take care of beforehand (moving out of apartment, selling my stuff, planning my wedding for October....)
+
