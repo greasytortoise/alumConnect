@@ -55,6 +55,7 @@ module.exports = function(app, express) {
     console.log('content length: ', req.headers['content-length']);
     if (err.code = 'LIMIT_FILE_SIZE') {
       console.log('image upload limited to 500kb');
+      res.status(200).json({'error': 'Image upload limited to 500kb'});
     }
   });
   app.use(require('morgan')('dev'));
