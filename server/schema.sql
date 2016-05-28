@@ -24,6 +24,7 @@ create table Users (
   handle varchar(255),
   githubid int,
   name varchar(255),
+  email varchar(255),
   image varchar(255),
   url_hash varchar(255),
   public int,
