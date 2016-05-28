@@ -10,7 +10,7 @@ var OriginalTeam = [
 
 class Footer extends React.Component {
 
-  DisplayTheTeamFairlySinceEveryoneWantsToBeListedFirst() {
+  DisplayNamesInRandomOrderSinceEveryoneWantsToBeListedFirst() {
     return _shuffle(OriginalTeam).map((person, index) => {
       var randomlySorted;
       return (
@@ -27,7 +27,7 @@ class Footer extends React.Component {
   render() {
     return (
       <div id="footer">
-        Built in HR40 by {this.DisplayTheTeamFairlySinceEveryoneWantsToBeListedFirst()}
+        Built in HR40 by {this.DisplayNamesInRandomOrderSinceEveryoneWantsToBeListedFirst()}
       </div>
     );
   }
