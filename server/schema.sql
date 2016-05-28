@@ -99,13 +99,18 @@ values
   ('mikejonas', 7482348, 'Mike Jonas', 'admin@admin.com', '/assets/default.jpg', 'ndas2q', 1, 1),
   ('yochess', 5927297, 'Drake Wang', 'admin@admin.com', '/assets/default.jpg', 'ndas2q', 1, 1),
   ('alamuv', 8962181, 'Alamu Palaniappan', 'admin@admin.com', '/assets/default.jpg', 'ndas2q', 1, 1),
-  ('taylorreyes1', 16503819, 'Matt Bresnan', 'admin@admin.com', 'assets/photos/1464390585654.jpg', 'ndas2q', 1, 1),
-  ('danthareja', 6980359, 'Matt Bresnan', 'admin@admin.com', 'assets/photos/1464390485466.jpg', 'ndas2q', 1, 1);
+  ('taylorreyes1', 16503819, 'Taylor Reyes', 'admin@admin.com', 'assets/photos/1464390585654.jpg', 'ndas2q', 1, 1),
+  ('danthareja', 6980359, 'Dan Thareja', 'admin@admin.com', 'assets/photos/1464390485466.jpg', 'ndas2q', 1, 1);
 
 insert into Groups_Users -- new addition
   (user_id, group_id)
 values
   (1, 1);
+  (2, 1);
+  (3, 1);
+  (4, 1);
+  (5, 1);
+  (6, 1);
 
 insert into Sites
   (site_name, base_url, active)
