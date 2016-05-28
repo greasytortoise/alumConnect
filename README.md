@@ -3,13 +3,9 @@
 A React CMS. Currently manages authentication, user profiles, and an admin dashboard with configurable options.
 
 ## Contributors:
-
   [Matthew W. Bresnan](https://github.com/mbresnan1701)
-
   [Alamu Palaniappan](https://github.com/alamuv)
-
   [Mike Jonas](https://github.com/mikejonas)
-
   [Drake Wang](https://github.com/yochess/)
 
 ## Getting Started
@@ -40,7 +36,7 @@ Once this repo is cloned,
 
 7. Import alumConnect schema to mySQL database
     ```
-    $ mysql -u root < schema.sql
+    $ mysql -u root < server/schema.sql
     ```
 
 8. Enter admin permissions on line 98 of schema.sql (contact Matt for details)
@@ -58,7 +54,7 @@ Once this repo is cloned,
 
 11. Insert data to alumConnect table
     ```
-    $ node new_insertData.js
+    $ node server/new_insertData.js
     ```
 
 12. Launch the server
