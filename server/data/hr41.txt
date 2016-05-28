@@ -86,7 +86,7 @@ I really want to explore artificial intelligence and machine learning.
 While I was at Berkeley, I took a few programming courses in Python, C++, and Java. Also, I built an WiFi enabled, LED lamp (kind of like the Phillips Hue) and built a website to control it. At eBay, I had a nontechnical business role, but I was given an opportunity to make small changes to internal web apps.
 
 
-I love making music I used to play clarinet in the Cal Marching Band, and now I'm experimenting with electronic music. 
+I love making music I used to play clarinet in the Cal Marching Band, and now I'm experimenting with electronic music.
 
 
 
@@ -275,28 +275,6 @@ I took a data structures class in college and it was easily my worst subject (I 
 
 
 Hmmm... I'm a fan of learning/ trying new things, so I tend to read a lot. One random thing I never thought I would try was this past year I learned swing dancing and "two-step" so I could non-ironically have fun at some of Austin's local favorite bars. I also recently tried out MIG welding and milling (manual, not CNC) which were both pretty cool.
-
-
-
-
-Brandon Courtney
-
-
-Brandon Courtney
-
-
-Grew up in Chico, CA (~ 3 hrs north of SF). Studied finance at Gonzaga University. Worked in Chico in healthcare ~ 2.5 years specifically on an ambulance; realized I wanted something different out of life so I decided to dedicate myself to getting into a js bootcamp. Reasoning that I could prepare anywhere and that many places were cheaper than California I left the US. Ended up living in Peru 11 months. Got back 4 days ago.
-
-
-Chico, CA or Arequipa, Peru depending...
-
-Three areas: 1.) Anywhere tech and finance overlap 2.) Some app ideas I have 3.) IOT especially Aquaponics (if you don't know what that is, youtube it)
-
-
-Some classes I took from Thinkful.com other than that none.
-
-
-I ran track in college so I love fitness in general and running in particular. I enjoy rockclimbing, traveling and anything in the mountains.
 
 
 
@@ -854,7 +832,7 @@ I am a California realtor.
 I used to own a business in Berkeley.
 
 
-What city are you coming from to be here at HR? 
+What city are you coming from to be here at HR?
 Seoul, Korea
 
 
@@ -919,7 +897,7 @@ I also love foosball, so I hope you're up for the challenge, Gloria.
 
 
 
-Jonathen Chen 
+Jonathen Chen
 
 
 Jonathen Chen

@@ -93,7 +93,7 @@ Code School, Fulcrum, previously, I built a few apps with Ruby on Rails (primari
 
 
 
-  Mario Yeung
+Mario Yeung
 
 
 Mario Yeung
@@ -141,7 +141,7 @@ Don't judge please but have a canine child who has her own website.
 
 
 
-  Brett Lensvelt
+Brett Lensvelt
 
 
 Brett Lensvelt (surname pronounced 'Lensfelt')
@@ -193,7 +193,7 @@ Football Cooking
 
 
 
-  Ben Roa
+Ben Roa
 
 
 Lewis Roa
@@ -219,7 +219,7 @@ TV shows -> It's Always Sunny, Archer EDM style music
 
 
 
- Jordan Tepper
+Jordan Tepper
 
 
 Jordan Tepper
@@ -246,7 +246,7 @@ Lots of MATLAB and a tiny amount of C++ during undergrad. Since about November t
 
 
 
- Jinsoo Cha
+Jinsoo Cha
 
 
 My name is Jinsoo Cha. (Soo rhymes with boo)
@@ -297,7 +297,7 @@ Bengali music
 
 
 
- Nicole Skoglund
+Nicole Skoglund
 
 
 Nicole Skoglund (long o in the last name, same pronunciation as the ‘o’ in ‘nicole’).
@@ -359,7 +359,7 @@ I love doing Vipassana (means “insight” in Pali) meditation.
 
 
 
- Leo Adelstein
+Leo Adelstein
 
 
 Leo Adelstein
@@ -383,7 +383,7 @@ Interested in Entrepreneurship, Psychology, Real Estate, Investing and Game Deve
 
 
 
- Aaron Freidus
+Aaron Freidus
 
 
 Aaron Freidus
@@ -411,7 +411,7 @@ Fumbling around code school/freecodecamp/codewars. Writing macros for games. Jav
 
 
 
- Adam Lessen
+Adam Lessen
 
 
 Adam Lessen (like "lesson")
@@ -484,7 +484,7 @@ I graduated a long while back with a Computer Science degree and was a web devel
 
 
 
- Tai Huynh
+Tai Huynh
 
 
 I’m Anhtai Huynh (pronounced ‘and-thai whin’ (pretend you’re Stewie from Family Guy and say cool-whip, but instead of whip, it’s whin.))
@@ -539,7 +539,7 @@ I really like to read. I like to play chess and M:tG. I used to ski a lot, and e
 
 
 
- Andrew Phavichitr
+Andrew Phavichitr
 
 
 Andrew Phavichitr (pronounced pa-vee-chee)
@@ -564,7 +564,7 @@ Enjoy hiking, traveling, eating, Netflix, and chilling
 
 
 
- Austin Baltes
+Austin Baltes
 
 
 Austin Baltes (pronounced Ball-t'is)
@@ -614,7 +614,7 @@ C++ & Matlab in college, Javascript with HR
 
 
 
- Mala Neti
+Mala Neti
 
 
 Hi everyone! My name is Mala Neti.
@@ -637,7 +637,7 @@ There are a lot of things I love to do for fun- I love to sing, specifically aca
 
 
 
- Timothy Do
+Timothy Do
 
 
 Timothy Do
@@ -663,7 +663,7 @@ Tucked away in a safety deposit box is a signed copy of Brandon Sanderson's Mist
 
 
 
- Michael Daly
+Michael Daly
 
 
 Michael Daly (Michael or Mike is fine)
@@ -686,7 +686,7 @@ I've been playing the drums for about ten years and was in a band for three.
 
 
 
- Bill Ramsey
+Bill Ramsey
 
 
 Bill Ramsey
@@ -709,7 +709,7 @@ per the picture, I have been to the land of hobbits. travel, reading, food.
 
 
 
- Drew Kosta
+Drew Kosta
 
 
 Drew Kosta (rhymes with pasta)
@@ -732,7 +732,7 @@ I'm into music, economics, and cooking
 
 
 
- Matt Naing
+Matt Naing
 
 
 Grisanu Naing (Gri-sa-nu Nai).
@@ -757,7 +757,7 @@ MATLAB and R quite extensively. A little of Javascript, CLISP and Python.
 
 
 
- Aaron Brown
+Aaron Brown
 
 
 Aaron (A-A-Ron if you're a K&P Fan) Brown
@@ -788,7 +788,7 @@ described my Saturday. ● Yes, I love watermelon.
 
 
 
- Erin Kavanaugh
+Erin Kavanaugh
 
 
 Erin Kavanaugh
@@ -811,7 +811,7 @@ Did a weeklong Singularity University course that first got me interested in tec
 
 
 
- Albert Han
+Albert Han
 
 
 My name's Albert Han. I go by the creative nickname of Albert. I'm the crazy one on the right. The crazy one one the left was my climbing partner when I lived in Shanghai.
@@ -837,7 +837,7 @@ Studied applied math and have a bit of research under my belt. Most of my past e
 
 
 
- Dan Conger
+Dan Conger
 
 
 Dan Conger Note: That's me on the right of my photo just in case you weren't sure which one I was ;)
@@ -860,7 +860,7 @@ I'm from a city called Niceville, FL. Hopefully you guys find that my personalit
 
 
 
- Kat Hao
+Kat Hao
 
 
 My name is Katherine Hao, pronounced "how". I like being called Kat or Katherine.
@@ -883,7 +883,7 @@ I was originally in HR 43, then 44 and now back to 43! I use to teach babies-tod
 
 
 
- Jack Zhang
+Jack Zhang
 
 
 Jack Zhang. I'm on the right - the other guy is my older brother.
@@ -908,7 +908,7 @@ I like to paint landscapes, though I've haven't had much time for painting recen
 
 
 
- Emily Forst
+Emily Forst
 
 
 Hiya! I’m Emily.
@@ -933,7 +933,7 @@ I mostly code in Ruby and tinkered a bit with Scheme. I’ve been interested in 
 
 
 
- Steven Huynh
+Steven Huynh
 
 
 Hi! Just call me Steven. For some reason, a lot of adults call me Steve.
@@ -961,7 +961,7 @@ Took classes at a community college in C++, Java and other random computer cours
 
 
 
- Chris Haug
+Chris Haug
 
 
 Hey everyone! I'm Chris. That pic was in the Philippines (where my mom is from) with some amazing kids teaching me Tagalog :)
