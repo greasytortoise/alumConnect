@@ -380,12 +380,13 @@ rejectStyle = {
   text-align: center;
   margin-top:10px;
   padding: 10px 0;
-  color: #bbb;
+  color: #c5c5c5;
   font-size: 14px;
 }
 
+
 #footer a {
-  color: #aaa;
+  color: #b5b5b5;
   font-weight: bold;
   text-decoration: underline;
 }
@@ -393,11 +394,12 @@ rejectStyle = {
 #footer a:hover {
   color: #555;
 }
-
-
-/* TEMPORARY UNTIL I CAN FIGURE OUT SCSS!!*/
-
-
+#loginFormWrapper #footer {
+  color: #d0d0d0;
+}
+#loginFormWrapper #footer a {
+    color: #d0d0d0;
+}
 
 /**
  * React Select

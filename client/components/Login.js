@@ -1,13 +1,7 @@
 import React from 'react';
 import {Router, Link} from 'react-router';
-import auth from '../util/authHelpers.js';
-import request from 'superagent';
-import RestHandler from '../util/RestHandler.js';
-
 import { Grid, Button } from 'react-bootstrap';
-
-var Promise = require('bluebird');
-
+import Footer from './helpers/Footer.js'
 
 const Login = React.createClass({
 
@@ -22,16 +16,12 @@ const Login = React.createClass({
     document.body.classList.remove('page-login');
   },
   getInitialState() {
-    return {
-      error: false
-    }
+    return { error: false }
   },
 
   handleSubmit(event) {
     event.preventDefault();
-
     window.location.href = '/auth';
-
   },
 
   render() {
@@ -45,7 +35,7 @@ const Login = React.createClass({
 
         </form>
 
-
+        <Footer />
       </div>
     );
   }
