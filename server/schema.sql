@@ -99,8 +99,8 @@ values
   ('mikejonas', 7482348, 'Mike Jonas', 'admin@admin.com', '/assets/default.png', 'ndas2q', 1, 1),
   ('yochess', 5927297, 'Drake Wang', 'admin@admin.com', '/assets/default.png', 'ndas2q', 1, 1),
   ('alamuv', 8962181, 'Alamu Palaniappan', 'admin@admin.com', '/assets/default.png', 'ndas2q', 1, 1),
-  ('taylorreyes1', 16503819, 'Taylor Reyes', 'admin@admin.com', 'assets/photos/1464390585654.png', 'ndas2q', 1, 1),
-  ('danthareja', 6980359, 'Dan Thareja', 'admin@admin.com', 'assets/photos/1464390485466.png', 'ndas2q', 1, 1);
+  ('taylorreyes1', 16503819, 'Taylor Reyes', 'admin@admin.com', 'assets/photos/1464390585654.jpg', 'ndas2q', 1, 1),
+  ('danthareja', 6980359, 'Dan Thareja', 'admin@admin.com', 'assets/photos/1464390485466.jpg', 'ndas2q', 1, 1);
 
 insert into Groups_Users -- new addition
   (user_id, group_id)
