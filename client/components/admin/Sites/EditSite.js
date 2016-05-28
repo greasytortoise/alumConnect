@@ -33,9 +33,8 @@ class EditSite extends React.Component {
 
       RestHandler.Post(url, data, (err, res) => {
         if (err) {return err;}
-        console.log('res', res.body);
         this.setState({
-          disabled: true,
+          disabled: true
         });
       });
     }

@@ -3,6 +3,8 @@ var hr38str = fs.readFileSync(__dirname + '/data/hr38.txt', 'utf8');
 var hr39str = fs.readFileSync(__dirname + '/data/hr39.txt', 'utf8');
 var hr40str = fs.readFileSync(__dirname + '/data/hr40.txt', 'utf8');
 var hr41str = fs.readFileSync(__dirname + '/data/hr41.txt', 'utf8');
+var hr42str = fs.readFileSync(__dirname + '/data/hr42.txt', 'utf8');
+var hr43str = fs.readFileSync(__dirname + '/data/hr43.txt', 'utf8');
 
 var groups = [hr38str, hr39str, hr40str, hr41str];
 var bioArray = [];

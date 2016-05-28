@@ -17,7 +17,7 @@ var Bios = require('./collections/bios');
 var User_Site = require('./models/userSite');
 var User_Sites = require('./collections/userSites');
 
-var groups = ['HR36', 'HR37', 'HR38', 'HR39', 'HR40', 'HR41', ];
+var groups = ['HR36', 'HR37', 'HR38', 'HR39', 'HR40', 'HR41', 'HR42', 'HR43'];
 var students = [];
 var biographies = bioFile.bioArray;
 var userInfos = userFile.userArray;
@@ -53,8 +53,8 @@ userInfos.forEach(function(userInfo, index) {
   var github = userInfo[3];
   var email = userInfo[4];
 
-  students[index + 153].github = github;
-  students[index + 153].email = email;
+  students[index + 158].github = github;
+  students[index + 158].email = email;
 });
 
 Promise.each(groups, function(group) {
