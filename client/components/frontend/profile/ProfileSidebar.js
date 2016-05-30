@@ -49,7 +49,6 @@ class ProfileSidebar extends React.Component {
 
   renderGroupMembers(members) {
     return members.sort(function(a, b) {
-      console.log(a.name)
       if (a.name.toLowerCase() > b.name.toLowerCase()) {
         return 1;
       }

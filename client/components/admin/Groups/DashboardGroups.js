@@ -59,7 +59,7 @@ class Groups extends React.Component {
         groups[i].idString = groups[i].id.toString();
         groups[i]['Can See'] = ''
         var visibleGroups = groups[i].visibleGroups;
-        if (groups[i].group_name === 'staff') {
+        if (groups[i].group_name === 'Staff') {
           groups[i]['Can See'] = 'All Groups';
         } else {
           for (var id in visibleGroups) {
