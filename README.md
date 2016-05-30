@@ -39,13 +39,17 @@ Once this repo is cloned,
     $ mysql -u root < server/schema.sql
     ```
 
-8. Enter admin permissions on line 98 of schema.sql (contact Matt for details)
+8. Enter initial admin permissions on line 98 of schema.sql. You will need your githubID and Handle:
+```sh
+curl https://api.github.com/users/*YOUR HANDLE HERE*
+```
+
 
 9. Obtain github OAuth credentials (see wiki)
 
 10. Replace githubAPIConfig.example.js in /server/config/ to githubAPIConfig.js. Fill up the keys as follows:
     ```
-    exports.sessionSecret = '<any 2 letter combination of your choice>';
+    exports.sessionSecret = 'SOME LONG STRING';
     exports.githubClientId = 'GITHUB CLIENT ID HERE';
     exports.githubClientSecret = 'GITHUB CLIENT SECRET HERE';
     exports.githubCallbackUrl = 'http://127.0.0.1:3000/auth/callback';
