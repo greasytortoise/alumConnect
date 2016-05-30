@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, Button, ButtonInput, Modal, } from 'react-bootstrap';
+import { Image, Button, ButtonInput, Modal, Alert} from 'react-bootstrap';
 import auth from '../../../util/authHelpers.js'
 import RestHandler from '../../../util/RestHandler'
 var Dropzone = require('react-dropzone');
@@ -97,6 +97,7 @@ class SelectImageModal extends React.Component {
     super(props);
     this.state = {
       selectedImage: undefined,
+      error: false
     }
   }
 
@@ -109,16 +110,28 @@ class SelectImageModal extends React.Component {
     data.append('userId', this.props.userId);
     // data.append('userId', file);
     RestHandler.Post('user/uploadimage', data, (err, res) => {
-      if(err) {
-        console.log(err)
+      if(err || res.body.error) {
+        var error = err || res.body.error;
+        this.setState({error: error});
       } else {
-        console.log('res.body: ', res.body);
+        this.setState({error: false});
+
         this.props.onHide(res.body.fileName);
       }
     });
    }
 
+
+  showError() {
+    if(this.state.error) {
+      return(
+        <Alert bsStyle="warning"><b>Warning:</b> {this.state.error}</Alert>
+      )
+    }
+  }
   render() {
+
+
     return (
       <Modal {...this.props} aria-labelledby="contained-modal-title-md">
 
@@ -126,6 +139,7 @@ class SelectImageModal extends React.Component {
           <Modal.Title id="contained-modal-title-md">Change profile image</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          {this.showError()}
           <div>
             <Dropzone
               disablePreview

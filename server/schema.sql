@@ -102,6 +102,7 @@ values
   ('taylorreyes1', 16503819, 'Taylor Reyes', 'admin@admin.com', 'assets/photos/1464390585654.jpg', 'ndas2q', 1, 1),
   ('danthareja', 6980359, 'Dan Thareja', 'admin@admin.com', 'assets/photos/1464390485466.jpg', 'ndas2q', 1, 1);
 
+
 insert into Groups_Users -- new addition
   (user_id, group_id)
 values

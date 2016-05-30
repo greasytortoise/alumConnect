@@ -3,14 +3,10 @@
 A React CMS. Currently manages authentication, user profiles, and an admin dashboard with configurable options.
 
 ## Contributors:
-
-  [Matthew W. Bresnan](https://github.com/mbresnan1701)
-
-  [Alamu Palaniappan](https://github.com/alamuv)
-
-  [Mike Jonas](https://github.com/mikejonas)
-
-  [Drake Wang](https://github.com/yochess/)
+* [Matthew W. Bresnan](https://github.com/mbresnan1701)
+* [Alamu Palaniappan](https://github.com/alamuv)
+* [Mike Jonas](https://github.com/mikejonas)
+* [Drake Wang](https://github.com/yochess/)
 
 ## Getting Started
 
@@ -40,16 +36,20 @@ Once this repo is cloned,
 
 7. Import alumConnect schema to mySQL database
     ```
-    $ mysql -u root < schema.sql
+    $ mysql -u root < server/schema.sql
     ```
 
-8. Enter admin permissions on line 98 of schema.sql (contact Matt for details)
+8. Enter initial admin permissions on line 98 of schema.sql. You will need your githubID and Handle:
+```sh
+curl https://api.github.com/users/*YOUR HANDLE HERE*
+```
+
 
 9. Obtain github OAuth credentials (see wiki)
 
 10. Replace githubAPIConfig.example.js in /server/config/ to githubAPIConfig.js. Fill up the keys as follows:
     ```
-    exports.sessionSecret = '<any 2 letter combination of your choice>';
+    exports.sessionSecret = 'SOME LONG STRING';
     exports.githubClientId = 'GITHUB CLIENT ID HERE';
     exports.githubClientSecret = 'GITHUB CLIENT SECRET HERE';
     exports.githubCallbackUrl = 'http://127.0.0.1:3000/auth/callback';
@@ -58,7 +58,7 @@ Once this repo is cloned,
 
 11. Insert data to alumConnect table
     ```
-    $ node new_insertData.js
+    $ node server/new_insertData.js
     ```
 
 12. Launch the server
