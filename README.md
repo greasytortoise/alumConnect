@@ -57,7 +57,7 @@ Once this repo is cloned,
 
 11. Launch the server
     ```
-    $ npm start
+    $ npm start 
     ```
 
 ## Database Schema
