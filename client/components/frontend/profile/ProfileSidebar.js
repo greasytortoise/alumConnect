@@ -25,7 +25,7 @@ class ProfileSidebar extends React.Component {
       var classMates = {};
       RestHandler.Get(url, (err, res) => {
         classMates[res.body.group_name] = res.body.users;
-        this.setState({usersGroups: classMates})
+        this.setState({ usersGroups: classMates })
       });
     }
   }
@@ -48,7 +48,17 @@ class ProfileSidebar extends React.Component {
   }
 
   renderGroupMembers(members) {
-    return members.map(function(user) {
+    return members.sort(function(a, b) {
+      if (a.name.toLowerCase() > b.name.toLowerCase()) {
+        return 1;
+      }
+      if (a.name.toLowerCase() < b.name.toLowerCase()) {
+        return -1;
+      }
+      // a must be equal to b
+      return 0;
+    })
+    .map(function(user) {
       return (
         <li key={user.id}>
           <Link to={`/users/${user.id}`}  activeClassName="active">{user.name}</Link>

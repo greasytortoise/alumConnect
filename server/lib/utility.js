@@ -15,7 +15,7 @@ var filter = require('lodash/filter');
 var uniq = require('lodash/uniq');
 var request = require('superagent');
 // IDs of admin priveledged groups
-var adminGroups = ['1', '2'];
+var adminGroups = ['1'];
 
 
 exports.isLoggedIn = function(req, res, next) {
@@ -66,6 +66,10 @@ exports.canISeeThisUser = function(userObj, req) {
       }
     }
     
+    if (targetGroup == selectedGroup) {
+      resolve(groupObj);
+    }
+
     visGroup.where({ Group_id: selectedGroup, Visible_id: targetGroup }).fetch()
       .then(function(results) {
         if (results) {
@@ -90,7 +94,7 @@ exports.filterUsers = function(usersArr, userId) {
             resolve(usersArr);
           } else {
             selectedGroup = parseInt(group);
-
+            allowedGroups.push(selectedGroup);
           }
         }
         break;
@@ -139,6 +143,10 @@ exports.canISeeThisGroup = function(groupObj, req) {
       }
     }
 
+    if (targetGroup == selectedGroup) {
+      resolve(groupObj);
+    }
+
     visGroup.where({ Group_id: selectedGroup, Visible_id: targetGroup }).fetch()
       .then(function(results) {
         if (results !== null) {
@@ -165,6 +173,7 @@ exports.filterGroups = function(groupsArr, user) {
         resolve(groupsArr);
       } else {
         selectedGroup = group;
+        allowedGroups.push(selectedGroup)
       }
     }
     visGroups.model.where({ Group_id: selectedGroup }).fetchAll()

@@ -59,10 +59,15 @@ class Groups extends React.Component {
         groups[i].idString = groups[i].id.toString();
         groups[i]['Can See'] = ''
         var visibleGroups = groups[i].visibleGroups;
-        for (var id in visibleGroups) {
-          groups[i]['Can See'] += visibleGroups[id] + ', ';
+        if (groups[i].group_name === 'Staff') {
+          groups[i]['Can See'] = 'All Groups';
+        } else {
+          for (var id in visibleGroups) {
+            groups[i]['Can See'] += visibleGroups[id] + ', ';
+          }
+          groups[i]['Can See'] = groups[i]['Can See'].replace(/,\s*$/, "");
         }
-        groups[i]['Can See'] = groups[i]['Can See'].replace(/,\s*$/, "");
+
         groups[i].Edit = this.getEditGroupLink(groups[i]);
         groups[i].Delete = this.getDeleteLink(groups[i].id, groups[i].group_name);
       }
@@ -94,7 +99,7 @@ class Groups extends React.Component {
     };
     console.log(data)
 
-    if(group === '' || data.visibleGroups.length === 0) {
+    if(group === '') {
       this.setState({error: true});
     } else {
       RestHandler.Post('/db/groups', data, (err, res) => {
@@ -217,7 +222,7 @@ class Groups extends React.Component {
         </form>
 
         {this.state.error && (
-          <p>Enter a Group Name and select groups that are visible.</p>
+          <p>Enter a Group Name</p>
         )}
       </div>
     );
