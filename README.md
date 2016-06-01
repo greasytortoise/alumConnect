@@ -39,15 +39,9 @@ Once this repo is cloned,
     $ mysql -u root < server/schema.sql
     ```
 
-8. Enter initial admin permissions on line 98 of schema.sql. You will need your githubID and Handle:
-```sh
-curl https://api.github.com/users/*YOUR HANDLE HERE*
-```
+8. Obtain github OAuth credentials (see wiki)
 
-
-9. Obtain github OAuth credentials (see wiki)
-
-10. Replace githubAPIConfig.example.js in /server/config/ to githubAPIConfig.js. Fill up the keys as follows:
+9. Replace githubAPIConfig.example.js in /server/config/ to githubAPIConfig.js. Fill up the keys as follows:
     ```
     exports.sessionSecret = 'SOME LONG STRING';
     exports.githubClientId = 'GITHUB CLIENT ID HERE';
@@ -56,14 +50,14 @@ curl https://api.github.com/users/*YOUR HANDLE HERE*
 
     ```
 
-11. Insert data to alumConnect table
+10. Insert data to alumConnect table
     ```
     $ node server/new_insertData.js
     ```
 
-12. Launch the server
+11. Launch the server
     ```
-    $ npm start
+    $ npm start 
     ```
 
 ## Database Schema
