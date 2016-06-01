@@ -39,25 +39,35 @@ Once this repo is cloned,
     $ mysql -u root < server/schema.sql
     ```
 
-8. Obtain github OAuth credentials (see wiki)
+8. In schema.sql, replace the values from line 97-98 and 110-111 with the necessary info. Delete lines 100-105 and lines 113-118.
+    (Note: If you are Dan, leave the values as is!)
 
-9. Replace githubAPIConfig.example.js in /server/config/ to githubAPIConfig.js. Fill up the keys as follows:
+    To find your github id, do:
     ```
-    exports.sessionSecret = 'SOME LONG STRING';
+    curl https://api.github.com/users/*YOUR HANDLE HERE*
+    ```
+
+9. Obtain github OAuth credentials (see wiki)
+
+10. Replace githubAPIConfig.example.js in /server/config/ to githubAPIConfig.js. Fill up the keys as follows:
+    ```
+    exports.sessionSecret = 'YOUR SECRET STRING HERE';
     exports.githubClientId = 'GITHUB CLIENT ID HERE';
     exports.githubClientSecret = 'GITHUB CLIENT SECRET HERE';
     exports.githubCallbackUrl = 'http://127.0.0.1:3000/auth/callback';
 
     ```
 
-10. Insert data to alumConnect table
+11. Insert data to alumConnect table
+    (Note: This step is only relavent to Dan!)
+
     ```
     $ node server/new_insertData.js
     ```
 
-11. Launch the server
+12. Launch the server
     ```
-    $ npm start 
+    $ npm start
     ```
 
 ## Database Schema
