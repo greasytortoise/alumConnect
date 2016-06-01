@@ -105,7 +105,12 @@ values
 insert into Groups_Users -- new addition
   (user_id, group_id)
 values
-  (1, 1);
+  (1, 1),
+  (2, 1),
+  (3, 1),
+  (4, 1),
+  (5, 1),
+  (6, 1);
 
 insert into Sites
   (site_name, base_url, active)
