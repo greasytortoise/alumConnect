@@ -39,7 +39,7 @@ module.exports = {
       .fetch({withRelated: ['groups']})
       .then(function(users) {
         util.filterUsers(users.map(function(user) {
-          // if (user.get('public') === 1) {  
+          // if (user.get('public') === 1) {
             var groups = user.related('groups');
             return {
               id: user.id,
@@ -69,7 +69,7 @@ module.exports = {
   //     .fetch({withRelated: ['groups']})
   //     .then(function(users) {
   //       var retObj = users.map(function(user) {
-  //         if (user.get('public') === 1) {  
+  //         if (user.get('public') === 1) {
   //           var groups = user.related('groups');
   //           return {
   //             id: user.id,
@@ -308,17 +308,17 @@ module.exports = {
                     return Promise.each(data.sites, function(site) {
                       return userSites
                         .query(function(qb) {
-                          qb.where('User_id', '=', id)
+                          return qb.where('User_id', '=', id)
                             .andWhere('Site_id', '=', site.id);
                         })
                         .fetch()
                         .then(function(userSite) {
                           if (userSite.at(0)) {
-                            userSite.at(0).save({
+                            return userSite.at(0).save({
                               rest_url: site.value
                             });
                           } else {
-                            userSites.create({
+                            return userSites.create({
                               rest_url: site.value,
                               User_id: user.id,
                               Site_id: site.id
@@ -331,17 +331,17 @@ module.exports = {
                     return Promise.each(data.userInfo, function(info) {
                       return bios
                         .query(function(qb) {
-                          qb.where('User_id', '=', id)
+                          return qb.where('User_id', '=', id)
                             .andWhere('Bio_Field_id', '=', info.id);
                         })
                         .fetch()
                         .then(function(bio) {
                           if (bio.at(0)) {
-                            bio.at(0).save({
+                           return bio.at(0).save({
                               bio: info.value
                             });
                           } else {
-                            bios.create({
+                            return bios.create({
                               bio: info.value,
                               User_id: user.id,
                               Bio_Field_id: info.id
