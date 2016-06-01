@@ -19,6 +19,7 @@ authRouter.route('/logout')
         console.log(err);
       }
       res.clearCookie('ac');
+      res.clearCookie('cu');
       res.redirect('/login');
     });
   });
@@ -42,6 +43,7 @@ authRouter.route('/refreshcookies')
   .get((req, res) => {
     const store = req.user.permission === 1 ? 1 : 0;
     res.cookie('ac', store, { httpOnly: false });
+    res.cookie('cu', req.user.id, { httpOnly: false });
     res.send();
   });
 
@@ -59,6 +61,7 @@ authRouter.route('/callback')
         .then(function(user) {
           var store = user.attributes.permission === 1 ? 1 : 0;
           res.cookie('ac', store, { httpOnly: false });
+          res.cookie('cu', user.attributes.id, { httpOnly: false });
           if (store === 1) {
             res.redirect('/dashboard');
           } else {
