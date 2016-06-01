@@ -32,7 +32,7 @@ create table Users (
   primary key(id)
 );
 
-create table Groups_Users ( -- NEW MANY-MANY TABLE
+create table Groups_Users (
   id int not null auto_increment,
   Group_id int not null,
   User_id int not null,
@@ -89,12 +89,14 @@ create table Bios (
 insert into Groups
   (group_name)
 values
-  ('staff');
+  ('staff'); -- or the name of the admin group
 
 insert into Users
   (handle, githubid, name, email, image, url_hash, public, permission)
 values
-  -- ('your_handle', 'your_id', 'DONALD TRUMP', 'admin@admin.com', '/assets/photos/trump.jpg', 'ndas2q', 0, 1);
+  -- ('your_handle', 'your_id', 'your_name', 'your_email', 'your_image', 'your_url', 1, 1),
+  -- ('your_handle', 'your_id', 'your_name', 'your_email', 'your_image', 'your_url', 1, 1);
+  -- etc
   ('mbresnan1701', 15022604, 'Matt Bresnan', 'admin@admin.com', '/assets/default.jpg', 'ndas2q', 1, 1),
   ('mikejonas', 7482348, 'Mike Jonas', 'admin@admin.com', '/assets/default.jpg', 'ndas2q', 1, 1),
   ('yochess', 5927297, 'Drake Wang', 'admin@admin.com', '/assets/default.jpg', 'ndas2q', 1, 1),
@@ -102,9 +104,12 @@ values
   ('taylorreyes1', 16503819, 'Taylor Reyes', 'admin@admin.com', 'assets/photos/1464390585654.jpg', 'ndas2q', 1, 1),
   ('danthareja', 6980359, 'Dan Thareja', 'admin@admin.com', 'assets/photos/1464390485466.jpg', 'ndas2q', 1, 1);
 
-insert into Groups_Users -- new addition
+insert into Groups_Users
   (user_id, group_id)
 values
+-- (1, 1),
+-- (2, 1);
+-- etc
   (1, 1),
   (2, 1),
   (3, 1),
