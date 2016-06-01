@@ -42,7 +42,7 @@ Once this repo is cloned,
 8. In schema.sql, replace the values from line 97-98 and 110-111 with the necessary info. Delete lines 100-105 and lines 113-118.
     (Note: If you are Dan, leave the values as is!)
 
-To find your github id, do:
+    To find your github id, do:
     ```
     curl https://api.github.com/users/*YOUR HANDLE HERE*
     ```
