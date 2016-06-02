@@ -11,13 +11,12 @@ class ProfileGroups extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      groups: [],
       selectedGroups: [],
     };
   }
 
   componentWillMount() {
-    var selectedGroups  = _map(this.props.selectedGroups, (key, val) => val).join(',');
+    var selectedGroups = _map(this.props.selectedGroups, (key, val) => val).join(',');
     this.setState({selectedGroups: selectedGroups})
   }
 
