@@ -32,7 +32,7 @@ create table Users (
   primary key(id)
 );
 
-create table Groups_Users ( -- NEW MANY-MANY TABLE
+create table Groups_Users (
   id int not null auto_increment,
   Group_id int not null,
   User_id int not null,
@@ -103,9 +103,12 @@ values
   ('danthareja', 6980359, 'Dan Thareja', 'admin@admin.com', 'assets/photos/1464390485466.jpg', 'ndas2q', 1, 1);
 
 
-insert into Groups_Users -- new addition
+insert into Groups_Users
   (user_id, group_id)
 values
+-- (1, 1),
+-- (2, 1);
+-- etc
   (1, 1),
   (2, 1),
   (3, 1),
