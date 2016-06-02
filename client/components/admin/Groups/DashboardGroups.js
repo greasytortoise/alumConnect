@@ -76,12 +76,9 @@ class Groups extends React.Component {
   }
 
   getEditGroupLink(group) {
-    var groups = this.state.groups.slice();
-    var index = groups.indexOf(group);
-    groups.splice(index, 1)
     var data = JSON.parse(JSON.stringify(group));
     return (
-      <EditGroup getGroups={this.getGroups.bind(this)} value={data} groups={groups}/>
+      <EditGroup getGroups={this.getGroups.bind(this)} value={data} groups={this.state.groups}/>
     );
   }
 
@@ -213,7 +210,7 @@ class Groups extends React.Component {
           <Select
             multi
             simpleValue
-            disabled={this.state.disabled} value={this.state.selectedGroups} placeholder="Select visible groups"
+            value={this.state.selectedGroups} placeholder="Select visible groups"
             labelKey="group_name"
             valueKey="idString"
             options={this.state.groups}
