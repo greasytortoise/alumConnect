@@ -89,7 +89,7 @@ create table Bios (
 insert into Groups
   (group_name)
 values
-  ('staff'); -- or the name of the admin group
+  ('Staff');
 
 insert into Users
   (handle, githubid, name, email, image, url_hash, public, permission)
