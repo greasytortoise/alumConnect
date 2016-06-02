@@ -9,7 +9,7 @@ class ImageWithPlaceholder extends React.Component {
   }
 
   handleImageLoaded() {
-    this.setState({ src: 'https://www.hackreactorconnect.com/' + this.props.src });
+    this.setState({ src: this.props.src });
   }
 
   handleImageErrored() {
