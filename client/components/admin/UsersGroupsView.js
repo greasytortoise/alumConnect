@@ -11,30 +11,13 @@ class ProfileGroups extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      groups: [],
       selectedGroups: [],
     };
   }
 
   componentWillMount() {
-    var selectedGroups  = _map(this.props.selectedGroups, (key, val) => val).join(',');
-    // this.setState({selectedGroups: selectedGroups})
-    this.getAvailableGroups();
-  }
-  componentWillReceiveProps(nextProps) {
-    if(nextProps) {
-      var selectedGroups  = _map(this.props.selectedGroups, (key, val) => val).join(',');
-      // this.setState({selectedGroups: selectedGroups})
-    }
-  }
-
-  getAvailableGroups() {
-    RestHandler.Get('/db/groups', (err, res) => {
-      //res.body.map is a Workaround to get the Select valueKey working.
-      //it ads a property with a stringified id to res.body.
-      res.body.map(obj => obj['idString'] = obj['id'].toString())
-      this.setState({ groups: res.body });
-    });
+    var selectedGroups = _map(this.props.selectedGroups, (key, val) => val).join(',');
+    this.setState({selectedGroups: selectedGroups})
   }
 
   displayUsersGroups() {
