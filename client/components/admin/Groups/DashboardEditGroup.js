@@ -39,7 +39,7 @@ class DashboardEditGroup extends React.Component {
 
   handleVisibleGroupSelect (selectedGroups) {
     var groups  = selectedGroups.split(',');
-    var visibleGroups = {}; 
+    var visibleGroups = {};
     this.state.allGroups.forEach(function(group){
       for (var i = 0; i < groups.length; i++) {
         if(groups[i] == group.idString){
@@ -47,7 +47,7 @@ class DashboardEditGroup extends React.Component {
         }
       }
     })
-    this.setState({ 
+    this.setState({
       visibleGroups: groups
     });
   }
@@ -96,7 +96,7 @@ class DashboardEditGroup extends React.Component {
             <Select
             multi
             simpleValue
-            disabled={this.state.disabled} value={this.state.visibleGroups} 
+            value={this.state.visibleGroups}
             placeholder="Select visible groups"
             labelKey="group_name"
             valueKey="idString"
