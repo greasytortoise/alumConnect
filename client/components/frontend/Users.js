@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Row, Col, DropdownButton, MenuItem, Input, Image, FormControl, InputGroup } from 'react-bootstrap';
-import auth from '../../util/authHelpers.js';
-
+import { Row, Col, DropdownButton, MenuItem, Input, FormControl, InputGroup } from 'react-bootstrap';
+import auth from '../../util/authHelpers';
+import ImageWithPlaceholder from '../helpers/ImageWithPlaceholder'
 import RestHandler from '../../util/RestHandler';
 
 class Users extends React.Component {
@@ -61,9 +61,8 @@ class Users extends React.Component {
           <Link to={{pathname: `/users/${id}`}}>
             <div
               className="user-card">
-              <Image
+              <ImageWithPlaceholder
                 src={image}
-                responsive
                 />
               <h4>{name}</h4>
             </div>
