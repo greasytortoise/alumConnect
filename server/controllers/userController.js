@@ -3,7 +3,7 @@ var User = require('../models/user');
 var Users = require('../collections/users');
 var util = require('../lib/utility.js');
 var Promise = require('bluebird');
-var Groups_Vis = require('../collections/groups_users.js');
+// var Groups_Vis = require('../collections/groups_users.js');
 var User_Sites = require('../collections/userSites.js');
 
 module.exports = {
@@ -360,6 +360,9 @@ module.exports = {
                         .del()
                     })
                     .then(function() {
+                      if (!Array.isArray(data.groups)) {
+                        data.groups = data.groups.split(',');
+                      }
                       return Promise.each(data.groups, function(group) {
                         user.groups().attach(group);
                       });
