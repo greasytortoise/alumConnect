@@ -38,6 +38,7 @@ class ProfileGroups extends React.Component {
   }
 
   handleGroupSelect (selectedGroups) {
+    selectedGroups = selectedGroups || "";
 		this.setState({ selectedGroups });
     this.props.stageProfileEdits((editedObject) => {
       editedObject.groups = selectedGroups.split(',');
@@ -60,7 +61,7 @@ class ProfileGroups extends React.Component {
 
   renderGroups() {
     var editing = this.props.editing;
-    var selectedGroups = this.state.selectedGroups;
+    var selectedGroups = this.props.selectedGroups;
 
     if(!editing && selectedGroups) {
       return (
