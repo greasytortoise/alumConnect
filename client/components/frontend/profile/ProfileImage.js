@@ -150,6 +150,15 @@ class SelectImageModal extends React.Component {
               <div>Drop an image file here <br /> or select an image</div>
             </Dropzone>
           </div>
+          <div className="crop-options">
+            <FormGroup>
+              <ControlLabel>Image crop<a target="_blank" href="https://github.com/greasytortoise/alumConnect/wiki/Uploading-images">(?)</a>:</ControlLabel>
+              <Radio inline checked={this.state.imageCropStrategy === 'default'} onClick={this.setImageCropTo.bind(this, 'default')}>Default</Radio>
+              <Radio inline checked={this.state.imageCropStrategy === 'top'} onClick={this.setImageCropTo.bind(this, 'top')}>Top</Radio>
+              <Radio inline checked={this.state.imageCropStrategy === 'center'} onClick={this.setImageCropTo.bind(this, 'center')}>Center</Radio>
+              <Radio inline checked={this.state.imageCropStrategy === 'bottom'} onClick={this.setImageCropTo.bind(this, 'bottom')}>Bottom</Radio>
+            </FormGroup>
+          </div>
         </Modal.Body>
       </Modal>
     );
