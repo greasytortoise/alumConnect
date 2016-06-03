@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, Button, ButtonInput, Modal, Alert} from 'react-bootstrap';
+import {Image, Button, ButtonInput, Modal, Alert, FormGroup, ControlLabel, Radio} from 'react-bootstrap';
 import auth from '../../../util/authHelpers.js'
 import RestHandler from '../../../util/RestHandler'
 var Dropzone = require('react-dropzone');
@@ -97,6 +97,7 @@ class SelectImageModal extends React.Component {
     super(props);
     this.state = {
       selectedImage: undefined,
+      imageCropStrategy: 'default',
       error: false
     }
   }
@@ -108,6 +109,7 @@ class SelectImageModal extends React.Component {
     data.append('fileName', fileName);
     data.append('photo', file);
     data.append('userId', this.props.userId);
+    data.append('cropStrategy', this.state.imageCropStrategy);
     // data.append('userId', file);
     RestHandler.Post('user/uploadimage', data, (err, res) => {
       if(err || res.body.error) {
@@ -129,9 +131,14 @@ class SelectImageModal extends React.Component {
       )
     }
   }
+
+  setImageCropTo(strategy) {
+    this.setState({
+      imageCropStrategy: strategy
+    });
+  }
+
   render() {
-
-
     return (
       <Modal {...this.props} aria-labelledby="contained-modal-title-md">
 
