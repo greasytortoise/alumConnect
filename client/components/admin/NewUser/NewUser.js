@@ -73,7 +73,7 @@ class DashboardNewUser extends React.Component {
       }
     });
   }
-  //things
+
   clearForm() {
     const fields = ['name', 'githubUsername'];
     fields.map(field => {

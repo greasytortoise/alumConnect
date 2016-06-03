@@ -53,8 +53,8 @@ userInfos.forEach(function(userInfo, index) {
   var github = userInfo[3];
   var email = userInfo[4];
 
-  students[index + 158].github = github;
-  students[index + 158].email = email;
+  students[index + 153].github = github;
+  students[index + 153].email = email;
 });
 
 Promise.each(groups, function(group) {

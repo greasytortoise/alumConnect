@@ -9,6 +9,7 @@ var Groups_users = require('../collections/groups_users');
 var Groups = require('../collections/groups');
 var visGroup = require('../models/visibleGroup.js');
 var visGroups = require('../collections/visibleGroups.js');
+var config = require('../config/githubAPIConfig.js');
 var Promise = require('bluebird');
 var filter = require('lodash/filter');
 var uniq = require('lodash/uniq');

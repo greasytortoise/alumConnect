@@ -5,6 +5,7 @@ var passport = require('passport');
 var GithubStrategy = require('passport-github2').Strategy;
 var User = require('../models/user');
 var request = require('superagent');
+var config = require('../config/githubAPIConfig.js');
 
 authRouter.route('/')
   .get(passport.authenticate('github', { scopes: [ 'user:email' ]}));
