@@ -2,7 +2,7 @@
   "name": "alumconnect",
   "version": "1.0.0",
   "description": "DO AMAZING THINGS",
-  "main": "index.js",
+  "main": "./client/index.js",
   "dependencies": {
     "base64-min": "^1.1.0",
     "bcrypt": "^0.8.5",

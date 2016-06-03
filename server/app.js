@@ -3,11 +3,10 @@ var Promise = require('bluebird');
 var os = require('os');
 var passport = require('passport');
 var GithubStrategy = require('passport-github2').Strategy;
-var config = require('./config/githubAPIConfig.js');
 
 var app = express();
 
-var LEX = require('letsencrypt-express').testing();
+var LEX = require('letsencrypt-express');
 
 var middleware = require('./config/middleware');
 var routes = require('./config/routes');
@@ -15,12 +14,11 @@ var routes = require('./config/routes');
 middleware(app, express);
 routes(app, express);
 
-//QQQQQQQ
 var lex = LEX.create({
   configDir: '/etc/letsencrypt',
   approveRegistration: function (hostname, cb) {
     cb(null, {
-      domains: ['donkit.com'],
+      domains: ['hackreactorconnect.com'],
       email: 'bresnan.mw@gmail.com',
       agreeTos: true,
     });
@@ -30,7 +28,7 @@ var lex = LEX.create({
 lex.onRequest = app;
 
 lex.listen([3000], [1337, 5001], function () {
-  var protocol = ('requestCert' in this) ? 'https': 'http';
+  var protocol = ('requestCert' in this) ? 'https' : 'http';
   console.log("Listening at " + protocol + '://localhost:' + this.address().port);
 });
 

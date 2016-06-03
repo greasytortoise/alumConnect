@@ -8,10 +8,10 @@
  *  populate the table.
 **/
 
-drop database if exists alumConnectTest;
-create database alumConnectTest;
+drop database if exists alumConnect;
+create database alumConnect;
 
-use alumConnectTest;
+use alumConnect;
 
 create table Groups (
   id int not null auto_increment,
@@ -94,15 +94,14 @@ values
 insert into Users
   (handle, githubid, name, email, image, url_hash, public, permission)
 values
-  -- ('your_handle', 'your_id', 'your_name', 'your_email', 'your_image', 'your_url', 1, 1),
-  -- ('your_handle', 'your_id', 'your_name', 'your_email', 'your_image', 'your_url', 1, 1);
-  -- etc
-  ('mbresnan1701', 15022604, 'Matt Bresnan', 'admin@admin.com', '/assets/default.jpg', 'ndas2q', 1, 1),
-  ('mikejonas', 7482348, 'Mike Jonas', 'admin@admin.com', '/assets/default.jpg', 'ndas2q', 1, 1),
-  ('yochess', 5927297, 'Drake Wang', 'admin@admin.com', '/assets/default.jpg', 'ndas2q', 1, 1),
-  ('alamuv', 8962181, 'Alamu Palaniappan', 'admin@admin.com', '/assets/default.jpg', 'ndas2q', 1, 1),
+  -- ('your_handle', 'your_id', 'DONALD TRUMP', 'admin@admin.com', '/assets/photos/trump.jpg', 'ndas2q', 0, 1);
+  ('mbresnan1701', 15022604, 'Matt Bresnan', 'admin@admin.com', '/assets/default.png', 'ndas2q', 1, 1),
+  ('mikejonas', 7482348, 'Mike Jonas', 'admin@admin.com', '/assets/default.png', 'ndas2q', 1, 1),
+  ('yochess', 5927297, 'Drake Wang', 'admin@admin.com', '/assets/default.png', 'ndas2q', 1, 1),
+  ('alamuv', 8962181, 'Alamu Palaniappan', 'admin@admin.com', '/assets/default.png', 'ndas2q', 1, 1),
   ('taylorreyes1', 16503819, 'Taylor Reyes', 'admin@admin.com', 'assets/photos/1464390585654.jpg', 'ndas2q', 1, 1),
   ('danthareja', 6980359, 'Dan Thareja', 'admin@admin.com', 'assets/photos/1464390485466.jpg', 'ndas2q', 1, 1);
+
 
 insert into Groups_Users
   (user_id, group_id)
@@ -116,6 +115,11 @@ values
   (4, 1),
   (5, 1),
   (6, 1);
+
+insert into Visible_Groups 
+  (Group_id, Visible_id)
+values
+  (1, 1);
 
 insert into Sites
   (site_name, base_url, active)
