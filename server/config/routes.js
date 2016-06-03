@@ -28,18 +28,10 @@ module.exports = function(app, express) {
   app.post('/user/uploadimage', function(req, res) {
     var originFile = req.body.fileName;
     var userId = req.body.userId;
-    var cropStrategy = sharp.strategy.entropy;
-    if(req.body.cropStrategy === 'top') {
-      cropStrategy = sharp.gravity.north;
-    } else if(req.body.cropStrategy === 'center') {
-      cropStrategy = sharp.gravity.center;
-    } else if(req.body.cropStrategy === 'bottom') {
-      cropStrategy = sharp.gravity.south;
-    }
     var fileName = 'assets/photos/' + new Date().getTime() + '.jpg';
     sharp(req.file.buffer)
-      .resize(640, 424)
-      .crop(cropStrategy)
+      .resize(800, 530)
+      .crop(sharp.strategy.entropy)
       .jpeg()
       .toFile('client/' + fileName, function(err) {
         if(err) {

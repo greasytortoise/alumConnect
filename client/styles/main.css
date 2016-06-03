@@ -346,11 +346,6 @@ textarea.form-control {
   border-style: solid;
   background-color: #eee;
 }
-
-.crop-options .radio-inline {
-  margin-left: 10px;
-}
-
 /*
 rejectStyle = {
   borderStyle: 'solid',
