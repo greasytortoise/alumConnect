@@ -1,5 +1,5 @@
 import React from 'react'
-import {Image, Button, ButtonInput, Modal, Alert, FormGroup, ControlLabel, Radio} from 'react-bootstrap';
+import { Image, Button, ButtonInput, Modal, Alert} from 'react-bootstrap';
 import auth from '../../../util/authHelpers.js'
 import RestHandler from '../../../util/RestHandler'
 var Dropzone = require('react-dropzone');
@@ -97,7 +97,6 @@ class SelectImageModal extends React.Component {
     super(props);
     this.state = {
       selectedImage: undefined,
-      imageCropStrategy: 'default',
       error: false
     }
   }
@@ -109,7 +108,6 @@ class SelectImageModal extends React.Component {
     data.append('fileName', fileName);
     data.append('photo', file);
     data.append('userId', this.props.userId);
-    data.append('cropStrategy', this.state.imageCropStrategy);
     // data.append('userId', file);
     RestHandler.Post('user/uploadimage', data, (err, res) => {
       if(err || res.body.error) {
@@ -131,14 +129,9 @@ class SelectImageModal extends React.Component {
       )
     }
   }
-
-  setImageCropTo(strategy) {
-    this.setState({
-      imageCropStrategy: strategy
-    });
-  }
-
   render() {
+
+
     return (
       <Modal {...this.props} aria-labelledby="contained-modal-title-md">
 
@@ -156,15 +149,6 @@ class SelectImageModal extends React.Component {
               >
               <div>Drop an image file here <br /> or select an image</div>
             </Dropzone>
-          </div>
-          <div className="crop-options">
-            <FormGroup>
-              <ControlLabel>Image crop<a href="https://github.com/greasytortoise/alumConnect/wiki/Uploading-images">(?)</a>:</ControlLabel>
-              <Radio inline checked={this.state.imageCropStrategy === 'default'} onClick={this.setImageCropTo.bind(this, 'default')}>Default</Radio>
-              <Radio inline checked={this.state.imageCropStrategy === 'top'} onClick={this.setImageCropTo.bind(this, 'top')}>Top</Radio>
-              <Radio inline checked={this.state.imageCropStrategy === 'center'} onClick={this.setImageCropTo.bind(this, 'center')}>Center</Radio>
-              <Radio inline checked={this.state.imageCropStrategy === 'bottom'} onClick={this.setImageCropTo.bind(this, 'bottom')}>Bottom</Radio>
-            </FormGroup>
           </div>
         </Modal.Body>
       </Modal>
