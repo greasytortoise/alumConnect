@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, Button } from 'react-bootstrap';
+import { FormControl, Button, InputGroup } from 'react-bootstrap';
 
 
 class ProfileSite extends React.Component {
@@ -11,11 +11,18 @@ class ProfileSite extends React.Component {
 
   componentDidMount() {
     this.setState({value: this.props.siteDetails.value})
+
   }
 
-  handleFormChange () {
+  componentWillReceiveProps(nextProps) {
+    if(nextProps) {
+      this.setState({value: nextProps.siteDetails.value})
+    }
+  }
+  
+  handleFormChange (e) {
     var {id} = this.props.siteDetails
-    var formValue = this.refs.input.refs.input.value || '';
+    var formValue = e.target.value || '';
     this.setState({value: formValue});
     this.props.stageProfileEdits((editedObject) => {
       editedObject.sites[id] = {
@@ -39,11 +46,13 @@ class ProfileSite extends React.Component {
     else if(editing) {
       return (
         <div key={id}>
-          <Input type="text"
-            addonBefore={base_url}
-            value={value}
-            ref="input"
-            onChange={this.handleFormChange.bind(this)}/>
+          <InputGroup>
+            <InputGroup.Addon>{base_url}</InputGroup.Addon>
+            <FormControl type="text"
+              value={value}
+              ref="input"
+              onChange={this.handleFormChange.bind(this)}/>
+          </InputGroup>
         </div>
       );
     } else {

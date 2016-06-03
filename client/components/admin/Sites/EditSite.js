@@ -1,20 +1,20 @@
 import React from 'react'
-import { Input, Button, ListGroupItem } from 'react-bootstrap'
+import { InputGroup, FormControl, ControlLabel, Button } from 'react-bootstrap'
 import RestHandler from '../../../util/RestHandler'
 
 class EditSite extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      site_name: this.props.value.site_name,
-      url: this.props.value.base_url,
+      site_name: this.props.site.site_name,
+      url: this.props.site.base_url,
       disabled: true
     }
   }
 
-  handleInputChange () {
+  handleInputChange (e) {
     this.setState({
-      url: this.refs.input.getValue(),
+      url: e.target.value,
       disabled: false
     });
   }
@@ -25,7 +25,7 @@ class EditSite extends React.Component {
         disabled: false
       });
     } else {
-      var url = '/db/sites/site/' + this.props.value.id;
+      var url = '/db/sites/site/' + this.props.site.id;
       var data = {
         site_name: this.state.site_name,
         base_url: this.state.url,
@@ -33,24 +33,30 @@ class EditSite extends React.Component {
 
       RestHandler.Post(url, data, (err, res) => {
         if (err) {return err;}
-        console.log('res', res.body);
-      });
-
-      this.setState({
-        disabled: true
+        this.setState({
+          disabled: true
+        });
       });
     }
   }
 
   render() {
-    var button = '';
-    this.state.disabled ? button = 'edit' : button = 'save';
-    const innerButton = <Button onClick={this.handleClick.bind(this)}>{button}</Button>;
+
+
+    var buttonText = this.state.disabled ? 'edit' : 'save';
     return (
-      <div>
-        <Input type="text" disabled={this.state.disabled} label={this.state.site_name}
-          buttonAfter={innerButton} value={this.state.url}
-          ref="input" onChange={this.handleInputChange.bind(this)} />
+      <div key={this.props.site.id}>
+        <ControlLabel>{this.state.site_name}</ControlLabel>
+        <InputGroup className="input-with-dropdown">
+          <InputGroup.Addon>
+            <Button onClick={this.handleClick.bind(this)}>{buttonText}</Button>
+          </InputGroup.Addon>
+          <FormControl type="text"
+            disabled={this.state.disabled}
+            value={this.state.url}
+            ref="input"
+            onChange={this.handleInputChange.bind(this)} />
+        </InputGroup>
       </div>
     );
   }

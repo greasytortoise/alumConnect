@@ -22,12 +22,12 @@ app.post('/admintest', util.isAdmin, function(req, res) {
 describe('Server utility: ', function() {
 
   it('token exists', function(done) {
-    var token = util.generateToken(5, 'admin@admin.com', 1, 'Admin');
+    var token = util.generateToken(1, 'admin@admin.com', 1, 'Admin');
     assert.isObject(token);
     done();
   });
   it('verifies token is valid upon request(user logged in)', function(done) {
-    var token = util.generateToken(5, 'admin@admin.com', 1, 'Admin');
+    var token = util.generateToken(1, 'admin@admin.com', 1, 'Admin');
     request(app)
       .post('/test')
       .send({token: token.token})
@@ -42,7 +42,7 @@ describe('Server utility: ', function() {
   });
 
   it('verifies user is admin before accessing protected resources', function(done) {
-    var token = util.generateToken(5, 'admin@admin.com', 1, 'Admin');
+    var token = util.generateToken(1, 'admin@admin.com', 1, 'Admin');
     request(app)
       .post('/admintest')
       .send({token: token.token})
@@ -57,7 +57,7 @@ describe('Server utility: ', function() {
   });
 
   it('Gets user permissions from server', function(done) {
-    var token = util.generateToken(5, 'admin@admin.com', 1, 'Admin');
+    var token = util.generateToken(1, 'admin@admin.com', 1, 'Admin');
     request(app)
       .post('/checktoken')
       .send({token: token.token})
@@ -76,7 +76,7 @@ describe('Server utility: ', function() {
 
 describe('Client authentication: ', function() {
   beforeEach('create new token', function(done) {
-    localStorage.setItem('jwtAlum', JSON.stringify(util.generateToken(5, 'admin@admin.com', 1, 'Admin')));
+    localStorage.setItem('jwtAlum', JSON.stringify(util.generateToken(1, 'admin@admin.com', 1, 'Admin')));
     done();
   });
 
@@ -95,7 +95,7 @@ describe('Client authentication: ', function() {
     var decoded = base64.decode(localStorage.getItem('jwtAlum').split('.')[1]);
     decoded = decoded.substring(0, decoded.length - 1);
     var parsed = JSON.parse(decoded);
-    expect(parsed.iss).to.equal(5);
+    expect(parsed.iss).to.equal(1);
     done();
 
   });

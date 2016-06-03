@@ -1,74 +1,40 @@
-var RestHandler = require('./RestHandler');
+import { browserHistory, Router, Route, Link, IndexRoute } from 'react-router'
 
 var request = require('superagent');
 var Promise = require('bluebird');
-
+var RestHandler = require('./RestHandler.js');
 module.exports = {
 
-
-  getToken() {
-    //returns the JWT in localstorage
-    return localStorage.getItem('jwtAlum');
-  },
-
-  logout() {
-    //Deletes the token from localstorage
-    localStorage.removeItem('jwtAlum');
-
-  },
-
-
-
-  loggedIn() {
-    //Check if token exists. If it does, check the expiration date, and return boolean representing logged in status
-    if(localStorage.getItem('jwtAlum')) {
-      var timeout = JSON.parse(atob(localStorage.getItem('jwtAlum').split('.')[1])).exp;
-      if(Date.now() >= timeout) {
-        localStorage.removeItem('jwtAlum');
-      }
+  requireAuth(nextState, replace) {
+    //check cookie 'ac' value to assertain user permissions. If inadequete, redirect to login
+    var temp = module.exports.getCookie('ac');
+    if (!temp || (temp !== '1' && temp !== '0')){
+      replace({
+        pathname: '/login',
+        state: { nextPathname: nextState.location.pathname }
+      });
     }
-    return !!localStorage.getItem('jwtAlum');
   },
 
-  checkToken(callback) {
-    //Check user permissions from server.
-    if(localStorage.getItem('jwtAlum')) {
-
-    // request('POST', '/checktoken')
-    //   .send({token: JSON.parse(localStorage.getItem('jwtAlum')).token})
-    //   .end(function(err, res){
-    //     if(err) {
-    //       console.log(err);
-    //     } else {
-    //       console.log(res);
-    //       callback(res);
-    //     }
-
-    //   });
-      RestHandler.Post('/checktoken', {}, callback);
-
+  requireAdmin(nextState, replace){
+    //check cookie 'ac' value to assertain user permissions. If inadequete, redirect to login
+    var temp = module.exports.getCookie('ac');
+    if (!temp || temp !== '1') {
+      replace({
+        pathname: '/login',
+        state: { nextPathname: nextState.location.pathname }
+      });
 
     }
   },
 
-
-  onChange() {},
-
-  parseJwt(){
-    //parses the token to get the juicy data inside.
-    if(localStorage.getItem('jwtAlum') !== null) {
-      return JSON.parse(atob(localStorage.getItem('jwtAlum').split('.')[1]));
-    } else {
-      return null;
-    }
-  },
-
-  parseJwtAsync(callback) {
-    if(this.parseJwt) {
-      callback(this.parseJwt());
-    } else {
-      callback(undefined);
-    }
+  getCookie(name) {
+    //cookie reader. OM NOM NOM. 
+    var regexp = new RegExp("(?:^" + name + "|;\s*"+ name + ")=(.*?)(?:;|$)", "g");
+    var result = regexp.exec(document.cookie);
+    return (result === null) ? null : result[1];
   }
+};
 
-}
+
+

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input } from 'react-bootstrap';
+import { FormControl } from 'react-bootstrap';
 
 
 class ProfileField extends React.Component {
@@ -13,9 +13,15 @@ class ProfileField extends React.Component {
     this.setState({value: this.props.fieldDetails.value})
   }
 
-  handleFormChange () {
+  componentWillReceiveProps(nextProps) {
+    if(nextProps) {
+      this.setState({value: nextProps.fieldDetails.value})
+    }
+  }
+
+  handleFormChange (e) {
     var {id} = this.props.fieldDetails
-    var formValue = this.refs.input.refs.input.value;
+    var formValue = e.target.value || '';
 
     this.setState({value: formValue});
     this.props.stageProfileEdits((editedObject) => {
@@ -50,7 +56,8 @@ class ProfileField extends React.Component {
       return (
         <div key={id}>
           <h3>{title}</h3>
-          <Input type="textarea"
+          <FormControl
+            componentClass="textarea"
             value={value}
             ref='input'
             onChange={this.handleFormChange.bind(this)} />

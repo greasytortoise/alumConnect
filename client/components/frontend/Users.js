@@ -1,7 +1,8 @@
-import React from 'react'
-import { Link } from 'react-router'
-import { Row, Col, DropdownButton, MenuItem, Input, Image } from 'react-bootstrap';
-
+import React from 'react';
+import { Link } from 'react-router';
+import { Row, Col, DropdownButton, MenuItem, Input, FormControl, InputGroup } from 'react-bootstrap';
+import auth from '../../util/authHelpers';
+import ImageWithPlaceholder from '../helpers/ImageWithPlaceholder'
 import RestHandler from '../../util/RestHandler';
 
 class Users extends React.Component {
@@ -16,44 +17,54 @@ class Users extends React.Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     RestHandler.Get('/db/groups', (err, res) => {
-      var groups = res.body.reverse()
+      var groups = res.body.reverse();
       var initialGroup = res.body[0];
       if(localStorage.selectedGroup) {
-        initialGroup = JSON.parse(localStorage.selectedGroup);
+        initialGroup = JSON.parse(localStorage.getItem('selectedGroup'));
       }
-      this.setState({groups: groups})
-      this.setState({selectedGroup: initialGroup})
+      this.setState({ groups: groups });
+      this.setState({selectedGroup: initialGroup });
       this.getUsers(initialGroup.id);
     });
   }
 
   getUsers(groupId) {
-    var getUrl = groupId ? '/db/users/group/' + groupId : '/db/users'
+    var getUrl = groupId ? '/db/groups/group/' + groupId : '/db/users';
+    // var getUrl = groupId ? '/db/groups/group/' + groupId : '/db/users'
+
     RestHandler.Get(getUrl, (err, res) => {
-      this.setState({users: res.body})
+      this.setState({ users: res.body.users });
     });
   }
 
   usersList() {
-    var searchUsersText = this.state.searchUsersText
-    var users = this.state.users.filter(function(name) {
-      return name.username.toLowerCase().includes(searchUsersText)
+    var searchUsersText = this.state.searchUsersText;
+    var users = this.state.users.filter(function(user) {
+      return user.name.toLowerCase().includes(searchUsersText);
     });
 
-    return users.map(function(user, index) {
-      var {username, id, image} = user
+    return users.sort(function(a, b) {
+      if (a.name.toLowerCase() > b.name.toLowerCase()) {
+        return 1;
+      }
+      if (a.name.toLowerCase() < b.name.toLowerCase()) {
+        return -1;
+      }
+      // a must be equal to b
+      return 0;
+    }).map(function(user, index) {
+      var {name, id, image} = user
       return(
         <Col xs={6} sm={4} md={3} lg={3} key={id}>
           <Link to={{pathname: `/users/${id}`}}>
             <div
               className="user-card">
-              <Image
+              <ImageWithPlaceholder
                 src={image}
-                responsive
                 />
-              <h4>{username}</h4>
+              <h4>{name}</h4>
             </div>
           </Link>
         </Col>
@@ -61,7 +72,7 @@ class Users extends React.Component {
     });
   }
 
-  handleGroupSelect(evt, key) {
+  handleGroupSelect(key, evt) {
     this.setState({'selectedGroup': key});
     localStorage.setItem('selectedGroup', JSON.stringify(key));
     this.getUsers(key.id);
@@ -76,8 +87,8 @@ class Users extends React.Component {
     });
   }
 
-  handleFilterUsersInput() {
-    var filterText = this.refs.searchusers.refs.input.value.toLowerCase();
+  handleFilterUsersInput(e) {
+    var filterText = e.target.value.toLowerCase();
     this.setState({searchUsersText: filterText});
   }
 
@@ -89,19 +100,19 @@ class Users extends React.Component {
       </DropdownButton>
     );
 
-    var title = 'Cohort38'
     return (
       <div>
         <Row className="search-for-users">
           <Col xs={12}>
-            <Input
-              type='text'
-              ref='searchusers'
-              onChange={this.handleFilterUsersInput.bind(this)}
-              wrapperClassName='input-with-dropdown'
-              placeholder="Search users"
-              addonBefore = {innerDropdown}
-              bsSize='large'/>
+            <InputGroup className="input-with-dropdown">
+              <InputGroup.Addon>{innerDropdown}</InputGroup.Addon>
+              <FormControl
+                type='text'
+                ref='searchusers'
+                onChange={this.handleFilterUsersInput.bind(this)}
+                placeholder="Search users"
+                bsSize='large'/>
+            </InputGroup>
           </Col>
         </Row>
         <Row>

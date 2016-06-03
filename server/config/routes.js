@@ -1,8 +1,13 @@
-var path = require('path')
+var path = require('path');
 var db = require('../dbConfig');
 var util = require('../lib/utility.js');
 var bcrypt = require('bcrypt');
 var handler = require('../lib/handler');
+var sharp = require('sharp');
+var User = require('../models/user');
+
+var passport = require('passport');
+var GithubStrategy = require('passport-github2').Strategy;
 
 var groupRouter = require('../routers/groupRouter');
 var userRouter = require('../routers/userRouter');
@@ -10,32 +15,56 @@ var siteRouter = require('../routers/siteRouter');
 var fieldRouter = require('../routers/fieldRouter');
 var userSiteRouter = require('../routers/userSiteRouter');
 var bioRouter = require('../routers/bioRouter');
+var authRouter = require('../routers/authRouter');
 
 module.exports = function(app, express) {
+
   app.use('/db/groups', groupRouter);
   app.use('/db/users', userRouter);
   app.use('/db/sites', siteRouter);
   app.use('/db/fields', fieldRouter);
-  app.use('/dashboard/db/users', userRouter);
+  app.use('/auth', authRouter);
 
-  app.post('/checktoken', util.getPermissions);
-  app.post('/login', handler.checkLogin);
-
-
-  app.post('/changepassword', function(req, res) {
-    var tokenUserData = req.token.split('.')[1].user;
-    Users.where({id: tokenUserData.id}).fetch().then(function(user){
-      bcrypt.hash(req.body.password, 10, function(err, hash) {
-        
-        //DO THING WITH HASH
-        //SAVE NEW PW TO DB!
-
+  app.post('/user/uploadimage', function(req, res) {
+    var originFile = req.body.fileName;
+    var userId = req.body.userId;
+    var cropStrategy = sharp.strategy.entropy;
+    if(req.body.cropStrategy === 'top') {
+      cropStrategy = sharp.gravity.north;
+    } else if(req.body.cropStrategy === 'center') {
+      cropStrategy = sharp.gravity.center;
+    } else if(req.body.cropStrategy === 'bottom') {
+      cropStrategy = sharp.gravity.south;
+    }
+    var fileName = 'assets/photos/' + new Date().getTime() + '.jpg';
+    sharp(req.file.buffer)
+      .resize(640, 424)
+      .crop(cropStrategy)
+      .jpeg()
+      .toFile('client/' + fileName, function(err) {
+        if(err) {
+          console.log("ERR", err);
+        }
+        User.where({id: userId})
+          .fetch()
+          .then(function(user) {
+            user.save({
+              image: fileName
+            })
+            .then(function() {
+              // Delete old image
+              res.json({'fileName': fileName});
+            })
+            .catch(function() {
+              console.log('image did not save');
+            });
+          })
       });
-    });
   });
 
-  app.get('*', function (request, response){
+  app.get('*', function (request, response) {
     console.log('directing to index');
-    response.sendFile(path.resolve(__dirname,  '../../client/index.html'))
+    response.sendFile(path.resolve(__dirname, '../../client/index.html'));
   });
+
 };

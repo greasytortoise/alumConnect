@@ -4,9 +4,15 @@
 iisnode.yml
 npm-debug.log
 node_modules
+build/
 client/bower_components
 client/bundle.js
 client/build/bundle.js
+client/assets/uploads/
+client/assets/photos/
+server/config/githubAPIConfig.js
+sessions
+dump.rdb
 
 # Floobits
 .floo

@@ -1,52 +1,137 @@
+var db = require('../dbConfig');
 var User = require('../models/user');
 var Users = require('../collections/users');
-
+var util = require('../lib/utility.js');
 var Promise = require('bluebird');
+// var Groups_Vis = require('../collections/groups_users.js');
+var User_Sites = require('../collections/userSites.js');
 
 module.exports = {
-  // http://localhost:3000/db/users
-  fetchUsers: function(req, res) {
-    Users.fetch({withRelated: ['groups']})
+  fetchUsers2: function(req, res) {
+    Users
+      .fetch({withRelated: ['groups']})
       .then(function(users) {
         var retObj = users.map(function(user) {
-          var group = user.related('groups');
+          var groups = user.related('groups');
           return {
             id: user.id,
-            username: user.get('username'),
-            password: user.get('password'),
+            handle: user.get('handle'),
+            githubid: user.get('githubid'),
+            name: user.get('name'),
+            public: user.get('public'),
             url: user.get('url_hash'),
             image: user.get('image'),
             email: user.get('email'),
-            group: group.get('group_name')
+            groups: groups.reduce(function(prev, group) {
+              prev[group.id] = group.get('group_name');
+              return prev;
+            }, {}),
           };
         });
         res.status(200).send(retObj);
-    });
+      });
   },
-  // http://localhost:3000/db/users/group/:id
-  fetchUsersByGroup: function(req, res) {
-    var groupId = req.params.id;
-    Users
-      .query('where', 'Group_id', '=', groupId)
-      .fetch()
-      .then(function(users) {
-        var retObj = users.map(function(user) {
-          return {
-            id: user.id,
-            username: user.get('username'),
-            password: user.get('password'),
-            url: user.get('url_hash'),
-            image: user.get('image'),
-            email: user.get('email')
-          };
-        });
-        res.json(retObj);
-    });
-  },
-  // http://localhost:3000/db/users/user/:id
-  fetchUserInfo: function(req, res) {
-    var id = req.params.id;
 
+  //for filtering
+
+  fetchUsers3: function(req, res) {
+    Users
+      .fetch({withRelated: ['groups']})
+      .then(function(users) {
+        util.filterUsers(users.map(function(user) {
+          // if (user.get('public') === 1) {
+            var groups = user.related('groups');
+            return {
+              id: user.id,
+              handle: user.get('handle'),
+              githubid: user.get('githubid'),
+              name: user.get('name'),
+              public: user.get('public'),
+              url: user.get('url_hash'),
+              image: user.get('image'),
+              email: user.get('email'),
+              groups: groups.reduce(function(prev, group) {
+                prev[group.id] = group.get('group_name');
+                return prev;
+              }, {}),
+            };
+          // }
+        }), req.user.id)
+        .then((results) => {
+          res.status(200).send(results);
+        });
+      });
+  },
+
+  // fetchUsersByGroup2: function(req, res) {
+  //   var groupId = req.params.id;
+  //   Users
+  //     .fetch({withRelated: ['groups']})
+  //     .then(function(users) {
+  //       var retObj = users.map(function(user) {
+  //         if (user.get('public') === 1) {
+  //           var groups = user.related('groups');
+  //           return {
+  //             id: user.id,
+  //             handle: user.get('handle'),
+  //             githubid: user.get('githubid'),
+  //             name: user.get('name'),
+  //             url: user.get('url_hash'),
+  //             image: user.get('image'),
+  //             email: user.get('email'),
+  //             groups: groups.reduce(function(prev, group) {
+  //               prev[group.id] = group.get('group_name');
+  //               return prev;
+  //             }, {}),
+  //           };
+  //         }
+  //       });
+  //       res.json(retObj);
+  //   });
+  // },
+
+  createUser2: function(req, res) {
+    var data = req.body;
+    var theuser;
+    Users
+      .create({
+        handle: data.user.handle,
+        githubid: data.user.githubid,
+        name: data.user.name,
+        email: data.user.email,
+        image: 'assets/default.png',
+        public: 1,
+        permission: data.user.admin || 0,
+      })
+      .then(function(user) {
+        theuser = user;
+        return Promise.each(data.groups, function(group) {
+          user.groups().attach(group);
+        });
+      })
+      .then(function() {
+        User_Sites
+          .create({
+            User_id: theuser.attributes.id,
+            Site_id: 4,
+            rest_url: data.user.handle,
+          })
+          .then(() => {
+            res.status(201).send(theuser);
+          })
+          .catch(function(err) {
+            throw err;
+            res.status(500).send('error creating user');
+          });
+      })
+      .catch(function(err) {
+        throw err;
+        res.status(500).send('error creating user');
+      });
+  },
+
+  fetchUserInfo2: function(req, res) {
+    var id = req.params.id;
     // user join with groups + bios + userSites
     User
       .where({id: id})
@@ -67,68 +152,129 @@ module.exports = {
               .related('bios')
               .fetch({withRelated: ['bioFields']})
               .then(function(bios) {
-                var group = user.related('groups');
+                var groups = user.related('groups');
 
-                // return one giant blob
                 var retObj = {
                   user: {
                     id: user.id,
-                    username: user.get('username'),
-                    password: user.get('password'),
+                    handle: user.get('handle'),
+                    githubid: user.get('githubid'),
+                    name: user.get('name'),
                     url: user.get('url_hash'),
                     email: user.get('email'),
-                    group: group.get('group_name'),
-                    image: user.get('image')
+                    group_id: groups.id,
+                    group: groups.get('group_name'),
+                    image: user.get('image'),
+                    public: user.get('public'),
+                    permission: user.get('permission'),
                   },
-                  sites: userSites.map(function(userSite) {
+                  sites: userSites.reduce(function(pre, userSite) {
                     var site = userSite.related('sites');
-                    return {
-                      id: site.id,
+                    pre[site.id] = {
                       site_name: site.get('site_name'),
                       base_url: site.get('base_url'),
                       value: userSite.get('rest_url')
                     };
-                  }),
-                  userInfo: bios.map(function(bio) {
+                    return pre;
+                  }, {}),
+                  userInfo: bios.reduce(function(pre, bio) {
                     var bioField = bio.related('bioFields');
-                    return {
-                      id: bioField.id,
+                    pre[bioField.id] = {
                       title: bioField.get('title'),
                       value: bio.get('bio')
-                    };
-                  })
+                    }
+                    return pre;
+                  }, {}),
+                  groups: groups.reduce(function(pre, group) {
+                    pre[group.id] = group.get('group_name');
+                    return pre;
+                  }, {})
                 };
                 res.json(retObj);
             });
         });
     });
   },
-  // http://localhost:3000/db/users
-  // no error handling yet
-  createUser: function(req, res) {
-    var data = req.body;
 
-    Users
-      .create({
-        username: data.user.username,
-        password: data.user.password,
-        email: data.user.email,
-        image: data.user.image,
-        // url_hash: data.user.url,
-        Group_id: data.user.group,
-        public: data.user.public,
-        permission: data.user.permission
-      })
-      .then(function() {
-        res.status(201).send('user is created!');
+  //NEW VERSION FILTERING
+
+  fetchUserInfo3: function(req, res) {
+    var id = req.params.id;
+    User
+      .where({ id: id })
+      .fetch({ withRelated: ['groups', 'bios', 'userSites']})
+      .then(function(user) {
+        if (!user) {
+          return res.status(404).send('user does not exist!');
+        }
+        // if (user.get('public') === 0) {
+        //   return res.status(401).send('User profile is hidden');
+        // }
+        user
+          .related('userSites')
+          .fetch({ withRelated: ['sites'] })
+          .then(function(userSites) {
+
+            // bios join with bioFields
+            user
+              .related('bios')
+              .fetch({ withRelated: ['bioFields'] })
+              .then(function(bios) {
+
+        // userSites join with sites
+                var groups = user.related('groups');
+                util.canISeeThisUser({
+                  user: {
+                    id: user.id,
+                    handle: user.get('handle'),
+                    githubid: user.get('githubid'),
+                    name: user.get('name'),
+                    url: user.get('url_hash'),
+                    email: user.get('email'),
+                    group_id: groups.id,
+                    group: groups.get('group_name'),
+                    image: user.get('image'),
+                    public: user.get('public'),
+                    permission: user.get('permission'),
+                  },
+                  sites: userSites.reduce(function(pre, userSite) {
+                    var site = userSite.related('sites');
+                    pre[site.id] = {
+                      site_name: site.get('site_name'),
+                      base_url: site.get('base_url'),
+                      value: userSite.get('rest_url')
+                    };
+                    return pre;
+                  }, {}),
+                  userInfo: bios.reduce(function(pre, bio) {
+                    var bioField = bio.related('bioFields');
+                    pre[bioField.id] = {
+                      title: bioField.get('title'),
+                      value: bio.get('bio')
+                    }
+                    return pre;
+                  }, {}),
+                  groups: groups.reduce(function(pre, group) {
+                    pre[group.id] = group.get('group_name');
+                    return pre;
+                  }, {}),
+                }, req)
+                .then(function(returned) {
+                  res.json(returned);
+                })
+                .catch(function(err) {
+                  console.log(err);
+                  res.json(err);
+                });
+              });
+          });
       });
   },
+
   // http://localhost:3000/db/users/user/:id
-  // no error handling yet
-  modifyUser: function(req, res) {
+  modifyUser2: function(req, res) {
     var id = req.params.id;
     var data = req.body;
-    console.log('from user: ', data);
     // grab user and join groups + userSites + bios
     User
       .where({id: id})
@@ -146,38 +292,33 @@ module.exports = {
               .related('bios')
               .fetch({withRelated: ['bioFields']})
               .then(function(bios) {
-                var group = user.related('groups');
+                var groups = user.related('groups');
 
-                // modify user info
                 user
                   .save({
-                    username: data.user.username || user.get('username'),
-                    password: data.user.password || user.get('password'),
-                    email: data.user.email || user.get('email'),
-                    image: data.user.image || user.get('image'),
-                    url_hash: data.user.url || user.get('url_hash'),
-                    Group_id: group.id
+                    handle: data.user.handle,
+                    githubid: data.user.githubid,
+                    name: user.get('name'),
+                    email: data.user.email,
+                    url_hash: data.user.url,
+                    permission: data.user.permission === 0 ? 0 : 1,
+                    public: data.user.public === 0 ? 0 : 1,
                   })
                   .then(function(user) {
-                    // for each site in the array
-                      // if it exists
-                        // if it has a value then modify it
-                        // else delete it
-                      // else, create it
                     return Promise.each(data.sites, function(site) {
                       return userSites
                         .query(function(qb) {
-                          qb.where('User_id', '=', id)
+                          return qb.where('User_id', '=', id)
                             .andWhere('Site_id', '=', site.id);
                         })
                         .fetch()
                         .then(function(userSite) {
                           if (userSite.at(0)) {
-                            userSite.at(0).save({
-                              rest_url: site.value || userSite.get('rest_url')
+                            return userSite.at(0).save({
+                              rest_url: site.value
                             });
                           } else {
-                            userSites.create({
+                            return userSites.create({
                               rest_url: site.value,
                               User_id: user.id,
                               Site_id: site.id
@@ -187,29 +328,44 @@ module.exports = {
                     });
                   })
                   .then(function() {
-                    // for each bio in the array
-                    // if it exists, modify it
-                    // else, create it
                     return Promise.each(data.userInfo, function(info) {
                       return bios
                         .query(function(qb) {
-                          qb.where('User_id', '=', id)
+                          return qb.where('User_id', '=', id)
                             .andWhere('Bio_Field_id', '=', info.id);
                         })
                         .fetch()
                         .then(function(bio) {
                           if (bio.at(0)) {
-                            bio.at(0).save({
-                              bio: info.value || bio.get('bio')
+                           return bio.at(0).save({
+                              bio: info.value
                             });
                           } else {
-                            bios.create({
+                            return bios.create({
                               bio: info.value,
                               User_id: user.id,
                               Bio_Field_id: info.id
                             });
                           }
                         });
+                    });
+                  })
+                  .then(function() {
+                    return Promise.each(groups.models, function(group) {
+                      return db.knex('Groups_Users')
+                        .where({
+                          Group_id: group.id,
+                          User_id: id
+                        })
+                        .del()
+                    })
+                    .then(function() {
+                      if (!Array.isArray(data.groups)) {
+                        data.groups = data.groups.split(',');
+                      }
+                      return Promise.each(data.groups, function(group) {
+                        user.groups().attach(group);
+                      });
                     });
                   })
                   .then(function() {
@@ -221,8 +377,7 @@ module.exports = {
       });
   },
 
-  // http://localhost:3000/db/users/user/:id
-  deleteUser: function(req, res) {
+  deleteUser2: function(req, res) {
     var id = req.params.id;
     User
       .where({id: id})
@@ -230,5 +385,17 @@ module.exports = {
       .then(function() {
         res.status(201).send('deleted!');
       });
-  }
-}
+  },
+
+  toggleVisible: (req, res) => {
+    const id = req.body.id;
+    User
+      .where({ id: id })
+      .then((user) => {
+        const newVis = user.get('public') === 1 ? 0 : 1;
+        user.set('public', newVis);
+        user.save();
+        res.status(200).send('Updated');
+      });
+  },
+};

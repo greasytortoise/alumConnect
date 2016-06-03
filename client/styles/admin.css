@@ -5,8 +5,12 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-/* Toggle Styles */
 
+.navbar-inverse .container{
+  width:100%;
+}
+
+/* Toggle Styles */
 #wrapper {
   padding-left: 0;
 }
@@ -22,6 +26,7 @@
   width: 0;
   height: 100%;
   margin-left: -250px;
+  margin-top: -20px;
   overflow-y: auto;
   background: #1d2025;
 }
@@ -41,11 +46,58 @@
   margin-right: -250px;
 }
 
+@media(min-width:768px) {
+  #wrapper {
+    padding-left: 250px;
+  }
+
+  #wrapper.toggled {
+    padding-left: 0;
+  }
+
+  #sidebar-wrapper {
+    width: 250px;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    width: 0;
+  }
+
+  #page-content-wrapper {
+    padding: 20px;
+    position: relative;
+  }
+
+  #wrapper.toggled #page-content-wrapper {
+    position: relative;
+    margin-right: 0;
+  }
+}
+
+.dashboard-title {
+  margin-top:0;
+  margin-bottom: 20px;
+}
+/* form styles */
+
+.findingGithubInfo {
+  color: #777;
+  font-weight: normal;
+  font-size: 15px;
+  margin-left: 10px;
+}
+.add-new-user-button {
+  margin-bottom: 20px;
+}
+
+.checkboxGroup {
+  /*margin-left: 4%;*/
+}
 /* Sidebar Styles */
 
 .sidebar-nav {
   position: absolute;
-  top: 0;
+  top: 20px;
   width: 250px;
   margin: 0;
   padding: 0;
@@ -66,7 +118,7 @@
 .sidebar-nav li a:hover {
   text-decoration: none;
   color: #fff;
-  background: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.1);
 }
 
 .sidebar-nav li a:active,
@@ -89,30 +141,75 @@
   background: none;
 }
 
-@media(min-width:768px) {
-    #wrapper {
-        padding-left: 250px;
-    }
+.deleteLink {
+  background-image: url('../assets/delete2.png');
+  background-size: contain;
+  height: 15px;
+  width: 15px;
+  margin: 0 auto;
+  position: relative;
+  top: 4px;
+  left: 10px;
+}
 
-    #wrapper.toggled {
-        padding-left: 0;
-    }
+.deleteLink2 {
+  background-image: url('../assets/delete2.png');
+  background-size: contain;
+  height: 15px;
+  width: 15px;
+  margin: 0 auto;
+  position: relative;
+  top: 8px;
+}
 
-    #sidebar-wrapper {
-        width: 250px;
-    }
+.deleteLink3 {
+  background-image: url('../assets/delete2.png');
+  background-size: contain;
+  height: 15px;
+  width: 15px;
+  margin: 0 auto;
+  position: relative;
+  top: 35px;
+}
 
-    #wrapper.toggled #sidebar-wrapper {
-        width: 0;
-    }
+.modal-container {
+  position: relative;
+}
+.modal-container .modal, .modal-container .modal-backdrop {
+  position: absolute;
+}
 
-    #page-content-wrapper {
-        padding: 20px;
-        position: relative;
-    }
+.checkboxGroup {
+  margin-top: 10px;
+  margin-top: 10px;
+}
 
-    #wrapper.toggled #page-content-wrapper {
-        position: relative;
-        margin-right: 0;
-    }
+.publicCheckbox {
+  margin-bottom: 10px;
+}
+
+.adminGroupUsersText {
+}
+
+.newGroupSubmitButton {
+  padding-top: 10px;
+}
+
+
+/* Griddle */
+.griddle-previous,
+.griddle-next,
+.griddle-page {
+  display: block;
+  float:left;
+  width:33%;
+  min-height: 1px;
+}
+
+.griddle-next {
+  text-align: right;
+}
+
+.griddle-page {
+  text-align: center;
 }

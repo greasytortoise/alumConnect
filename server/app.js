@@ -1,7 +1,11 @@
 var express = require('express');
 var Promise = require('bluebird');
+var os = require('os');
+var passport = require('passport');
+var GithubStrategy = require('passport-github2').Strategy;
+var config = require('./config/githubAPIConfig.js');
+
 var app = express();
-//things
 
 var LEX = require('letsencrypt-express').testing();
 
@@ -11,13 +15,12 @@ var routes = require('./config/routes');
 middleware(app, express);
 routes(app, express);
 
-
-
+//QQQQQQQ
 var lex = LEX.create({
-  configDir: /*require('os').homedir()*/ './config',
+  configDir: '/etc/letsencrypt',
   approveRegistration: function (hostname, cb) {
     cb(null, {
-      domains: [hostname],
+      domains: ['donkit.com'],
       email: 'bresnan.mw@gmail.com',
       agreeTos: true,
     });

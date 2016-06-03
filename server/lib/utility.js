@@ -2,108 +2,193 @@ var bcrypt = require('bcrypt');
 var jwt = require('jwt-simple');
 var moment = require('moment');
 var User = require('../models/user');
-var jwtTokenSecret = 'DONALD_TRUMP_HUGE_HANDS_NO_PROBLEM';
+var Group = require('../models/group');
+var Groups = require('../collections/groups');
+var Group_user = require('../models/group_user');
+var Groups_users = require('../collections/groups_users');
+var Groups = require('../collections/groups');
+var visGroup = require('../models/visibleGroup.js');
+var visGroups = require('../collections/visibleGroups.js');
+var config = require('../config/githubAPIConfig.js');
+var Promise = require('bluebird');
+var filter = require('lodash/filter');
+var uniq = require('lodash/uniq');
+var request = require('superagent');
+// IDs of admin priveledged groups
+var adminGroups = ['1'];
 
-
-exports.generateToken = function(userid, email, perm, name) {
-  //generates a JSON Web Token(JWT) to be sent with response on successful login attempt
-  var expires = moment().add('days', 3).valueOf();
-  var token = jwt.encode({
-    iss: userid,
-    exp: expires,
-    perm: perm
-
-  }, jwtTokenSecret);
-
-  return {token: token, expires: expires, user: email, name: name };
-
-};
-
-exports.getSecret = function() {
-  return jwtTokenSecret;
-};
 
 exports.isLoggedIn = function(req, res, next) {
-  //Check token on request to make sure it's valid. 
-  var token = (req.body && req.body.token) || (req.query && req.query.access_token) || req.headers['x-access-token'];
-  if (token) {
-    try {
-      var decoded = jwt.decode(token, jwtTokenSecret);
-
-      if (decoded.exp <= Date.now()) {
-        res.send(400, 'Access token has expired');
-      } else {
-        next();
-      }
-
-
-    } catch (err) {
-      res.send(500, 'Error has occured');
-    }
+  if (req.isAuthenticated()) {
+    next();
   } else {
-    res.send(403, 'Not logged in');
+    res.redirect('/login');
   }
 };
 
-exports.getPermissions = function(req, res) {
-  //Query the database for the owner of the token, and returns their permissions(0 for user, 1 for admin);
-  var decoded = jwt.decode(req.body.token, jwtTokenSecret);
-  User.where({id: decoded.iss}).fetch().then(function(user){
-    res.send(200, user.attributes.permission);
-  });
-
-};
-
-
 exports.isAdmin = function(req, res, next) {
-  // if(req.body.token === undefined) {
-  //   res.send(403, 'You have requested an admin-only resource without adequete permissions');
-  // }
-  // console.log(req.body.token);
-  // var token = JSON.parse(req.body.token).token;
-  // var decoded = jwt.decode(token, jwtTokenSecret);
-  // User.where({id: decoded.iss}).fetch().then(function(user){
-  //   if(user.attributes.permission === 1) {
-  //     next();
-  //   } else {
-  //     res.send(403, 'You have requested an admin-only resource without adequete permissions');
-  //   }
-  // });
-
-  //Middleware that checks for admin permissions before being allowed to continue. 
-
-  var token = (req.body && req.body.token) || (req.query && req.query.access_token) || req.headers['x-access-token'];
-  if (token) {
-    try {
-      var decoded = jwt.decode(token, jwtTokenSecret);
-      User.where({id: decoded.iss}).fetch().then(function(user){
+  
+  if (req.isAuthenticated()) {
+    User.where({ handle: req.user.handle }).fetch()
+      .then(function(user) {
         if(user.attributes.permission === 1) {
           next();
         } else {
-          res.send(403, 'You have requested an admin-only resource without adequete permissions');
+          res.redirect('/');
         }
       });
-
-
-    } catch (err) {
-      res.send(500, 'Error has occured');
-    }
   } else {
-    res.send(403, 'Not logged in');
+    res.redirect('/login');
   }
+};
 
+exports.canISeeThisUser = function(userObj, req) {
+  
+  return new Promise(function(resolve, reject) {
+    var mygroups = [];
+    var selectedGroup;
+    var targetGroup;
+    
+    for (var group in req.user.groups) {
+      if (adminGroups.indexOf(group) !== -1) {
+        resolve(userObj);
+      } else {
+        selectedGroup = group;
+      }
+    }
+
+    for (var group in userObj.groups) {
+      console.log('2', group)
+      if (adminGroups.indexOf(group) !== -1 && userObj.user.public === 1) {
+        resolve(userObj);
+      } else {
+        targetGroup = group;
+      }
+    }
+    
+    if (targetGroup == selectedGroup) {
+      resolve(groupObj);
+    }
+
+    visGroup.where({ Group_id: selectedGroup, Visible_id: targetGroup }).fetch()
+      .then(function(results) {
+        if (results) {
+          resolve(userObj);
+        } else {
+          resolve('Permission Denied');
+        }
+      });
+  });
+};
+
+exports.filterUsers = function(usersArr, userId) {
+  return new Promise(function(resolve, reject) {
+    var allowedGroups = [];
+    var selectedGroup;
+    var filteredUsers = [];
+    
+    for (var i = 0; i < usersArr.length; i++) {
+      if (userId === usersArr[i].id) {
+        for (var group in usersArr[i].groups) {
+          if (adminGroups.indexOf(group) !== -1) {
+            resolve(usersArr);
+          } else {
+            selectedGroup = parseInt(group);
+            allowedGroups.push(selectedGroup);
+          }
+        }
+        break;
+      }
+    }
+
+    visGroups.model.where({ Group_id: selectedGroup }).fetchAll()
+      .then(function(visGroups) {
+        for (var l = 0; l < visGroups.models.length; l++) {
+          allowedGroups.push(visGroups.models[l].attributes.Visible_id);
+        }
+        var filtered = filter(usersArr, function(item) {
+          for (var group in item.groups) {
+            if (adminGroups.indexOf(group) !== -1) {
+              return true;
+            } else if (allowedGroups.indexOf(parseInt(group)) !== -1) {
+              return true;
+            } else {
+              return false;
+            }
+          }
+        });
+        resolve(filtered);
+      })
+      .catch(function(err) {
+        reject(err);
+      });
+  });
+};
+
+exports.canISeeThisGroup = function(groupObj, req) {
+  return new Promise(function(resolve, reject) {
+    var mygroups = [];
+    var selectedGroup;
+    var targetGroup = req.params.id;
+  
+    if (adminGroups.indexOf(targetGroup.toString()) !== -1) {
+      resolve(groupObj);
+    }
+
+    for (var group in req.user.groups) {
+      if (adminGroups.indexOf(group) !== -1) {
+        resolve(groupObj);
+      } else {
+        selectedGroup = group;
+      }
+    }
+
+    if (targetGroup == selectedGroup) {
+      resolve(groupObj);
+    }
+
+    visGroup.where({ Group_id: selectedGroup, Visible_id: targetGroup }).fetch()
+      .then(function(results) {
+        if (results !== null) {
+          resolve(groupObj);
+        } else {
+          resolve('Permission Denied');
+        }
+      })
+      .catch(function(err) {
+        reject(err);
+      });
+  });
 };
 
 
-exports.allowCrossDomain = function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+exports.filterGroups = function(groupsArr, user) {
+  return new Promise(function(resolve, reject) {
+    var allowedGroups = [];
+    var selectedGroup;
+    var filteredUsers = [];
 
-  if ('OPTIONS' === req.method) {
-    res.send(200);
-  }
-  else {
-    next();
-  }
+    for (var group in user.groups) {
+      if (adminGroups.indexOf(group) !== -1) {
+        resolve(groupsArr);
+      } else {
+        selectedGroup = group;
+        allowedGroups.push(selectedGroup)
+      }
+    }
+    visGroups.model.where({ Group_id: selectedGroup }).fetchAll()
+      .then(function(visGroups) {
+        for (var l = 0; l < visGroups.models.length; l++) {
+          allowedGroups.push(visGroups.models[l].attributes.Visible_id);
+        }
+        var filtered = filter(groupsArr, function(item) {
+          return allowedGroups.indexOf(item.id) !== -1;
+        });
+        resolve(filtered);
+      })
+      .catch(function(err) {
+        reject(err);
+      });
+  });
 };
+
