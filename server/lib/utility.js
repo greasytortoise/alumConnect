@@ -26,7 +26,7 @@ exports.isLoggedIn = function(req, res, next) {
 };
 
 exports.isAdmin = function(req, res, next) {
-  
+
   if (req.isAuthenticated()) {
     User.where({ handle: req.user.handle }).fetch()
       .then(function(user) {
@@ -42,12 +42,12 @@ exports.isAdmin = function(req, res, next) {
 };
 
 exports.canISeeThisUser = function(userObj, req) {
-  
+
   return new Promise(function(resolve, reject) {
     var mygroups = [];
     var selectedGroup;
     var targetGroup;
-    
+
     for (var group in req.user.groups) {
       if (adminGroups.indexOf(group) !== -1) {
         resolve(userObj);
@@ -64,9 +64,9 @@ exports.canISeeThisUser = function(userObj, req) {
         targetGroup = group;
       }
     }
-    
+
     if (targetGroup == selectedGroup) {
-      resolve(groupObj);
+      resolve(userObj);
     }
 
     visGroup.where({ Group_id: selectedGroup, Visible_id: targetGroup }).fetch()
@@ -85,7 +85,7 @@ exports.filterUsers = function(usersArr, userId) {
     var allowedGroups = [];
     var selectedGroup;
     var filteredUsers = [];
-    
+
     for (var i = 0; i < usersArr.length; i++) {
       if (userId === usersArr[i].id) {
         for (var group in usersArr[i].groups) {
@@ -129,7 +129,7 @@ exports.canISeeThisGroup = function(groupObj, req) {
     var mygroups = [];
     var selectedGroup;
     var targetGroup = req.params.id;
-  
+
     if (adminGroups.indexOf(targetGroup.toString()) !== -1) {
       resolve(groupObj);
     }
@@ -190,4 +190,3 @@ exports.filterGroups = function(groupsArr, user) {
       });
   });
 };
-
